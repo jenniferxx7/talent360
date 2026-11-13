@@ -1,0 +1,467 @@
+<title>Talent One 人才360畫像</title>
+<style>
+/* ===== 配色：104 HA 設計公版（react-ha-v2 palette / colors / typography） ===== */
+:root{
+  --c-primary:#00afb8;        /* brand-400 產品主色 */
+  --c-primary-dark:#014a50;   /* brand-700 */
+  --c-primary-light:#e6f9fa;  /* brand-50 產品背景色 */
+  --c-heading:#292929;        /* gray-800 主要文字 */
+  --c-accent:#1654b9;         /* link-300 */
+  --c-accent-light:#dbe8ff;   /* link-50 */
+  --c-warn:#ff7800;           /* warning-400 */
+  --c-warn-light:#ffeedf;     /* warning-50 */
+  --c-ok:#509e1f;             /* success-400 */
+  --c-ok-light:#e9f6dc;       /* success-50 */
+  --c-bg:#f3f3f3;             /* gray-100 */
+  --c-surface:#ffffff;
+  --c-border:#dddddd;         /* gray-300 */
+  --c-text:#292929;           /* gray-800 */
+  --c-text-sub:#7e7e7e;       /* gray-600 */
+  --radius:8px;
+  --shadow:0 2px 8px 0 rgba(41,41,41,.15); /* shadow-s */
+  --font:Arial,"PingFang TC","Microsoft JhengHei",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--c-text);background:var(--c-bg);line-height:1.6;font-size:16px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.topbar{position:sticky;top:0;z-index:50;background:var(--c-surface);border-bottom:1px solid var(--c-border)}
+.topbar .wrap{display:flex;align-items:center;gap:24px;height:64px}
+.logo{font-weight:900;color:var(--c-heading);white-space:nowrap}
+.nav{display:flex;gap:4px;flex:1}
+.nav a{text-decoration:none;padding:8px 12px;border-radius:8px;color:var(--c-text-sub);font-size:15px}
+.nav a:hover{background:var(--c-primary-light);color:var(--c-primary)}
+.nav a.on{color:var(--c-primary);font-weight:700;background:var(--c-primary-light)}
+section[id]{scroll-margin-top:64px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px}
+section[id] .eyebrow::before{display:none;content:"";width:20px;height:20px;background:currentColor;-webkit-mask:var(--ic) center/contain no-repeat;mask:var(--ic) center/contain no-repeat}
+#what{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='14' rx='2'/%3E%3Ccircle cx='9' cy='11' r='2'/%3E%3Cpath d='M6 16c.8-1.4 1.9-2 3-2s2.2.6 3 2M14 10h4M14 14h4'/%3E%3C/svg%3E")}
+#goals{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 12a8 8 0 0 1-14.9 4M4 12a8 8 0 0 1 14.9-4'/%3E%3Cpath d='M19 3v5h-5M5 21v-5h5'/%3E%3C/svg%3E")}
+#roles{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='8' r='3'/%3E%3Cpath d='M3 20c0-3 2.7-5 6-5s6 2 6 5'/%3E%3Ccircle cx='17' cy='9' r='2.5'/%3E%3Cpath d='M16.5 15c2.6 0 4.5 1.6 4.5 4'/%3E%3C/svg%3E")}
+#build{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3 3 8l9 5 9-5-9-5z'/%3E%3Cpath d='M3 13l9 5 9-5'/%3E%3C/svg%3E")}
+.btn{display:inline-flex;align-items:center;gap:6px;border:0;border-radius:4px;padding:12px 22px;font-size:16px;font-weight:700;text-decoration:none;cursor:pointer;font-family:inherit}
+.btn-blue{background:var(--c-primary);color:#fff}
+.btn-white{background:#fff;color:var(--c-heading)}
+.btn-line{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.6)}
+.btn-sm{padding:8px 14px;font-size:14px}
+section{padding:72px 0}
+.eyebrow{font-size:14px;font-weight:700;color:var(--c-primary);letter-spacing:.05em}
+h1{font-size:44px;line-height:1.25;color:#fff;font-weight:900;text-wrap:balance}
+h2{font-size:32px;color:var(--c-heading);font-weight:900;margin:4px 0 12px}
+h3{font-size:20px;color:var(--c-heading)}
+.lead{font-size:18px;color:var(--c-text-sub)}
+
+.hero{background:linear-gradient(135deg,#014a50 0%,#028b95 100%);padding:88px 0 80px}
+.hero .lead{color:#e6f9fa;margin:16px 0 28px}
+.hero .btns{display:flex;gap:10px;flex-wrap:wrap}
+
+/* 定義：職缺畫像 × 員工畫像 */
+.def{display:grid;grid-template-columns:1fr 120px 1fr;gap:16px;align-items:stretch;margin-top:28px}
+.pcard{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:10px}
+.pcard .tag{align-self:flex-start;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px}
+.pcard ul{list-style:none;display:flex;flex-direction:column;gap:6px;font-size:15px}
+.pcard li{display:flex;align-items:center;gap:8px}
+.pcard li b{flex:none;width:48px;color:var(--c-text-sub);font-weight:400}
+.pcard .ex{font-size:13px;color:var(--c-text-sub);margin-top:-4px}
+.pcard li .tip{order:-1}
+.pcard li .tip:hover::after,.pcard li .tip:focus::after{left:-6px;transform:none}
+.tip{position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid #a9a9a9;color:#7e7e7e;font-size:10px;font-weight:700;line-height:1;cursor:help}
+.tip:hover,.tip:focus{border-color:var(--c-primary);color:var(--c-primary);outline:none}
+.tip:hover::after,.tip:focus::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:220px;background:#292929;color:#fff;font-size:12px;font-weight:400;line-height:1.5;padding:8px 10px;border-radius:4px;z-index:60;text-align:left}
+.match{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;font-size:14px;color:var(--c-text-sub)}
+.match .ring{width:72px;height:72px;border-radius:50%;border:6px solid var(--c-primary);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--c-primary);background:#fff}
+.gapbox span{background:#fff;border-radius:4px;padding:4px 10px;font-size:14px}
+.result{margin-top:12px;background:var(--c-surface);border:2px solid var(--c-primary);border-radius:var(--radius);overflow:hidden}
+.r-head{display:flex;gap:12px;align-items:baseline;background:var(--c-primary-light);padding:10px 20px}
+.r-head b{color:var(--c-primary-dark)}
+.r-head span{font-size:14px;color:var(--c-text-sub)}
+.r-body{display:grid;grid-template-columns:240px 1fr;gap:20px;padding:18px 20px}
+.r-num{font-size:36px;font-weight:900;color:var(--c-primary);line-height:1.1}
+.r-gap{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.r-gap .g{font-size:12px;background:var(--c-warn-light);color:var(--c-warn);border-radius:4px;padding:2px 8px}
+.r-uses{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.r-uses div{display:flex;gap:10px;align-items:flex-start;background:var(--c-bg);border-radius:var(--radius);padding:10px 12px;font-size:14px}
+.r-uses b{flex:none;color:var(--c-primary-dark)}
+.sub{font-size:13px;color:var(--c-text-sub)}
+/* 比對看板 */
+.cmp{margin-top:28px;display:grid;grid-template-columns:1fr 340px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);overflow:visible}
+.cmp-tb{padding:18px 20px;display:flex;flex-direction:column;min-width:0}
+.cmp-tb table{flex:1;table-layout:fixed}
+.cmp tbody td{height:52px}
+.cmp th:nth-child(1){width:84px}.cmp th:nth-child(4){width:84px}
+.cmp-cap{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;color:var(--c-heading);margin-bottom:10px}
+.cmp-cap .sub{font-weight:400}
+.cmp table{width:100%;border-collapse:collapse;font-size:14px}
+.cmp th{font-size:13px;font-weight:700;text-align:left;padding:8px 12px;border-bottom:2px solid var(--c-border)}
+.cmp th .pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:2px 10px;font-size:12px}
+.cmp th .emp{background:var(--c-primary-light);color:var(--c-primary-dark)}
+.cmp th .job{background:var(--c-warn-light);color:var(--c-warn)}
+.cmp th small{font-weight:400;color:var(--c-text-sub);margin-left:6px}
+.cmp td{padding:8px 12px;border-bottom:1px solid var(--c-border);vertical-align:middle;line-height:1.45}
+.cmp tr:last-child td{border-bottom:none}
+.cmp td.dim{white-space:nowrap;font-weight:700;color:var(--c-heading);display:table-cell;border:0;border-bottom:1px solid var(--c-border);border-radius:0;background:transparent;padding:8px 12px}
+.cmp tr:last-child td.dim{border-bottom:0}
+.cmp tr.gap td.dim{background:#fffaf5}
+.cmp td.dim span{display:inline-flex;align-items:center;gap:6px}
+.cmp td.dim .tip:hover::after,.cmp td.dim .tip:focus::after{left:-6px;transform:none;width:260px}
+.cmp td.st{text-align:center;white-space:nowrap}
+.cmp .ok,.cmp .ng{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:1px 8px}
+.cmp .ok{background:#eef6e8;color:#509e1f}
+.cmp .ng{background:var(--c-warn-light);color:var(--c-warn)}
+.cmp tr.gap td{background:#fffaf5}
+.cmp .hl{color:var(--c-warn);font-weight:700}
+.cmp-rs{background:var(--c-primary-light);border-left:1px solid var(--c-border);border-radius:0 var(--radius) var(--radius) 0;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+.rs-top{display:flex;align-items:center;gap:14px}
+.rs-ring{flex:none;width:76px;height:76px;border-radius:50%;background:conic-gradient(var(--c-primary) 0 88%,#cdeef0 88% 100%);display:flex;align-items:center;justify-content:center}
+.rs-ring b{width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:var(--c-primary)}
+.rs-top p{font-size:13px;color:var(--c-text-sub);line-height:1.6}
+.rs-top p b{display:block;font-size:15px;color:var(--c-heading)}
+.rs-gap{display:flex;flex-wrap:wrap;gap:6px}
+.rs-gap span{font-size:12px;background:#fff;border:1px solid var(--c-warn);color:var(--c-warn);border-radius:4px;padding:1px 8px}
+.rs-uses{display:flex;flex-direction:column;gap:6px;border-top:1px solid #c9e9eb;padding-top:12px}
+.rs-uses div{display:flex;gap:10px;align-items:center;background:#fff;border-radius:6px;padding:6px 10px;font-size:13px;line-height:1.45}
+.rs-uses i{flex:none;width:26px;height:26px;border-radius:50%;background:var(--gc);color:#fff;font-style:normal;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center}
+@media (max-width:900px){.cmp{grid-template-columns:1fr}.cmp-rs{border-left:none;border-top:1px solid var(--c-border);border-radius:0 0 var(--radius) var(--radius)}}
+@media (max-width:560px){.cmp-tb{padding:14px 10px;overflow-x:auto}.cmp td,.cmp th{padding:8px 6px}}
+@media (max-width:760px){.r-body,.r-uses{grid-template-columns:1fr}}
+.gapbox{margin-top:16px;background:var(--c-primary-light);border-radius:var(--radius);padding:18px 22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.gapbox b{color:var(--c-primary-dark)}
+
+/* 期待與應用 */
+.goals{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px}
+.goal{position:relative;background:var(--c-surface);border:1px solid var(--c-border);border-top:6px solid var(--gc);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:14px}
+.g-top{display:flex;align-items:center;gap:12px}
+.g-badge{flex:none;width:52px;height:52px;border-radius:50%;background:var(--gc);color:#fff;font-size:26px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.g-top b{display:block;font-size:20px;color:var(--c-heading)}
+.g-top small{font-size:13px;color:var(--gc);font-weight:700}
+.goal h3{font-size:16px;line-height:1.5;color:var(--c-text);font-weight:700;min-height:48px}
+.g-steps{list-style:none;display:flex;flex-direction:column;gap:0;padding:0;margin:0}
+.g-steps li{position:relative;padding:6px 0 6px 22px;font-size:14px;color:var(--c-text-sub)}
+.g-steps li::before{content:"";position:absolute;left:4px;top:12px;width:9px;height:9px;border-radius:50%;background:#fff;border:2px solid var(--gc)}
+.g-steps li:not(:last-child)::after{content:"";position:absolute;left:9px;top:23px;bottom:-5px;border-left:2px solid var(--c-border)}
+.g-steps li:last-child{color:var(--c-heading);font-weight:700}
+.g-steps li:last-child::before{background:var(--gc)}
+.g-links{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px dashed var(--c-border)}
+.g-links a{font-size:13px;font-weight:700;color:var(--gc);text-decoration:none;border:1px solid var(--gc);border-radius:4px;padding:3px 10px;background:#fff}
+.g-links a:hover{background:var(--gc);color:#fff}
+@media (max-width:960px){.goals{grid-template-columns:repeat(2,1fr)}}
+/* 選用育留 × 層級矩陣 */
+.mx-wrap{margin-top:28px;overflow-x:auto}
+.mx{display:grid;grid-template-columns:72px repeat(4,1fr);gap:8px;min-width:780px}
+.mx-h{display:flex;align-items:center;gap:10px;background:var(--c-surface);border:1px solid var(--c-border);border-top:6px solid var(--gc);border-radius:var(--radius);padding:12px 14px}
+.mx-h .g-badge{width:40px;height:40px;font-size:20px}
+.mx-h b{display:block;font-size:18px;color:var(--c-heading)}
+.mx-h small{font-size:12px;color:var(--gc);font-weight:700}
+.mx-r{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:var(--c-bg);border-radius:var(--radius);padding:8px 4px}
+.mx-r b{font-size:15px;color:var(--c-heading)}
+.mx-r small{font-size:11px;line-height:1.3;color:var(--c-text-sub)}
+.mx-c{display:flex;align-items:center;background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid var(--gc);border-radius:var(--radius);padding:12px 14px;font-size:14px;line-height:1.5;min-height:64px}
+.mx-l{display:flex;gap:6px;flex-wrap:wrap;padding-top:4px}
+.mx-l a{font-size:13px;font-weight:700;color:var(--gc);text-decoration:none;border:1px solid var(--gc);border-radius:4px;padding:3px 10px;background:#fff}
+.mx-l a:hover{background:var(--gc);color:#fff}
+/* 誰會用到 */
+.roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.role{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:12px}
+.r-top{display:flex;align-items:center;gap:12px}
+.r-ic{flex:none;width:52px;height:52px;border-radius:12px;background:var(--c-primary-dark);color:#fff;font-size:16px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.r-top b{display:block;font-size:20px;color:var(--c-heading)}
+.r-top small{font-size:13px;color:var(--c-text-sub)}
+.r-scope{align-self:flex-start;font-size:12px;font-weight:700;color:var(--c-primary-dark);background:var(--c-primary-light);border-radius:999px;padding:2px 10px}
+.role ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.role li{position:relative;padding-left:18px;font-size:15px;line-height:1.5}
+.role li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;border-radius:50%;background:var(--c-primary)}
+.r-go{margin-top:auto;padding-top:12px;border-top:1px dashed var(--c-border);font-size:14px;font-weight:700;color:var(--c-primary);text-decoration:none}
+.r-go:hover{text-decoration:underline}
+@media (max-width:860px){.roles{grid-template-columns:1fr}}
+@media (max-width:560px){.goals{grid-template-columns:1fr}}
+.flow3{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:13px}
+.flow3 span{background:var(--c-bg);border-radius:4px;padding:3px 8px}
+.flow3 i{font-style:normal;color:var(--c-text-sub)}
+.goal .go{margin-top:auto;font-size:14px;font-weight:700;color:var(--c-primary);text-decoration:none}
+.more-uses{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:14px}
+.more-uses .lb{color:var(--c-text-sub)}
+.more-uses a{border:1px solid var(--c-border);background:#fff;border-radius:4px;padding:4px 12px;text-decoration:none;color:var(--c-text)}
+.more-uses a:hover{border-color:var(--c-primary);color:var(--c-primary)}
+
+/* 畫像組成 */
+.dims{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:28px}
+.dim{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:6px}
+.dim .n{font-size:18px;font-weight:900;color:var(--c-heading)}
+.dim .d{font-size:14px;color:var(--c-text-sub);flex:1}
+.dim .s{font-size:12px;color:var(--c-text-sub);border-top:1px solid #eeeeee;padding-top:8px}
+.dim .s b{color:var(--c-primary-dark)}
+/* 資料匯流圖 */
+.flow{margin-top:28px;display:grid;grid-template-columns:minmax(0,1.5fr) 90px 200px 56px minmax(0,1fr);align-items:stretch;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:20px 24px}
+.f-col{display:flex;flex-direction:column}
+.f-cap{font-size:12px;font-weight:700;color:var(--c-text-sub);letter-spacing:.05em;height:22px}
+.f-src{display:grid;grid-template-rows:22px repeat(5,1fr);gap:8px}
+.f-src .f-cap{height:auto}
+.src{display:flex;align-items:center;gap:12px;background:var(--c-bg);border-radius:8px;padding:10px 12px;min-height:56px}
+.src .prod{flex:none;width:96px;font-size:12px;font-weight:700;color:var(--c-primary-dark);background:#fff;border:1px solid #bfe7ea;border-radius:999px;padding:3px 0;text-align:center}
+.src b{display:block;font-size:15px;color:var(--c-heading)}
+.src small{font-size:12px;color:var(--c-text-sub)}
+.f-link{width:100%;height:100%;overflow:visible}
+.f-link path{fill:none;stroke:var(--c-primary);stroke-width:2;vector-effect:non-scaling-stroke;stroke-dasharray:6 6;animation:flowdash 1.2s linear infinite;opacity:.7}
+@keyframes flowdash{to{stroke-dashoffset:-12}}
+@media (prefers-reduced-motion:reduce){.f-link path{animation:none}}
+.f-mid{justify-content:center;padding-top:22px}
+.hub{background:var(--c-primary-dark);color:#fff;border-radius:16px;padding:22px 18px;text-align:center;box-shadow:0 8px 24px rgba(1,74,80,.25);position:relative}
+.hub small{display:block;font-size:13px;opacity:.85}
+.hub b{display:block;font-size:26px;font-weight:900;margin:4px 0 12px}
+.hub ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.hub li{font-size:13px;background:rgba(255,255,255,.12);border-radius:999px;padding:3px 0}
+.f-dst .dst{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:stretch;gap:6px}
+.pp{border-radius:10px;padding:12px 14px;text-align:center}
+.pp b{display:block;font-size:17px}
+.pp small{font-size:12px;color:var(--c-text-sub)}
+.pp.emp{background:var(--c-primary-light)}.pp.emp b{color:var(--c-primary-dark)}
+.pp.job{background:var(--c-warn-light)}.pp.job b{color:var(--c-warn)}
+.dst .x{align-self:center;font-size:18px;font-weight:900;color:var(--c-text-sub);line-height:1}
+.use{margin-top:10px;display:flex;align-items:center;justify-content:center;gap:4px;font-size:13px;color:var(--c-text-sub)}
+.use i{width:24px;height:24px;border-radius:50%;background:var(--gc);color:#fff;font-style:normal;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center}
+.use span{margin-left:4px}
+@media (max-width:900px){
+  .flow{grid-template-columns:1fr;gap:12px;padding:16px}
+  .f-link{display:none}
+  .f-mid{padding-top:0}
+  .f-mid::before,.f-dst::before{content:"↓";display:block;text-align:center;font-size:22px;color:var(--c-primary);margin-bottom:8px}
+  .f-src{grid-template-rows:auto}
+}
+.hubline{margin-top:16px;display:flex;align-items:center;gap:12px;justify-content:center;flex-wrap:wrap;font-size:15px;color:var(--c-text-sub)}
+.hubline b{background:var(--c-primary-dark);color:#fff;border-radius:4px;padding:6px 14px;font-size:15px}
+
+.closing{background:var(--c-primary-dark);color:#fff;text-align:center}
+.closing h2{color:#fff}
+.closing .lead{color:#e6f9fa;margin:0 auto 28px}
+.foot{font-size:13px;color:var(--c-text-sub);text-align:center;padding:24px}
+
+@media (max-width:960px){
+  .def{grid-template-columns:1fr}
+  .match{flex-direction:row}
+  .goals{grid-template-columns:1fr}
+  .dims{grid-template-columns:1fr 1fr}
+  .nav{display:none}
+  h1{font-size:32px}
+}
+@media (max-width:560px){
+  .dims{grid-template-columns:1fr}
+  .wrap{padding:0 16px}
+  .topbar .wrap{gap:10px}
+}
+</style>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="logo">Talent One 人才360畫像</div>
+    <nav class="nav">
+      <a href="#what">什麼是人才畫像</a>
+      <a href="#goals">應用情境</a>
+      <a href="#roles">誰會用到</a>
+      <a href="#build">畫像怎麼組成</a>
+    </nav>
+    <a class="btn btn-blue btn-sm" href="app2.html">進入人才畫像網站 →</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow" style="color:#c5f3f5">TALENT ONE｜人才360畫像</p>
+    <h1>讓每個職缺找到對的人，<br>讓每位員工看見下一步</h1>
+    <p class="lead">人才畫像是企業對人才的 Persona：先描繪「這個職缺需要什麼樣的人」，再對照「這位員工現在是什麼樣子」，用在選才、用才、育才、留才的每個決策。</p>
+    <div class="btns">
+      <a class="btn btn-white" href="#what">了解人才畫像 ↓</a>
+      <a class="btn btn-line" href="app2.html">直接進入人才畫像網站</a>
+    </div>
+  </div>
+</section>
+
+<section id="what">
+  <div class="wrap">
+    <p class="eyebrow">什麼是人才畫像</p>
+    <h2>員工畫像 × 職缺畫像，精準比對人才適配度</h2>
+    <p class="lead" style="max-width:none">以能力、動機、經歷、表現、學習五個維度，分別描述員工現況與職缺要求；兩者比對得出適配度與能力落差，作為選、用、育、留決策的依據。</p>
+    <div class="cmp">
+      <div class="cmp-tb">
+        <div class="cmp-cap">範例比對<span class="sub">陳柏翰（資深工程師）× 技術主管職缺</span></div>
+        <table>
+          <thead><tr>
+            <th>面向</th>
+            <th><span class="pill emp">員工畫像</span><small>陳柏翰</small></th>
+            <th><span class="pill job">職缺畫像<span class="tip" tabindex="0" data-tip="從目前擔任「技術主管」的高績效者歸納共同的能力、動機、經歷與學習特徵，作為建議條件，再由用人主管確認、調整。">!</span></span><small>技術主管</small></th>
+            <th style="text-align:center">結果</th>
+          </tr></thead>
+          <tbody>
+            <tr class="gap"><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：擅長什麼、哪裡需要加強（測評中心）／職缺：勝任需要的關鍵能力與程度">!</span>能力</span></td><td>問題分析 PR95、溝通協作 <span class="hl">PR55</span>、領導能力 <span class="hl">PR70</span></td><td>領導能力 PR85+、溝通協作 PR85+</td><td class="st"><span class="ng">▲ 落差</span></td></tr>
+            <tr><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：什麼事情能驅動他（測評中心）／職缺：適合這個職缺的工作動機">!</span>動機</span></td><td>成就動機高，追求精益求精</td><td>重視團隊成長與共同目標</td><td class="st"><span class="ok">✓ 符合</span></td></tr>
+            <tr><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：做過哪些職位、年資多久（企業大師）／職缺：需要的年資與經歷">!</span>經歷</span></td><td>資深工程師 6 年，帶過 4 人專案</td><td>年資 5 年以上，帶過 3 人以上專案</td><td class="st"><span class="ok">✓ 符合</span></td></tr>
+            <tr><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：歷年績效與目標達成（績效管理）／職缺：期待的績效標準">!</span>表現</span></td><td>近 3 年績效 A／A／A+</td><td>近 2 年績效 A 以上</td><td class="st"><span class="ok">✓ 符合</span></td></tr>
+            <tr class="gap"><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：上過哪些課、學習是否持續（企業學習平台）／職缺：勝任前需要完成的課程或認證">!</span>學習</span></td><td>已完成「同理溝通與回饋技巧」</td><td>完成「新手主管的領導力」</td><td class="st"><span class="ng">▲ 未完成</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cmp-rs">
+        <div class="rs-top">
+          <div class="rs-ring"><b>88%</b></div>
+          <p><b>比對結果：適配度 88%</b>3 個面向符合，2 個面向有落差</p>
+        </div>
+        <div class="rs-gap"><span>溝通協作 −30</span><span>領導能力 −15</span><span>未完成「新手主管的領導力」</span></div>
+        <div class="rs-uses">
+          <div style="--gc:#00afb8"><i>選</i>內部人選適配度第 2 高，列入候選名單</div>
+          <div style="--gc:#1654b9"><i>用</i>補強溝通協作後，列入下次升遷評估</div>
+          <div style="--gc:#509e1f"><i>育</i>擔任跨部門專案窗口，完成主管課程</div>
+          <div style="--gc:#ff7800"><i>留</i>讓他看見往技術主管發展的路徑</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="goals" style="background:var(--c-surface)">
+  <div class="wrap">
+    <p class="eyebrow">應用情境</p>
+    <h2>一份人才畫像，貫穿選、用、育、留</h2>
+    <p class="lead" style="max-width:none">從招募、升遷、培育到留任，公司、部門與員工都用同一份畫像做判斷，各自得到需要的答案。</p>
+    <div class="mx-wrap"><div class="mx">
+      <div class="mx-corner"></div>
+      <div class="mx-h" style="--gc:#00afb8"><span class="g-badge">選</span><div><b>選才</b><small>找對人</small></div></div>
+      <div class="mx-h" style="--gc:#1654b9"><span class="g-badge">用</span><div><b>用才</b><small>放對位置</small></div></div>
+      <div class="mx-h" style="--gc:#509e1f"><span class="g-badge">育</span><div><b>育才</b><small>培養人</small></div></div>
+      <div class="mx-h" style="--gc:#ff7800"><span class="g-badge">留</span><div><b>留才</b><small>留住人</small></div></div>
+
+      <div class="mx-r"><b>公司</b><small>經營層<br>人資</small></div>
+      <div class="mx-c" style="--gc:#00afb8">建立關鍵職缺畫像，盤點內部接班人選</div>
+      <div class="mx-c" style="--gc:#1654b9">人才九宮格盤點，掌握明日之星分布</div>
+      <div class="mx-c" style="--gc:#509e1f">彙整共同能力落差，規劃年度培訓</div>
+      <div class="mx-c" style="--gc:#ff7800">檢視各部門薪資與表現是否相稱</div>
+
+      <div class="mx-r"><b>部門</b><small>部門主管</small></div>
+      <div class="mx-c" style="--gc:#00afb8">用職缺畫像比對內部人選，找出最適合的人</div>
+      <div class="mx-c" style="--gc:#1654b9">比較升遷候選人的適配度與落差</div>
+      <div class="mx-c" style="--gc:#509e1f">依成員落差安排歷練、指導與課程</div>
+      <div class="mx-c" style="--gc:#ff7800">提早發現高離職風險成員，安排面談</div>
+
+      <div class="mx-r"><b>員工</b><small>員工本人</small></div>
+      <div class="mx-c" style="--gc:#00afb8">看見內部職缺條件，知道自己適不適合</div>
+      <div class="mx-c" style="--gc:#1654b9">了解升遷還差什麼，主動爭取機會</div>
+      <div class="mx-c" style="--gc:#509e1f">依目標職缺取得個人化學習建議</div>
+      <div class="mx-c" style="--gc:#ff7800">看見內部發展路徑，願意留下來成長</div>
+
+      <div class="mx-corner"></div>
+      <div class="mx-l" style="--gc:#00afb8"><a href="app2.html#jobs">職缺畫像</a><a href="app2.html#match">人才比對</a></div>
+      <div class="mx-l" style="--gc:#1654b9"><a href="app2.html#promo">升遷評估</a><a href="app2.html#review">人才盤點</a></div>
+      <div class="mx-l" style="--gc:#509e1f"><a href="app2.html#path">發展路徑</a><a href="app2.html#plan">培訓規劃</a></div>
+      <div class="mx-l" style="--gc:#ff7800"><a href="app2.html#risk">離職預測</a><a href="app2.html#salary">薪資合理性</a></div>
+    </div></div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="wrap">
+    <p class="eyebrow">誰會用到</p>
+    <h2>公司、部門、員工，各自看見需要的答案</h2>
+    <p class="lead">同一份人才畫像，依角色顯示不同的範圍與重點。</p>
+    <div class="roles">
+      <div class="role">
+        <div class="r-top"><span class="r-ic">公司</span><div><b>公司層級</b><small>經營層、人資</small></div></div>
+        <div class="r-scope">可看範圍：全公司</div>
+        <ul>
+          <li>關鍵職缺有沒有接班人？</li>
+          <li>人才結構健康嗎？誰是明日之星？</li>
+          <li>薪資和表現相稱嗎？</li>
+        </ul>
+        <a class="r-go" href="app2.html#home--hr">以人資身分體驗 →</a>
+      </div>
+      <div class="role">
+        <div class="r-top"><span class="r-ic">部門</span><div><b>部門層級</b><small>部門主管</small></div></div>
+        <div class="r-scope">可看範圍：本部門</div>
+        <ul>
+          <li>團隊缺哪些能力？</li>
+          <li>誰可以升遷？還差什麼？</li>
+          <li>誰可能想離開？</li>
+        </ul>
+        <a class="r-go" href="app2.html#home--mgr">以部門主管身分體驗 →</a>
+      </div>
+      <div class="role">
+        <div class="r-top"><span class="r-ic">員工</span><div><b>員工個人</b><small>員工本人</small></div></div>
+        <div class="r-scope">可看範圍：只有自己</div>
+        <ul>
+          <li>我的強項是什麼？</li>
+          <li>想發展的職缺還差多少？</li>
+          <li>該爭取哪些歷練、上哪些課？</li>
+        </ul>
+        <a class="r-go" href="app2.html#me">以員工身分體驗 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap">
+    <p class="eyebrow">畫像怎麼組成</p>
+    <h2>Talent One 平台整合五大面向，建構完整人才畫像</h2>
+    <p class="lead" style="max-width:none">測評、績效、人事、學習、薪酬資料分散在各產品中，由 Talent One 平台透過資料 API 統一收攏與串接。企業只要使用 104 的服務，人才畫像就會自動彙整完成，讓每個人才決策都有完整依據。</p>
+    <div class="flow">
+      <div class="f-col f-src">
+        <div class="f-cap">104 產品資料</div>
+        <div class="src"><span class="prod">測評中心</span><div><b>能力與動機</b><small>職能強弱項、工作動機、個人風格</small></div></div>
+        <div class="src"><span class="prod">績效管理</span><div><b>工作表現</b><small>歷年考核、目標達成率</small></div></div>
+        <div class="src"><span class="prod">企業大師</span><div><b>職務與經歷</b><small>部門、職位、年資、異動紀錄</small></div></div>
+        <div class="src"><span class="prod">企業學習平台</span><div><b>學習與成長</b><small>修課紀錄、學習時數</small></div></div>
+        <div class="src"><span class="prod">薪酬平台</span><div><b>薪酬</b><small>薪資水平、調薪紀錄</small></div></div>
+      </div>
+      <svg class="f-link f-in" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 17 C55 17 45 54 100 54"/><path d="M0 35.7 C55 35.7 45 54 100 54"/><path d="M0 54.4 L100 54"/><path d="M0 73 C55 73 45 54 100 54"/><path d="M0 91.8 C55 91.8 45 54 100 54"/>
+      </svg>
+      <div class="f-col f-mid">
+        <div class="hub">
+          <small>Talent One 平台</small>
+          <b>資料 API</b>
+          <ul><li>統一收攏</li><li>串接整合</li><li>權限控管</li></ul>
+        </div>
+      </div>
+      <svg class="f-link f-out" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0 54 L100 54"/></svg>
+      <div class="f-col f-dst">
+        <div class="f-cap">產出</div>
+        <div class="dst">
+          <div class="pp emp"><b>員工畫像</b><small>這個人是什麼樣子</small></div>
+          <span class="x">×</span>
+          <div class="pp job"><b>職缺畫像</b><small>這個職缺需要什麼樣的人</small></div>
+          <div class="use"><i style="--gc:#00afb8">選</i><i style="--gc:#1654b9">用</i><i style="--gc:#509e1f">育</i><i style="--gc:#ff7800">留</i><span>決策應用</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="closing">
+  <div class="wrap">
+    <h2>用人才畫像，選對人、育對人</h2>
+    <p class="lead">先定義職缺要的人，再看清每位員工的樣貌與下一步，人才決策更有方向。</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+      <a class="btn btn-white" href="app2.html">網站 B 版：職缺比對（選用育留）→</a>
+      <a class="btn btn-line" href="app.html">網站 A 版：資料查閱（公司／部門／員工）</a>
+    </div>
+  </div>
+</section>
+<p class="foot">本頁為示意畫面，所有公司、部門、人員與數據皆為虛構範例。</p>
+
+<script>
+/* 在線上頁面中，連到網站的連結改由頁面自己切換，避免被外框攔下 */
+document.querySelectorAll('a[href^="app"]').forEach(function(a){
+  a.addEventListener('click',function(e){e.preventDefault();location.href=new URL(a.getAttribute('href'),location.href).href;});
+});
+/* 捲動時標示目前所在的段落 */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}).filter(Boolean);
+  function spy(){
+    var y=window.scrollY+120, cur=null;
+    secs.forEach(function(s){if(s.offsetTop<=y) cur=s.id;});
+    if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4&&secs.length) cur=secs[secs.length-1].id;
+    links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)});
+  }
+  window.addEventListener('scroll',spy,{passive:true});
+  window.addEventListener('resize',spy);
+  spy();
+})();
+</script>

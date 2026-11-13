@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人才360畫像｜Talent One</title>
+<style>
+/* ===== 配色：104 HA 設計公版（react-ha-v2 palette / colors / typography） ===== */
+:root{
+  --c-primary:#00afb8;        /* brand-400 產品主色 */
+  --c-primary-dark:#014a50;   /* brand-700 */
+  --c-primary-light:#e6f9fa;  /* brand-50 產品背景色 */
+  --c-heading:#292929;        /* gray-800 主要文字 */
+  --c-accent:#1654b9;         /* link-300 */
+  --c-accent-light:#dbe8ff;   /* link-50 */
+  --c-warn:#ff7800;           /* warning-400 */
+  --c-warn-light:#ffeedf;     /* warning-50 */
+  --c-danger:#ea475b;         /* error-300 */
+  --c-danger-light:#ffe9ec;   /* error-50 */
+  --c-ok:#509e1f;             /* success-400 */
+  --c-ok-light:#e9f6dc;       /* success-50 */
+  --c-purple:#78269f;         /* selected-300 */
+  --c-purple-light:#ede7f7;   /* selected-50 */
+  --c-bg:#f3f3f3;             /* gray-100 */
+  --c-surface:#ffffff;
+  --c-border:#dddddd;         /* gray-300 */
+  --c-text:#292929;           /* gray-800 */
+  --c-text-sub:#7e7e7e;       /* gray-600 */
+  --radius:8px;
+  --shadow:0 2px 4px 0 rgba(41,41,41,.1); /* shadow-xs */
+  --font:Arial,"PingFang TC","Microsoft JhengHei",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--c-text);background:var(--c-bg);line-height:1.6;font-size:15px}
+a{color:var(--c-primary)}
+button,select,input{font-family:inherit;font-size:14px}
+button{cursor:pointer}
+
+/* 頂部列 */
+/* 品牌列（對齊公版 header-navigation：白底品牌列＋模組頁籤列） */
+.appbar{position:sticky;top:0;z-index:40;height:60px;background:var(--c-surface);color:var(--c-text);display:flex;align-items:center;gap:16px;padding:0 24px;border-bottom:1px solid #eeeeee}
+.appbar .logo{display:flex;align-items:center;gap:14px;white-space:nowrap;text-decoration:none}
+.appbar .logo .mark{display:block;flex:none}
+.appbar .logo .prod{font-weight:700;font-size:22px;line-height:1;color:#6f6f6f;letter-spacing:.5px}
+.appbar .co{font-size:17px;color:var(--c-heading);white-space:nowrap;padding-left:14px;border-left:1px solid #a9a9a9;line-height:1.2}
+.appbar .sp{flex:1}
+.appbar a.why{color:var(--c-accent);font-size:13px;text-decoration:none;white-space:nowrap}
+.appbar a.why:hover{text-decoration:underline}
+.demo{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--c-text-sub);border:1px dashed #a9a9a9;background:#f3f3f3;border-radius:4px;padding:3px 8px;white-space:nowrap}
+.demo .tag{font-weight:700;letter-spacing:.05em;border:1px solid var(--c-border);background:#fff;border-radius:4px;padding:0 4px}
+.demo select{font-size:13px;padding:2px 6px}
+.who{position:relative;white-space:nowrap}
+.who-btn{display:flex;align-items:center;gap:8px;border:0;background:none;font-size:14px;color:var(--c-text);padding:4px 6px;border-radius:4px}
+.who-btn:hover{background:var(--c-bg)}
+.who-btn .caret{font-size:11px;color:var(--c-text-sub)}
+.who-menu{position:absolute;right:0;top:44px;z-index:50;min-width:220px;background:#fff;border:1px solid var(--c-border);border-radius:4px;box-shadow:0 2px 8px 0 rgba(41,41,41,.15);padding:6px}
+.who-menu button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;border:0;background:none;padding:8px 10px;border-radius:4px;text-align:left;font-size:14px;color:var(--c-text)}
+.who-menu button:hover{background:var(--c-primary-light)}
+.who-menu button.on b{color:var(--c-primary)}
+.who-menu button span{font-size:12px;color:var(--c-text-sub)}
+.who .av{width:30px;height:30px;border-radius:50%;background:var(--c-primary-light);color:var(--c-primary);display:flex;align-items:center;justify-content:center;font-weight:900}
+
+/* 版面 */
+.shell{display:block;min-height:calc(100vh - 60px)}
+/* 模組頁籤列：底線樣式，當前頁籤主色＋底線；第二層為該模組的功能 */
+.side{position:sticky;top:60px;z-index:30;background:var(--c-surface);border-bottom:1px solid var(--c-border);box-shadow:0 2px 4px 0 rgba(41,41,41,.06)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px}
+.tab-item{position:relative}
+.tab-item>a{display:block;padding:12px 16px 9px;font-size:17px;color:var(--c-text);text-decoration:none;border-bottom:4px solid transparent;white-space:nowrap}
+.tab-item:hover>a,.tab-item:focus-within>a{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.tab-item>a.on{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.drop{display:none;position:absolute;left:0;top:100%;z-index:45;min-width:180px;background:#fff;border:1px solid var(--c-border);border-radius:4px;box-shadow:0 2px 8px 0 rgba(41,41,41,.15);padding:6px}
+.tab-item:hover .drop,.tab-item:focus-within .drop{display:block}
+.drop a{display:block;padding:8px 12px;border-radius:4px;font-size:14px;color:var(--c-text);text-decoration:none;white-space:nowrap}
+.drop a:hover{background:var(--c-bg);color:var(--c-primary)}
+.drop a.on{background:var(--c-primary-light);color:var(--c-primary);font-weight:700}
+.lk{font-size:12px;color:var(--c-text-sub)}
+main{padding:24px 28px 48px;min-width:0;max-width:1600px;margin:0 auto}
+
+/* 頁首 */
+.crumb{font-size:13px;color:var(--c-text-sub);margin-bottom:4px}
+.crumb a{color:var(--c-text-sub);text-decoration:none}
+.ph{display:flex;align-items:flex-end;gap:16px;justify-content:space-between;flex-wrap:wrap;margin-bottom:18px}
+.ph h1{font-size:26px;color:var(--c-heading);font-weight:900}
+.ph p{color:var(--c-text-sub);font-size:14px}
+.solves{font-size:13px;background:var(--c-danger-light);color:var(--c-danger);border-radius:999px;padding:4px 12px;font-weight:700}
+
+/* 卡片 */
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);min-width:0}
+.card-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.card-h h3{font-size:16px;color:var(--c-heading)}
+.mt{margin-top:16px}
+
+/* 資料來源標示 */
+.srcs{font-size:12px;color:var(--c-text-sub)}
+.srcs a{color:var(--c-text-sub);text-decoration:none;border-bottom:1px dotted var(--c-text-sub)}
+.srcs a:hover{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.card-src{margin-top:12px;padding-top:8px;border-top:1px solid #eeeeee}
+.kpi .l,.mini-l{display:flex;align-items:center;gap:4px}
+.tip{position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid #a9a9a9;color:#7e7e7e;font-size:10px;font-weight:700;line-height:1;cursor:help}
+.tip:hover,.tip:focus{border-color:var(--c-primary);color:var(--c-primary);outline:none}
+.tip:hover::after,.tip:focus::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:230px;background:#292929;color:#fff;font-size:12px;font-weight:400;line-height:1.5;padding:8px 10px;border-radius:4px;z-index:60;white-space:normal;text-align:left;box-shadow:0 2px 8px 0 rgba(41,41,41,.15)}
+
+.kpi .l{font-size:13px;color:var(--c-text-sub)}
+.kpi .n{font-size:28px;font-weight:900;color:var(--c-heading);line-height:1.3}
+.kpi .s{font-size:12px}
+.kpi .from{font-size:11px;color:var(--c-text-sub);margin-top:6px}
+.up{color:var(--c-ok)}.down{color:var(--c-warn)}
+
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:130px 1fr 64px;align-items:center;gap:10px;font-size:14px}
+.bar .track{height:10px;background:var(--c-primary-light);border-radius:5px;overflow:hidden}
+.bar .fill{height:100%;background:var(--c-primary);border-radius:5px;width:0;transition:width .8s}
+.bar .fill.acc{background:var(--c-accent)}
+.bar .fill.warn{background:var(--c-warn)}
+.bar .v{text-align:right;color:var(--c-text-sub)}
+
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th{text-align:left;background:#f3f3f3;color:var(--c-text-sub);font-weight:700;padding:10px;border-bottom:1px solid var(--c-border);white-space:nowrap}
+table.t td{padding:10px;border-bottom:1px solid #eeeeee;vertical-align:middle}
+table.t tr.click{cursor:pointer}
+table.t tr.click:hover td{background:#e6f9fa}
+.tbl-wrap{overflow-x:auto}
+
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.b-ok{background:var(--c-ok-light);color:var(--c-ok)}
+.b-warn{background:var(--c-warn-light);color:var(--c-warn)}
+.b-danger{background:var(--c-danger-light);color:var(--c-danger)}
+.b-blue{background:var(--c-primary-light);color:var(--c-primary)}
+.b-acc{background:var(--c-accent-light);color:var(--c-accent)}
+.b-pur{background:var(--c-purple-light);color:var(--c-purple)}
+.lock{color:var(--c-text-sub);font-size:13px}
+.lock::before{content:"🔒 "}
+
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid transparent;border-radius:8px;padding:8px 14px;font-weight:700;text-decoration:none;font-size:14px;white-space:nowrap}
+.btn-blue{background:var(--c-primary);color:#fff}
+.btn-line{background:#fff;color:var(--c-primary);border-color:var(--c-primary)}
+.btn-sm{padding:4px 10px;font-size:13px}
+
+.ai{background:linear-gradient(90deg,#e6f9fa,#f3f7ff);border:1px solid #c5f3f5;border-radius:10px;padding:14px 16px;font-size:14px}
+.ai .t{font-weight:700;color:var(--c-primary);margin-bottom:4px;display:flex;gap:8px;flex-wrap:wrap;align-items:baseline}
+.ai .t span{font-weight:400;font-size:12px;color:var(--c-text-sub)}
+
+.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+select,input[type=text]{padding:7px 10px;border:1px solid var(--c-border);border-radius:6px;background:#fff}
+select:disabled{background:#f3f3f3;color:var(--c-text-sub)}
+
+/* 首頁 */
+.hello{font-size:22px;font-weight:900;color:var(--c-heading)}
+.qcard{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--c-text);border:1px solid var(--c-border);background:#fff;border-radius:var(--radius);padding:16px;transition:.2s}
+.qcard:hover{border-color:var(--c-primary);transform:translateY(-2px);box-shadow:0 2px 8px 0 rgba(41,41,41,.15)}
+.qcard .q{font-weight:700}
+.qcard .to{font-size:13px;color:var(--c-primary);font-weight:700;margin-top:auto}
+.qcard .no{font-size:12px;color:var(--c-danger);font-weight:700}
+.vcard{border:1px solid var(--c-border);background:#fff;border-radius:var(--radius);padding:18px}
+.vcard h3{font-size:18px;color:var(--c-heading);margin-bottom:4px}
+.vcard p{font-size:13px;color:var(--c-text-sub);margin-bottom:10px}
+.vcard a{display:block;padding:8px 10px;border-radius:8px;text-decoration:none;color:var(--c-text);background:var(--c-bg);margin-top:6px;font-size:14px}
+.vcard a:hover{background:var(--c-primary-light);color:var(--c-primary)}
+.sync{display:flex;justify-content:space-between;gap:8px;font-size:13px;padding:6px 0;border-bottom:1px dashed var(--c-border)}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--c-ok);margin-right:6px}
+
+/* 員工畫像 */
+.phead{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--c-primary-light);display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:var(--c-primary)}
+.phead .nm{font-size:22px;font-weight:900}
+.phead .meta{color:var(--c-text-sub);font-size:14px}
+.phead .acts{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.circle{display:flex;flex-direction:column;gap:8px}
+.circle div{border-radius:10px;padding:10px 14px;font-size:14px}
+.circle .why{background:var(--c-purple-light)}
+.circle .how{background:var(--c-accent-light)}
+.circle .what{background:var(--c-primary-light)}
+.circle b{display:block;font-size:12px}
+.perfrow{display:flex;gap:10px}
+.perfrow div{flex:1;border:1px solid var(--c-border);border-radius:10px;padding:10px;text-align:center}
+.perfrow b{display:block;font-size:22px;color:var(--c-heading)}
+.perfrow span{font-size:12px;color:var(--c-text-sub)}
+.course{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--c-border);border-radius:8px;padding:9px 12px;font-size:14px;margin-top:8px}
+
+/* 比較 */
+.cmp{display:grid;gap:14px}
+.ccard{border:1px solid var(--c-border);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:6px;font-size:14px;background:#fff}
+.ccard.best{border:2px solid var(--c-primary)}
+.ccard .nm{font-size:17px;font-weight:700}
+.ccard .row{display:flex;justify-content:space-between;gap:8px;border-top:1px dashed var(--c-border);padding-top:6px}
+.ccard .row span:first-child{color:var(--c-text-sub)}
+.fit{font-size:28px;font-weight:900;color:var(--c-primary)}
+.picks{display:flex;gap:8px;flex-wrap:wrap}
+.pick{border:1px solid var(--c-border);border-radius:999px;padding:4px 12px;background:#fff;font-size:13px}
+.pick.on{background:var(--c-primary);border-color:var(--c-primary);color:#fff}
+
+.locked{text-align:center;padding:64px 20px;color:var(--c-text-sub)}
+.locked .ic{font-size:44px}
+.locked b{display:block;font-size:20px;color:var(--c-text);margin:8px 0}
+
+.toast-wrap{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100;pointer-events:none}
+.toast{background:var(--c-primary-dark);color:#fff;padding:10px 18px;border-radius:8px;font-size:14px;opacity:0;transition:.3s}
+.toast.show{opacity:1}
+.fade{animation:fade .35s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+@media (max-width:1100px){.g5{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){
+  .tabs{padding-left:12px;padding-right:12px;gap:18px}
+  .appbar{padding:0 12px;gap:10px}
+  .side a{white-space:nowrap}
+  .g2,.g3{grid-template-columns:1fr}
+  .appbar .co,.appbar a.why{display:none}
+  main{padding:16px}
+}
+@media (max-width:560px){.g4,.g5{grid-template-columns:1fr}.bar{grid-template-columns:96px 1fr 52px}.who .nmtxt{display:none}}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <a class="logo" href="#home" title="回到首頁"><svg class="mark" viewBox="0 0 52 30" width="52" height="30" aria-label="104"><path d="M3 9 L10 5 L10 25" fill="none" stroke="#6f6f6f" stroke-width="4" stroke-linejoin="miter"/><circle cx="22" cy="15" r="8" fill="none" stroke="#ff7800" stroke-width="4"/><path d="M46 25 L46 5 L36 19 L51 19" fill="none" stroke="#6f6f6f" stroke-width="4" stroke-linejoin="miter"/></svg><span class="prod">人才360畫像</span></a>
+  <span class="co">範例科技股份有限公司</span>
+  <span class="sp"></span>
+  <a class="why" href="./">為什麼需要人才畫像？</a>
+  <div class="who">
+    <button class="who-btn" id="whoBtn" aria-haspopup="true" aria-expanded="false"><span class="av" id="av">王</span><span class="nmtxt" id="whoName">王經理</span><span class="caret">▾</span></button>
+    <div class="who-menu" id="whoMenu" hidden>
+      <button data-role="hr" class="on"><b>王經理</b><span>人資部｜HR</span></button>
+      <button data-role="mgr"><b>陳協理</b><span>產品研發部｜部門主管</span></button>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="side" id="side"></nav>
+  <main id="main"></main>
+</div>
+<div class="toast-wrap"><div class="toast" id="toast"></div></div>
+
+<script>
+/* ===================== 資料來源（資料 API ↔ 產品） ===================== */
+const APIS = {
+  org:   {api:'組織/人事 API', prod:'企業大師',     url:'https://marketing.pro.104.com.tw/index.html', fields:'部門、職務、年資、到離職、職務異動', sync:'2027/05/12 08:00', rows:'326 位員工'},
+  train: {api:'訓練紀錄 API', prod:'企業學習平台', url:'https://training.104.com.tw/landingPage/marketing/index.html', fields:'修課紀錄、學習時數、課程完成率', sync:'2027/05/12 08:05', rows:'7,182 筆修課紀錄'},
+  pay:   {api:'薪酬資料 API', prod:'薪酬平台',     url:'https://salary.104.com.tw/landingpage/marketing/survey-report/index.html', fields:'月薪、調薪紀錄、市場薪資行情', sync:'2027/05/12 08:10', rows:'326 位員工、近 3 年調薪'},
+  assess:{api:'測評資料 API', prod:'測評中心',     url:'https://ehr.104.com.tw/products/assessmentcenter/index.html', fields:'職能測評、工作動機、個人風格', sync:'2027/05/12 08:15', rows:'298 份測評報告'},
+  perf:  {api:'績效資料 API', prod:'績效管理',     url:'https://ehr.104.com.tw/products/hrd/performance.html', fields:'年度考核、目標達成率', sync:'2027/05/12 08:20', rows:'近 3 年考核紀錄'}
+};
+
+/* ===================== 範例資料（皆為虛構） ===================== */
+const MY_DEPT = '產品研發部';
+const CO_MEDIAN = 58600;
+const DIMS = ['問題分析','領導能力','溝通協作','貫徹執行','創新思考','應變能力'];
+const COURSE = {'問題分析':'結構化問題解決','領導能力':'新手主管的領導力','溝通協作':'同理溝通與回饋技巧','貫徹執行':'目標管理與時間規劃','創新思考':'設計思考工作坊','應變能力':'敏捷式專案管理'};
+const DEPTS = [
+  {name:'產品研發部', n:84, pay:68500, a:38, turn:7.1, train:86, hi:12, keep:58, watch:10, risk:4, skills:[82,74,61,70,78,66]},
+  {name:'業務部',     n:72, pay:52300, a:31, turn:12.4,train:74, hi:9,  keep:50, watch:9,  risk:4, skills:[70,68,80,75,60,72]},
+  {name:'行銷部',     n:28, pay:55800, a:29, turn:9.0, train:68, hi:4,  keep:20, watch:3,  risk:1, skills:[66,62,77,72,81,70]},
+  {name:'客戶服務部', n:56, pay:45200, a:24, turn:15.8,train:71, hi:5,  keep:41, watch:7,  risk:3, skills:[60,58,79,70,55,68]},
+  {name:'財務部',     n:22, pay:58900, a:33, turn:4.5, train:80, hi:3,  keep:17, watch:2,  risk:0, skills:[84,60,63,82,58,61]},
+  {name:'人力資源部', n:18, pay:54100, a:35, turn:5.6, train:92, hi:3,  keep:14, watch:1,  risk:0, skills:[68,64,82,74,63,72]}
+];
+const PEOPLE = [
+  {id:'p1', name:'陳柏翰', dept:'產品研發部', title:'資深工程師', years:6, perf:['A','A','A+'], pot:'中', radar:[95,70,55,90,80,61], pay:72000,
+   motive:'成就動機高（PR 88），追求精益求精', style:'分析型：情緒穩定，凡事先評估再行動', hours:18,
+   courses:[['同理溝通與回饋技巧','done'],['敏捷式專案管理','40%']],
+   ai:'分析與執行能力突出，是團隊的技術核心；但習慣獨立完成工作，帶人經驗較少。適合先擔任技術導師，再逐步承擔管理職。'},
+  {id:'p2', name:'王思妤', dept:'產品研發部', title:'專案經理', years:5, perf:['A','A+','A'], pot:'高', radar:[80,93,90,85,72,84], pay:69500,
+   motive:'親和與成就動機均衡，重視團隊共同成長', style:'協調型：溝通細膩，面對變動彈性高', hours:26,
+   courses:[['新手主管的領導力','done'],['結構化問題解決','done']],
+   ai:'領導與協作能力最佳，過去帶領跨部門專案皆如期完成。技術深度略弱，可搭配資深工程師擔任副手。'},
+  {id:'p3', name:'張家豪', dept:'產品研發部', title:'工程師', years:3, perf:['A+','A+','A'], pot:'高', radar:[85,72,66,58,96,70], pay:61500,
+   motive:'權力動機高（PR 85），喜歡主導、追求影響力', style:'開創型：行動快，敢於嘗試新做法', hours:4,
+   courses:[],
+   ai:'績效亮眼、點子多，具高潛力；但年資較淺、執行穩定度仍待累積。近半年幾乎沒有學習紀錄，且薪資低於部門中位數，需留意留任風險。'},
+  {id:'p4', name:'李宜蓁', dept:'產品研發部', title:'UI 設計師', years:4, perf:['B+','A','B+'], pot:'中', radar:[70,60,78,74,88,65], pay:56000,
+   motive:'自主動機高，重視創作空間', style:'創意型：重視美感與使用者感受', hours:12,
+   courses:[['設計思考工作坊','done']],
+   ai:'創新思考突出，作品品質穩定；同一職務 4 年未異動，建議討論職涯發展方向，避免成長停滯。'},
+  {id:'p5', name:'林雅婷', dept:'業務部', title:'業務副理', years:8, perf:['A','B+','A'], pot:'中', radar:[72,80,85,94,63,57], pay:58000,
+   motive:'成就動機高（PR 90），以目標為導向', style:'推動型：積極主動、抗壓性高', hours:20,
+   courses:[['目標管理與時間規劃','done']],
+   ai:'業績穩定且客戶關係深厚，但薪資低於同職級中位數 12%、14 個月未調薪，留任風險偏高。'},
+  {id:'p6', name:'周志明', dept:'業務部', title:'業務專員', years:2, perf:['B','B+','A'], pot:'中', radar:[62,55,82,70,68,75], pay:42000,
+   motive:'親和動機高，重視人際關係', style:'外向型：善於建立關係', hours:30,
+   courses:[['結構化問題解決','60%']],
+   ai:'績效逐年進步、學習積極，溝通能力佳，可持續培育為資深業務。'},
+  {id:'p7', name:'吳佩珊', dept:'行銷部', title:'行銷企劃', years:3, perf:['B+','A','A'], pot:'中', radar:[68,58,80,72,90,74], pay:52000,
+   motive:'自主動機高，追求新鮮感', style:'創意型：點子多、喜歡變化', hours:8,
+   courses:[],
+   ai:'創意與溝通表現佳；近期訓練參與率下降，建議了解其發展期待。'},
+  {id:'p8', name:'黃冠宇', dept:'客戶服務部', title:'客服組長', years:5, perf:['A','B+','B'], pot:'低', radar:[66,74,92,70,55,68], pay:46000,
+   motive:'親和動機高（PR 91），重視團隊氛圍', style:'支持型：耐心、善於安撫情緒', hours:16,
+   courses:[['新手主管的領導力','done']],
+   ai:'溝通協作能力極佳；主管異動後績效下滑，可能與團隊氛圍改變有關，建議安排關懷面談。'},
+  {id:'p9', name:'鄭婉如', dept:'財務部', title:'會計主任', years:9, perf:['A','A','A'], pot:'中', radar:[90,76,70,95,52,60], pay:66000,
+   motive:'安全動機高，重視穩定與制度', style:'嚴謹型：細心、重視流程', hours:14,
+   courses:[['敏捷式專案管理','done']],
+   ai:'執行與分析能力穩定可靠，是財務部的關鍵人才；可列入接班人選。'},
+  {id:'p10',name:'許文傑', dept:'人力資源部', title:'HRBP', years:4, perf:['A','A','B+'], pot:'中', radar:[74,70,90,78,72,80], pay:55000,
+   motive:'親和與成就動機均衡', style:'協調型：善於跨部門溝通', hours:22,
+   courses:[['設計思考工作坊','done']],
+   ai:'溝通協作與應變能力佳，適合擔任跨部門專案窗口。'}
+];
+const RISKS = [
+  {id:'p3', lv:'高', sig:'績效連 3 季 A+，但薪資低於部門中位數 9%，近半年幾乎沒有學習紀錄', src:['perf','pay','train']},
+  {id:'p5', lv:'高', sig:'薪資低於同職級中位數 12%，14 個月未調薪', src:['pay','perf']},
+  {id:'p4', lv:'中', sig:'同一職務已 4 年未異動，績效持平', src:['org','perf']},
+  {id:'p8', lv:'中', sig:'主管異動後績效下滑，測評顯示親和動機高', src:['org','perf','assess']},
+  {id:'p7', lv:'低', sig:'訓練參與率下降，其他指標正常', src:['train']}
+];
+const POSITIONS = [
+  {id:'tl', name:'技術主管', dept:'產品研發部', w:[.25,.3,.2,.15,0,.1]},
+  {id:'sm', name:'業務主管', dept:'業務部', w:[.15,.3,.25,.2,0,.1]}
+];
+const PROBLEMS = [
+  {no:0, q:'了解員工全貌', d:'一頁看完員工的能力、動機、績效與學習紀錄，快速掌握這個人', page:'emp-list', to:'員工畫像'},
+  {no:1, q:'人員升遷評估', d:'把候選人的能力、動機和績效放在一起看，選人更有把握', page:'emp-compare', to:'晉升人選比較'},
+  {no:2, q:'訂定招募條件', d:'從表現好的同仁身上，找出公司真正需要的特質', page:'co-pref', to:'公司用人喜好'},
+  {no:3, q:'檢視薪資合理性', d:'看清各部門薪資落在哪裡，調薪討論有數據可以說', page:'dept-salary', to:'部門薪資水平'},
+  {no:4, q:'規劃員工培訓', d:'依每個人的需要推薦課程，讓培訓真正派上用場', page:'emp-idp', to:'個人發展建議'},
+  {no:5, q:'員工離職預測', d:'提早留意可能想離開的人才，來得及好好關心', page:'dept-risk', to:'留才預警'}
+];
+
+/* ===================== 狀態 ===================== */
+const S = {role:'hr', dept:'產品研發部', listQ:'', listDept:'全部', pos:'tl', picks:['p1','p2','p3'], idp:'p1'};
+const isMgr = () => S.role === 'mgr';
+
+/* ===================== 工具 ===================== */
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString('zh-TW');
+const byId = id => PEOPLE.find(p => p.id === id);
+const visiblePeople = () => isMgr() ? PEOPLE.filter(p => p.dept === MY_DEPT) : PEOPLE;
+const visibleDepts = () => isMgr() ? DEPTS.filter(d => d.name === MY_DEPT) : DEPTS;
+const payRange = n => `約 ${Math.floor(n/1000)-3}K–${Math.floor(n/1000)+3}K`;
+const gradeScore = g => ({'A+':115,'A':105,'B+':95,'B':88}[g] || 80);
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2400)}
+
+function srcs(keys){
+  return `<div class="srcs">來源：${keys.map(k=>{const a=APIS[k];
+    return `<a href="${a.url}" target="_blank" rel="noopener" title="前往${a.prod}查看完整資料">${a.prod}</a>`}).join('、')}</div>`;
+}
+function card(title, keys, body, cls=''){
+  return `<div class="card ${cls}"><div class="card-h"><h3>${title}</h3></div>${body}${keys&&keys.length?`<div class="card-src">${srcs(keys)}</div>`:''}</div>`;
+}
+function ai(text, keys){
+  return `<div class="ai"><div class="t">✨ AI 綜合分析<span>彙整自：${keys.map(k=>APIS[k].prod).join('、')}</span></div>${text}</div>`;
+}
+function bar(label,val,txt,cls=''){
+  return `<div class="bar"><span>${label}</span><span class="track"><span class="fill ${cls}" data-w="${Math.max(0,Math.min(100,val))}"></span></span><span class="v">${txt}</span></div>`;
+}
+const TIPS = {
+  '在職人數':'統計日當天在職的員工人數（不含已離職、留職停薪）',
+  '高潛力人才':'近 2 年績效皆 A 以上，且測評潛力評級為「高」的在職員工數；占比＝高潛力人才數 ÷ 在職員工數（12.6%）',
+  '年度離職率':'本年度離職人數 ÷ 本年度平均在職人數 × 100%',
+  '平均年資':'在職員工年資加總 ÷ 在職員工數',
+  '績效 A 以上':'最近一次考核為 A 以上的在職員工數 ÷ 在職員工數 × 100%',
+  '人均訓練時數':'本年度在職員工學習時數加總 ÷ 在職員工數'
+};
+const tipHtml = t => t ? `<span class="tip" tabindex="0" role="img" aria-label="計算方式：${t}" data-tip="${t}">!</span>` : '';
+function kpi(label,num,sub,keys,subCls=''){
+  return `<div class="card kpi"><div class="l">${label}${tipHtml(TIPS[label])}</div><div class="n">${num}</div>${sub?`<div class="s ${subCls}">${sub}</div>`:''}<div class="from">來源：${keys.map(k=>`<a href="${APIS[k].url}" target="_blank" rel="noopener">${APIS[k].prod}</a>`).join('、')}</div></div>`;
+}
+function header(crumb,title,desc,solve){
+  return `<div class="crumb">${crumb}</div><div class="ph"><div><h1>${title}</h1><p>${desc}</p></div>${solve?`<span class="solves">解決：${solve}</span>`:''}</div>`;
+}
+function locked(){
+  return `<div class="card locked"><div class="ic">🔒</div><b>部門主管沒有公司層級的檢視權限</b>公司分析僅開放 HR 檢視。你可以查看自己部門的資料：<br><br><a class="btn btn-blue" href="#dept-overview">前往部門總覽</a></div>`;
+}
+function riskBadge(lv){return `<span class="badge ${lv==='高'?'b-danger':lv==='中'?'b-warn':'b-ok'}">${lv}風險</span>`}
+function potBadge(p){return `<span class="badge ${p==='高'?'b-ok':p==='中'?'b-blue':'b-warn'}">潛力${p}</span>`}
+function topN(p,n){return p.radar.map((v,i)=>[DIMS[i],v]).sort((a,b)=>b[1]-a[1]).slice(0,n)}
+function lowN(p,n){return p.radar.map((v,i)=>[DIMS[i],v]).sort((a,b)=>a[1]-b[1]).slice(0,n)}
+function fitScore(p,pos){const w=POSITIONS.find(x=>x.id===pos).w;return Math.round(p.radar.reduce((s,v,i)=>s+v*w[i],0))}
+
+/* ===================== 首頁：人才概況 ===================== */
+function homeOverview(){
+  const mini=(l,n,tip)=>`<div style="background:var(--c-bg);border-radius:8px;padding:10px 12px"><div class="mini-l" style="font-size:12px;color:var(--c-text-sub)">${l}${tip?`<span class="tip" tabindex="0" role="img" aria-label="計算方式：${tip}" data-tip="${tip}">!</span>`:''}</div><div style="font-size:22px;font-weight:900;color:var(--c-heading)">${n}</div></div>`;
+  const more=(href,t)=>`<a href="${href}" style="display:inline-block;margin-top:12px;font-size:14px;font-weight:700;text-decoration:none">${t} →</a>`;
+  const co = isMgr()
+    ? `<div style="text-align:center;padding:28px 10px;color:var(--c-text-sub)"><div style="font-size:32px">🔒</div>部門主管沒有公司層級的檢視權限</div>`
+    : `<div class="grid g3" style="gap:10px">
+        ${mini('在職人數','326',TIPS['在職人數'])}
+        ${mini('高潛力人才','41 人',TIPS['高潛力人才'])}
+        ${mini('年度離職率','9.8%',TIPS['年度離職率'])}
+        ${mini('平均年資','5.2 年',TIPS['平均年資'])}
+        ${mini('績效 A 以上','32%',TIPS['績效 A 以上'])}
+        ${mini('人均訓練時數','22 小時',TIPS['人均訓練時數'])}
+      </div>
+      <div style="font-size:13px;font-weight:700;color:var(--c-text-sub);margin:14px 0 6px">人才結構（績效 × 潛力）</div>
+      <div style="display:flex;height:14px;border-radius:7px;overflow:hidden">
+        <span style="width:13%;background:var(--c-ok)" title="高潛力 13%"></span><span style="width:71%;background:var(--c-primary)" title="穩定貢獻 71%"></span><span style="width:12%;background:#ffab31" title="待觀察 12%"></span><span style="width:4%;background:var(--c-danger)" title="留任風險 4%"></span>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--c-text-sub);margin-top:6px">
+        <span><b style="color:var(--c-ok)">●</b> 高潛力 13%</span><span><b style="color:var(--c-primary)">●</b> 穩定貢獻 71%</span><span><b style="color:#ffab31">●</b> 待觀察 12%</span><span><b style="color:var(--c-danger)">●</b> 留任風險 4%</span>
+      </div>
+      <div style="font-size:13px;font-weight:700;color:var(--c-text-sub);margin:14px 0 6px">需優先關注</div>
+      <div class="sync"><span>客戶服務部離職率 15.8%，全公司最高</span><a href="#dept-overview" data-dept="客戶服務部">查看</a></div>
+      <div class="sync"><span>業務部平均薪資低於公司中位數 11%</span><a href="#dept-salary">查看</a></div>
+      ${more('#co-overview','查看公司總覽')}`;
+  const dept = `<table class="t"><thead><tr><th>部門</th><th>人數</th><th>績效 A 以上</th><th>需關注</th></tr></thead><tbody>
+    ${visibleDepts().map(d=>`<tr class="click" data-go="dept-overview" data-dept="${d.name}"><td><b>${d.name}</b></td><td>${d.n}</td><td>${d.a}%</td><td>${d.risk?`<span class="badge b-warn">${d.risk} 人</span>`:'—'}</td></tr>`).join('')}
+    </tbody></table>${more('#dept-overview','查看部門總覽')}`;
+  const vis = visiblePeople().map(p=>p.id);
+  const rs = RISKS.filter(r=>vis.includes(r.id)).slice(0,3);
+  const hi = PEOPLE.filter(p=>p.pot==='高'&&vis.includes(p.id));
+  const emp = `<div style="font-size:13px;font-weight:700;color:var(--c-text-sub);margin-bottom:6px">需要關注</div>
+    ${rs.length?rs.map(r=>{const p=byId(r.id);return `<div class="sync"><a href="#emp-profile--${p.id}"><b>${p.name}</b></a><span>${p.dept} ${riskBadge(r.lv)}</span></div>`}).join(''):'<p style="font-size:13px;color:var(--c-text-sub)">目前沒有需要關注的人才</p>'}
+    <div style="font-size:13px;font-weight:700;color:var(--c-text-sub);margin:12px 0 6px">高潛力人才</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">${hi.map(p=>`<a class="badge b-ok" style="text-decoration:none" href="#emp-profile--${p.id}">${p.name}</a>`).join('')}</div>
+    ${more('#emp-list','查看員工畫像')}`;
+  const lowHours = PEOPLE.filter(p=>vis.includes(p.id)&&p.hours<10);
+  const learn = `<div style="font-size:13px;font-weight:700;color:var(--c-text-sub);margin-bottom:8px">年度課程完成率</div>
+    <div class="bars">${visibleDepts().map(d=>bar(d.name,d.train,d.train+'%','acc')).join('')}</div>
+    <div style="font-size:13px;font-weight:700;color:var(--c-text-sub);margin:12px 0 6px">今年學習時數偏低（未滿 10 小時）</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">${lowHours.length?lowHours.map(p=>`<a class="badge b-warn" style="text-decoration:none" href="#emp-idp--${p.id}">${p.name}｜${p.hours} 小時</a>`).join(''):'<span style="font-size:13px;color:var(--c-text-sub)">目前沒有</span>'}</div>
+    ${more('#emp-idp','查看個人發展建議')}`;
+  return `<div class="grid g2">
+    ${card('🏢 公司概況',['org','perf','assess','train','pay'],co)}
+    ${card(isMgr()?'👥 我的部門':'👥 部門概況',['org','perf'],`<div class="tbl-wrap">${dept}</div>`)}
+    ${card('👤 員工動態',['perf','assess','pay'],emp)}
+    ${card('📚 學習與發展',['train','assess'],learn)}
+  </div>`;
+}
+
+/* ===================== 側邊導覽 ===================== */
+const NAV = [
+  {g:'公司分析', items:[['co-overview','公司總覽',1],['co-pref','用人喜好',1]]},
+  {g:'部門分析', items:[['dept-overview','部門總覽'],['dept-salary','部門薪資水平'],['dept-risk','留才預警']]},
+  {g:'員工分析', items:[['emp-list','員工畫像'],['emp-compare','晉升人選比較'],['emp-idp','個人發展建議']]}
+];
+function renderSide(cur){
+  const key = cur==='emp-profile' ? 'emp-list' : cur;
+  const mod = NAV.find(s=>s.items.some(([id])=>id===key));
+  const tabs = NAV.map(s=>`<div class="tab-item"><a href="#${s.items[0][0]}" class="${s===mod?'on':''}" aria-haspopup="true">${s.g}${s.items[0][2]&&isMgr()?' <span class="lk">🔒</span>':''}</a>
+    <div class="drop">${s.items.map(([id,t,hr])=>`<a href="#${id}" class="${id===key?'on':''}">${t}${hr&&isMgr()?' <span class="lk">🔒</span>':''}</a>`).join('')}</div></div>`).join('');
+  $('#side').innerHTML = `<div class="tabs">${tabs}</div>`;
+}
+
+/* ===================== 頁面 ===================== */
+const PAGES = {
+  home(){
+    const who = isMgr()?'陳協理（產品研發部主管）':'王經理（人資部）';
+    return `<div class="hello">${who}您好，今天需要哪方面的人才分析？</div>
+    <p style="color:var(--c-text-sub);margin:4px 0 16px">根據您的需求，彙整人才資料，提供您進行決策分析。</p>
+    <div class="grid g3">${PROBLEMS.map(p=>`<a class="qcard" href="#${p.page}"><span class="q" style="font-size:17px">${p.q}</span><span style="font-size:13px;color:var(--c-text-sub)">${p.d}</span><span class="to">前往「${p.to}」→</span></a>`).join('')}</div>
+    <h2 style="font-size:18px;color:var(--c-heading);margin:28px 0 12px">人才概況</h2>
+    ${homeOverview()}`;
+  },
+
+  sources(){
+    return header('首頁 › 資料來源','資料來源','人才360畫像的資料彙整自以下產品，想看更完整的資料，可直接前往對應產品。')+
+    `<div class="grid g3">${Object.values(APIS).map(a=>`<div class="card"><div class="card-h"><h3>${a.prod}</h3></div>
+      <p style="font-size:14px;margin-bottom:10px"><b>提供資料：</b>${a.fields}</p>
+      <a class="btn btn-line btn-sm" href="${a.url}" target="_blank" rel="noopener">前往${a.prod} ↗</a></div>`).join('')}</div>`;
+  },
+
+  'co-overview'(){
+    const h = header('公司分析 › 公司總覽','公司總覽','全公司人才結構一覽。');
+    if(isMgr()) return h+locked();
+    return h+`<div class="grid g3">
+      ${kpi('在職人數','326','較去年 +4%',['org'],'up')}
+      ${kpi('高潛力人才','41 人','占 12.6%',['perf','assess'])}
+      ${kpi('年度離職率','9.8%','較去年 −1.2%',['org'],'up')}
+      ${kpi('平均年資','5.2 年','較去年 +0.3 年',['org'])}
+      ${kpi('績效 A 以上','32%','較去年 +2%',['perf'],'up')}
+      ${kpi('人均訓練時數','22 小時','較去年 +5 小時',['train'],'up')}
+    </div>
+    <div class="grid g2 mt">
+      ${card('各部門績效 A 以上比例',['perf'],`<div class="bars">${DEPTS.map(d=>bar(d.name,d.a*2.2,d.a+'%')).join('')}</div>`)}
+      ${card('各部門人數與離職率',['org'],`<div class="tbl-wrap"><table class="t"><thead><tr><th>部門</th><th>人數</th><th>年度離職率</th></tr></thead><tbody>
+        ${DEPTS.map(d=>`<tr class="click" data-go="dept-overview" data-dept="${d.name}"><td><b>${d.name}</b></td><td>${d.n}</td><td>${d.turn>=12?`<span class="badge b-danger">${d.turn}%</span>`:d.turn+'%'}</td></tr>`).join('')}
+      </tbody></table></div><p style="font-size:12px;color:var(--c-text-sub);margin-top:8px">點選部門可查看部門總覽</p>`)}
+    </div>
+    <div class="mt">${ai('客戶服務部離職率 15.8% 為全公司最高，且平均薪資低於公司中位數 23%，建議優先檢視；產品研發部高潛力人才最多，可作為接班梯隊的主要來源。',['org','perf','pay','assess'])}</div>`;
+  },
+
+  'co-pref'(){
+    const h = header('公司分析 › 用人喜好','公司用人喜好','從近 2 年績效 A 以上的 48 位高績效者，歸納公司實際偏好的人才特徵。','說不清楚公司要什麼樣的人');
+    if(isMgr()) return h+locked();
+    const d=[['問題分析與解決',88],['成就動機',85],['跨部門協作',79],['情緒穩定度',76],['學習敏捷度',72]];
+    return h+`<div class="grid g2">
+      ${card('高績效者的共同特徵（平均 PR）',['assess','perf'],`<div class="bars">${d.map(x=>bar(x[0],x[1],'PR '+x[1])).join('')}</div>`)}
+      ${card('高績效者的背景',['org'],`<div class="bars">${bar('年資 3–7 年',62,'62%','acc')}${bar('曾跨部門輪調',45,'45%','acc')}${bar('內部晉升',38,'38%','acc')}${bar('年資 1 年以下',8,'8%','acc')}</div>`)}
+    </div>
+    <div class="grid g2 mt">
+      ${card('建議的招募條件',[],`<div class="bars" style="gap:8px;font-size:14px">
+        <div>✅ 重視「問題分析與解決」能力，面試加入情境題</div>
+        <div>✅ 成就動機高、自我驅動，適合目標導向的工作</div>
+        <div>✅ 具跨部門協作經驗，不只看個人技術</div>
+        <div>✅ 年資 3–7 年的人才，到職後績效最穩定</div></div>`)}
+      ${ai('公司的高績效者多為「分析驅動、自我要求高、願意跨部門合作」的人，且多在年資 3–7 年時表現最好。建議招募時除了專業能力，也把協作經驗納入評估；內部可優先培育年資 3 年以上的高潛力員工。',['assess','perf','org'])}
+    </div>`;
+  },
+
+  'dept-overview'(){
+    const list = visibleDepts();
+    if(!list.find(d=>d.name===S.dept)) S.dept = list[0].name;
+    const d = DEPTS.find(x=>x.name===S.dept);
+    const mem = PEOPLE.filter(p=>p.dept===d.name);
+    return header('部門分析 › 部門總覽','部門總覽','部門的人才組成、職能分布與人才分群。')+
+    `<div class="filters">部門：<select id="deptSel" ${isMgr()?'disabled':''}>${list.map(x=>`<option ${x.name===d.name?'selected':''}>${x.name}</option>`).join('')}</select>${isMgr()?'<span class="lock">部門主管只能檢視自己部門</span>':''}</div>
+    <div class="grid g4">
+      ${kpi('部門人數',d.n,'',['org'])}
+      ${kpi('績效 A 以上',d.a+'%','',['perf'])}
+      ${kpi('年度課程完成率',d.train+'%','',['train'])}
+      ${kpi('需關注人才',d.risk+' 人','',['perf','pay','org'], d.risk?'down':'')}
+    </div>
+    <div class="grid g2 mt">
+      ${card('團隊職能分布（平均 PR）',['assess'],`<div class="bars">${DIMS.map((s,i)=>bar(s,d.skills[i],'PR '+d.skills[i],'acc')).join('')}</div>`)}
+      ${card('人才分群（績效 × 潛力）',['perf','assess'],`<table class="t"><tbody>
+        <tr><td><span class="badge b-ok">高潛力</span></td><td>績效好、潛力高，列入培育名單</td><td><b>${d.hi}</b> 人</td></tr>
+        <tr><td><span class="badge b-blue">穩定貢獻</span></td><td>表現穩定，持續發展</td><td><b>${d.keep}</b> 人</td></tr>
+        <tr><td><span class="badge b-warn">待觀察</span></td><td>績效或潛力需提升</td><td><b>${d.watch}</b> 人</td></tr>
+        <tr class="click" data-go="dept-risk"><td><span class="badge b-danger">留任風險</span></td><td>出現離職訊號（點選查看）</td><td><b>${d.risk}</b> 人</td></tr></tbody></table>`)}
+    </div>
+    ${mem.length?`<div class="mt">${card('部門成員畫像（範例）',['org','perf'],`<div class="tbl-wrap"><table class="t"><thead><tr><th>姓名</th><th>職稱</th><th>年資</th><th>近 3 年績效</th><th>潛力</th><th></th></tr></thead><tbody>
+      ${mem.map(p=>`<tr class="click" data-go="emp-profile--${p.id}"><td><b>${p.name}</b></td><td>${p.title}</td><td>${p.years} 年</td><td>${p.perf.join('／')}</td><td>${potBadge(p.pot)}</td><td><a href="#emp-profile--${p.id}">查看畫像 →</a></td></tr>`).join('')}
+    </tbody></table></div>`)}</div>`:''}`;
+  },
+
+  'dept-salary'(){
+    const rows = DEPTS.map(d=>{
+      const diff = Math.round((d.pay-CO_MEDIAN)/CO_MEDIAN*100);
+      if(isMgr() && d.name!==MY_DEPT) return `<tr><td>${d.name}</td><td colspan="5"><span class="lock">無權限檢視其他部門薪資</span></td></tr>`;
+      const st = diff<=-15?'<span class="badge b-danger">明顯偏低</span>':diff<=-8?'<span class="badge b-warn">偏低</span>':'<span class="badge b-ok">合理</span>';
+      return `<tr><td><b>${d.name}</b></td><td>${d.n}</td><td>${isMgr()?payRange(d.pay):fmt(d.pay)+' 元'}</td>
+        <td><span style="display:inline-block;height:8px;border-radius:4px;vertical-align:middle;width:${Math.min(90,Math.abs(diff)*4)}px;background:${diff<0?'var(--c-warn)':'var(--c-accent)'}"></span> ${diff>0?'+':''}${diff}%</td>
+        <td>${d.turn>=12?`<span class="badge b-danger">${d.turn}%</span>`:d.turn+'%'}</td><td>${st}</td></tr>`;
+    }).join('');
+    const txt = isMgr()
+      ? '產品研發部平均薪資高於公司中位數 17%，整體具競爭力；但部門內高績效的張家豪低於部門中位數 9%，建議於下次調薪優先檢視。'
+      : '客戶服務部薪資低於公司中位數 23%，且離職率 15.8% 為全公司最高，兩者可能相關，建議優先檢視薪資結構；業務部偏低 11%，可搭配獎金制度一併評估。';
+    return header('部門分析 › 部門薪資水平','部門薪資水平',`各部門平均月薪與公司中位數（${isMgr()?'約 58K':fmt(CO_MEDIAN)+' 元'}）比較，搭配離職率判斷是否需要調整。`,'部門薪資是否合理沒有數據')+
+      card('各部門平均月薪（2027 年 Q2）',['pay','org'],`<div class="tbl-wrap"><table class="t"><thead><tr><th>部門</th><th>人數</th><th>平均月薪</th><th>與公司中位數比較</th><th>年度離職率</th><th>狀態</th></tr></thead><tbody>${rows}</tbody></table></div>
+      ${isMgr()?'<p class="lock" style="margin-top:10px">部門主管看到的薪資以區間顯示，個人薪資明細僅 HR 可檢視</p>':''}`)+
+      `<div class="mt">${ai(txt,['pay','org'])}</div>`;
+  },
+
+  'dept-risk'(){
+    const list = RISKS.filter(r=>!isMgr()||byId(r.id).dept===MY_DEPT);
+    const txt = isMgr()
+      ? '產品研發部有 1 位高風險人才（張家豪）：績效頂尖但薪資偏低、近半年幾乎沒有學習紀錄，建議本週安排面談並提出調薪或發展計畫。'
+      : '目前有 2 位高風險人才，共同訊號是「績效好但薪資低於中位數」。建議 HR 與部門主管本月內完成關懷面談。';
+    return header('部門分析 › 留才預警','留才預警','綜合績效、薪資、職務異動、訓練參與等訊號，標示需要關注的人才。','人才要離職了才知道')+
+      card(`需要關注的人才（${list.length} 位）`,['perf','pay','org','train'],`<div class="tbl-wrap"><table class="t"><thead><tr><th>姓名</th><th>部門</th><th>風險</th><th>觀察到的訊號</th><th>訊號來源</th><th></th></tr></thead><tbody>
+      ${list.map(r=>{const p=byId(r.id);return `<tr><td><a href="#emp-profile--${p.id}"><b>${p.name}</b></a></td><td>${p.dept}</td><td>${riskBadge(r.lv)}</td><td>${r.sig}</td><td style="font-size:12px;color:var(--c-text-sub)">${r.src.map(k=>APIS[k].prod).join('<br>')}</td><td><button class="btn btn-blue btn-sm" data-toast="已建立與 ${p.name} 的關懷面談提醒（示意）">安排面談</button></td></tr>`}).join('')}
+      </tbody></table></div>`)+`<div class="mt">${ai(txt,['perf','pay','org','train'])}</div>`;
+  },
+
+  'emp-list'(){
+    const depts = ['全部',...visibleDepts().map(d=>d.name)];
+    if(!depts.includes(S.listDept)) S.listDept='全部';
+    const list = visiblePeople().filter(p=>(S.listDept==='全部'||p.dept===S.listDept)&&(!S.listQ||(p.name+p.title).includes(S.listQ)));
+    return header('員工分析 › 員工畫像','員工畫像','搜尋員工，查看彙整自各資料 API 的360畫像。')+
+    `<div class="filters"><input type="text" id="q" placeholder="搜尋姓名或職稱" value="${S.listQ}">
+      部門：<select id="ld" ${isMgr()?'disabled':''}>${depts.map(x=>`<option ${x===S.listDept?'selected':''}>${x}</option>`).join('')}</select>
+      ${isMgr()?'<span class="lock">部門主管只能檢視自己部門的員工</span>':''}</div>`+
+    card(`員工清單（${list.length} 位，範例）`,['org','perf','assess'],list.length?`<div class="tbl-wrap"><table class="t"><thead><tr><th>姓名</th><th>部門</th><th>職稱</th><th>年資</th><th>近 3 年績效</th><th>潛力</th><th>最強項</th><th></th></tr></thead><tbody>
+      ${list.map(p=>`<tr class="click" data-go="emp-profile--${p.id}"><td><b>${p.name}</b></td><td>${p.dept}</td><td>${p.title}</td><td>${p.years} 年</td><td>${p.perf.join('／')}</td><td>${potBadge(p.pot)}</td><td>${topN(p,1)[0][0]}</td><td><a href="#emp-profile--${p.id}">查看畫像 →</a></td></tr>`).join('')}
+    </tbody></table></div>`:'<p style="color:var(--c-text-sub);padding:24px;text-align:center">查無符合條件的員工，請調整搜尋條件。</p>');
+  },
+
+  'emp-profile'(q){
+    const p = byId(q.id) || visiblePeople()[0];
+    if(isMgr() && p.dept!==MY_DEPT) return header('員工分析 › 員工畫像','員工畫像','')+`<div class="card locked"><div class="ic">🔒</div><b>無權限檢視其他部門員工</b>部門主管只能檢視產品研發部的員工畫像。<br><br><a class="btn btn-blue" href="#emp-list">回員工清單</a></div>`;
+    const risk = RISKS.find(r=>r.id===p.id);
+    return `<div class="crumb"><a href="#emp-list">員工分析 › 員工畫像</a> › ${p.name}</div>
+    <div class="card"><div class="phead"><div class="avatar">${p.name[0]}</div>
+      <div><div class="nm">${p.name} ${potBadge(p.pot)} ${risk?riskBadge(risk.lv):''}</div><div class="meta">${p.dept}｜${p.title}｜年資 ${p.years} 年</div>${srcs(['org'])}</div>
+      <div class="acts"><button class="btn btn-line" data-addcmp="${p.id}">加入晉升比較</button><a class="btn btn-blue" href="#emp-idp--${p.id}">查看發展建議</a></div></div></div>
+    <div class="grid g2 mt">
+      ${card('績效歷程',['perf'],`<div class="perfrow">${['2024','2025','2026'].map((y,i)=>`<div><span>${y} 年</span><b>${p.perf[i]}</b><span>目標達成 ${gradeScore(p.perf[i])}%</span></div>`).join('')}</div>`)}
+      ${card('薪資',['pay'],isMgr()
+        ? `<div class="kpi"><div class="n" style="font-size:22px">${payRange(p.pay)}</div><p class="lock">個人薪資明細僅 HR 可檢視</p></div>`
+        : `<div class="kpi"><div class="n">${fmt(p.pay)} 元</div><div class="s ${p.pay<DEPTS.find(d=>d.name===p.dept).pay?'down':'up'}">較部門平均 ${Math.round((p.pay-DEPTS.find(d=>d.name===p.dept).pay)/DEPTS.find(d=>d.name===p.dept).pay*100)}%</div></div>`)}
+    </div>
+    <div class="grid g2 mt">
+      ${card('能力雷達（測評 PR）',['assess'],`<svg id="radar" viewBox="0 0 300 260" width="100%" style="max-width:340px;display:block;margin:0 auto"></svg>`)}
+      ${card('人才黃金圈',['assess'],`<div class="circle"><div class="why"><b>Why｜工作動機</b>${p.motive}</div><div class="how"><b>How｜心理素質與風格</b>${p.style}</div><div class="what"><b>What｜外顯能力（前 3 強項）</b>${topN(p,3).map(x=>x[0]+' PR '+x[1]).join('、')}</div></div>`)}
+    </div>
+    <div class="grid g2 mt">
+      ${card('學習紀錄',['train'],`<p>今年學習時數：<b>${p.hours} 小時</b>（公司平均 22 小時）</p>${p.courses.length?p.courses.map(c=>`<div class="course"><span>${c[0]}</span>${c[1]==='done'?'<span class="badge b-ok">已完成</span>':`<span class="badge b-warn">進行中 ${c[1]}</span>`}</div>`).join(''):'<p style="color:var(--c-text-sub);margin-top:8px">今年尚無修課紀錄</p>'}`)}
+      ${ai(p.ai,['org','perf','assess','train','pay'])}
+    </div>`;
+  },
+
+  'emp-compare'(){
+    const poss = POSITIONS.filter(x=>!isMgr()||x.dept===MY_DEPT);
+    if(!poss.find(x=>x.id===S.pos)) S.pos = poss[0].id;
+    const pos = POSITIONS.find(x=>x.id===S.pos);
+    const pool = PEOPLE.filter(p=>p.dept===pos.dept);
+    S.picks = S.picks.filter(id=>pool.find(p=>p.id===id));
+    if(!S.picks.length) S.picks = pool.slice(0,3).map(p=>p.id);
+    const cands = S.picks.map(byId).map(p=>({p,fit:fitScore(p,S.pos)})).sort((a,b)=>b.fit-a.fit);
+    const best = cands[0];
+    const txt = cands.length<2 ? '請至少選擇 2 位候選人進行比較。'
+      : `「${pos.name}」需要帶人與跨部門協調，領導能力與溝通協作權重最高。${best.p.name}職務適配度最高（${best.fit}%），${topN(best.p,1)[0][0]}是最大優勢；${cands.slice(1).map(c=>`${c.p.name}的強項是${topN(c.p,1)[0][0]}，但${lowN(c.p,1)[0][0]}較弱`).join('；')}。建議由${best.p.name}優先接任，並為其他候選人安排對應的發展計畫。`;
+    return header('員工分析 › 晉升人選比較','晉升人選比較','依職務需求，把候選人的適配度、績效、動機與強弱項並排比較。','用人、升遷靠主管主觀判斷')+
+    `<div class="card"><div class="filters" style="margin:0">職缺：<select id="posSel">${poss.map(x=>`<option value="${x.id}" ${x.id===S.pos?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select>
+      <span style="color:var(--c-text-sub)">選擇候選人（2–4 位）：</span><div class="picks">${pool.map(p=>`<button class="pick ${S.picks.includes(p.id)?'on':''}" data-pick="${p.id}">${p.name}</button>`).join('')}</div></div></div>
+    <div class="card mt"><div class="card-h"><h3>候選人比較</h3>${srcs(['perf','assess','org'])}</div>
+      <div class="cmp" style="grid-template-columns:repeat(${Math.max(cands.length,1)},1fr)">
+      ${cands.map((c,i)=>`<div class="ccard ${i===0&&cands.length>1?'best':''}">${i===0&&cands.length>1?'<span class="badge b-ok" style="align-self:flex-start">最適合</span>':''}
+        <div class="nm"><a href="#emp-profile--${c.p.id}">${c.p.name}</a></div><div style="color:var(--c-text-sub)">${c.p.title}・年資 ${c.p.years} 年</div>
+        <div><span class="fit">${c.fit}%</span> <span style="color:var(--c-text-sub)">職務適配度</span></div>
+        <div class="row"><span>近 3 年績效</span><span>${c.p.perf.join('／')}</span></div>
+        <div class="row"><span>領導能力</span><span>PR ${c.p.radar[1]}</span></div>
+        <div class="row"><span>溝通協作</span><span>PR ${c.p.radar[2]}</span></div>
+        <div class="row"><span>工作動機</span><span>${c.p.motive.split('，')[0]}</span></div>
+        <div class="row"><span>最強項</span><span>${topN(c.p,1)[0][0]}</span></div>
+        <div class="row"><span>需注意</span><span style="color:var(--c-warn)">${lowN(c.p,1)[0][0]} PR ${lowN(c.p,1)[0][1]}</span></div></div>`).join('')}
+      </div></div>
+    <div class="mt">${ai(txt,['perf','assess','org'])}</div>`;
+  },
+
+  'emp-idp'(q){
+    if(q.id) S.idp=q.id;
+    const vis = visiblePeople();
+    if(!vis.find(p=>p.id===S.idp)) S.idp = vis[0].id;
+    const p = byId(S.idp);
+    const weak = lowN(p,3);
+    return header('員工分析 › 個人發展建議','個人發展建議（IDP）','依測評弱項推薦企業學習平台的課程，並追蹤學習進度。','培訓一體適用、成效不明')+
+    `<div class="filters">員工：<select id="idpSel">${vis.map(x=>`<option value="${x.id}" ${x.id===p.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select><a href="#emp-profile--${p.id}">查看 ${p.name} 的完整畫像 →</a></div>
+    <div class="grid g2">
+      ${card('待加強的能力',['assess'],`<div class="bars">${weak.map(w=>bar(w[0],w[1],'PR '+w[1],'warn')).join('')}</div>`)}
+      ${card('推薦課程',['train'],weak.map(w=>{const c=COURSE[w[0]];const had=p.courses.find(x=>x[0]===c);
+        return `<div class="course"><span>${c}<br><span style="font-size:12px;color:var(--c-text-sub)">補強：${w[0]}</span></span>${had?(had[1]==='done'?'<span class="badge b-ok">已完成</span>':`<span class="badge b-warn">進行中 ${had[1]}</span>`):`<button class="btn btn-blue btn-sm" data-toast="已將「${c}」指派給 ${p.name}（示意）">指派課程</button>`}</div>`}).join('')+
+        `<p style="font-size:12px;color:var(--c-text-sub);margin-top:10px">課程與進度來自企業學習平台，<a href="${APIS.train.url}" target="_blank" rel="noopener">前往查看完整學習紀錄 ↗</a></p>`)}
+    </div>
+    <div class="mt">${ai(`${p.name}的強項是${topN(p,2).map(x=>x[0]).join('與')}，${weak.map(x=>x[0]).slice(0,2).join('、')}相對較弱。建議優先完成「${COURSE[weak[0][0]]}」，並安排需要${weak[0][0]}的實際任務歷練，3 個月後再以測評追蹤成效。`,['assess','train'])}</div>`;
+  }
+};
+
+/* ===================== 路由 ===================== */
+function parse(){
+  const h = location.hash.replace('#','') || 'home';
+  const [page, id] = h.split('--');
+  const q = id ? {id} : {};
+  return {page: PAGES[page]?page:'home', q};
+}
+function render(){
+  const {page,q} = parse();
+  renderSide(page);
+  const m = $('#main');
+  m.innerHTML = `<div class="fade">${PAGES[page](q)}</div>`;
+  if($('#radar')) drawRadar(byId(q.id)||visiblePeople()[0]);
+  setTimeout(()=>document.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'),50);
+  bind();
+  const key = location.hash;
+  if(key!==render.last){ window.scrollTo(0,0); render.last=key; }
+}
+function bind(){
+  const ds=$('#deptSel'); if(ds) ds.onchange=()=>{S.dept=ds.value;render()};
+  const ld=$('#ld'); if(ld) ld.onchange=()=>{S.listDept=ld.value;render()};
+  const qi=$('#q'); if(qi){
+    const go=()=>{S.listQ=qi.value.trim();const pos=qi.selectionStart;render();const n=$('#q');n.focus();n.setSelectionRange(pos,pos)};
+    qi.addEventListener('input',e=>{if(!e.isComposing)go()});
+    qi.addEventListener('compositionend',go);
+  }
+  const ps=$('#posSel'); if(ps) ps.onchange=()=>{S.pos=ps.value;S.picks=[];render()};
+  const is=$('#idpSel'); if(is) is.onchange=()=>{S.idp=is.value; if(location.hash!=='#emp-idp') location.hash='emp-idp'; else render();};
+  document.querySelectorAll('[data-pick]').forEach(b=>b.onclick=()=>{
+    const id=b.dataset.pick;
+    if(S.picks.includes(id)){ if(S.picks.length<=2){toast('至少需要 2 位候選人');return} S.picks=S.picks.filter(x=>x!==id);}
+    else{ if(S.picks.length>=4){toast('最多比較 4 位候選人');return} S.picks.push(id);}
+    render();
+  });
+}
+function drawRadar(p){
+  const cx=150,cy=130,R=95,n=6;let s='';
+  const pt=(i,r)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [cx+r*Math.cos(a),cy+r*Math.sin(a)]};
+  [.25,.5,.75,1].forEach(k=>{s+=`<polygon points="${DIMS.map((_,i)=>pt(i,R*k).join(',')).join(' ')}" fill="none" stroke="#dddddd"/>`});
+  DIMS.forEach((l,i)=>{const e=pt(i,R),t=pt(i,R+20);s+=`<line x1="${cx}" y1="${cy}" x2="${e[0]}" y2="${e[1]}" stroke="#eeeeee"/><text x="${t[0]}" y="${t[1]+4}" font-size="12" text-anchor="middle" fill="#7e7e7e">${l}</text>`});
+  s+=`<polygon points="${p.radar.map((v,i)=>pt(i,R*v/100).join(',')).join(' ')}" fill="rgba(0,175,184,.25)" stroke="#00afb8" stroke-width="2"/>`;
+  p.radar.forEach((v,i)=>{const q=pt(i,R*v/100);s+=`<circle cx="${q[0]}" cy="${q[1]}" r="3.5" fill="#028b95"/>`});
+  $('#radar').innerHTML=s;
+}
+
+/* 全域事件 */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-toast]'); if(t){toast(t.dataset.toast);return}
+  const a=e.target.closest('[data-addcmp]'); if(a){
+    const p=byId(a.dataset.addcmp); const pos=POSITIONS.find(x=>x.dept===p.dept&&(!isMgr()||x.dept===MY_DEPT));
+    if(!pos){toast(`${p.dept}目前沒有開放中的晉升職缺（示意）`);return}
+    S.pos=pos.id; if(!S.picks.includes(p.id)) S.picks=[...S.picks.filter(id=>byId(id).dept===p.dept).slice(0,3),p.id];
+    location.hash='emp-compare'; return;
+  }
+  const dl=e.target.closest('a[data-dept]'); if(dl) S.dept=dl.dataset.dept;
+  if(e.target.closest('a,button,select,input')) return;
+  const r=e.target.closest('tr[data-go]'); if(r){ if(r.dataset.dept) S.dept=r.dataset.dept; location.hash=r.dataset.go; }
+});
+const whoMenu=$('#whoMenu'), whoBtn=$('#whoBtn');
+whoBtn.onclick=e=>{e.stopPropagation();whoMenu.hidden=!whoMenu.hidden;whoBtn.setAttribute('aria-expanded',String(!whoMenu.hidden))};
+document.addEventListener('click',e=>{if(!e.target.closest('.who')){whoMenu.hidden=true;whoBtn.setAttribute('aria-expanded','false')}});
+whoMenu.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{
+  S.role=b.dataset.role; whoMenu.hidden=true;
+  whoMenu.querySelectorAll('[data-role]').forEach(x=>x.classList.toggle('on',x===b));
+  $('#av').textContent=isMgr()?'陳':'王'; $('#whoName').textContent=isMgr()?'陳協理':'王經理';
+  toast(isMgr()?'目前以陳協理（產品研發部主管）的帳號檢視':'目前以王經理（人資部）的帳號檢視');
+  render();
+});
+window.addEventListener('hashchange',render);
+document.querySelector('a.why').addEventListener('click',e=>{e.preventDefault();location.href=new URL('./',location.href).href;});
+render();
+</script>
+</body>
+</html>

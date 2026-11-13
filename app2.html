@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人才360畫像（職缺比對版）｜Talent One</title>
+<style>
+/* ===== 配色：104 HA 大B 設計公版（react-ha-v2 palette / colors / typography） ===== */
+:root{
+  --c-primary:#00afb8; --c-primary-dark:#014a50; --c-primary-light:#e6f9fa;
+  --c-heading:#292929; --c-accent:#1654b9; --c-accent-light:#dbe8ff;
+  --c-warn:#ff7800; --c-warn-light:#ffeedf; --c-danger:#ea475b; --c-danger-light:#ffe9ec;
+  --c-ok:#509e1f; --c-ok-light:#e9f6dc; --c-purple:#78269f; --c-purple-light:#ede7f7;
+  --c-bg:#f3f3f3; --c-surface:#ffffff; --c-border:#dddddd; --c-text:#292929; --c-text-sub:#7e7e7e;
+  --radius:8px; --shadow:0 2px 4px 0 rgba(41,41,41,.1);
+  --font:Arial,"PingFang TC","Microsoft JhengHei",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);color:var(--c-text);background:var(--c-bg);line-height:1.6;font-size:15px}
+a{color:var(--c-primary)}
+button,select,input{font-family:inherit;font-size:14px}
+button{cursor:pointer}
+
+/* 品牌列 */
+.appbar{position:sticky;top:0;z-index:40;height:60px;background:#fff;display:flex;align-items:center;gap:16px;padding:0 24px;border-bottom:1px solid #eeeeee}
+.logo{display:flex;align-items:center;gap:14px;white-space:nowrap;text-decoration:none}
+.logo .mark{display:block;flex:none}
+.logo .prod{font-weight:700;font-size:22px;line-height:1;color:#6f6f6f;letter-spacing:.5px}
+.co{font-size:17px;color:var(--c-heading);white-space:nowrap;padding-left:14px;border-left:1px solid #a9a9a9;line-height:1.2}
+.sp{flex:1}
+.why{color:var(--c-accent);font-size:13px;text-decoration:none;white-space:nowrap}
+.why:hover{text-decoration:underline}
+.who{position:relative;white-space:nowrap}
+.who-btn{display:flex;align-items:center;gap:8px;border:0;background:none;font-size:14px;color:var(--c-text);padding:4px 6px;border-radius:4px}
+.who-btn:hover{background:var(--c-bg)}
+.who-btn .caret{font-size:11px;color:var(--c-text-sub)}
+.av{width:30px;height:30px;border-radius:50%;background:var(--c-primary-light);color:var(--c-primary);display:flex;align-items:center;justify-content:center;font-weight:900}
+.who-menu{position:absolute;right:0;top:44px;z-index:50;min-width:220px;background:#fff;border:1px solid var(--c-border);border-radius:4px;box-shadow:0 2px 8px 0 rgba(41,41,41,.15);padding:6px}
+.who-menu button{display:flex;flex-direction:column;align-items:flex-start;gap:2px;width:100%;border:0;background:none;padding:8px 10px;border-radius:4px;text-align:left;font-size:14px;color:var(--c-text)}
+.who-menu button:hover{background:var(--c-primary-light)}
+.who-menu button.on b{color:var(--c-primary)}
+.who-menu button span{font-size:12px;color:var(--c-text-sub)}
+
+/* 模組頁籤列（滑過展開子選單） */
+.side{position:sticky;top:60px;z-index:30;background:#fff;border-bottom:1px solid var(--c-border);box-shadow:0 2px 4px 0 rgba(41,41,41,.06)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px}
+.tab-item{position:relative}
+.tab-item>a{display:block;padding:12px 16px 9px;font-size:17px;color:var(--c-text);text-decoration:none;border-bottom:4px solid transparent;white-space:nowrap}
+.tab-item:hover>a,.tab-item:focus-within>a{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.tab-item>a.on{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.tab-item>a small{font-size:12px;color:var(--c-text-sub);margin-left:4px}
+.drop{display:none;position:absolute;left:0;top:100%;z-index:45;min-width:180px;background:#fff;border:1px solid var(--c-border);border-radius:4px;box-shadow:0 2px 8px 0 rgba(41,41,41,.15);padding:6px}
+.tab-item:hover .drop,.tab-item:focus-within .drop{display:block}
+.drop a{display:block;padding:8px 12px;border-radius:4px;font-size:14px;color:var(--c-text);text-decoration:none;white-space:nowrap}
+.drop a:hover{background:var(--c-bg);color:var(--c-primary)}
+.drop a.on{background:var(--c-primary-light);color:var(--c-primary);font-weight:700}
+
+main{padding:24px 28px 48px;max-width:1440px;margin:0 auto}
+.crumb{font-size:13px;color:var(--c-text-sub);margin-bottom:4px}
+.crumb a{color:var(--c-text-sub);text-decoration:none}
+.ph{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.ph h1{font-size:26px;color:var(--c-heading);font-weight:900}
+.ph p{color:var(--c-text-sub);font-size:14px}
+
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);min-width:0}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.card-h h3{font-size:16px;color:var(--c-heading)}
+.card-src{margin-top:12px;padding-top:8px;border-top:1px solid #eeeeee;font-size:12px;color:var(--c-text-sub)}
+.card-src a{color:var(--c-text-sub);text-decoration:none;border-bottom:1px dotted var(--c-text-sub)}
+.card-src a:hover{color:var(--c-primary);border-bottom-color:var(--c-primary)}
+.mt{margin-top:16px}
+.sub{font-size:13px;color:var(--c-text-sub)}
+.lbl{font-size:13px;font-weight:700;color:var(--c-text-sub);margin:12px 0 6px}
+
+.kpi .l{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--c-text-sub)}
+.kpi .n{font-size:26px;font-weight:900;color:var(--c-heading);line-height:1.3}
+.tip{position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid #a9a9a9;color:#7e7e7e;font-size:10px;font-weight:700;line-height:1;cursor:help}
+.tip:hover,.tip:focus{border-color:var(--c-primary);color:var(--c-primary);outline:none}
+.tip:hover::after,.tip:focus::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:230px;background:#292929;color:#fff;font-size:12px;font-weight:400;line-height:1.5;padding:8px 10px;border-radius:4px;z-index:60;text-align:left}
+
+.bars{display:flex;flex-direction:column;gap:10px}
+.bar{display:grid;grid-template-columns:110px 1fr 70px;align-items:center;gap:10px;font-size:14px}
+.track{position:relative;height:10px;background:#eeeeee;border-radius:5px;overflow:visible}
+.fill{position:absolute;left:0;top:0;height:100%;background:var(--c-primary);border-radius:5px;width:0;transition:width .8s}
+.fill.warn{background:var(--c-warn)}
+.target{position:absolute;top:-4px;width:2px;height:18px;background:var(--c-heading)}
+.bar .v{text-align:right;color:var(--c-text-sub);font-variant-numeric:tabular-nums}
+
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th{text-align:left;background:#f3f3f3;color:var(--c-text-sub);font-weight:700;padding:10px;border-bottom:1px solid var(--c-border);white-space:nowrap}
+table.t td{padding:10px;border-bottom:1px solid #eeeeee;vertical-align:middle}
+table.t tr.click{cursor:pointer}
+table.t tr.click:hover td{background:var(--c-primary-light)}
+.tbl{overflow-x:auto}
+
+.badge{display:inline-block;font-size:12px;font-weight:700;border-radius:999px;padding:2px 10px;white-space:nowrap}
+.b-ok{background:var(--c-ok-light);color:var(--c-ok)}.b-warn{background:var(--c-warn-light);color:var(--c-warn)}
+.b-danger{background:var(--c-danger-light);color:var(--c-danger)}.b-blue{background:var(--c-primary-light);color:var(--c-primary)}
+.b-line{background:#fff;border:1px solid var(--c-border);color:var(--c-text-sub);font-weight:400}
+.lock{color:var(--c-text-sub);font-size:13px}.lock::before{content:"🔒 "}
+
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid transparent;border-radius:4px;padding:8px 14px;font-weight:700;text-decoration:none;font-size:14px;white-space:nowrap}
+.btn-blue{background:var(--c-primary);color:#fff}
+.btn-line{background:#fff;color:var(--c-primary);border-color:var(--c-primary)}
+.btn-sm{padding:4px 10px;font-size:13px}
+select{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;background:#fff}
+select:disabled{background:#f3f3f3;color:var(--c-text-sub)}
+.filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+
+.ai{background:linear-gradient(90deg,#e6f9fa,#f3f7ff);border:1px solid #c5f3f5;border-radius:var(--radius);padding:14px 16px;font-size:14px}
+.ai .t{font-weight:700;color:var(--c-primary);margin-bottom:4px}
+
+/* 首頁 */
+.hello{font-size:22px;font-weight:900;color:var(--c-heading)}
+.cycle{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--c-text);background:#fff;border:1px solid var(--c-border);border-top:4px solid var(--c-primary);border-radius:var(--radius);padding:16px;transition:.2s}
+.cycle:hover{box-shadow:0 2px 8px 0 rgba(41,41,41,.15);transform:translateY(-2px)}
+.cycle .h{display:flex;align-items:baseline;gap:8px}
+.cycle .h b{font-size:20px;color:var(--c-heading)}
+.cycle .h span{font-size:13px;color:var(--c-text-sub)}
+.cycle .num{font-size:24px;font-weight:900;color:var(--c-primary)}
+.cycle ul{list-style:none;font-size:14px;display:flex;flex-direction:column;gap:2px}
+.cycle li::before{content:"› ";color:var(--c-primary)}
+
+/* 職缺畫像 */
+.cond{display:flex;flex-direction:column;gap:6px;font-size:14px}
+.cond div{display:flex;gap:8px}
+.cond b{flex:none;width:84px;color:var(--c-text-sub);font-weight:400}
+.chip{display:inline-block;font-size:12px;border-radius:4px;padding:1px 8px;margin:2px 4px 2px 0;background:var(--c-warn-light);color:var(--c-warn)}
+.fitnum{font-size:22px;font-weight:900;color:var(--c-primary);font-variant-numeric:tabular-nums}
+.fitbar{height:8px;background:#eeeeee;border-radius:4px;overflow:hidden;width:120px}
+.fitbar i{display:block;height:100%;background:var(--c-primary)}
+
+/* 盤點九宮格 */
+.nine{display:grid;grid-template-columns:40px repeat(3,1fr);grid-template-rows:repeat(3,auto) 30px;gap:8px}
+.nine .ax{display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--c-text-sub)}
+.cell{background:#fafafa;border:1px solid #eeeeee;border-radius:var(--radius);padding:10px;min-height:96px}
+.cell .tt{font-size:13px;font-weight:700;margin-bottom:6px}
+.cell a{display:inline-block;font-size:13px;background:#fff;border:1px solid var(--c-border);border-radius:4px;padding:1px 8px;margin:2px 4px 2px 0;text-decoration:none;color:var(--c-text)}
+.cell a:hover{border-color:var(--c-primary);color:var(--c-primary)}
+.cell.star{background:var(--c-ok-light)}.cell.risk{background:var(--c-danger-light)}.cell.core{background:var(--c-primary-light)}
+
+/* 發展路徑 */
+.route{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:15px}
+.route .node{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:10px 14px}
+.route .node b{display:block;font-size:16px}
+.route .arrow{color:var(--c-primary);font-size:22px}
+.plan h4{font-size:15px;margin-bottom:6px;display:flex;justify-content:space-between}
+.plan h4 span{font-size:12px;color:var(--c-text-sub);font-weight:400}
+.plan li{font-size:14px;margin:6px 0 0 18px}
+
+.ccard{border:1px solid var(--c-border);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;gap:6px;font-size:14px;background:#fff}
+.ccard.best{border:2px solid var(--c-primary)}
+.ccard .row{display:flex;justify-content:space-between;gap:8px;border-top:1px dashed var(--c-border);padding-top:6px}
+.ccard .row span:first-child{color:var(--c-text-sub)}
+.picks{display:flex;gap:8px;flex-wrap:wrap}
+.pick{border:1px solid var(--c-border);border-radius:999px;padding:4px 12px;background:#fff;font-size:13px}
+.pick.on{background:var(--c-primary);border-color:var(--c-primary);color:#fff}
+
+.locked{text-align:center;padding:56px 20px;color:var(--c-text-sub)}
+.locked b{display:block;font-size:18px;color:var(--c-text);margin:8px 0}
+.toast-wrap{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100;pointer-events:none}
+.toast{background:#292929;color:#fff;padding:10px 18px;border-radius:4px;font-size:14px;opacity:0;transition:.3s}
+.toast.show{opacity:1}
+.fade{animation:fade .3s}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.foot{font-size:12px;color:var(--c-text-sub);text-align:center;padding:16px}
+
+@media (max-width:1100px){.g4{grid-template-columns:1fr 1fr}}
+@media (max-width:860px){.g2,.g3{grid-template-columns:1fr}.co,.why{display:none}main{padding:16px}.appbar{padding:0 12px;gap:10px}.tabs{gap:4px}}
+@media (max-width:560px){.g4{grid-template-columns:1fr}.who .nmtxt,.logo .prod{display:none}.bar{grid-template-columns:84px 1fr 56px}}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <a class="logo" href="#home" title="回到首頁"><svg class="mark" viewBox="0 0 52 30" width="52" height="30" aria-label="104"><path d="M3 9 L10 5 L10 25" fill="none" stroke="#6f6f6f" stroke-width="4"/><circle cx="22" cy="15" r="8" fill="none" stroke="#ff7800" stroke-width="4"/><path d="M46 25 L46 5 L36 19 L51 19" fill="none" stroke="#6f6f6f" stroke-width="4"/></svg><span class="prod">人才360畫像</span></a>
+  <span class="co">範例科技股份有限公司</span>
+  <span class="sp"></span>
+  <a class="why" href="./">為什麼需要人才畫像？</a>
+  <div class="who">
+    <button class="who-btn" id="whoBtn" aria-haspopup="true" aria-expanded="false"><span class="av" id="av">王</span><span class="nmtxt" id="whoName">王經理</span><span class="caret">▾</span></button>
+    <div class="who-menu" id="whoMenu" hidden>
+      <button data-role="hr" class="on"><b>王經理</b><span>人資部｜HR</span></button>
+      <button data-role="mgr"><b>陳協理</b><span>產品研發部｜部門主管</span></button>
+      <button data-role="emp"><b>陳柏翰</b><span>產品研發部｜員工</span></button>
+    </div>
+  </div>
+</header>
+<nav class="side" id="side"></nav>
+<main id="main"></main>
+<p class="foot">本頁為示意畫面，所有公司、部門、人員與數據皆為虛構範例。</p>
+<div class="toast-wrap"><div class="toast" id="toast"></div></div>
+
+<script>
+/* ===== 資料來源產品 ===== */
+const SRC = {
+  org:{prod:'企業大師',url:'https://marketing.pro.104.com.tw/index.html'},
+  train:{prod:'企業學習平台',url:'https://training.104.com.tw/landingPage/marketing/index.html'},
+  pay:{prod:'薪酬平台',url:'https://salary.104.com.tw/landingpage/marketing/survey-report/index.html'},
+  assess:{prod:'測評中心',url:'https://ehr.104.com.tw/products/assessmentcenter/index.html'},
+  perf:{prod:'績效管理',url:'https://ehr.104.com.tw/products/hrd/performance.html'}
+};
+
+/* ===== 範例資料（虛構） ===== */
+const MY_DEPT='產品研發部';
+const DIMS=['問題分析','領導能力','溝通協作','貫徹執行','創新思考','應變能力'];
+const DEPTS=[
+  {name:'產品研發部',n:84,pay:68500,turn:7.1},{name:'業務部',n:72,pay:52300,turn:12.4},
+  {name:'行銷部',n:28,pay:55800,turn:9.0},{name:'客戶服務部',n:56,pay:45200,turn:15.8},
+  {name:'財務部',n:22,pay:58900,turn:4.5},{name:'人力資源部',n:18,pay:54100,turn:5.6}
+];
+const CO_MEDIAN=58600;
+const PEOPLE=[
+  {id:'p1',name:'陳柏翰',dept:'產品研發部',title:'資深工程師',years:6,perf:['A','A','A+'],pot:'中',radar:[95,70,55,90,80,61],pay:72000,hours:18,motive:'成就動機高，追求精益求精'},
+  {id:'p2',name:'王思妤',dept:'產品研發部',title:'專案經理',years:5,perf:['A','A+','A'],pot:'高',radar:[80,93,90,85,72,84],pay:69500,hours:26,motive:'親和與成就動機均衡'},
+  {id:'p3',name:'張家豪',dept:'產品研發部',title:'工程師',years:3,perf:['A+','A+','A'],pot:'高',radar:[85,72,66,58,96,70],pay:61500,hours:4,motive:'權力動機高，喜歡主導'},
+  {id:'p4',name:'李宜蓁',dept:'產品研發部',title:'UI 設計師',years:4,perf:['B+','A','B+'],pot:'中',radar:[70,60,78,74,88,65],pay:56000,hours:12,motive:'自主動機高，重視創作空間'},
+  {id:'p5',name:'林雅婷',dept:'業務部',title:'業務副理',years:8,perf:['A','B+','A'],pot:'中',radar:[72,80,85,94,63,57],pay:58000,hours:20,motive:'成就動機高，以目標為導向'},
+  {id:'p6',name:'周志明',dept:'業務部',title:'業務專員',years:2,perf:['B','B+','A'],pot:'中',radar:[62,55,82,70,68,75],pay:42000,hours:30,motive:'親和動機高'},
+  {id:'p7',name:'吳佩珊',dept:'行銷部',title:'行銷企劃',years:3,perf:['B+','A','A'],pot:'中',radar:[68,58,80,72,90,74],pay:52000,hours:8,motive:'自主動機高，追求新鮮感'},
+  {id:'p8',name:'黃冠宇',dept:'客戶服務部',title:'客服組長',years:5,perf:['A','B+','B'],pot:'低',radar:[66,74,92,70,55,68],pay:46000,hours:16,motive:'親和動機高，重視團隊氛圍'},
+  {id:'p9',name:'鄭婉如',dept:'財務部',title:'會計主任',years:9,perf:['A','A','A'],pot:'中',radar:[90,76,70,95,52,60],pay:66000,hours:14,motive:'安全動機高，重視制度'},
+  {id:'p10',name:'許文傑',dept:'人力資源部',title:'HRBP',years:4,perf:['A','A','B+'],pot:'中',radar:[74,70,90,78,72,80],pay:55000,hours:22,motive:'親和與成就動機均衡'}
+];
+const JOBS=[
+  {id:'j1',name:'技術主管',dept:'產品研發部',lv:'主管職',target:[80,85,85,80,70,75],explicit:['年資 5 年以上','帶過 3 人以上專案','近 2 年績效 A 以上'],motive:'重視團隊成長與共同目標',style:'協調型，面對變動彈性高',base:6,status:'已確認'},
+  {id:'j2',name:'資深工程師',dept:'產品研發部',lv:'專業職',target:[90,60,65,85,80,65],explicit:['年資 4 年以上','主導過核心模組開發'],motive:'成就動機高，追求專業精進',style:'分析型，凡事先評估再行動',base:11,status:'已確認'},
+  {id:'j3',name:'業務主管',dept:'業務部',lv:'主管職',target:[70,85,85,90,60,75],explicit:['年資 6 年以上','年度業績達成 100% 以上'],motive:'以目標為導向',style:'推動型，抗壓性高',base:5,status:'待主管確認'},
+  {id:'j4',name:'HRBP',dept:'人力資源部',lv:'專業職',target:[75,65,90,75,70,80],explicit:['年資 3 年以上','具跨部門專案經驗'],motive:'親和與成就動機均衡',style:'協調型，善於溝通',base:3,status:'已確認'}
+];
+const RISKS=[
+  {id:'p3',lv:'高',sig:'績效連 3 季 A+，薪資低於部門中位數 9%，近半年幾乎沒有學習紀錄'},
+  {id:'p5',lv:'高',sig:'薪資低於同職級中位數 12%，14 個月未調薪'},
+  {id:'p4',lv:'中',sig:'同一職務 4 年未異動，績效持平'},
+  {id:'p8',lv:'中',sig:'主管異動後績效下滑'},
+  {id:'p7',lv:'低',sig:'訓練參與率下降'}
+];
+const TASK={'問題分析':'主導一次跨部門問題根因分析','領導能力':'擔任 3 人以上專案的負責人','溝通協作':'擔任跨部門專案的協調窗口','貫徹執行':'獨立負責一項季度目標','創新思考':'提出並試行一項流程改善','應變能力':'參與一次新產品上市或緊急專案'};
+const MENTOR={'問題分析':'由資深架構師帶領做決策檢討','領導能力':'安排現任主管擔任導師，每月一對一','溝通協作':'每季收集同事 360 回饋','貫徹執行':'與主管訂定月度目標檢核','創新思考':'參加內部創新提案分享會','應變能力':'由跨部門主管提供即時回饋'};
+const COURSE={'問題分析':'結構化問題解決','領導能力':'新手主管的領導力','溝通協作':'同理溝通與回饋技巧','貫徹執行':'目標管理與時間規劃','創新思考':'設計思考工作坊','應變能力':'敏捷式專案管理'};
+
+/* ===== 狀態與工具 ===== */
+const S={role:'hr',job:'j1',picks:['p1','p2','p3'],pathP:'p1',pathJ:'j1',salaryDept:'全部',meJ:'j1',myList:[]};
+const isMgr=()=>S.role==='mgr';
+const isEmp=()=>S.role==='emp';
+const ME='p1';
+const ROLES={hr:{av:'王',nm:'王經理',msg:'目前以王經理（人資部）的帳號檢視'},mgr:{av:'陳',nm:'陳協理',msg:'目前以陳協理（產品研發部主管）的帳號檢視'},emp:{av:'柏',nm:'陳柏翰',msg:'目前以陳柏翰（產品研發部員工）的帳號檢視'}};
+const EMP_PAGES=['me','explore'];
+const $=s=>document.querySelector(s);
+const fmt=n=>n.toLocaleString('zh-TW');
+const byId=id=>PEOPLE.find(p=>p.id===id);
+const job=id=>JOBS.find(j=>j.id===id);
+const visP=()=>isMgr()?PEOPLE.filter(p=>p.dept===MY_DEPT):PEOPLE;
+const visJ=()=>isMgr()?JOBS.filter(j=>j.dept===MY_DEPT):JOBS;
+const fit=(p,j)=>Math.round(p.radar.reduce((s,v,i)=>s+Math.min(v/j.target[i],1),0)/DIMS.length*100);
+const gaps=(p,j)=>p.radar.map((v,i)=>({d:DIMS[i],v,t:j.target[i],g:j.target[i]-v})).filter(x=>x.g>0).sort((a,b)=>b.g-a.g);
+const range=n=>`約 ${Math.floor(n/1000)-3}K–${Math.floor(n/1000)+3}K`;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2400)}
+const src=keys=>`<div class="card-src">來源：${keys.map(k=>`<a href="${SRC[k].url}" target="_blank" rel="noopener" title="前往${SRC[k].prod}查看完整資料">${SRC[k].prod}</a>`).join('、')}</div>`;
+const card=(title,keys,body,extra='')=>`<div class="card"><div class="card-h"><h3>${title}</h3>${extra}</div>${body}${keys&&keys.length?src(keys):''}</div>`;
+const tip=t=>`<span class="tip" tabindex="0" role="img" aria-label="計算方式：${t}" data-tip="${t}">!</span>`;
+const kpi=(l,n,t,sub='')=>`<div class="card kpi"><div class="l">${l}${t?tip(t):''}</div><div class="n">${n}</div>${sub?`<div class="sub">${sub}</div>`:''}</div>`;
+const ai=t=>`<div class="ai"><div class="t">✨ AI 綜合分析</div>${t}</div>`;
+const head=(crumb,title,desc)=>`<div class="crumb">${crumb}</div><div class="ph"><div><h1>${title}</h1><p>${desc}</p></div></div>`;
+const fitCell=f=>`<div style="display:flex;align-items:center;gap:8px"><span class="fitnum" style="font-size:16px">${f}%</span><span class="fitbar"><i style="width:${f}%"></i></span></div>`;
+const riskB=lv=>`<span class="badge ${lv==='高'?'b-danger':lv==='中'?'b-warn':'b-ok'}">${lv}風險</span>`;
+function gapBars(p,j){return `<div class="bars">${DIMS.map((d,i)=>{const v=p.radar[i],t=j.target[i];return `<div class="bar"><span>${d}</span><span class="track"><span class="fill ${v<t?'warn':''}" data-w="${v}"></span><span class="target" style="left:${t}%"></span></span><span class="v">${v}／${t}</span></div>`}).join('')}</div><p class="sub" style="margin-top:8px">長條＝員工目前 PR，黑線＝職缺要求；橘色代表未達要求</p>`}
+
+/* ===== 導覽 ===== */
+const NAV=[
+  {g:'選才',d:'找對人',items:[['jobs','職缺畫像'],['match','人才比對']]},
+  {g:'用才',d:'放對位置',items:[['promo','升遷評估'],['review','人才盤點']]},
+  {g:'育才',d:'培養人',items:[['path','發展路徑'],['plan','培訓規劃']]},
+  {g:'留才',d:'留住人',items:[['risk','離職預測'],['salary','薪資合理性']]}
+];
+const NAV_EMP=[
+  {g:'我的畫像',d:'看見自己',items:[['me','我的畫像']]},
+  {g:'探索職缺',d:'規劃下一步',items:[['explore','探索職缺']]}
+];
+function renderNav(cur){
+  const key=cur==='job'?'jobs':cur;
+  const nav=isEmp()?NAV_EMP:NAV;
+  const mod=nav.find(s=>s.items.some(([id])=>id===key));
+  $('#side').innerHTML=`<div class="tabs">${nav.map(s=>`<div class="tab-item"><a href="#${s.items[0][0]}" class="${s===mod?'on':''}">${s.g}<small>${s.d}</small></a><div class="drop">${s.items.map(([id,t])=>`<a href="#${id}" class="${id===key?'on':''}">${t}</a>`).join('')}</div></div>`).join('')}</div>`;
+}
+
+/* ===== 頁面 ===== */
+const PAGES={
+  home(){
+    const who=isMgr()?'陳協理（產品研發部主管）':'王經理（人資部）';
+    const jobs=visJ(), ppl=visP();
+    const ready=j=>ppl.filter(p=>fit(p,j)>=85).length;
+    const rs=RISKS.filter(r=>ppl.some(p=>p.id===r.id));
+    return `<div class="hello">${who}您好，今天需要哪方面的人才分析？</div>
+    <p class="sub" style="font-size:14px;margin:4px 0 16px">根據您的需求，彙整人才資料，提供您進行決策分析。</p>
+    <div class="grid g4">
+      <a class="cycle" href="#jobs"><div class="h"><b>選才</b><span>找對人</span></div><div class="num">${jobs.length} 個關鍵職缺</div><ul><li>職缺畫像</li><li>人才比對</li></ul></a>
+      <a class="cycle" href="#promo"><div class="h"><b>用才</b><span>放對位置</span></div><div class="num">${ppl.filter(p=>p.pot==='高').length} 位高潛力人才</div><ul><li>升遷評估</li><li>人才盤點</li></ul></a>
+      <a class="cycle" href="#path"><div class="h"><b>育才</b><span>培養人</span></div><div class="num">${ppl.filter(p=>p.hours<10).length} 位學習時數偏低</div><ul><li>發展路徑</li></ul></a>
+      <a class="cycle" href="#risk"><div class="h"><b>留才</b><span>留住人</span></div><div class="num">${rs.filter(r=>r.lv==='高').length} 位高離職風險</div><ul><li>離職預測</li><li>薪資合理性</li></ul></a>
+    </div>
+    <div class="grid g2 mt">
+      ${card('關鍵職缺與內部人選',['assess','perf','org'],`<div class="tbl"><table class="t"><thead><tr><th>職缺</th><th>部門</th><th>適配 85% 以上的內部人選</th><th>畫像狀態</th></tr></thead><tbody>
+        ${jobs.map(j=>`<tr class="click" data-go="job--${j.id}"><td><b>${j.name}</b></td><td>${j.dept}</td><td>${ready(j)} 人</td><td><span class="badge ${j.status==='已確認'?'b-ok':'b-warn'}">${j.status}</span></td></tr>`).join('')}
+      </tbody></table></div><p class="sub" style="margin-top:8px;display:flex;align-items:center;gap:4px">職缺適配度${tip('各能力面向「員工 PR ÷ 職缺要求」的平均，超過要求以 100% 計')}　點選職缺可查看畫像</p>`)}
+      ${card('需要留意',['perf','pay','org','train'],`${rs.slice(0,3).map(r=>{const p=byId(r.id);return `<div style="display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--c-border);font-size:14px"><span><b>${p.name}</b>｜${r.sig}</span>${riskB(r.lv)}</div>`}).join('')}
+        ${jobs.some(j=>j.status!=='已確認')?`<div style="padding:8px 0;font-size:14px">「業務主管」職缺畫像待主管確認 <a href="#job--j3">前往確認</a></div>`:''}
+        <a href="#risk" style="display:inline-block;margin-top:10px;font-weight:700;font-size:14px;text-decoration:none">查看離職預測 →</a>`)}
+    </div>`;
+  },
+
+  jobs(){
+    return head('選才 › 職缺畫像','職缺畫像','定義每個關鍵職缺需要什麼樣的人。建議條件由高績效者歸納，再由主管確認。')+
+    `<div class="grid g2">${visJ().map(j=>card(`${j.name}<span class="sub" style="font-weight:400;margin-left:8px">${j.dept}｜${j.lv}</span>`,['assess','perf'],
+      `<div class="cond"><div><b>經驗條件</b><span>${j.explicit.join('、')}</span></div><div><b>關鍵能力</b><span>${DIMS.map((d,i)=>[d,j.target[i]]).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>`${x[0]} PR${x[1]}+`).join('、')}</span></div><div><b>工作動機</b><span>${j.motive}</span></div></div>
+       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><span class="sub">依 ${j.base} 位高績效者歸納</span><a class="btn btn-line btn-sm" href="#job--${j.id}">查看畫像</a></div>`,
+      `<span class="badge ${j.status==='已確認'?'b-ok':'b-warn'}">${j.status}</span>`)).join('')}</div>`;
+  },
+
+  job(id){
+    const j=job(id)||visJ()[0];
+    if(isMgr()&&j.dept!==MY_DEPT) return head('選才 › 職缺畫像','職缺畫像','')+`<div class="card locked"><div style="font-size:36px">🔒</div><b>無權限檢視其他部門職缺</b><a class="btn btn-blue" href="#jobs">回職缺畫像</a></div>`;
+    const top=visP().map(p=>({p,f:fit(p,j)})).sort((a,b)=>b.f-a.f).slice(0,3);
+    return `<div class="crumb"><a href="#jobs">選才 › 職缺畫像</a> › ${j.name}</div><div class="ph"><div><h1>${j.name}｜職缺畫像</h1><p>${j.dept}｜${j.lv}｜依 ${j.base} 位高績效者歸納</p></div><span class="badge ${j.status==='已確認'?'b-ok':'b-warn'}">${j.status}</span></div>
+    <div class="grid g2">
+      ${card('看得到的條件（經驗與表現）',['org','perf'],`<div class="cond">${j.explicit.map(e=>`<div><b>✓</b><span>${e}</span></div>`).join('')}</div>`)}
+      ${card('看不到的條件（動機與風格）',['assess'],`<div class="cond"><div><b>工作動機</b><span>${j.motive}</span></div><div><b>個人風格</b><span>${j.style}</span></div></div>`)}
+    </div>
+    <div class="grid g2 mt">
+      ${card('關鍵能力要求（PR）',['assess'],`<div class="bars">${DIMS.map((d,i)=>`<div class="bar"><span>${d}</span><span class="track"><span class="fill" data-w="${j.target[i]}"></span></span><span class="v">PR ${j.target[i]}+</span></div>`).join('')}</div>`)}
+      ${card('最接近的內部人選',['assess','perf'],`${top.map(x=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--c-border)"><span><b>${x.p.name}</b> <span class="sub">${x.p.title}</span></span>${fitCell(x.f)}</div>`).join('')}<a href="#match" data-job="${j.id}" style="display:inline-block;margin-top:10px;font-weight:700;font-size:14px;text-decoration:none">查看完整人才比對 →</a>`)}
+    </div>
+    ${j.status!=='已確認'?`<div class="card mt" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span>這份畫像由系統依高績效者歸納，需由用人主管確認或調整後才會正式套用。</span><button class="btn btn-blue" data-toast="已送出給業務部主管確認（示意）">送主管確認</button></div>`:''}`;
+  },
+
+  match(){
+    const js=visJ(); if(!js.find(j=>j.id===S.job)) S.job=js[0].id;
+    const j=job(S.job);
+    const list=visP().map(p=>({p,f:fit(p,j),g:gaps(p,j)})).sort((a,b)=>b.f-a.f);
+    return head('選才 › 人才比對','人才比對','選擇職缺，從內部人才中找出最適合的人選，並看清每個人的落差。')+
+    `<div class="filters">職缺：<select id="jobSel">${js.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select><a href="#job--${j.id}">查看職缺畫像</a></div>`+
+    card(`內部人選排序（${list.length} 位）`,['assess','perf','org'],`<div class="tbl"><table class="t"><thead><tr><th>姓名</th><th>目前職位</th><th>職缺適配度</th><th>主要落差</th><th></th></tr></thead><tbody>
+      ${list.map(x=>`<tr><td><b>${x.p.name}</b></td><td>${x.p.dept}｜${x.p.title}</td><td>${fitCell(x.f)}</td><td>${x.g.length?x.g.slice(0,2).map(g=>`<span class="chip">${g.d} −${g.g}</span>`).join(''):'<span class="badge b-ok">已達要求</span>'}</td><td><a class="btn btn-line btn-sm" href="#path--${x.p.id}--${j.id}">看發展路徑</a></td></tr>`).join('')}
+    </tbody></table></div><p class="sub" style="margin-top:8px;display:flex;align-items:center;gap:4px">職缺適配度${tip('各能力面向「員工 PR ÷ 職缺要求」的平均，超過要求以 100% 計')}</p>`);
+  },
+
+  promo(){
+    const js=visJ().filter(j=>j.lv==='主管職'); if(!js.find(j=>j.id===S.job)) S.job=js[0].id;
+    const j=job(S.job); const pool=PEOPLE.filter(p=>p.dept===j.dept);
+    S.picks=S.picks.filter(id=>pool.some(p=>p.id===id)); if(S.picks.length<2) S.picks=pool.slice(0,3).map(p=>p.id);
+    const c=S.picks.map(byId).map(p=>({p,f:fit(p,j),g:gaps(p,j)})).sort((a,b)=>b.f-a.f);
+    return head('用才 › 升遷評估','升遷評估','以職缺畫像為標準，比較升遷候選人的適配度、績效與落差。')+
+    `<div class="card"><div class="filters" style="margin:0">職缺：<select id="promoSel">${js.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select><span class="sub">候選人（2–4 位）：</span><div class="picks">${pool.map(p=>`<button class="pick ${S.picks.includes(p.id)?'on':''}" data-pick="${p.id}">${p.name}</button>`).join('')}</div></div></div>
+    <div class="grid mt" style="grid-template-columns:repeat(${c.length},1fr)">${c.map((x,i)=>`<div class="ccard ${i===0?'best':''}">${i===0?'<span class="badge b-ok" style="align-self:flex-start">最適合</span>':''}<b style="font-size:17px">${x.p.name}</b><span class="sub">${x.p.title}｜年資 ${x.p.years} 年</span><div><span class="fitnum">${x.f}%</span> <span class="sub">職缺適配度</span></div>
+      <div class="row"><span>近 3 年績效</span><span>${x.p.perf.join('／')}</span></div><div class="row"><span>潛力</span><span>${x.p.pot}</span></div><div class="row"><span>工作動機</span><span>${x.p.motive}</span></div>
+      <div class="row"><span>主要落差</span><span>${x.g.length?x.g.slice(0,2).map(g=>`${g.d} −${g.g}`).join('、'):'無'}</span></div><a class="btn btn-line btn-sm" style="align-self:flex-start;margin-top:4px" href="#path--${x.p.id}--${j.id}">看發展路徑</a></div>`).join('')}</div>
+    <div class="mt">${ai(`以「${j.name}」的畫像來看，${c[0].p.name}適配度最高（${c[0].f}%），建議優先考慮；${c.slice(1).map(x=>`${x.p.name}主要落差在${x.g[0]?x.g[0].d:'—'}`).join('，')}，可透過發展路徑補強後再評估。`)}</div>
+    <div class="card-src" style="border:0">來源：測評中心、績效管理、企業大師</div>`;
+  },
+
+  review(){
+    const ppl=visP();
+    const perfLv=p=>({'A+':'高','A':'中'}[p.perf[2]]||'低');
+    const cell=(pot,pf)=>ppl.filter(p=>p.pot===pot&&perfLv(p)===pf);
+    const name={'高高':'明日之星','高中':'高潛力','高低':'待激發','中高':'核心骨幹','中中':'穩定貢獻','中低':'待觀察','低高':'專業貢獻','低中':'穩定執行','低低':'需改善'};
+    const cls={'高高':'star','中高':'core','低低':'risk'};
+    let h='';['高','中','低'].forEach(pot=>{h+=`<div class="ax">潛力${pot}</div>`;['低','中','高'].forEach(pf=>{const k=pot+pf;h+=`<div class="cell ${cls[k]||''}"><div class="tt">${name[k]}</div>${cell(pot,pf).map(p=>`<a href="#path--${p.id}">${p.name}</a>`).join('')||'<span class="sub">—</span>'}</div>`})});
+    h+=`<div></div><div class="ax">績效低</div><div class="ax">績效中</div><div class="ax">績效高</div>`;
+    return head('用才 › 人才盤點','人才盤點','依績效與潛力把人才分群，看出誰是明日之星、誰需要關注。')+
+      card(`人才九宮格（${isMgr()?MY_DEPT:'全公司範例'}）`,['perf','assess'],`<div class="nine">${h}</div><p class="sub" style="margin-top:10px">績效依最近一次考核；潛力依測評中心潛力評級。點選姓名可查看發展路徑。</p>`);
+  },
+
+  path(a,b){
+    if(a) S.pathP=a; if(b) S.pathJ=b;
+    const ppl=visP(); if(!ppl.find(p=>p.id===S.pathP)) S.pathP=ppl[0].id;
+    const js=visJ(); if(!js.find(j=>j.id===S.pathJ)) S.pathJ=js[0].id;
+    const p=byId(S.pathP), j=job(S.pathJ), f=fit(p,j), g=gaps(p,j).slice(0,2);
+    return head('育才 › 發展路徑','發展路徑','從員工目前的職位出發，看離目標職缺還差什麼，以及該怎麼準備。')+
+    `<div class="filters">員工：<select id="pathP">${ppl.map(x=>`<option value="${x.id}" ${x.id===p.id?'selected':''}>${x.name}（${x.title}）</option>`).join('')}</select>目標職缺：<select id="pathJ">${js.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select></div>
+    <div class="card"><div class="route"><div class="node"><span class="sub">目前</span><b>${p.title}</b><span class="sub">${p.dept}｜年資 ${p.years} 年</span></div><span class="arrow">→</span><div class="node"><span class="sub">目標</span><b>${j.name}</b><span class="sub">${j.dept}</span></div><div style="margin-left:auto;text-align:right"><span class="sub">目前適配度</span><div class="fitnum">${f}%</div></div></div></div>
+    <div class="grid g2 mt">
+      ${card('能力落差',['assess'],gapBars(p,j))}
+      ${card('學習與歷練建議',['train','assess'],g.length?`<div class="plan"><h4>工作歷練 <span>約 70%</span></h4><ul>${g.map(x=>`<li>${TASK[x.d]}</li>`).join('')}</ul></div>
+        <div class="plan mt"><h4>指導與回饋 <span>約 20%</span></h4><ul>${g.map(x=>`<li>${MENTOR[x.d]}</li>`).join('')}</ul></div>
+        <div class="plan mt"><h4>課程 <span>約 10%</span></h4><ul>${g.map(x=>`<li>${COURSE[x.d]} <button class="btn btn-line btn-sm" data-toast="已將「${COURSE[x.d]}」指派給 ${p.name}（示意）">指派</button></li>`).join('')}</ul></div>
+        <p class="sub" style="margin-top:10px">比例參考 70-20-10 學習法則：能力成長多來自工作歷練。</p>`:'<p>已達到目標職缺的能力要求，可直接列入人選。</p>')}
+    </div>
+    <div class="mt">${ai(g.length?`${p.name}距離「${j.name}」最大的落差是${g.map(x=>x.d).join('與')}。建議先安排「${TASK[g[0].d]}」的實際歷練，搭配「${COURSE[g[0].d]}」課程，約 6 個月後重新比對適配度。`:`${p.name}已符合「${j.name}」的能力要求，可與主管討論轉任時程。`)}</div>`;
+  },
+
+  plan(){
+    const ppl=visP(), LOW=70;
+    const rows=DIMS.map((d,i)=>({d,who:ppl.filter(p=>p.radar[i]<LOW)})).filter(r=>r.who.length).sort((a,b)=>b.who.length-a.who.length);
+    const avgH=Math.round(ppl.reduce((s,p)=>s+p.hours,0)/ppl.length);
+    const lowH=ppl.filter(p=>p.hours<10);
+    return head('育才 › 培訓規劃','培訓規劃','彙整'+(isMgr()?'部門':'全公司')+'人才的能力落差，找出最多人需要加強的能力，安排對應課程與對象。')+
+    `<div class="grid g4">${kpi('檢視人數',ppl.length+' 人')}${kpi('需加強的能力面向',rows.length+' 項','PR 低於 '+LOW+' 視為需加強')}${kpi('平均學習時數',avgH+' 小時','','今年至今')}${kpi('學習時數偏低',lowH.length+' 人','今年學習未滿 10 小時')}</div>`+
+    `<div class="mt">`+card('建議培訓項目（依需求人數排序）',['assess','train'],`<div class="tbl"><table class="t"><thead><tr><th>能力面向</th><th>需加強人數</th><th>建議課程</th><th>建議對象</th><th></th></tr></thead><tbody>
+      ${rows.map(r=>`<tr><td><b>${r.d}</b></td><td>${r.who.length} 人</td><td>${COURSE[r.d]}</td><td>${r.who.map(p=>p.name).join('、')}</td><td><button class="btn btn-blue btn-sm" data-toast="已建立「${COURSE[r.d]}」培訓計畫，指派給 ${r.who.length} 人（示意）">建立培訓計畫</button></td></tr>`).join('')}
+    </tbody></table></div><p class="sub" style="margin-top:8px">課程可在企業學習平台開班或指派線上課；每位對象的完整落差請看發展路徑。</p>`)+`</div>`+
+    `<div class="mt">${ai(rows.length?`最多人需要加強的是「${rows[0].d}」（${rows[0].who.length} 人），建議優先開設「${COURSE[rows[0].d]}」。另有 ${lowH.length} 位學習時數偏低，可搭配主管一對一討論學習計畫。`:'目前人才能力皆達標準。')}</div>`;
+  },
+
+  risk(){
+    const ppl=visP(); const list=RISKS.filter(r=>ppl.some(p=>p.id===r.id));
+    return head('留才 › 離職預測','離職預測','綜合績效、薪資、職務異動與學習參與等訊號，提早留意可能想離開的人才。')+
+      card(`需要關注的人才（${list.length} 位）`,['perf','pay','org','train'],`<div class="tbl"><table class="t"><thead><tr><th>姓名</th><th>部門</th><th>風險</th><th>觀察到的訊號</th><th></th></tr></thead><tbody>
+      ${list.map(r=>{const p=byId(r.id);return `<tr><td><b>${p.name}</b></td><td>${p.dept}</td><td>${riskB(r.lv)}</td><td>${r.sig}</td><td><button class="btn btn-blue btn-sm" data-toast="已建立與 ${p.name} 的關懷面談提醒（示意）">安排面談</button> <a class="btn btn-line btn-sm" href="#path--${p.id}">發展路徑</a></td></tr>`}).join('')}
+      </tbody></table></div>`)+`<div class="mt">${ai('高風險人才的共同訊號是「績效好但薪資偏低」。除了調薪，也可以提供明確的發展路徑，讓他們看見內部的下一步。')}</div>`;
+  },
+
+  salary(){
+    const rows=DEPTS.map(d=>{const diff=Math.round((d.pay-CO_MEDIAN)/CO_MEDIAN*100);
+      if(isMgr()&&d.name!==MY_DEPT) return `<tr><td>${d.name}</td><td colspan="4"><span class="lock">無權限檢視其他部門薪資</span></td></tr>`;
+      return `<tr><td><b>${d.name}</b></td><td>${d.n}</td><td>${isMgr()?range(d.pay):fmt(d.pay)+' 元'}</td><td>${diff>0?'+':''}${diff}%</td><td>${diff<=-15?'<span class="badge b-danger">明顯偏低</span>':diff<=-8?'<span class="badge b-warn">偏低</span>':'<span class="badge b-ok">合理</span>'}</td></tr>`}).join('');
+    const under=visP().filter(p=>p.pay<DEPTS.find(d=>d.name===p.dept).pay*0.95&&p.perf[2].startsWith('A'));
+    return head('留才 › 薪資合理性','薪資合理性','各部門與高績效員工的薪資，是否與表現相稱。')+
+    `<div class="grid g2">${card('各部門平均月薪 vs 公司中位數',['pay','org'],`<div class="tbl"><table class="t"><thead><tr><th>部門</th><th>人數</th><th>平均月薪</th><th>與中位數比較</th><th>狀態</th></tr></thead><tbody>${rows}</tbody></table></div>`)}
+    ${card('高績效但薪資偏低的員工',['pay','perf'],under.length?under.map(p=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--c-border);font-size:14px"><span><b>${p.name}</b>｜${p.dept}｜近一年 ${p.perf[2]}</span><span>${isMgr()?range(p.pay):fmt(p.pay)+' 元'}</span></div>`).join('')+'<p class="sub" style="margin-top:8px">條件：最近一次績效 A 以上，且月薪低於部門平均 5% 以上</p>':'<p class="sub">目前沒有</p>')}</div>`;
+  },
+
+  /* ===== 員工本人 ===== */
+  me(a){
+    if(a&&job(a)) S.meJ=a;
+    const p=byId(ME), j=job(S.meJ), f=fit(p,j), g=gaps(p,j);
+    const strong=DIMS.map((d,i)=>[d,p.radar[i]]).sort((x,y)=>y[1]-x[1]).slice(0,2).map(x=>x[0]);
+    const g2=g.slice(0,2);
+    const addBtn=t=>S.myList.includes(t)?`<span class="badge b-ok">已加入</span>`:`<button class="btn btn-line btn-sm" data-add="${t}">加入學習清單</button>`;
+    return `<div class="hello">${p.name}您好，這是您的人才畫像</div>
+    <p class="sub" style="font-size:14px;margin:4px 0 16px">看見自己的強項，並了解往目標職缺還需要準備什麼。這份資料只有您本人、您的主管與人資看得到。</p>
+    <div class="grid g2">
+      ${card('我的能力（PR）',['assess'],`<div class="bars">${DIMS.map((d,i)=>`<div class="bar"><span>${d}</span><span class="track"><span class="fill" data-w="${p.radar[i]}"></span></span><span class="v">PR ${p.radar[i]}</span></div>`).join('')}</div><p class="sub" style="margin-top:8px">您的強項：${strong.join('、')}</p>`)}
+      ${card('我的樣貌',['assess','org','perf','train'],`<div class="cond"><div><b>目前職位</b><span>${p.dept}｜${p.title}｜年資 ${p.years} 年</span></div><div><b>工作動機</b><span>${p.motive}</span></div><div><b>近 3 年績效</b><span>${p.perf.join('／')}</span></div><div><b>今年學習</b><span>${p.hours} 小時，已完成「同理溝通與回饋技巧」</span></div></div>`)}
+    </div>
+    <div class="filters mt">我的目標職缺：<select id="meJ">${JOBS.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select><a href="#explore">看其他職缺</a></div>
+    <div class="card"><div class="route"><div class="node"><span class="sub">目前</span><b>${p.title}</b><span class="sub">${p.dept}</span></div><span class="arrow">→</span><div class="node"><span class="sub">目標</span><b>${j.name}</b><span class="sub">${j.dept}</span></div><div style="margin-left:auto;text-align:right"><span class="sub" style="display:inline-flex;align-items:center;gap:4px">目前適配度${tip('各能力面向「我的 PR ÷ 職缺要求」的平均，超過要求以 100% 計')}</span><div class="fitnum">${f}%</div></div></div></div>
+    <div class="grid g2 mt">
+      ${card('還差什麼',['assess'],gapBars(p,j))}
+      ${card('我可以怎麼準備',['train','assess'],g2.length?`<div class="plan"><h4>爭取的歷練</h4><ul>${g2.map(x=>`<li>${TASK[x.d]}</li>`).join('')}</ul></div>
+        <div class="plan mt"><h4>建議課程</h4><ul>${g2.map(x=>`<li>${COURSE[x.d]} ${addBtn(COURSE[x.d])}</li>`).join('')}</ul></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn btn-blue btn-sm" data-toast="已通知主管您對「${j.name}」有興趣，並附上目前的適配度與準備計畫（示意）">讓主管知道我的意願</button></div>`:'<p>您已達到這個職缺的能力要求，可以和主管討論轉任時程。</p>')}
+    </div>
+    <div class="mt">${ai(g2.length?`您的${strong[0]}是明顯強項。往「${j.name}」發展，最需要補強的是${g2.map(x=>x.d).join('與')}，建議先爭取「${TASK[g2[0].d]}」的機會，並完成「${COURSE[g2[0].d]}」。`:`您已符合「${j.name}」的能力要求。`)}</div>`;
+  },
+
+  explore(){
+    const p=byId(ME);
+    const list=JOBS.map(j=>({j,f:fit(p,j),g:gaps(p,j)})).sort((a,b)=>b.f-a.f);
+    return head('探索職缺','探索職缺','看看公司內部的關鍵職缺，以及您目前的適配度。')+
+    card(`內部關鍵職缺（${list.length} 個）`,['assess','org'],`<div class="tbl"><table class="t"><thead><tr><th>職缺</th><th>部門</th><th>我的適配度</th><th>主要落差</th><th></th></tr></thead><tbody>
+      ${list.map(x=>`<tr><td><b>${x.j.name}</b></td><td>${x.j.dept}</td><td>${fitCell(x.f)}</td><td>${x.g.length?x.g.slice(0,2).map(g=>`<span class="chip">${g.d} −${g.g}</span>`).join(''):'<span class="badge b-ok">已達要求</span>'}</td><td><a class="btn btn-line btn-sm" href="#me--${x.j.id}">設為目標</a></td></tr>`).join('')}
+    </tbody></table></div><p class="sub" style="margin-top:8px">適配度只看能力面向，實際任用仍需主管與人資評估。</p>`);
+  }
+};
+function setRole(r,silent){
+  S.role=r; const R=ROLES[r];
+  document.querySelectorAll('#whoMenu [data-role]').forEach(x=>x.classList.toggle('on',x.dataset.role===r));
+  $('#av').textContent=R.av; $('#whoName').textContent=R.nm;
+  if(!silent) toast(R.msg);
+}
+
+/* ===== 路由 ===== */
+function render(){
+  const h=location.hash.replace('#','')||'home';
+  const [page,a,b]=h.split('--');
+  if(page==='home'&&ROLES[a]&&a!==S.role) setRole(a,true);
+  if(EMP_PAGES.includes(page)&&!isEmp()) setRole('emp',true);
+  let fn=PAGES[page]?page:'home';
+  if(isEmp()&&!EMP_PAGES.includes(fn)) fn='me';
+  if(!isEmp()&&EMP_PAGES.includes(fn)) fn='home';
+  renderNav(fn);
+  $('#main').innerHTML=`<div class="fade">${PAGES[fn](a,b)}</div>`;
+  setTimeout(()=>document.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'),50);
+  bind();
+  if(location.hash!==render.last){window.scrollTo(0,0);render.last=location.hash;}
+}
+function bind(){
+  const js=$('#jobSel'); if(js) js.onchange=()=>{S.job=js.value;render()};
+  const mj=$('#meJ'); if(mj) mj.onchange=()=>{location.hash='me--'+mj.value};
+  document.querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>{S.myList.push(b.dataset.add);toast(`已將「${b.dataset.add}」加入學習清單（示意）`);render()});
+  const ps=$('#promoSel'); if(ps) ps.onchange=()=>{S.job=ps.value;S.picks=[];render()};
+  const pp=$('#pathP'), pj=$('#pathJ');
+  if(pp) pp.onchange=()=>{S.pathP=pp.value; location.hash='path--'+S.pathP+'--'+S.pathJ};
+  if(pj) pj.onchange=()=>{S.pathJ=pj.value; location.hash='path--'+S.pathP+'--'+S.pathJ};
+  document.querySelectorAll('[data-pick]').forEach(btn=>btn.onclick=()=>{const id=btn.dataset.pick;
+    if(S.picks.includes(id)){if(S.picks.length<=2){toast('至少需要 2 位候選人');return}S.picks=S.picks.filter(x=>x!==id)}
+    else{if(S.picks.length>=4){toast('最多比較 4 位候選人');return}S.picks.push(id)} render();});
+}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-toast]'); if(t){toast(t.dataset.toast);return}
+  const jl=e.target.closest('a[data-job]'); if(jl) S.job=jl.dataset.job;
+  if(e.target.closest('a,button,select,input')) return;
+  const r=e.target.closest('tr[data-go]'); if(r) location.hash=r.dataset.go;
+});
+const whoMenu=$('#whoMenu'), whoBtn=$('#whoBtn');
+whoBtn.onclick=e=>{e.stopPropagation();whoMenu.hidden=!whoMenu.hidden;whoBtn.setAttribute('aria-expanded',String(!whoMenu.hidden))};
+document.addEventListener('click',e=>{if(!e.target.closest('.who')){whoMenu.hidden=true;whoBtn.setAttribute('aria-expanded','false')}});
+whoMenu.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{
+  whoMenu.hidden=true; setRole(b.dataset.role);
+  const target=isEmp()?'#me':'#home';
+  if(location.hash===target) render(); else location.hash=target;
+});
+document.querySelector('a.why').addEventListener('click',e=>{e.preventDefault();location.href=new URL('./',location.href).href;});
+window.addEventListener('hashchange',render);
+render();
+</script>
+</body>
+</html>
