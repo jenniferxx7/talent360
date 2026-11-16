@@ -1,4 +1,3 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Talent One 人才360畫像</title>
 <style>
 /* ===== 配色：104 HA 設計公版（react-ha-v2 palette / colors / typography） ===== */
@@ -113,7 +112,7 @@ h3{font-size:20px;color:var(--c-heading)}
 .cmp .hl{color:var(--c-warn);font-weight:700}
 .cmp-rs{background:var(--c-primary-light);border-left:1px solid var(--c-border);border-radius:0 var(--radius) var(--radius) 0;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
 .rs-top{display:flex;align-items:center;gap:14px}
-.rs-ring{flex:none;width:76px;height:76px;border-radius:50%;background:conic-gradient(var(--c-primary) 0 88%,#cdeef0 88% 100%);display:flex;align-items:center;justify-content:center}
+.rs-ring{flex:none;width:76px;height:76px;border-radius:50%;background:conic-gradient(var(--c-primary) 0 77%,#cdeef0 77% 100%);display:flex;align-items:center;justify-content:center}
 .rs-ring b{width:60px;height:60px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:var(--c-primary)}
 .rs-top p{font-size:13px;color:var(--c-text-sub);line-height:1.6}
 .rs-top p b{display:block;font-size:15px;color:var(--c-heading)}
@@ -156,9 +155,16 @@ h3{font-size:20px;color:var(--c-heading)}
 .mx-r{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:var(--c-bg);border-radius:var(--radius);padding:8px 4px}
 .mx-r b{font-size:15px;color:var(--c-heading)}
 .mx-r small{font-size:11px;line-height:1.3;color:var(--c-text-sub)}
+.mx-r em{margin-top:6px;font-style:normal;font-size:11px;font-weight:700;color:var(--c-primary-dark);background:var(--c-primary-light);border-radius:999px;padding:1px 6px;white-space:nowrap}
+.try{margin-top:20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--c-primary-light);border-radius:var(--radius);padding:14px 18px}
+.try .lb{font-size:14px;font-weight:700;color:var(--c-primary-dark);margin-right:6px}
+.try a{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid #bfe7ea;border-radius:999px;padding:6px 14px;font-size:14px;font-weight:700;color:var(--c-primary);text-decoration:none}
+.try a b{font-size:12px;color:#fff;background:var(--c-primary-dark);border-radius:999px;padding:1px 8px}
+.try a small{font-size:12px;font-weight:400;color:var(--c-text-sub)}
+.try a:hover{border-color:var(--c-primary);background:#fff}
 .mx-c{display:flex;align-items:center;background:var(--c-surface);border:1px solid var(--c-border);border-left:3px solid var(--gc);border-radius:var(--radius);padding:12px 14px;font-size:14px;line-height:1.5;min-height:64px}
-.mx-l{display:flex;gap:6px;flex-wrap:wrap;padding-top:4px}
-.mx-l a{font-size:13px;font-weight:700;color:var(--gc);text-decoration:none;border:1px solid var(--gc);border-radius:4px;padding:3px 10px;background:#fff}
+.mx-l{margin-left:auto;display:flex;flex-direction:column;align-items:stretch;gap:6px}
+.mx-l a{text-align:center;white-space:nowrap;font-size:13px;font-weight:700;color:var(--gc);text-decoration:none;border:1px solid var(--gc);border-radius:4px;padding:3px 10px;background:#fff}
 .mx-l a:hover{background:var(--gc);color:#fff}
 /* 誰會用到 */
 .roles{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
@@ -191,6 +197,23 @@ h3{font-size:20px;color:var(--c-heading)}
 .dim .d{font-size:14px;color:var(--c-text-sub);flex:1}
 .dim .s{font-size:12px;color:var(--c-text-sub);border-top:1px solid #eeeeee;padding-top:8px}
 .dim .s b{color:var(--c-primary-dark)}
+/* 完整畫像（產品解鎖） */
+.ul-prog{margin-top:24px}
+.ul-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.ul-bar i{height:10px;border-radius:999px;background:var(--c-primary)}
+.ul-bar i:nth-child(1){opacity:.35}.ul-bar i:nth-child(2){opacity:.5}.ul-bar i:nth-child(3){opacity:.65}.ul-bar i:nth-child(4){opacity:.8}
+.ul-lbl{display:flex;justify-content:space-between;margin-top:6px;font-size:13px;color:var(--c-text-sub)}
+.ul-lbl b{color:var(--c-primary-dark)}
+.ul-grid{margin-top:18px;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.ul-p{display:flex;flex-direction:column;gap:6px;background:var(--c-bg);border-radius:var(--radius);padding:16px}
+.ul-n{font-size:16px;font-weight:900;color:var(--c-primary-dark);text-decoration:none}
+.ul-n:hover{color:var(--c-primary);text-decoration:underline}
+.ul-d{font-size:12px;color:var(--c-text-sub)}
+.ul-f{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;padding-top:10px;border-top:1px solid var(--c-border)}
+.ul-f span{font-size:12px;background:#fff;border:1px solid var(--c-border);border-radius:999px;padding:2px 8px}
+.ul-note{margin-top:12px;font-size:13px;color:var(--c-text-sub)}
+@media (max-width:900px){.ul-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.ul-grid{grid-template-columns:1fr}}
 /* 資料匯流圖 */
 .flow{margin-top:28px;display:grid;grid-template-columns:minmax(0,1.5fr) 90px 200px 56px minmax(0,1fr);align-items:stretch;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:20px 24px}
 .f-col{display:flex;flex-direction:column}
@@ -257,10 +280,10 @@ h3{font-size:20px;color:var(--c-heading)}
     <nav class="nav">
       <a href="#what">什麼是人才畫像</a>
       <a href="#goals">應用情境</a>
-      <a href="#roles">誰會用到</a>
       <a href="#build">畫像怎麼組成</a>
+      <a href="#unlock">完整畫像</a>
     </nav>
-    <a class="btn btn-blue btn-sm" href="app2.html">進入人才畫像網站 →</a>
+    <a class="btn btn-blue btn-sm" href="app2.html">體驗人才畫像網站 →</a>
   </div>
 </header>
 
@@ -271,7 +294,7 @@ h3{font-size:20px;color:var(--c-heading)}
     <p class="lead">人才畫像是企業對人才的 Persona：先描繪「這個職缺需要什麼樣的人」，再對照「這位員工現在是什麼樣子」，用在選才、用才、育才、留才的每個決策。</p>
     <div class="btns">
       <a class="btn btn-white" href="#what">了解人才畫像 ↓</a>
-      <a class="btn btn-line" href="app2.html">直接進入人才畫像網站</a>
+      <a class="btn btn-line" href="app2.html">體驗人才畫像網站</a>
     </div>
   </div>
 </section>
@@ -280,7 +303,7 @@ h3{font-size:20px;color:var(--c-heading)}
   <div class="wrap">
     <p class="eyebrow">什麼是人才畫像</p>
     <h2>員工畫像 × 職缺畫像，精準比對人才適配度</h2>
-    <p class="lead" style="max-width:none">以能力、動機、經歷、表現、學習五個維度，分別描述員工現況與職缺要求；兩者比對得出適配度與能力落差，作為選、用、育、留決策的依據。</p>
+    <p class="lead" style="max-width:none">以職能、技能、動機、經歷、表現、學習六個維度，分別描述員工現況與職缺要求；兩者比對得出適配度與能力落差，作為選、用、育、留決策的依據。</p>
     <div class="cmp">
       <div class="cmp-tb">
         <div class="cmp-cap">範例比對<span class="sub">陳柏翰（資深工程師）× 技術主管職缺</span></div>
@@ -292,7 +315,8 @@ h3{font-size:20px;color:var(--c-heading)}
             <th style="text-align:center">結果</th>
           </tr></thead>
           <tbody>
-            <tr class="gap"><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：擅長什麼、哪裡需要加強（測評中心）／職缺：勝任需要的關鍵能力與程度">!</span>能力</span></td><td>問題分析 PR95、溝通協作 <span class="hl">PR55</span>、領導能力 <span class="hl">PR70</span></td><td>領導能力 PR85+、溝通協作 PR85+</td><td class="st"><span class="ng">▲ 落差</span></td></tr>
+            <tr class="gap"><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：擅長什麼、哪裡需要加強（測評中心）／職缺：勝任需要的關鍵能力與程度">!</span>職能</span></td><td>問題分析 PR95、溝通協作 <span class="hl">PR55</span>、領導能力 <span class="hl">PR70</span></td><td>領導能力 PR85+、溝通協作 PR85+</td><td class="st"><span class="ng">▲ 落差</span></td></tr>
+            <tr class="gap"><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：具備哪些專業技能（企業大師）／職缺：需要的專業技能">!</span>技能</span></td><td>系統架構設計、程式碼審查</td><td>另需 <span class="hl">專案管理、人員招募面談</span></td><td class="st"><span class="ng">▲ 缺 2 項</span></td></tr>
             <tr><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：什麼事情能驅動他（測評中心）／職缺：適合這個職缺的工作動機">!</span>動機</span></td><td>成就動機高，追求精益求精</td><td>重視團隊成長與共同目標</td><td class="st"><span class="ok">✓ 符合</span></td></tr>
             <tr><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：做過哪些職位、年資多久（企業大師）／職缺：需要的年資與經歷">!</span>經歷</span></td><td>資深工程師 6 年，帶過 4 人專案</td><td>年資 5 年以上，帶過 3 人以上專案</td><td class="st"><span class="ok">✓ 符合</span></td></tr>
             <tr><td class="dim"><span><span class="tip" tabindex="0" data-tip="員工：歷年績效與目標達成（績效管理）／職缺：期待的績效標準">!</span>表現</span></td><td>近 3 年績效 A／A／A+</td><td>近 2 年績效 A 以上</td><td class="st"><span class="ok">✓ 符合</span></td></tr>
@@ -302,10 +326,10 @@ h3{font-size:20px;color:var(--c-heading)}
       </div>
       <div class="cmp-rs">
         <div class="rs-top">
-          <div class="rs-ring"><b>88%</b></div>
-          <p><b>比對結果：適配度 88%</b>3 個面向符合，2 個面向有落差</p>
+          <div class="rs-ring"><b>77%</b></div>
+          <p><b>比對結果：適配度 77%</b>3 個面向符合，3 個面向有落差<span class="tip" tabindex="0" data-tip="適配度＝職能 70%＋技能 30%。職能達成 88%、技能具備 2/4（50%），因此為 77%。" style="margin-left:4px">!</span></p>
         </div>
-        <div class="rs-gap"><span>溝通協作 −30</span><span>領導能力 −15</span><span>未完成「新手主管的領導力」</span></div>
+        <div class="rs-gap"><span>溝通協作 −30</span><span>領導能力 −15</span><span>缺 專案管理</span><span>缺 人員招募面談</span><span>未完成「新手主管的領導力」</span></div>
         <div class="rs-uses">
           <div style="--gc:#00afb8"><i>選</i>內部人選適配度第 2 高，列入候選名單</div>
           <div style="--gc:#1654b9"><i>用</i>補強溝通協作後，列入下次升遷評估</div>
@@ -320,14 +344,14 @@ h3{font-size:20px;color:var(--c-heading)}
 <section id="goals" style="background:var(--c-surface)">
   <div class="wrap">
     <p class="eyebrow">應用情境</p>
-    <h2>一份人才畫像，貫穿選、用、育、留</h2>
-    <p class="lead" style="max-width:none">從招募、升遷、培育到留任，公司、部門與員工都用同一份畫像做判斷，各自得到需要的答案。</p>
+    <h2>從選才到留才，企業精準用人，員工看見發展</h2>
+    <p class="lead" style="max-width:none">人才畫像應用於選才、用才、育才、留才四大環節：公司掌握整體人才布局，部門主管做出用人判斷，員工規劃個人發展。</p>
     <div class="mx-wrap"><div class="mx">
       <div class="mx-corner"></div>
-      <div class="mx-h" style="--gc:#00afb8"><span class="g-badge">選</span><div><b>選才</b><small>找對人</small></div></div>
-      <div class="mx-h" style="--gc:#1654b9"><span class="g-badge">用</span><div><b>用才</b><small>放對位置</small></div></div>
-      <div class="mx-h" style="--gc:#509e1f"><span class="g-badge">育</span><div><b>育才</b><small>培養人</small></div></div>
-      <div class="mx-h" style="--gc:#ff7800"><span class="g-badge">留</span><div><b>留才</b><small>留住人</small></div></div>
+      <div class="mx-h" style="--gc:#00afb8"><span class="g-badge">選</span><div><b>選才</b><small>找對人</small></div><div class="mx-l"><a href="app2.html#jobs">職缺畫像</a><a href="app2.html#match">人才比對</a></div></div>
+      <div class="mx-h" style="--gc:#1654b9"><span class="g-badge">用</span><div><b>用才</b><small>放對位置</small></div><div class="mx-l"><a href="app2.html#promo">升遷評估</a><a href="app2.html#review">人才盤點</a></div></div>
+      <div class="mx-h" style="--gc:#509e1f"><span class="g-badge">育</span><div><b>育才</b><small>培養人</small></div><div class="mx-l"><a href="app2.html#path">發展路徑</a><a href="app2.html#plan">培訓規劃</a></div></div>
+      <div class="mx-h" style="--gc:#ff7800"><span class="g-badge">留</span><div><b>留才</b><small>留住人</small></div><div class="mx-l"><a href="app2.html#risk">離職預測</a><a href="app2.html#salary">薪資合理性</a></div></div>
 
       <div class="mx-r"><b>公司</b><small>經營層<br>人資</small></div>
       <div class="mx-c" style="--gc:#00afb8">建立關鍵職缺畫像，盤點內部接班人選</div>
@@ -344,54 +368,15 @@ h3{font-size:20px;color:var(--c-heading)}
       <div class="mx-r"><b>員工</b><small>員工本人</small></div>
       <div class="mx-c" style="--gc:#00afb8">看見內部職缺條件，知道自己適不適合</div>
       <div class="mx-c" style="--gc:#1654b9">了解升遷還差什麼，主動爭取機會</div>
-      <div class="mx-c" style="--gc:#509e1f">依目標職缺取得個人化學習建議</div>
+      <div class="mx-c" style="--gc:#509e1f">查看目標職缺需完成的課程，補齊後提高勝任機會</div>
       <div class="mx-c" style="--gc:#ff7800">看見內部發展路徑，願意留下來成長</div>
 
-      <div class="mx-corner"></div>
-      <div class="mx-l" style="--gc:#00afb8"><a href="app2.html#jobs">職缺畫像</a><a href="app2.html#match">人才比對</a></div>
-      <div class="mx-l" style="--gc:#1654b9"><a href="app2.html#promo">升遷評估</a><a href="app2.html#review">人才盤點</a></div>
-      <div class="mx-l" style="--gc:#509e1f"><a href="app2.html#path">發展路徑</a><a href="app2.html#plan">培訓規劃</a></div>
-      <div class="mx-l" style="--gc:#ff7800"><a href="app2.html#risk">離職預測</a><a href="app2.html#salary">薪資合理性</a></div>
     </div></div>
-  </div>
-</section>
-
-<section id="roles">
-  <div class="wrap">
-    <p class="eyebrow">誰會用到</p>
-    <h2>公司、部門、員工，各自看見需要的答案</h2>
-    <p class="lead">同一份人才畫像，依角色顯示不同的範圍與重點。</p>
-    <div class="roles">
-      <div class="role">
-        <div class="r-top"><span class="r-ic">公司</span><div><b>公司層級</b><small>經營層、人資</small></div></div>
-        <div class="r-scope">可看範圍：全公司</div>
-        <ul>
-          <li>關鍵職缺有沒有接班人？</li>
-          <li>人才結構健康嗎？誰是明日之星？</li>
-          <li>薪資和表現相稱嗎？</li>
-        </ul>
-        <a class="r-go" href="app2.html#home--hr">以人資身分體驗 →</a>
-      </div>
-      <div class="role">
-        <div class="r-top"><span class="r-ic">部門</span><div><b>部門層級</b><small>部門主管</small></div></div>
-        <div class="r-scope">可看範圍：本部門</div>
-        <ul>
-          <li>團隊缺哪些能力？</li>
-          <li>誰可以升遷？還差什麼？</li>
-          <li>誰可能想離開？</li>
-        </ul>
-        <a class="r-go" href="app2.html#home--mgr">以部門主管身分體驗 →</a>
-      </div>
-      <div class="role">
-        <div class="r-top"><span class="r-ic">員工</span><div><b>員工個人</b><small>員工本人</small></div></div>
-        <div class="r-scope">可看範圍：只有自己</div>
-        <ul>
-          <li>我的強項是什麼？</li>
-          <li>想發展的職缺還差多少？</li>
-          <li>該爭取哪些歷練、上哪些課？</li>
-        </ul>
-        <a class="r-go" href="app2.html#me">以員工身分體驗 →</a>
-      </div>
+    <div class="try">
+      <span class="lb">不同角色體驗人才畫像網站</span>
+      <a href="app2.html#home--hr"><b>公司</b>以人資身分 →</a>
+      <a href="app2.html#home--mgr"><b>部門</b>以部門主管身分 →</a>
+      <a href="app2.html#me"><b>員工</b>以員工身分 →</a>
     </div>
   </div>
 </section>
@@ -434,6 +419,31 @@ h3{font-size:20px;color:var(--c-heading)}
   </div>
 </section>
 
+<section id="unlock" style="background:var(--c-surface)">
+  <div class="wrap">
+    <p class="eyebrow">完整畫像</p>
+    <h2>啟用全部 104 產品，解鎖完整人才畫像</h2>
+    <p class="lead" style="max-width:none">測評、績效、人事、學習、薪酬，分別由不同的 104 產品提供。完整啟用 104 產品，就能看見全方位的人才畫像，從找人、升遷到培育與留任，都能用數據做判斷。</p>
+    <div class="ul-prog">
+      <div class="ul-bar"><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="ul-lbl"><span>啟用 1 個產品：看見單一面向</span><b>啟用 5 個產品：完整人才畫像</b></div>
+    </div>
+    <div class="ul-grid">
+      <div class="ul-p"><a class="ul-n" href="https://ehr.104.com.tw/products/assessmentcenter/index.html" target="_blank" rel="noopener">測評中心 ↗</a><span class="ul-d">能力與動機</span><div class="ul-f"><span>職缺畫像</span><span>人才比對</span><span>升遷評估</span><span>人才盤點</span><span>發展路徑</span><span>培訓規劃</span></div></div>
+      <div class="ul-p"><a class="ul-n" href="https://ehr.104.com.tw/products/hrd/performance.html" target="_blank" rel="noopener">績效管理 ↗</a><span class="ul-d">工作表現</span><div class="ul-f"><span>職缺畫像</span><span>人才比對</span><span>升遷評估</span><span>人才盤點</span><span>離職預測</span></div></div>
+      <div class="ul-p"><a class="ul-n" href="https://marketing.pro.104.com.tw/index.html" target="_blank" rel="noopener">企業大師 ↗</a><span class="ul-d">職務與經歷</span><div class="ul-f"><span>職缺畫像</span><span>人才比對</span><span>升遷評估</span><span>離職預測</span><span>薪資合理性</span></div></div>
+      <div class="ul-p"><a class="ul-n" href="https://training.104.com.tw/landingPage/marketing/index.html" target="_blank" rel="noopener">企業學習平台 ↗</a><span class="ul-d">學習與成長</span><div class="ul-f"><span>培訓規劃</span><span>課程建議</span><span>離職預測</span></div></div>
+      <div class="ul-p"><a class="ul-n" href="https://salary.104.com.tw/landingpage/marketing/survey-report/index.html" target="_blank" rel="noopener">薪酬平台 ↗</a><span class="ul-d">薪酬</span><div class="ul-f"><span>薪資合理性</span><span>離職預測</span></div></div>
+    </div>
+    <p class="ul-note">啟用不同產品，就能解鎖不同分析功能。例如啟用測評中心、績效管理、企業大師 3 個產品，即可使用「人才比對」；5 個產品全部啟用，就能看到完整人才畫像。</p>
+    <div class="try">
+      <span class="lb">實際看看差異</span>
+      <a href="app2.html#home--hr--part"><b>部分啟用</b>啟用 3 個 104 產品 →</a>
+      <a href="app2.html#home--hr--full"><b>全部啟用</b>啟用 5 個 104 產品，完整人才畫像 →</a>
+    </div>
+  </div>
+</section>
+
 <section class="closing">
   <div class="wrap">
     <h2>用人才畫像，選對人、育對人</h2>
@@ -451,12 +461,26 @@ h3{font-size:20px;color:var(--c-heading)}
 document.querySelectorAll('a[href^="app"]').forEach(function(a){
   a.addEventListener('click',function(e){e.preventDefault();location.href=new URL(a.getAttribute('href'),location.href).href;});
 });
+/* 點選錨點時，讓該段內容在畫面中上下置中 */
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var id=a.getAttribute('href'); if(id.length<2) return;
+    var sec=document.querySelector(id); if(!sec) return;
+    var box=sec.querySelector('.wrap')||sec;
+    e.preventDefault();
+    var bar=64, avail=window.innerHeight-bar, h=box.offsetHeight;
+    var top=box.getBoundingClientRect().top+window.scrollY-bar;
+    var y=h<avail ? top-(avail-h)/2 : top-24;
+    window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+    history.replaceState(null,'',id);
+  });
+});
 /* 捲動時標示目前所在的段落 */
 (function(){
   var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'))}).filter(Boolean);
   function spy(){
-    var y=window.scrollY+120, cur=null;
+    var y=window.scrollY+window.innerHeight/2, cur=null;
     secs.forEach(function(s){if(s.offsetTop<=y) cur=s.id;});
     if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4&&secs.length) cur=secs[secs.length-1].id;
     links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+cur)});
@@ -464,5 +488,22 @@ document.querySelectorAll('a[href^="app"]').forEach(function(a){
   window.addEventListener('scroll',spy,{passive:true});
   window.addEventListener('resize',spy);
   spy();
+})();
+</script>
+<!-- TO TOP -->
+<style>
+.totop{position:fixed;right:24px;bottom:24px;z-index:80;width:48px;height:48px;border-radius:50%;border:1px solid #dddddd;background:#fff;color:#7e7e7e;box-shadow:0 2px 8px 0 rgba(41,41,41,.15);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .2s,transform .2s,visibility .2s,color .2s,border-color .2s}
+.totop.show{opacity:1;visibility:visible;transform:none}
+.totop:hover,.totop:focus-visible{color:#00afb8;border-color:#00afb8;outline:none}
+.totop svg{width:18px;height:18px}
+.totop span{font-size:10px;font-weight:700;line-height:1;letter-spacing:.02em}
+@media (max-width:560px){.totop{right:16px;bottom:16px;width:44px;height:44px}}
+</style>
+<button class="totop" id="toTop" type="button" aria-label="回到頁面頂端" title="回到頂端"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 14l6-6 6 6"/></svg><span>TOP</span></button>
+<script>
+(function(){var b=document.getElementById('toTop');
+  function t(){b.classList.toggle('show',window.scrollY>400)}
+  window.addEventListener('scroll',t,{passive:true});t();
+  b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
 })();
 </script>
