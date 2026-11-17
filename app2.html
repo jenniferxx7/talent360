@@ -69,6 +69,8 @@ main{padding:24px 28px 48px;max-width:1440px;margin:0 auto}
 .card{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow);min-width:0}
 .card-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
 .card-h h3{font-size:16px;color:var(--c-heading)}
+.card-h .hint{display:inline-flex;align-items:center;gap:4px;font-size:13px}
+.card-h .hint .tip:hover::after,.card-h .hint .tip:focus::after{left:auto;right:-6px;transform:none}
 .card-src{margin-top:12px;padding-top:8px;border-top:1px solid #eeeeee;font-size:12px;color:var(--c-text-sub)}
 .card-src a{color:var(--c-text-sub);text-decoration:none;border-bottom:1px dotted var(--c-text-sub)}
 .card-src a:hover{color:var(--c-primary);border-bottom-color:var(--c-primary)}
@@ -78,7 +80,7 @@ main{padding:24px 28px 48px;max-width:1440px;margin:0 auto}
 
 .kpi .l{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--c-text-sub)}
 .kpi .n{font-size:26px;font-weight:900;color:var(--c-heading);line-height:1.3}
-.tip{position:relative;flex:none;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid #a9a9a9;color:#7e7e7e;font-size:10px;font-weight:700;line-height:1;cursor:help}
+.tip{position:relative;top:-1px;vertical-align:middle;flex:none;display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;border:1px solid #a9a9a9;color:#7e7e7e;font-size:10px;font-weight:700;line-height:1;cursor:help}
 .tip:hover,.tip:focus{border-color:var(--c-primary);color:var(--c-primary);outline:none}
 .tip:hover::after,.tip:focus::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 6px);transform:translateX(-50%);width:230px;background:#292929;color:#fff;font-size:12px;font-weight:400;line-height:1.5;padding:8px 10px;border-radius:4px;z-index:60;text-align:left}
 
@@ -146,6 +148,28 @@ select:disabled{background:#f3f3f3;color:var(--c-text-sub)}
 
 /* 首頁 */
 .hello{font-size:22px;font-weight:900;color:var(--c-heading)}
+.watch{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--c-border);font-size:14px}
+.watch .who-l{display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-width:0}
+.watch .who-l>b{flex:none;min-width:48px;color:var(--c-heading)}
+.ph p .tip,.card-h h3 .tip,.sub .tip,.nine-def .tip{margin-left:4px;vertical-align:middle}
+.c-tag{display:inline-block;font-size:12px;line-height:1.4;padding:1px 6px;border-radius:4px;background:var(--c-accent-light);color:var(--c-accent);margin-left:6px;vertical-align:1px}
+.c-tag.ext{background:var(--c-warn-light);color:#b35400}
+.jc{display:flex;flex-direction:column;gap:10px}
+.jc>div{display:flex;align-items:flex-start;gap:12px}
+.jc>div>b{flex:none;width:56px;font-size:13px;font-weight:400;color:var(--c-text-sub);line-height:24px}
+.jc .cs{display:flex;flex-wrap:wrap;gap:6px}
+.jc .cs i{font-style:normal;font-size:13px;line-height:1.4;padding:2px 8px;border-radius:4px;background:var(--c-bg);color:var(--c-text)}
+.jc .cs.ab i{background:var(--c-primary-light);color:var(--c-primary-dark)}
+.jc .cs.ab em{font-style:normal;font-weight:700}
+.jc .cs.skl i{background:var(--c-accent-light);color:var(--c-accent)}
+.jc .cs.gp i{background:var(--c-warn-light);color:#b35400}
+.jc .cs.gp i.ok{background:var(--c-ok-light);color:var(--c-ok)}
+.ccard .jc{margin:4px 0 8px;padding-top:12px;border-top:1px solid var(--c-border)}
+.ccard>.btn{margin-top:auto!important}
+.ccard .jc>div>b{width:72px}
+.sigs{display:flex;gap:6px;flex-wrap:wrap}
+.sigs span{font-size:13px;line-height:1.4;padding:2px 8px;border-radius:4px;background:var(--c-bg);color:var(--c-text)}
+.watch .badge,.watch .btn{flex:none}
 .cycle{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:var(--c-text);background:#fff;border:1px solid var(--c-border);border-top:4px solid var(--c-primary);border-radius:var(--radius);padding:16px;transition:.2s}
 .cycle:hover{box-shadow:0 2px 8px 0 rgba(41,41,41,.15);transform:translateY(-2px)}
 .cycle .h{display:flex;align-items:baseline;gap:8px}
@@ -217,7 +241,7 @@ select:disabled{background:#f3f3f3;color:var(--c-text-sub)}
 .plan li{font-size:14px;margin:6px 0 0 18px}
 
 .ccard{border:1px solid var(--c-border);border-radius:var(--radius);padding:14px;display:flex;flex-direction:column;gap:6px;font-size:14px;background:#fff}
-.ccard.best{border:2px solid var(--c-primary)}
+.ccard.best{border-color:var(--c-primary);box-shadow:0 0 0 1px var(--c-primary)}
 .ccard .row{display:grid;grid-template-columns:84px 1fr;align-items:start;gap:8px;border-top:1px dashed var(--c-border);padding-top:6px}
 .ccard .row span:first-child{color:var(--c-text-sub);white-space:nowrap}
 .ccard .row span:last-child{text-align:left}
@@ -376,7 +400,7 @@ const missing=page=>(REQ[page]||[]).filter(k=>!has(k));
 function buyBox(miss,title,mini){
   const ok=SRC_ORDER.filter(has);
   return `<div class="card buy ${mini?'mini':''}">${mini?'':'<div class="ic">🔒</div>'}<h3>${title}</h3>
-    <p>這項分析需要以下 104 產品的資料，啟用後即可使用。</p>
+    <p>需啟用以下 104 產品才能使用。</p>
     <div class="need">${miss.map(k=>`<a href="${SRC[k].url}" target="_blank" rel="noopener">了解${SRC[k].prod} ↗<small>提供${SRC_DESC[k]}資料</small></a>`).join('')}</div>
     <div class="have">目前已啟用：${ok.map(k=>SRC[k].prod).join('、')}</div></div>`;
 }
@@ -404,10 +428,11 @@ const range=n=>`約 ${Math.floor(n/1000)-3}K–${Math.floor(n/1000)+3}K`;
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2400)}
 const src=keys=>`<div class="card-src">來源：${keys.map(k=>`<a href="${SRC[k].url}" target="_blank" rel="noopener" title="前往${SRC[k].prod}查看完整資料">${SRC[k].prod}</a>`).join('、')}</div>`;
 const card=(title,keys,body,extra='')=>`<div class="card"><div class="card-h"><h3>${title}</h3>${extra}</div>${body}${keys&&keys.length?src(keys):''}</div>`;
-const tip=t=>`<span class="tip" tabindex="0" role="img" aria-label="計算方式：${t}" data-tip="${t}">!</span>`;
+const tip=t=>`<span class="tip" tabindex="0" role="img" aria-label="說明：${t}" data-tip="${t}">!</span>`;
 const kpi=(l,n,t,sub='')=>`<div class="card kpi"><div class="l">${l}${t?tip(t):''}</div><div class="n">${n}</div>${sub?`<div class="sub">${sub}</div>`:''}</div>`;
 const ai=t=>`<div class="ai"><div class="t">✨ AI 綜合分析</div>${t}</div>`;
-const head=(crumb,title,desc)=>`<div class="crumb">${crumb}</div><div class="ph"><div><h1>${title}</h1><p>${desc}</p></div></div>`;
+const head=(crumb,title,desc,t)=>`<div class="crumb">${crumb}</div><div class="ph"><div><h1>${title}</h1><p>${desc}${t?tip(t):''}</p></div></div>`;
+const sigs=s=>`<span class="sigs">${s.split('，').map(x=>`<span>${x}</span>`).join('')}</span>`;
 const fitCell=f=>`<div style="display:flex;align-items:center;gap:8px"><span class="fitnum" style="font-size:16px">${f}%</span><span class="fitbar"><i style="width:${f}%"></i></span></div>`;
 const riskB=lv=>`<span class="badge ${lv==='高'?'b-danger':lv==='中'?'b-warn':'b-ok'}">${lv}風險</span>`;
 function gapBars(p,j){
@@ -444,7 +469,7 @@ const PAGES={
     const rs=RISKS.filter(r=>ppl.some(p=>p.id===r.id));
     const lk=t=>`<span style="font-size:16px;color:var(--c-text-sub)">🔒 ${t}</span>`;
     return `<div class="hello">${who}您好，今天需要哪方面的人才分析？</div>
-    <p class="sub" style="font-size:14px;margin:4px 0 16px">根據您的需求，彙整人才資料，提供您進行決策分析。</p>
+    <p class="sub" style="font-size:14px;margin:4px 0 16px">依您的需求彙整人才資料，協助決策分析。</p>
     ${planBar()}
     <div class="grid g4">
       <div class="cycle"><div class="h"><b>選才</b><span>找對人</span></div><a class="num" href="#jobs" title="查看關鍵職缺">${jobs.length} 個關鍵職缺 ›</a><ul><li><a href="#jobs">職缺畫像</a></li><li><a href="#match">人才比對</a></li></ul></div>
@@ -456,16 +481,16 @@ const PAGES={
       ${card('關鍵職缺與內部人選',['assess','perf','org'],`<div class="tbl"><table class="t nw"><thead><tr><th>職缺</th><th>部門</th><th><span style="display:inline-flex;align-items:center;gap:4px">適配人選${tip('職缺適配度 85% 以上的內部人才。'+FIT_TIP)}</span></th></tr></thead><tbody>
         ${jobs.map(j=>`<tr class="click" data-go="job--${j.id}"><td><b>${j.name}</b></td><td>${j.dept}</td><td><a href="#match" data-job="${j.id}" title="查看人選">${ready(j)} 人 ›</a></td></tr>`).join('')}
       </tbody></table></div>`)}
-      ${card('需要留意',missing('risk').length?[]:['perf','pay','org','train'],`${jobs.some(j=>j.status!=='已確認')?`<div style="padding:8px 0;font-size:14px;border-bottom:1px dashed var(--c-border)">「業務主管」職缺畫像待主管確認 <a href="#job--j3">前往確認</a></div>`:''}
-        ${missing('risk').length?`<div class="mt">${buyBox(missing('risk'),'啟用後可提早發現離職風險',true)}</div>`:`${rs.slice(0,3).map(r=>{const p=byId(r.id);return `<div style="display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px dashed var(--c-border);font-size:14px"><span><b>${p.name}</b>｜${r.sig}</span>${riskB(r.lv)}</div>`}).join('')}
+      ${card('需要留意',missing('risk').length?[]:['perf','pay','org','train'],`${jobs.some(j=>j.status!=='已確認')?`<div class="watch"><span class="who-l"><b>業務主管</b><span class="sigs"><span>職缺畫像待主管確認</span></span></span><a class="btn btn-line btn-sm" href="#job--j3">前往確認</a></div>`:''}
+        ${missing('risk').length?`<div class="mt">${buyBox(missing('risk'),'啟用後可提早發現離職風險',true)}</div>`:`${rs.slice(0,3).map(r=>{const p=byId(r.id);return `<div class="watch"><span class="who-l"><b>${p.name}</b><span class="sigs">${r.sig.split('，').map(s=>`<span>${s}</span>`).join('')}</span></span>${riskB(r.lv)}</div>`}).join('')}
         <a href="#risk" style="display:inline-block;margin-top:10px;font-weight:700;font-size:14px;text-decoration:none">查看離職預測 →</a>`}`)}
     </div>`;
   },
 
   jobs(){
-    return head('選才 › 職缺畫像','職缺畫像','定義每個關鍵職缺需要什麼樣的人。建議條件由高績效者歸納，再由主管確認。')+
+    return head('選才 › 職缺畫像','職缺畫像','定義關鍵職缺需要什麼樣的人。','建議條件由高績效者歸納，再由主管確認。')+
     `<div class="grid g2">${visJ().map(j=>card(`${j.name}<span class="sub" style="font-weight:400;margin-left:8px">${j.dept}｜${j.lv}</span>`,['assess','perf'],
-      `<div class="cond"><div><b>經驗條件</b><span>${j.explicit.join('、')}</span></div><div><b>關鍵能力</b><span>${DIMS.map((d,i)=>[d,j.target[i]]).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>`${x[0]} PR${x[1]}+`).join('、')}</span></div><div><b>專業技能</b><span>${(JOB_SKILLS[j.id]||[]).join('、')}</span></div><div><b>工作動機</b><span>${j.motive}</span></div></div>
+      `<div class="jc"><div><b>經驗條件</b><span class="cs">${j.explicit.map(e=>`<i>${e}</i>`).join('')}</span></div><div><b>關鍵能力</b><span class="cs ab">${DIMS.map((d,i)=>[d,j.target[i]]).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>`<i>${x[0]} <em>PR${x[1]}+</em></i>`).join('')}</span></div><div><b>專業技能</b><span class="cs skl">${(JOB_SKILLS[j.id]||[]).map(s=>`<i>${s}</i>`).join('')}</span></div><div><b>工作動機</b><span class="cs">${`<i>${j.motive}</i>`}</span></div></div>
        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px"><span class="sub">依 ${j.base} 位高績效者歸納</span><a class="btn btn-line btn-sm" href="#job--${j.id}">查看畫像</a></div>`,
       `<span class="badge ${j.status==='已確認'?'b-ok':'b-warn'}">${j.status}</span>`)).join('')}</div>`;
   },
@@ -476,26 +501,26 @@ const PAGES={
     const top=visP().map(p=>({p,f:fit(p,j)})).sort((a,b)=>b.f-a.f).slice(0,3);
     return `<div class="crumb"><a href="#jobs">選才 › 職缺畫像</a> › ${j.name}</div><div class="ph"><div><h1>${j.name}｜職缺畫像</h1><p>${j.dept}｜${j.lv}｜依 ${j.base} 位高績效者歸納</p></div><span class="badge ${j.status==='已確認'?'b-ok':'b-warn'}">${j.status}</span></div>
     <div class="grid g2">
-      ${card('看得到的條件（經驗與表現）',['org','perf'],`<div class="cond">${j.explicit.map(e=>`<div class="ck"><b>✓</b><span>${e}</span></div>`).join('')}</div>`)}
-      ${card('看不到的條件（動機與風格）',['assess'],`<div class="cond"><div><b>工作動機</b><span>${j.motive}</span></div><div><b>個人風格</b><span>${j.style}</span></div></div>`)}
+      ${card('經驗與表現',['org','perf'],`<div class="cond">${j.explicit.map(e=>`<div class="ck"><b>✓</b><span>${e}</span></div>`).join('')}</div>`)}
+      ${card('動機與風格',['assess'],`<div class="cond"><div><b>工作動機</b><span>${j.motive}</span></div><div><b>個人風格</b><span>${j.style}</span></div></div>`)}
     </div>
     <div class="grid g2 mt">
       ${card('能力要求',['assess','org'],`<h4 class="gh">職能（PR）</h4><div class="bars">${DIMS.map((d,i)=>`<div class="bar"><span>${d}</span><span class="track"><span class="fill" data-w="${j.target[i]}"></span></span><span class="v">PR ${j.target[i]}+</span></div>`).join('')}</div>
         <h4 class="gh mt">專業技能</h4><div class="sk">${(JOB_SKILLS[j.id]||[]).map(s=>`<span class="ok" style="background:var(--c-primary-light);color:var(--c-primary-dark)">${s}</span>`).join('')}</div>`)}
       ${card('最接近的內部人選',['assess','perf'],`${top.map(x=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--c-border)"><span><b>${x.p.name}</b> <span class="sub">${x.p.title}</span></span>${fitCell(x.f)}</div>`).join('')}<a href="#match" data-job="${j.id}" style="display:inline-block;margin-top:10px;font-weight:700;font-size:14px;text-decoration:none">查看完整人才比對 →</a>`)}
     </div>
-    ${j.status!=='已確認'?`<div class="card mt" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span>這份畫像由系統依高績效者歸納，需由用人主管確認或調整後才會正式套用。</span><button class="btn btn-blue" data-toast="已送出給業務部主管確認（示意）">送主管確認</button></div>`:''}`;
+    ${j.status!=='已確認'?`<div class="card mt" style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><span>系統依高績效者歸納，需用人主管確認或調整後才正式套用。</span><button class="btn btn-blue" data-toast="已送出給業務部主管確認（示意）">送主管確認</button></div>`:''}`;
   },
 
   match(){
     const js=visJ(); if(!js.find(j=>j.id===S.job)) S.job=js[0].id;
     const j=job(S.job);
     const list=visP().map(p=>({p,f:fit(p,j),g:gaps(p,j)})).sort((a,b)=>b.f-a.f);
-    return head('選才 › 人才比對','人才比對','選擇職缺，從內部人才中找出最適合的人選，並看清每個人的落差。')+
+    return head('選才 › 人才比對','人才比對','選擇職缺，找出最適合的內部人選與落差。')+
     `<div class="filters">職缺：<select id="jobSel">${js.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select><a href="#job--${j.id}">查看職缺畫像</a></div>`+
-    card(`內部人選排序（${list.length} 位）`,['assess','perf','org'],`<div class="tbl"><table class="t"><thead><tr><th>姓名</th><th>目前職位</th><th>職缺適配度</th><th>主要落差</th><th></th></tr></thead><tbody>
+    card(`內部人選排序（${list.length} 位）`,['assess','perf','org'],`<div class="tbl"><table class="t"><thead><tr><th>姓名</th><th>目前職位</th><th><span style="display:inline-flex;align-items:center;gap:4px">職缺適配度${tip(FIT_TIP)}</span></th><th>主要落差</th><th></th></tr></thead><tbody>
       ${list.map(x=>`<tr><td><b>${x.p.name}</b></td><td>${x.p.dept}｜${x.p.title}</td><td>${fitCell(x.f)}</td><td>${gapChips(x.p,j,x.g)}</td><td><a class="btn btn-line btn-sm" href="#path--${x.p.id}--${j.id}">看發展路徑</a></td></tr>`).join('')}
-    </tbody></table></div><p class="sub" style="margin-top:8px;display:flex;align-items:center;gap:4px">職缺適配度${tip(FIT_TIP)}</p>`);
+    </tbody></table></div>`);
   },
 
   promo(){
@@ -503,12 +528,17 @@ const PAGES={
     const j=job(S.job); const pool=PEOPLE.filter(p=>p.dept===j.dept);
     S.picks=S.picks.filter(id=>pool.some(p=>p.id===id)); if(S.picks.length<2) S.picks=pool.slice(0,3).map(p=>p.id);
     const c=S.picks.map(byId).map(p=>({p,f:fit(p,j),g:gaps(p,j)})).sort((a,b)=>b.f-a.f);
-    return head('用才 › 升遷評估','升遷評估','以職缺畫像為標準，比較升遷候選人的適配度、績效與落差。')+
+    return head('用才 › 升遷評估','升遷評估','以職缺畫像為標準，比較候選人的適配度、績效與落差。')+
     `<div class="card"><div class="filters" style="margin:0">職缺：<select id="promoSel">${js.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select><span class="sub">候選人（2–4 位）：</span><div class="picks">${pool.map(p=>`<button class="pick ${S.picks.includes(p.id)?'on':''}" data-pick="${p.id}">${p.name}</button>`).join('')}</div></div></div>
     <div class="grid mt" style="grid-template-columns:repeat(${c.length},1fr)">${c.map((x,i)=>`<div class="ccard ${i===0?'best':''}"><div style="display:flex;align-items:center;gap:8px"><b style="font-size:17px">${x.p.name}</b>${i===0?'<span class="badge b-ok">最適合</span>':''}</div><span class="sub">${x.p.title}｜年資 ${x.p.years} 年</span><div><span class="fitnum">${x.f}%</span> <span class="sub">職缺適配度</span></div>
-      <div class="row"><span>近 3 年績效</span><span>${x.p.perf.join('／')}</span></div><div class="row"><span>綜合能力</span><span>${x.p.pot}（${x.p.ab.s} 分）</span></div><div class="row"><span>專業技能</span><span>${(PERSON_SKILLS[x.p.id]||[]).join('、')||'—'}</span></div><div class="row"><span>工作動機</span><span>${x.p.motive}</span></div>
-      <div class="row"><span>職能落差</span><span>${x.g.length?x.g.slice(0,2).map(g=>`${g.d} −${g.g}`).join('、'):'無'}</span></div>
-      <div class="row"><span>技能落差</span><span>${skillMiss(x.p,j).length?'缺 '+skillMiss(x.p,j).join('、'):'無'}</span></div><a class="btn btn-line btn-sm" style="align-self:flex-start;margin-top:4px" href="#path--${x.p.id}--${j.id}">看發展路徑</a></div>`).join('')}</div>
+      <div class="jc">
+      <div><b>近 3 年績效</b><span class="cs">${x.p.perf.map(v=>`<i>${v}</i>`).join('')}</span></div>
+      <div><b>綜合能力</b><span class="cs ab"><i>${x.p.pot} <em>${x.p.ab.s} 分</em></i></span></div>
+      <div><b>專業技能</b><span class="cs skl">${(PERSON_SKILLS[x.p.id]||[]).map(s=>`<i>${s}</i>`).join('')||'<i>—</i>'}</span></div>
+      <div><b>工作動機</b><span class="cs"><i>${x.p.motive}</i></span></div>
+      <div><b>職能落差</b><span class="cs gp">${x.g.length?x.g.slice(0,2).map(g=>`<i>${g.d} −${g.g}</i>`).join(''):'<i class="ok">無</i>'}</span></div>
+      <div><b>技能落差</b><span class="cs gp">${skillMiss(x.p,j).length?skillMiss(x.p,j).map(s=>`<i>缺 ${s}</i>`).join(''):'<i class="ok">無</i>'}</span></div>
+      </div><a class="btn btn-line btn-sm" style="align-self:flex-start;margin-top:4px" href="#path--${x.p.id}--${j.id}">看發展路徑</a></div>`).join('')}</div>
     <div class="mt">${ai(`以「${j.name}」的畫像來看，${c[0].p.name}適配度最高（${c[0].f}%），建議優先考慮；${c.slice(1).map(x=>`${x.p.name}主要落差在${x.g[0]?x.g[0].d:'—'}`).join('，')}，可透過發展路徑補強後再評估。`)}</div>
     <div class="card-src" style="border:0">來源：測評中心、績效管理、企業大師</div>`;
   },
@@ -524,9 +554,9 @@ const PAGES={
     let h='';['高','中','低'].forEach(pot=>{h+=`<div class="ax"><b>能力${pot}</b><small>（${{'高':'80+','中':'65–79','低':'<65'}[pot]}）</small></div>`;['低','中','高'].forEach(pf=>{const k=pot+pf;h+=`<div class="cell ${cls[k]||''}"><div class="tt"><span style="display:inline-flex;align-items:center;gap:4px">${name[k]}${tip(mean[k])}</span></div>${cell(pot,pf).map(p=>`<a href="#path--${p.id}" title="最近績效 ${p.perf[2]}（${pf}）× 綜合能力 ${p.ab.s} 分（${p.pot}）">${p.name}</a>`).join('')||'<span class="sub">—</span>'}</div>`})});
     h+=`<div></div>${['低','中','高'].map(pf=>`<div class="ax"><b>績效${pf}</b><small>（${pfDef[pf]}）</small></div>`).join('')}`;
     const ex=byId('p1');
-    return head('用才 › 人才盤點','人才盤點','依績效與綜合能力把人才分群，看出誰是明日之星、誰需要關注。')+
-      card(`人才九宮格（${isMgr()?MY_DEPT:'全公司範例'}）`,['perf','assess','org','train'],`<div class="nine-def"><div><b>橫軸｜績效</b>最近一次考核結果：A+ 為高、A 為中、B+ 以下為低（績效管理）</div><div><b style="display:inline-flex;align-items:center;gap:4px">縱軸｜綜合能力${tip(ABIL_TIP)}</b>職能 PR（測評中心）50%＋技能（企業大師）30%＋學習時數（企業學習平台）20%</div></div>
-        <div class="nine">${h}</div><p class="sub" style="margin-top:10px">例：${ex.name}職能 PR 平均 ${ex.ab.c}、技能 ${ex.ab.k} 分、學習 ${ex.ab.l} 分，綜合能力 ${ex.ab.s} 分（${ex.pot}）；最近一次績效 ${ex.perf[2]}。滑過姓名可看分類依據，點選可查看發展路徑。</p>`)+
+    return head('用才 › 人才盤點','人才盤點','依績效與綜合能力分群，找出明日之星與需關注的人才。')+
+      card(`人才九宮格（${isMgr()?MY_DEPT:'全公司範例'}）`,['perf','assess','org','train'],`<div class="nine-def"><div><b>橫軸｜績效</b>最近一次考核結果${tip('A+ 為高、A 為中、B+ 以下為低（績效管理）')}</div><div><b>縱軸｜綜合能力</b>職能 50%＋技能 30%＋學習 20%${tip(ABIL_TIP)}</div></div>
+        <div class="nine">${h}</div>`,`<span class="sub hint">滑過姓名看分類依據，點選看發展路徑${tip(`例：${ex.name}職能 PR 平均 ${ex.ab.c}、技能 ${ex.ab.k} 分、學習 ${ex.ab.l} 分，綜合能力 ${ex.ab.s} 分（${ex.pot}）；最近一次績效 ${ex.perf[2]}。`)}</span>`)+
       `<div class="mt" id="sec-pot">`+card(`綜合能力高的人才（${ppl.filter(p=>p.pot==='高').length} 位）`,['assess','org','train','perf'],`<div class="tbl"><table class="t nw"><thead><tr><th>姓名</th><th>部門｜職位</th><th>綜合能力</th><th>職能 PR 平均</th><th>技能</th><th>近 3 年績效</th><th></th></tr></thead><tbody>
         ${ppl.filter(p=>p.pot==='高').sort((a,b)=>b.ab.s-a.ab.s).map(p=>`<tr><td><b>${p.name}</b></td><td>${p.dept}｜${p.title}</td><td><b>${p.ab.s}</b> 分</td><td>${p.ab.c}</td><td>${(PERSON_SKILLS[p.id]||[]).length} 項</td><td>${p.perf.join('／')}</td><td><a class="btn btn-line btn-sm" href="#path--${p.id}">看發展路徑</a></td></tr>`).join('')}
       </tbody></table></div>`)+`</div>`;
@@ -537,12 +567,12 @@ const PAGES={
     const ppl=visP(); if(!ppl.find(p=>p.id===S.pathP)) S.pathP=ppl[0].id;
     const js=visJ(); if(!js.find(j=>j.id===S.pathJ)) S.pathJ=js[0].id;
     const p=byId(S.pathP), j=job(S.pathJ), f=fit(p,j), g=gaps(p,j).slice(0,2);
-    return head('育才 › 發展路徑','發展路徑','從員工目前的職位出發，看離目標職缺還差什麼，以及該怎麼準備。')+
+    return head('育才 › 發展路徑','發展路徑','看員工離目標職缺還差什麼、該怎麼準備。')+
     `<div class="filters">員工：<select id="pathP">${ppl.map(x=>`<option value="${x.id}" ${x.id===p.id?'selected':''}>${x.name}（${x.title}）</option>`).join('')}</select>目標職缺：<select id="pathJ">${js.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select></div>
     <div class="card"><div class="route"><div class="node"><span class="sub">目前</span><b>${p.title}</b><span class="sub">${p.dept}｜年資 ${p.years} 年</span></div><span class="arrow">→</span><div class="node"><span class="sub">目標</span><b>${j.name}</b><span class="sub">${j.dept}</span></div><div style="margin-left:auto;text-align:right"><span class="sub" style="display:inline-flex;align-items:center;gap:4px">目前適配度${tip(FIT_TIP)}</span><div class="fitnum">${f}%</div><div class="sub" style="font-size:12px">職能 ${Math.round(fitC(p,j)*100)}%｜技能 ${Math.round(fitK(p,j)*100)}%</div></div></div></div>
     <div class="grid g2 mt">
       ${card('能力落差',['assess','org','train'],gapAll(p,j))}
-      ${card('學習與歷練建議',['train','assess'],g.length?`<div class="tipbox">💡 能力成長多半來自實際做事，其次是有人帶，上課則是輔助。三種方式一起進行，效果最好。</div><div class="plan mt"><h4>做中學 <span>主要：在工作中累積經驗</span></h4><ul>${g.map(x=>`<li>${TASK[x.d]}</li>`).join('')}</ul></div>
+      ${card('學習與歷練建議',['train','assess'],g.length?`<div class="tipbox">💡 做中學為主、跟人學為輔、上課學補充，三種一起進行效果最好。</div><div class="plan mt"><h4>做中學 <span>主要：在工作中累積經驗</span></h4><ul>${g.map(x=>`<li>${TASK[x.d]}</li>`).join('')}</ul></div>
         <div class="plan mt"><h4>跟人學 <span>其次：請主管或前輩帶</span></h4><ul>${g.map(x=>`<li>${MENTOR[x.d]}</li>`).join('')}</ul></div>
         ${has('train')?`<div class="plan mt"><h4>上課學 <span>輔助：補足觀念與方法</span></h4><ul>${g.map(x=>`<li>${COURSE[x.d]} <button class="btn btn-line btn-sm" data-toast="已將「${COURSE[x.d]}」指派給 ${p.name}（示意）">指派</button></li>`).join('')}${skillMiss(p,j).map(s=>`<li>${s}實務（補技能） <button class="btn btn-line btn-sm" data-toast="已將「${s}實務」指派給 ${p.name}（示意）">指派</button></li>`).join('')}</ul></div>`:`<div class="plan mt"><h4>上課學 <span>輔助：補足觀念與方法</span></h4>${lockLine('train','可看到建議課程並直接指派')}</div>`}`:'<p>已達到目標職缺的能力要求，可直接列入人選。</p>')}
     </div>
@@ -571,17 +601,17 @@ const PAGES={
     const rows=DIMS.map((d,i)=>({d,who:ppl.filter(p=>p.radar[i]<LOW)})).filter(r=>r.who.length).sort((a,b)=>b.who.length-a.who.length);
     const avgH=Math.round(ppl.reduce((s,p)=>s+p.hours,0)/ppl.length);
     const lowH=ppl.filter(p=>p.hours<10);
-    return head('育才 › 培訓規劃','培訓規劃','彙整'+(isMgr()?'部門':'全公司')+'人才的能力落差，找出最多人需要加強的能力，安排對應課程與對象。')+
+    return head('育才 › 培訓規劃','培訓規劃','彙整'+(isMgr()?'部門':'全公司')+'能力落差，找出最多人需加強的能力，安排課程與對象。')+
     `<div class="grid g4">${kpi('檢視人數',ppl.length+' 人')}${kpi('需加強的能力面向',rows.length+' 項','PR 低於 '+LOW+' 視為需加強')}${kpi('平均學習時數',avgH+' 小時','','今年至今')}${kpi('學習時數偏低',lowH.length+' 人','今年學習未滿 10 小時')}</div>`+
     `<div class="mt">`+card(`${isMgr()?'部門':'公司'}培訓需求（職能＋技能缺口）`,['assess','org','train'],(()=>{
       const jobs=visJ(), sk=[...new Set(jobs.flatMap(j=>JOB_SKILLS[j.id]||[]))];
       const skRows=sk.map(s=>{const js=jobs.filter(j=>(JOB_SKILLS[j.id]||[]).includes(s)),depts=js.map(j=>j.dept);
         return {s,js:js.map(j=>j.name),have:ppl.filter(p=>(PERSON_SKILLS[p.id]||[]).includes(s)),lack:ppl.filter(p=>depts.includes(p.dept)&&!(PERSON_SKILLS[p.id]||[]).includes(s))}}).filter(r=>r.have.length<=1).sort((a,b)=>a.have.length-b.have.length);
       const cRows=rows.map(r=>`<tr><td><b>${r.d}</b></td><td>${r.who.length} 人</td><td>${COURSE[r.d]}</td><td>${r.who.map(p=>p.name).join('、')}</td><td><button class="btn btn-blue btn-sm" data-toast="已建立「${COURSE[r.d]}」培訓計畫，指派給 ${r.who.length} 人（示意）">安排課程</button></td></tr>`).join('');
-      const sRows=skRows.map(r=>`<tr><td><b>${r.s}</b><div class="sub" style="font-size:12px">${r.js.join('、')}需要</div></td><td>${r.have.length?`僅 ${r.have[0].name} 具備`:'<span style="color:var(--c-danger,#ea475b);font-weight:700">無人具備</span>'}</td><td>${r.have.length?`${r.s}實務（內訓，由 ${r.have[0].name} 擔任講師）`:`${r.s}實務（外訓）`}</td><td>${r.lack.map(p=>p.name).join('、')||'—'}</td><td>${r.have.length?`<button class="btn btn-blue btn-sm" data-toast="已建立「${r.s}實務」內訓課程，由 ${r.have[0].name} 擔任講師（示意）">安排內訓</button>`:`<button class="btn btn-blue btn-sm" data-toast="已從企業學習平台查找「${r.s}」外部課程，並建立外訓申請（示意）">安排外訓</button>`}</td></tr>`).join('');
+      const sRows=skRows.map(r=>`<tr><td><b>${r.s}</b><div class="sub" style="font-size:12px">${r.js.join('、')}需要</div></td><td>${r.have.length?`僅 ${r.have[0].name} 具備`:'<span style="color:var(--c-danger,#ea475b);font-weight:700">無人具備</span>'}</td><td>${r.s}實務${r.have.length?`<span class="c-tag">內訓</span><div class="sub" style="font-size:12px">講師：${r.have[0].name}</div>`:'<span class="c-tag ext">外訓</span>'}</td><td>${r.lack.map(p=>p.name).join('、')||'—'}</td><td>${r.have.length?`<button class="btn btn-blue btn-sm" data-toast="已建立「${r.s}實務」內訓課程，由 ${r.have[0].name} 擔任講師（示意）">安排內訓</button>`:`<button class="btn btn-blue btn-sm" data-toast="已從企業學習平台查找「${r.s}」外部課程，並建立外訓申請（示意）">安排外訓</button>`}</td></tr>`).join('');
       const tab=S.ptab||'c';
       const tabs=`<div class="ptabs"><button data-ptab="c" class="${tab==='c'?'on':''}">職能缺口<span>${rows.length}</span></button><button data-ptab="s" class="${tab==='s'?'on':''}">技能缺口<span>${skRows.length}</span></button></div>`;
-      const note=tab==='c'?`職能 PR 低於 ${LOW} 視為需加強，依需加強人數排序`:'關鍵職缺所需、但具備人數不足的技能：有同仁具備可擔任講師就安排內訓，沒有人可擔任講師就安排外訓';
+      const note=tab==='c'?`職能 PR 低於 ${LOW} 視為需加強，依需加強人數排序`:`關鍵職缺所需、但具備人數不足的技能${tip('有同仁具備可擔任講師就安排內訓；沒有人可擔任講師就安排外訓。')}`;
       return tabs+`<p class="sub" style="margin:10px 0">${note}</p><div class="tbl"><table class="t nw"><thead><tr><th>${tab==='c'?'職能':'技能'}</th><th>${tab==='c'?'需加強人數':'目前具備'}</th><th>建議課程</th><th>建議上課對象</th><th></th></tr></thead><tbody>${tab==='c'?cRows:sRows}</tbody></table></div>`;
     })())+`</div>`+
     `<div class="mt" id="sec-lowh">`+card(`學習時數偏低（${lowH.length} 位）`,['train','perf'],lowH.length?`<div class="tbl"><table class="t nw"><thead><tr><th>姓名</th><th>部門｜職位</th><th>今年學習時數</th><th>近一年績效</th><th></th></tr></thead><tbody>
@@ -595,10 +625,10 @@ const PAGES={
     const f=['高','中','低'].includes(lv)?lv:'';
     const list=f?all.filter(r=>r.lv===f):all;
     const chip=(v,t)=>`<a class="pick ${f===v?'on':''}" href="#risk${v?'--'+v:''}" style="text-decoration:none">${t}（${v?all.filter(r=>r.lv===v).length:all.length}）</a>`;
-    return head('留才 › 離職預測','離職預測','綜合績效、薪資、職務異動與學習參與等訊號，提早留意可能想離開的人才。')+
+    return head('留才 › 離職預測','離職預測','提早留意可能想離開的人才。','綜合績效、薪資、職務異動與學習參與等訊號判斷。')+
       `<div class="filters"><span>風險等級：</span><div class="picks">${chip('','全部')}${chip('高','高風險')}${chip('中','中風險')}${chip('低','低風險')}</div></div>`+
       card(`${f?f+'離職風險':'需要關注'}的人才（${list.length} 位）`,['perf','pay','org','train'],`<div class="tbl"><table class="t"><thead><tr><th>姓名</th><th>部門</th><th>風險</th><th>觀察到的訊號</th><th></th></tr></thead><tbody>
-      ${list.map(r=>{const p=byId(r.id);return `<tr><td><b>${p.name}</b></td><td>${p.dept}</td><td>${riskB(r.lv)}</td><td>${r.sig}</td><td><button class="btn btn-blue btn-sm" data-toast="已建立與 ${p.name} 的關懷面談提醒（示意）">安排面談</button> <a class="btn btn-line btn-sm" href="#path--${p.id}">發展路徑</a></td></tr>`}).join('')}
+      ${list.map(r=>{const p=byId(r.id);return `<tr><td><b>${p.name}</b></td><td>${p.dept}</td><td>${riskB(r.lv)}</td><td>${sigs(r.sig)}</td><td><button class="btn btn-blue btn-sm" data-toast="已建立與 ${p.name} 的關懷面談提醒（示意）">安排面談</button> <a class="btn btn-line btn-sm" href="#path--${p.id}">發展路徑</a></td></tr>`}).join('')}
       </tbody></table></div>`)+`<div class="mt">${ai('高風險人才的共同訊號是「績效好但薪資偏低」。除了調薪，也可以提供明確的發展路徑，讓他們看見內部的下一步。')}</div>`;
   },
 
@@ -608,11 +638,11 @@ const PAGES={
       return `<tr><td><b>${d.name}</b></td><td>${d.n}</td><td>${isMgr()?range(d.pay):fmt(d.pay)+' 元'}</td><td>${diff>=0?'高 '+diff:'低 '+Math.abs(diff)}%</td><td>${diff<=-15?'<span class="badge b-danger">明顯偏低</span>':diff<=-8?'<span class="badge b-warn">偏低</span>':'<span class="badge b-ok">合理</span>'}</td></tr>`}).join('');
     const under=visP().filter(p=>p.pay<DEPTS.find(d=>d.name===p.dept).pay*0.95&&p.perf[2].startsWith('A'));
     return head('留才 › 薪資合理性','薪資合理性','各部門與高績效員工的薪資，是否與表現相稱。')+
-    `<div class="grid g2">${card('各部門平均月薪 vs 公司中位數',['pay','org'],`<div class="tbl"><table class="t nw"><thead><tr><th>部門</th><th>人數</th><th>平均月薪</th><th><span style="display:inline-flex;align-items:center;gap:4px">公司中位數${tip('公司中位數：'+(isMgr()?range(CO_MEDIAN):fmt(CO_MEDIAN)+' 元')+'。把全公司員工月薪由低到高排列，排在正中間的那個數字，不受極端高薪或低薪影響。')}</span></th><th>狀態</th></tr></thead><tbody>${rows}</tbody></table></div>`,'<span class="sub">低於 8% 偏低、低於 15% 明顯偏低</span>')}
-    ${card('高績效但薪資偏低的員工',['pay','perf'],under.length?`<div class="uplist">${under.map(p=>{const avg=DEPTS.find(d=>d.name===p.dept).pay,diff=p.pay-avg,pct=Math.round(diff/avg*100),w=Math.round(p.pay/avg*100);
+    `<div class="grid g2">${card('各部門平均月薪 vs 公司中位數',['pay','org'],`<div class="tbl"><table class="t nw"><thead><tr><th>部門</th><th>人數</th><th>平均月薪</th><th><span style="display:inline-flex;align-items:center;gap:4px">公司中位數${tip('公司中位數：'+(isMgr()?range(CO_MEDIAN):fmt(CO_MEDIAN)+' 元')+'。把全公司員工月薪由低到高排列，排在正中間的那個數字，不受極端高薪或低薪影響。')}</span></th><th><span style="display:inline-flex;align-items:center;gap:4px">狀態${tip('低於公司中位數 8% 為偏低、低於 15% 為明顯偏低。')}</span></th></tr></thead><tbody>${rows}</tbody></table></div>`)}
+    ${card('高績效但薪資偏低的員工'+tip('最近一次績效 A 以上，且月薪低於部門平均 5% 以上。'),['pay','perf'],under.length?`<div class="uplist">${under.map(p=>{const avg=DEPTS.find(d=>d.name===p.dept).pay,diff=p.pay-avg,pct=Math.round(diff/avg*100),w=Math.round(p.pay/avg*100);
         return `<div class="up"><div class="up-h"><span><b>${p.name}</b><span class="sub">${p.dept}｜近一年績效 ${p.perf[2]}</span></span><span class="up-gap">低 ${Math.abs(pct)}%${isMgr()?'':`<small>（−${fmt(Math.abs(diff))} 元）</small>`}</span></div>
           <div class="up-bar"><i style="width:${w}%"></i><em style="left:100%"></em></div>
-          <div class="up-v"><span>目前 ${isMgr()?range(p.pay):fmt(p.pay)+' 元'}</span><span>部門平均 ${isMgr()?range(avg):fmt(avg)+' 元'}</span></div></div>`}).join('')}</div>`:'<p class="sub">目前沒有</p>','<span class="sub">最近一次績效 A 以上，且月薪低於部門平均 5% 以上</span>')}</div>`;
+          <div class="up-v"><span>目前 ${isMgr()?range(p.pay):fmt(p.pay)+' 元'}</span><span>部門平均 ${isMgr()?range(avg):fmt(avg)+' 元'}</span></div></div>`}).join('')}</div>`:'<p class="sub">目前沒有</p>')}</div>`;
   },
 
   /* ===== 員工本人 ===== */
@@ -623,7 +653,7 @@ const PAGES={
     const g2=g.slice(0,2);
     const addBtn=t=>S.myList.includes(t)?`<span class="badge b-ok">已加入</span>`:`<button class="btn btn-line btn-sm" data-add="${t}">加入學習清單</button>`;
     return `<div class="hello">${p.name}您好，這是您的人才畫像</div>
-    <p class="sub" style="font-size:14px;margin:4px 0 16px">看見自己的強項，並了解往目標職缺還需要準備什麼。</p>
+    <p class="sub" style="font-size:14px;margin:4px 0 16px">看見自己的強項，了解往目標職缺還要準備什麼。</p>
     <div class="grid g2">
       ${card('我的能力（PR）',['assess'],`<div class="bars">${DIMS.map((d,i)=>`<div class="bar"><span>${d}</span><span class="track"><span class="fill" data-w="${p.radar[i]}"></span></span><span class="v">PR ${p.radar[i]}</span></div>`).join('')}</div><p class="sub" style="margin-top:8px">您的強項：${strong.join('、')}</p>`)}
       ${card('我的樣貌',['assess','org','perf','train'],`<div class="cond"><div><b>目前職位</b><span>${p.dept}｜${p.title}｜年資 ${p.years} 年</span></div><div><b>專業技能</b><span>${(PERSON_SKILLS[p.id]||[]).join('、')}</span></div><div><b>工作動機</b><span>${p.motive}</span></div><div><b>近 3 年績效</b><span>${p.perf.join('／')}</span></div><div><b>今年學習</b><span>${p.hours} 小時，已完成「同理溝通與回饋技巧」</span></div></div>`)}
@@ -643,9 +673,9 @@ const PAGES={
     const p=byId(ME);
     const list=JOBS.map(j=>({j,f:fit(p,j),g:gaps(p,j)})).sort((a,b)=>b.f-a.f);
     return head('探索職缺','探索職缺','看看公司內部的關鍵職缺，以及您目前的適配度。')+
-    card(`內部關鍵職缺（${list.length} 個）`,['assess','org'],`<div class="tbl"><table class="t"><thead><tr><th>職缺</th><th>部門</th><th>我的適配度</th><th>我的落差</th><th></th></tr></thead><tbody>
+    card(`內部關鍵職缺（${list.length} 個）`,['assess','org'],`<div class="tbl"><table class="t"><thead><tr><th>職缺</th><th>部門</th><th><span style="display:inline-flex;align-items:center;gap:4px">我的適配度${tip('適配度只看能力面向，實際任用仍需主管與人資評估。'+FIT_TIP)}</span></th><th>我的落差</th><th></th></tr></thead><tbody>
       ${list.map(x=>`<tr><td><b>${x.j.name}</b></td><td>${x.j.dept}</td><td>${fitCell(x.f)}</td><td>${gapChips(p,x.j,x.g)}</td><td><a class="btn btn-line btn-sm" href="#me--${x.j.id}">設為目標</a></td></tr>`).join('')}
-    </tbody></table></div><p class="sub" style="margin-top:8px">適配度只看能力面向，實際任用仍需主管與人資評估。</p>`);
+    </tbody></table></div>`);
   }
 };
 function setRole(r,silent){
