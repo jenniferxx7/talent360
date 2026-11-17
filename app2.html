@@ -166,7 +166,7 @@ select:disabled{background:#f3f3f3;color:var(--c-text-sub)}
 .jc .cs.gp i.ok{background:var(--c-ok-light);color:var(--c-ok)}
 .ccard .jc{margin:4px 0 8px;padding-top:12px;border-top:1px solid var(--c-border)}
 .ccard>.btn{margin-top:auto!important}
-.ccard .jc>div>b{width:72px}
+.ccard .jc>div>b,.jc.w72>div>b{width:72px}
 .sigs{display:flex;gap:6px;flex-wrap:wrap}
 .sigs span{font-size:13px;line-height:1.4;padding:2px 8px;border-radius:4px;background:var(--c-bg);color:var(--c-text)}
 .watch .badge,.watch .btn{flex:none}
@@ -656,7 +656,7 @@ const PAGES={
     <p class="sub" style="font-size:14px;margin:4px 0 16px">看見自己的強項，了解往目標職缺還要準備什麼。</p>
     <div class="grid g2">
       ${card('我的能力（PR）',['assess'],`<div class="bars">${DIMS.map((d,i)=>`<div class="bar"><span>${d}</span><span class="track"><span class="fill" data-w="${p.radar[i]}"></span></span><span class="v">PR ${p.radar[i]}</span></div>`).join('')}</div><p class="sub" style="margin-top:8px">您的強項：${strong.join('、')}</p>`)}
-      ${card('我的樣貌',['assess','org','perf','train'],`<div class="cond"><div><b>目前職位</b><span>${p.dept}｜${p.title}｜年資 ${p.years} 年</span></div><div><b>專業技能</b><span>${(PERSON_SKILLS[p.id]||[]).join('、')}</span></div><div><b>工作動機</b><span>${p.motive}</span></div><div><b>近 3 年績效</b><span>${p.perf.join('／')}</span></div><div><b>今年學習</b><span>${p.hours} 小時，已完成「同理溝通與回饋技巧」</span></div></div>`)}
+      ${card('我的樣貌',['assess','org','perf','train'],`<div class="jc w72"><div><b>目前職位</b><span class="cs"><i>${p.dept}</i><i>${p.title}</i><i>年資 ${p.years} 年</i></span></div><div><b>關鍵能力</b><span class="cs ab">${DIMS.map((d,i)=>[d,p.radar[i]]).sort((a,b)=>b[1]-a[1]).slice(0,3).map(x=>`<i>${x[0]} <em>PR${x[1]}</em></i>`).join('')}</span></div><div><b>專業技能</b><span class="cs skl">${(PERSON_SKILLS[p.id]||[]).map(s=>`<i>${s}</i>`).join('')}</span></div><div><b>工作動機</b><span class="cs"><i>${p.motive}</i></span></div><div><b>近 3 年績效</b><span class="cs">${p.perf.map(v=>`<i>${v}</i>`).join('')}</span></div><div><b>今年學習</b><span class="cs"><i>${p.hours} 小時</i><i>已完成「同理溝通與回饋技巧」</i></span></div></div>`)}
     </div>
     <div class="filters mt">我的目標職缺：<select id="meJ">${JOBS.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select><a href="#explore">看其他職缺</a></div>
     <div class="card"><div class="route"><div class="node"><span class="sub">目前</span><b>${p.title}</b><span class="sub">${p.dept}</span></div><span class="arrow">→</span><div class="node"><span class="sub">目標</span><b>${j.name}</b><span class="sub">${j.dept}</span></div><div style="margin-left:auto;text-align:right"><span class="sub" style="display:inline-flex;align-items:center;gap:4px">目前適配度${tip(FIT_TIP)}</span><div class="fitnum">${f}%</div></div></div></div>
