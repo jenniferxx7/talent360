@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Talent One 人才360畫像</title>
+<title>Talent One 人才360畫像</title>
 <style>
 /* ===== 配色：104 HA 設計公版（react-ha-v2 palette / colors / typography） ===== */
 :root{
@@ -121,6 +121,39 @@ h3{font-size:20px;color:var(--c-heading)}
 .rs-uses{display:flex;flex-direction:column;gap:6px;border-top:1px solid #c9e9eb;padding-top:12px}
 .rs-uses div{display:flex;gap:10px;align-items:center;background:#fff;border-radius:6px;padding:6px 10px;font-size:13px;line-height:1.45}
 .rs-uses i{flex:none;width:26px;height:26px;border-radius:50%;background:var(--gc);color:#fff;font-style:normal;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center}
+.pf{display:grid;grid-template-columns:1fr 84px 1.15fr;gap:12px;align-items:stretch;margin-top:28px}
+.pf-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:14px}
+.pf-cap{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--c-primary-dark)}
+.pf-who{display:flex;align-items:center;gap:12px}
+.pf-av{width:40px;height:40px;border-radius:50%;background:var(--c-primary-light);color:var(--c-primary);display:flex;align-items:center;justify-content:center;font-weight:900}
+.pf-who b{display:block;font-size:17px;color:var(--c-heading)}
+.pf-who small{font-size:13px;color:var(--c-text-sub)}
+.pf-rows{display:flex;flex-direction:column;gap:10px}
+.pf-rows>div{display:flex;align-items:flex-start;gap:12px}
+.pf-rows b{flex:none;width:54px;display:inline-flex;align-items:center;gap:6px;height:24px;font-size:13px;font-weight:400;color:var(--c-text-sub)}
+.pf-rows b .tip:hover::after,.pf-rows b .tip:focus::after{left:-6px;transform:none}
+.pf-rows span{display:flex;flex-wrap:wrap;gap:6px}
+.pf-rows i{font-style:normal;font-size:13px;line-height:1.4;padding:2px 8px;border-radius:4px;background:var(--c-bg);color:var(--c-text)}
+.pf-rows i.hi{background:var(--c-primary-light);color:var(--c-primary-dark);font-weight:700}
+.pf-rows i.sk{background:var(--c-accent-light);color:var(--c-accent)}
+.pf-sum{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:12px;border-top:1px solid var(--c-border);font-size:13px;color:var(--c-text-sub)}
+.pf-sum span{background:var(--c-primary-light);border-radius:4px;padding:4px 10px}
+.pf-sum b{color:var(--c-primary-dark)}
+.pf-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center}
+.pf-arrow span{width:44px;height:44px;border-radius:50%;background:var(--c-primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900}
+.pf-arrow small{font-size:12px;color:var(--c-text-sub);line-height:1.4}
+.pf-grid{display:grid;grid-template-columns:52px repeat(3,1fr);gap:6px}
+.pf-grid .ax{display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--c-text-sub);text-align:center}
+.pf-grid .ax.b{padding-top:2px}
+.pf-grid .c{background:var(--c-bg);border:1px solid transparent;border-radius:6px;padding:8px 10px;font-size:13px;font-weight:700;color:var(--c-heading);display:flex;flex-direction:column;gap:4px;min-height:64px}
+.pf-grid .c span{font-size:12px;font-weight:400;color:var(--c-text-sub)}
+.pf-grid .c em{font-style:normal;font-weight:700;color:var(--c-primary-dark);background:#fff;border-radius:4px;padding:1px 6px}
+.pf-grid .c.star{background:var(--c-primary-light);border-color:var(--c-primary)}
+.pf-grid .c.core{background:var(--c-accent-light)}
+.pf-grid .c.risk{background:#ffe9ec}
+.pf-note{font-size:14px;color:var(--c-text);background:var(--c-primary-light);border-radius:6px;padding:10px 14px;margin:0}
+.pf-note b{color:var(--c-primary-dark)}
+@media (max-width:900px){.pf{grid-template-columns:1fr}.pf-arrow{flex-direction:row}.pf-arrow span{transform:rotate(90deg)}}
 @media (max-width:900px){.cmp{grid-template-columns:1fr}.cmp-rs{border-left:none;border-top:1px solid var(--c-border);border-radius:0 0 var(--radius) var(--radius)}}
 @media (max-width:560px){.cmp-tb{padding:14px 10px;overflow-x:auto}.cmp td,.cmp th{padding:8px 6px}}
 @media (max-width:760px){.r-body,.r-uses{grid-template-columns:1fr}}
@@ -279,6 +312,7 @@ h3{font-size:20px;color:var(--c-heading)}
     <div class="logo">Talent One 人才360畫像</div>
     <nav class="nav">
       <a href="#what">什麼是人才畫像</a>
+      <a href="#compare">人才比對</a>
       <a href="#goals">應用情境</a>
       <a href="#build">畫像怎麼組成</a>
       <a href="#unlock">完整畫像</a>
@@ -290,8 +324,8 @@ h3{font-size:20px;color:var(--c-heading)}
 <section class="hero">
   <div class="wrap">
     <p class="eyebrow" style="color:#c5f3f5">TALENT ONE｜人才360畫像</p>
-    <h1>讓每個職缺找到對的人，<br>讓每位員工看見下一步</h1>
-    <p class="lead">人才畫像是企業對人才的 Persona：先描繪「這個職缺需要什麼樣的人」，再對照「這位員工現在是什麼樣子」，用在選才、用才、育才、留才的每個決策。</p>
+    <h1>掌握人才輪廓，<br>讓企業用對人、員工看見下一步</h1>
+    <p class="lead">人才畫像如同每位員工的 Persona：盤點員工的能力、技能、經歷與表現，掌握員工的人才輪廓，作為選才、用才、育才、留才的決策依據；再對照職缺畫像，精準找出最適合的人選。</p>
     <div class="btns">
       <a class="btn btn-white" href="#what">了解人才畫像 ↓</a>
       <a class="btn btn-line" href="app2.html">體驗人才畫像網站</a>
@@ -302,15 +336,58 @@ h3{font-size:20px;color:var(--c-heading)}
 <section id="what">
   <div class="wrap">
     <p class="eyebrow">什麼是人才畫像</p>
-    <h2>員工畫像 × 職缺畫像，精準比對人才適配度</h2>
-    <p class="lead" style="max-width:none">以職能、技能、動機、經歷、表現、學習六個維度，分別描述員工現況與職缺要求；兩者比對得出適配度與能力落差，作為選、用、育、留決策的依據。</p>
+    <h2>描繪員工的人才輪廓，掌握人才布局</h2>
+    <p class="lead" style="max-width:none">以職能、技能、動機、經歷、表現、學習六個維度，描繪員工的畫像輪廓；再依績效與綜合能力盤點分類，掌握員工屬於哪一種人才。</p>
+    <div class="pf">
+      <div class="pf-card">
+        <div class="pf-cap">① 人才畫像輪廓</div>
+        <div class="pf-who"><span class="pf-av">陳</span><div><b>陳柏翰</b><small>產品研發部｜資深工程師</small></div></div>
+        <div class="pf-rows">
+          <div><b><span class="tip" tabindex="0" data-tip="資料來源：測評中心。擅長什麼、哪裡需要加強">!</span>職能</b><span><i class="hi">問題分析 PR95</i><i>領導能力 PR70</i><i>溝通協作 PR55</i></span></div>
+          <div><b><span class="tip" tabindex="0" data-tip="資料來源：企業大師。具備哪些專業技能">!</span>技能</b><span><i class="sk">系統架構設計</i><i class="sk">程式碼審查</i></span></div>
+          <div><b><span class="tip" tabindex="0" data-tip="資料來源：測評中心。什麼事情能驅動他">!</span>動機</b><span><i>成就動機高，追求精益求精</i></span></div>
+          <div><b><span class="tip" tabindex="0" data-tip="資料來源：企業大師。做過哪些職位、年資多久">!</span>經歷</b><span><i>資深工程師 6 年</i><i>帶過 4 人專案</i></span></div>
+          <div><b><span class="tip" tabindex="0" data-tip="資料來源：績效管理。歷年績效與目標達成">!</span>表現</b><span><i>A</i><i>A</i><i>A+</i></span></div>
+          <div><b><span class="tip" tabindex="0" data-tip="資料來源：企業學習平台。上過哪些課、學習是否持續">!</span>學習</b><span><i>已完成「同理溝通與回饋技巧」</i></span></div>
+        </div>
+        <div class="pf-sum"><span>綜合能力 <b>86 分（高）</b></span><span>最近績效 <b>A+（高）</b></span></div>
+      </div>
+      <div class="pf-arrow"><span>→</span><small>依績效 × 綜合能力分類</small></div>
+      <div class="pf-card">
+        <div class="pf-cap">② 人才分類<span class="tip" tabindex="0" data-tip="橫軸：最近一次績效，A+ 為高、A 為中、B+ 以下為低。縱軸：綜合能力＝職能 50%＋技能 30%＋學習 20%，80 分以上為高、65–79 為中、65 以下為低。">!</span></div>
+        <div class="pf-grid">
+          <div class="ax">能力高</div>
+          <div class="c">待激發型<span>許文傑</span></div>
+          <div class="c">潛力型<span>王思妤、林雅婷</span></div>
+          <div class="c star">明星型<span><em>陳柏翰</em></span></div>
+          <div class="ax">能力中</div>
+          <div class="c">待觀察型<span>黃冠宇</span></div>
+          <div class="c">穩定型<span>鄭婉如</span></div>
+          <div class="c">戰力型<span>—</span></div>
+          <div class="ax">能力低</div>
+          <div class="c">待培育型<span>李宜蓁</span></div>
+          <div class="c">執行型<span>張家豪、周志明、吳佩珊</span></div>
+          <div class="c">實幹型<span>—</span></div>
+          <div></div><div class="ax b">績效低</div><div class="ax b">績效中</div><div class="ax b">績效高</div>
+        </div>
+        <p class="pf-note">陳柏翰綜合能力與績效都高，屬於<b>明星型</b>人才，可優先列入接班與關鍵職缺人選。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare" style="padding-top:0">
+  <div class="wrap">
+    <p class="eyebrow">人才比對</p>
+    <h2>人才畫像 × 職缺畫像，精準比對人才適配度</h2>
+    <p class="lead" style="max-width:none">職缺畫像以相同六個維度，定義職缺需要的人才條件；與人才畫像逐項比對，即可看出適配度與能力落差，作為選、用、育、留的決策依據。</p>
     <div class="cmp">
       <div class="cmp-tb">
         <div class="cmp-cap">範例比對<span class="sub">陳柏翰（資深工程師）× 技術主管職缺</span></div>
         <table>
           <thead><tr>
             <th>面向</th>
-            <th><span class="pill emp">員工畫像</span><small>陳柏翰</small></th>
+            <th><span class="pill emp">人才畫像</span><small>陳柏翰</small></th>
             <th><span class="pill job">職缺畫像<span class="tip" tabindex="0" data-tip="從目前擔任「技術主管」的高績效者歸納共同的能力、動機、經歷與學習特徵，作為建議條件，再由用人主管確認、調整。">!</span></span><small>技術主管</small></th>
             <th style="text-align:center">結果</th>
           </tr></thead>
@@ -355,7 +432,7 @@ h3{font-size:20px;color:var(--c-heading)}
 
       <div class="mx-r"><b>公司</b><small>經營層<br>人資</small></div>
       <div class="mx-c" style="--gc:#00afb8">建立關鍵職缺畫像，盤點內部接班人選</div>
-      <div class="mx-c" style="--gc:#1654b9">人才九宮格盤點，掌握明日之星分布</div>
+      <div class="mx-c" style="--gc:#1654b9">人才九宮格盤點，掌握明星型人才分布</div>
       <div class="mx-c" style="--gc:#509e1f">彙整共同能力落差，規劃年度培訓</div>
       <div class="mx-c" style="--gc:#ff7800">檢視各部門薪資與表現是否相稱</div>
 
@@ -409,7 +486,7 @@ h3{font-size:20px;color:var(--c-heading)}
       <div class="f-col f-dst">
         <div class="f-cap">產出</div>
         <div class="dst">
-          <div class="pp emp"><b>員工畫像</b><small>這個人是什麼樣子</small></div>
+          <div class="pp emp"><b>人才畫像</b><small>這個人是什麼樣子</small></div>
           <span class="x">×</span>
           <div class="pp job"><b>職缺畫像</b><small>這個職缺需要什麼樣的人</small></div>
           <div class="use"><i style="--gc:#00afb8">選</i><i style="--gc:#1654b9">用</i><i style="--gc:#509e1f">育</i><i style="--gc:#ff7800">留</i><span>決策應用</span></div>

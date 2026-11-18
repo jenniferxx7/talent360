@@ -547,14 +547,14 @@ const PAGES={
     const ppl=visP();
     const perfLv=p=>({'A+':'高','A':'中'}[p.perf[2]]||'低');
     const cell=(pot,pf)=>ppl.filter(p=>p.pot===pot&&perfLv(p)===pf);
-    const name={'高高':'明日之星','高中':'潛力股','高低':'待激發','中高':'核心骨幹','中中':'穩定貢獻','中低':'待觀察','低高':'績效突出','低中':'穩定執行','低低':'需改善'};
+    const name={'高高':'明星型','高中':'潛力型','高低':'待激發型','中高':'戰力型','中中':'穩定型','中低':'待觀察型','低高':'實幹型','低中':'執行型','低低':'待培育型'};
     const cls={'高高':'star','中高':'core','低低':'risk'};
     const mean={'高高':'績效與綜合能力都高，優先列入接班與關鍵職缺','高中':'能力高、績效中等，給予挑戰任務加速發揮','高低':'能力高但績效未發揮，了解原因並調整工作安排','中高':'績效好、能力中等，是穩定產出的中堅，可再補強能力承擔更大責任','中中':'表現穩定，持續培養','中低':'績效偏低，需與主管訂定改善目標','低高':'績效好但能力指標偏低，建議補強職能、技能或學習','低中':'穩定執行既有工作，可安排學習計畫','低低':'績效與能力皆低，需改善計畫'};
     const pfDef={'高':'A+','中':'A','低':'B+ 以下'};
     let h='';['高','中','低'].forEach(pot=>{h+=`<div class="ax"><b>能力${pot}</b><small>（${{'高':'80+','中':'65–79','低':'<65'}[pot]}）</small></div>`;['低','中','高'].forEach(pf=>{const k=pot+pf;h+=`<div class="cell ${cls[k]||''}"><div class="tt"><span style="display:inline-flex;align-items:center;gap:4px">${name[k]}${tip(mean[k])}</span></div>${cell(pot,pf).map(p=>`<a href="#path--${p.id}" title="最近績效 ${p.perf[2]}（${pf}）× 綜合能力 ${p.ab.s} 分（${p.pot}）">${p.name}</a>`).join('')||'<span class="sub">—</span>'}</div>`})});
     h+=`<div></div>${['低','中','高'].map(pf=>`<div class="ax"><b>績效${pf}</b><small>（${pfDef[pf]}）</small></div>`).join('')}`;
     const ex=byId('p1');
-    return head('用才 › 人才盤點','人才盤點','依績效與綜合能力分群，找出明日之星與需關注的人才。')+
+    return head('用才 › 人才盤點','人才盤點','依績效與綜合能力分群，找出明星型與需關注的人才。')+
       card(`人才九宮格（${isMgr()?MY_DEPT:'全公司範例'}）`,['perf','assess','org','train'],`<div class="nine-def"><div><b>橫軸｜績效</b>最近一次考核結果${tip('A+ 為高、A 為中、B+ 以下為低（績效管理）')}</div><div><b>縱軸｜綜合能力</b>職能 50%＋技能 30%＋學習 20%${tip(ABIL_TIP)}</div></div>
         <div class="nine">${h}</div>`,`<span class="sub hint">滑過姓名看分類依據，點選看發展路徑${tip(`例：${ex.name}職能 PR 平均 ${ex.ab.c}、技能 ${ex.ab.k} 分、學習 ${ex.ab.l} 分，綜合能力 ${ex.ab.s} 分（${ex.pot}）；最近一次績效 ${ex.perf[2]}。`)}</span>`)+
       `<div class="mt" id="sec-pot">`+card(`綜合能力高的人才（${ppl.filter(p=>p.pot==='高').length} 位）`,['assess','org','train','perf'],`<div class="tbl"><table class="t nw"><thead><tr><th>姓名</th><th>部門｜職位</th><th>綜合能力</th><th>職能 PR 平均</th><th>技能</th><th>近 3 年績效</th><th></th></tr></thead><tbody>
