@@ -220,7 +220,8 @@ select{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;backg
 .rtab.more{border-style:dashed;background:#fafafa}
 .chips-r{display:flex;flex-wrap:wrap;gap:8px}
 .rchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--c-border);background:#fff;border-radius:999px;padding:3px 11px;font-size:13px;font-weight:400;line-height:1.5;color:var(--c-text);cursor:pointer;transition:border-color .2s,background .2s}
-.chips-r{gap:6px}
+.chips-r{gap:8px}
+.rchip{font-size:14px;padding:5px 14px;border-color:#c9ced6}
 .rchip.on{font-weight:700}
 .dot{width:8px!important;height:8px!important}
 .rchip:hover{border-color:var(--c-primary);color:var(--c-primary-dark)}
@@ -351,6 +352,21 @@ a.num:hover{color:var(--c-primary)}
 .iss-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .iss-h h3{font-size:16px;color:var(--c-heading)}
 .iss-h .sub{margin-right:auto}
+.today{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);margin-bottom:16px}
+.today-h{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.today-h b{font-size:15px;color:var(--c-heading)}
+.today-all{margin-left:auto;font-size:13px;font-weight:700;text-decoration:none}
+.today-g{display:grid;grid-template-columns:1fr 1fr;gap:0 24px}
+.today-c{display:flex;align-items:flex-start;gap:10px;padding:6px 0;text-decoration:none;color:var(--c-text);min-width:0}
+.today-c+.today-c{border-left:1px solid #eeeeee;padding-left:24px;margin-left:-24px}
+.today-c:hover b{color:var(--c-primary)}
+.today-n{flex:none;width:20px;height:20px;margin-top:1px;border-radius:50%;background:var(--c-primary);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center}
+.today-b{display:flex;flex-direction:column;gap:2px;min-width:0}
+.today-b b{font-size:14px;color:var(--c-heading);transition:color .2s}
+.today-d{font-size:13px;color:var(--c-text-sub);line-height:1.5}
+.today-d em{font-style:normal;font-weight:700;color:var(--c-warn)}
+.today-go{font-size:13px;font-weight:700;color:var(--c-primary)}
+@media (max-width:860px){.today-g{grid-template-columns:1fr}.today-c+.today-c{border-left:0;border-top:1px solid #eeeeee;padding-left:0;margin-left:0}}
 .pcnt{border:0;cursor:pointer;font-family:inherit;font-size:13px}
 .pcnt:hover{filter:brightness(.95);text-decoration:underline}
 .lnk{border:0;background:none;padding:0;font:inherit;font-size:14px;font-weight:700;color:var(--c-accent);cursor:pointer}
@@ -801,6 +817,16 @@ function allDetail(rs,k){
   return `<table class="t xt"><thead><tr><th>職務</th><th>優質企業平均</th><th>本公司</th><th>比較結果</th><th></th></tr></thead><tbody>${rs.map(x=>{const s=stat(x,k);const v={skill:a=>`${Math.round(a.skill.reduce((t,y)=>t+y[2],0)/a.skill.length)}%`,pay:a=>money(a.pay[1]),comp:a=>`PR ${Math.round(a.comp.reduce((t,y)=>t+y[2],0)/a.comp.length)}`,exp:a=>`${a.exp[1]} 年`,ex:a=>`${Math.round(a.ex.reduce((t,y)=>t+y[2],0)/a.ex.length)} 分`,learn:a=>`${a.learn[1]} 小時`}[k],mv={skill:a=>`${Math.round(a.skill.reduce((t,y)=>t+y[1],0)/a.skill.length)}%`,pay:a=>money(mPay(a)),comp:a=>`PR ${Math.round(a.comp.reduce((t,y)=>t+y[1],0)/a.comp.length)}`,exp:a=>`${a.exp[0]} 年`,ex:a=>`${Math.round(a.ex.reduce((t,y)=>t+y[1],0)/a.ex.length)} 分`,learn:a=>`${a.learn[0]} 小時`}[k];
     return `<tr><td><b>${x.name}</b></td><td class="mkv">${mv(x)}</td><td><b>${v(x)}</b></td><td>${stTag(s.lv,s.txt)}</td><td class="act"><button class="btn btn-line btn-sm" data-hrole="${x.id}" data-xopen="${k}">看此職務</button></td></tr>`}).join('')}</tbody></table>`;
 }
+/* 首頁「今日優先改善」：取改善重點前 1–2 項；HR 盡量挑不同部門，主管只會有自己部門 */
+function todayBox(is){
+  if(!is.length) return '';
+  /* 第 2 項挑不同問題類型（面向）；HR 再要求不同部門 */
+  const f=is[0],nx=c=>is.find(i=>i!==f&&c(i));
+  const o=isMgr()?(nx(i=>i.k!==f.k)||is[1]):(nx(i=>i.r.dept!==f.r.dept&&i.k!==f.k)||nx(i=>i.k!==f.k)||nx(i=>i.r.dept!==f.r.dept)||is[1]);
+  const pick=[f]; if(o) pick.push(o);
+  return `<div class="today mt"><div class="today-h"><b>優先改善重點</b>${tip(isMgr()?`${MY_DEPT}落後人數最多的項目，兩項為不同問題類型。`:'全公司落後人數最多的項目，第 2 項優先列出不同部門、不同問題類型。')}<a href="#issues" class="today-all">看全部 ${is.length} 項 →</a></div>
+    <div class="today-g">${pick.map((i,n)=>`<a class="today-c" href="#issues--${i.r.id}--${i.k}"><span class="today-n">${n+1}</span><span class="today-b"><b>${i.r.name}｜${i.short}</b><span class="today-d">${i.r.n} 人中有 <em>${i.lagN} 人</em>低於優質企業（${stat(i.r,i.k).txt}）。建議先${i.sol[0][0].split('，')[0].replace(/^用/,'透過')}。</span><span class="today-go">看改善建議 →</span></span></a>`).join('')}</div></div>`;
+}
 function issueCard(i){
   const d=dimOf(i.k),pn=lagPeople(i.r,i.k).length,op=S.iopen&&S.iopen[i.id];
   return `<div class="iss" id="go-${i.r.id}-${i.k}"><div class="iss-h"><span class="iss-r">${i.r.name}</span><span class="iss-d">${d.n}</span><h3>${i.short}</h3><span class="sub">${i.r.dept}</span>${pn?`<button class="badge b-warn pcnt" data-ipeople="${i.id}" aria-expanded="${!!op}" title="${i.r.name}共 ${i.r.n} 人，其中 ${pn} 人在這個面向低於優質企業平均。點選${op?'收合':'查看'}人員清單">${pn} / ${i.r.n} 人落後 ${op?'▴':'▾'}</button>`:`<span class="badge b-line">0 / ${i.r.n} 人落後</span>`}</div>
@@ -836,6 +862,7 @@ const PAGES={
     return `<div class="hello" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">${who}您好，以下為公司人才市場定位分析${scopeTag()}</div>
     <p class="sub" style="font-size:14px;margin:4px 0 16px">以同產業優質企業為標竿，比較公司各個職務人才的技能、薪資、職能等差距，掌握人才管理的關鍵議題與改善方向。<br><span class="sub">本次比較涵蓋 <b>${rs.length} 個職務、共 ${rs.reduce((s,r)=>s+r.n,0)} 人</b>${isMgr()?'':`（全公司 ${DEPTS.reduce((s,d)=>s+d.n,0)} 人，其餘職務尚無足夠的同業比較資料）`}${tip('僅納入 104 有足夠同產業優質企業樣本的職務；樣本不足的職務暫不比較。')}</span></p>
     ${planBar()}
+    ${todayBox(is)}
     <div class="grid home2">
     ${(()=>{if(!rs.find(x=>x.id===S.hrole))S.hrole=rs[0].id;const ALL=null,r=brole(S.hrole),isAll=r===ALL,lnk=k=>isAll?'#issues':`#bench--${r.id}--${k}`;
       const avg=a=>Math.round(a.reduce((s,v)=>s+v,0)/a.length);
@@ -1098,6 +1125,10 @@ whoBtn.onclick=e=>{e.stopPropagation();whoMenu.hidden=!whoMenu.hidden;whoBtn.set
 document.addEventListener('click',e=>{if(!e.target.closest('.who')){whoMenu.hidden=true;whoBtn.setAttribute('aria-expanded','false')}});
 whoMenu.querySelectorAll('[data-role]').forEach(b=>b.onclick=()=>{whoMenu.hidden=true;setRole(b.dataset.role);if(location.hash==='#home')render();else location.hash='#home'});
 whoMenu.querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>{whoMenu.hidden=true;setPlan(b.dataset.plan);render()});
+/* 「為什麼需要人才畫像？」：完整版（檔名 app3.html）連到同資料夾說明頁；
+   單獨上傳的 C 版（檔名改成 index.html）沒有說明頁，直接隱藏這個連結 */
+const C_ALONE=!/app3\.html$/i.test(location.pathname)&&location.protocol!=='data:';
+if(C_ALONE) document.querySelector('a.why').hidden=true;
 document.querySelector('a.why').addEventListener('click',e=>{e.preventDefault();location.href=new URL('./',location.href).href;});
 window.addEventListener('hashchange',render);
 render();
