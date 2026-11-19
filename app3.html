@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>人才360畫像（市場對標版）｜Talent One</title>
+<title>人才360畫像（C 版：市場比較）｜Talent One</title>
 <style>
 /* ===== 配色：104 HA 大B 設計公版（react-ha-v2 palette / colors / typography） ===== */
 :root{
@@ -64,7 +64,9 @@ button{cursor:pointer}
 main{padding:24px 28px 48px;max-width:1440px;margin:0 auto}
 .crumb{font-size:13px;color:var(--c-text-sub);margin-bottom:4px}
 .ph{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
-.ph h1{font-size:26px;color:var(--c-heading);font-weight:900}
+.ph h1{font-size:26px;color:var(--c-heading);font-weight:900;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.b-brand{background:var(--c-primary-light);color:var(--c-primary-dark)}
+.scope{vertical-align:middle}
 .ph p{color:var(--c-text-sub);font-size:14px}
 .hello{font-size:22px;font-weight:900;color:var(--c-heading)}
 
@@ -121,7 +123,7 @@ main{padding:24px 28px 48px;max-width:1440px;margin:0 auto}
 .gd.w{background:var(--c-warn-light);color:var(--c-warn)}
 
 table.t{width:100%;border-collapse:collapse;font-size:14px}
-table.t th{text-align:left;background:#f3f3f3;color:var(--c-text-sub);font-weight:700;padding:10px;border-bottom:1px solid var(--c-border);white-space:nowrap}
+table.t th{text-align:left;background:#f3f3f3;color:var(--c-text-sub);font-weight:700;font-size:13px;line-height:1.4;padding:6px 10px;border-bottom:1px solid var(--c-border);white-space:nowrap}
 table.t td{padding:10px;border-bottom:1px solid #eeeeee;vertical-align:middle}
 .t.nw th,.t.nw td{white-space:nowrap}
 .tbl{overflow-x:auto}
@@ -136,7 +138,14 @@ table.t td{padding:10px;border-bottom:1px solid #eeeeee;vertical-align:middle}
 .btn{display:inline-flex;align-items:center;gap:6px;border:1px solid transparent;border-radius:4px;padding:8px 14px;font-weight:700;text-decoration:none;font-size:14px;white-space:nowrap;cursor:pointer}
 .btn-blue{background:var(--c-primary);color:#fff}
 .btn-line{background:#fff;color:var(--c-primary);border-color:var(--c-primary)}
-.btn-buy{background:var(--c-accent);color:#fff}
+.btn-buy{background:var(--c-primary);color:#fff}
+.btn-buy:hover{background:#009aa3}
+.btn-gray{background:#fff;color:var(--c-text);border-color:var(--c-border);font-weight:400}
+.btn-gray:hover{border-color:var(--c-primary);color:var(--c-primary)}
+.btn-line:hover{background:var(--c-primary-light)}
+td.act{text-align:right;white-space:nowrap}
+td.act .btn{width:126px;justify-content:center;padding-left:6px;padding-right:6px}
+.cmpt td{white-space:nowrap}.cmpt td:first-child{white-space:normal}
 .btn-sm{padding:4px 10px;font-size:13px}
 select{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;background:#fff}
 .filters{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
@@ -158,7 +167,7 @@ select{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;backg
 .jc .cs.gp i{background:var(--c-warn-light);color:#b35400}
 .jc .cs.gp i.ok{background:var(--c-ok-light);color:var(--c-ok)}
 
-/* 對標狀態 */
+/* 比較狀態 */
 .st{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;white-space:nowrap}
 .st-h{background:var(--c-danger-light);color:#c22c40}
 .st-m{background:var(--c-warn-light);color:#b35400}
@@ -179,18 +188,191 @@ select{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;backg
 .vs>div b{font-size:24px;font-weight:900;color:var(--c-heading);font-variant-numeric:tabular-nums}
 .vs>div.mk b{color:#8a929c}
 .vs .st{margin-left:auto}
+.vs>div.df{padding-left:20px;border-left:1px solid var(--c-line,#e4e4e4)}
+.vs>div.df b{font-size:20px}
+.vs>div.df.w b,.vs>div.df.w .pct{color:var(--c-warn,#ff7800)}
+.vs>div.df.ok b,.vs>div.df.ok .pct{color:#509e1f}
+.vs .pct{font-size:14px;font-weight:700}
 .rel{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid #eeeeee;font-size:13px}
 .rel a{font-weight:700;text-decoration:none}
+.cmpt td.mkv{color:#5f6770}
+.cmpt tr.opened td{background:var(--c-primary-light);border-bottom-color:transparent}
+.cmpt .btn.on{background:var(--c-primary);color:#fff}
+.xrow>td{padding:0 10px 14px;background:var(--c-primary-light);white-space:normal}
+.xp{background:#fff;border:1px solid #cdeff1;border-radius:var(--radius);padding:14px 16px}
+.xp-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.xp-h b{font-size:14px;color:var(--c-heading)}
+.xp .vs>div b{font-size:22px}
+.xt th{background:#fafafa}
+.xrow.flash .xp{box-shadow:0 0 0 2px var(--c-primary);transition:box-shadow .3s}
+.cmpt .na{color:#a9a9a9;font-size:14px}
+.home2{grid-template-columns:1fr;align-items:start}
+.rtabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:4px 0 0;padding-bottom:12px;border-bottom:2px solid var(--c-primary)}
+.rtab{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;border:1px solid var(--c-border);background:#fff;border-radius:6px;padding:10px 12px;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
+.rtab:hover{border-color:var(--c-primary)}
+.rtab b{font-size:15px;color:var(--c-heading)}
+.rtab small{font-size:12px;color:var(--c-text-sub)}
+.rtab .rc{margin-top:4px;font-size:12px;font-weight:700;border-radius:4px;padding:1px 8px}
+.rtab .rc.h{background:var(--c-danger-light);color:#c22c40}.rtab .rc.m{background:var(--c-warn-light);color:#b35400}.rtab .rc.n{background:var(--c-ok-light);color:var(--c-ok)}
+.rtab.on{border-color:var(--c-primary);background:var(--c-primary-light);box-shadow:0 0 0 1px var(--c-primary)}
+.rtab.on::after{content:"";position:absolute;left:50%;bottom:-15px;transform:translateX(-50%);border:7px solid transparent;border-top-color:var(--c-primary)}
+.rtabs+.tbl,.morep+.tbl{margin-top:12px}
+.rtab.more{border-style:dashed;background:#fafafa}
+.chips-r{display:flex;flex-wrap:wrap;gap:8px}
+.rchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--c-border);background:#fff;border-radius:999px;padding:3px 11px;font-size:13px;font-weight:400;line-height:1.5;color:var(--c-text);cursor:pointer;transition:border-color .2s,background .2s}
+.chips-r{gap:6px}
+.rchip.on{font-weight:700}
+.dot{width:8px!important;height:8px!important}
+.rchip:hover{border-color:var(--c-primary);color:var(--c-primary-dark)}
+.rchip.on{background:var(--c-primary);border-color:var(--c-primary);color:#fff}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;flex:none}
+.dot.h{background:var(--c-danger)}.dot.m{background:#f5c000}.dot.g{background:#6cc24a}
+.rchip.on .dot{box-shadow:0 0 0 2px #fff}
+.dot-leg{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--c-text-sub);margin:10px 0 0;padding-bottom:12px;border-bottom:2px solid var(--c-primary)}
+.dot-leg span{display:inline-flex;align-items:center;gap:6px}
+.dot-leg+.tbl{margin-top:12px}
+.rsel{position:relative;display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-bottom:14px;border-bottom:2px solid var(--c-primary)}
+.rsel-l{font-size:14px;color:var(--c-text-sub)}
+.rsel-btn{display:flex;align-items:center;gap:12px;border:1px solid var(--c-primary);background:#fff;border-radius:6px;padding:9px 14px;min-width:420px;text-align:left;cursor:pointer;transition:box-shadow .2s}
+.rsel-btn:hover,.rsel-btn.open{box-shadow:0 0 0 2px var(--c-primary-light)}
+.rsel-btn b{font-size:17px;color:var(--c-heading)}
+.rsel-btn .caret{margin-left:auto;color:var(--c-primary);font-size:14px}
+.rsel-nav{display:inline-flex;align-items:center;gap:6px}
+.rsel-step{width:36px;height:36px;border:1px solid var(--c-border);border-radius:6px;background:#fff;font-size:20px;line-height:1;color:var(--c-text);cursor:pointer}
+.rsel-step:hover{border-color:var(--c-primary);color:var(--c-primary)}
+.morep.dd{position:absolute;top:calc(100% - 8px);left:0;width:min(640px,100%);z-index:25;margin-top:0;box-shadow:0 6px 18px rgba(41,41,41,.18)}
+.rsel+.tbl{margin-top:12px}
+@media (max-width:860px){.rsel-btn{min-width:0;width:100%;flex-wrap:wrap}}
+@media (max-width:860px){.rtabs{grid-template-columns:1fr 1fr!important}}
+.rtab.more.open{border-style:solid;border-color:var(--c-primary)}
+.morep{margin-top:12px;border:1px solid var(--c-border);border-radius:6px;padding:12px;background:#fff}
+.morep input[type=search]{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;min-width:200px}
+.morep .tbl{max-height:260px;overflow-y:auto}
+.morep tr.click{cursor:pointer}
+.morep tr.click:hover td{background:var(--c-primary-light)}
+.morep tr.cur td{background:var(--c-primary-light);font-weight:700}
+.card-h .hint.ind{gap:8px;font-size:14px;color:var(--c-text)}
+.card-h .hint.ind .tip:hover::after,.card-h .hint.ind .tip:focus::after{left:-6px;right:auto;transform:none;bottom:auto;top:calc(100% + 6px)}
+.cats{display:flex;flex-direction:column;gap:10px}
+.ptabs{display:flex;gap:4px;border-bottom:1px solid var(--c-border);flex-wrap:wrap}
+.ptabs button{border:0;background:none;padding:8px 14px 7px;font-size:15px;color:var(--c-text);border-bottom:3px solid transparent;margin-bottom:-1px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.ptabs button:hover{color:var(--c-primary)}
+.ptabs button.on{color:var(--c-primary);border-bottom-color:var(--c-primary);font-weight:700}
+.ptabs button span{font-size:12px;background:var(--c-bg);color:var(--c-text-sub);border-radius:999px;padding:0 7px}
+.ptabs button span.r{background:var(--c-danger-light);color:#c22c40}
+.ptabs button.on span{background:var(--c-primary-light);color:var(--c-primary-dark)}
+.ptabs button.lk{margin-left:auto;font-size:13px;color:var(--c-text-sub)}
+.ptabs button.lk:hover{color:var(--c-primary)}
+.ptabs .tip{margin-left:0}
+.sb-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.sbar{display:flex;gap:2px;height:10px;border-radius:5px;overflow:hidden;background:#eee;margin:10px 0 12px}
+.sbar i{display:block;height:100%}
+.dz{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+.dz-r{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.dz-sum{font-size:14px;color:var(--c-text);text-decoration:none}
+.dz-sum b{font-size:22px;font-weight:900;color:var(--c-heading)}
+.dz-sum:hover{color:var(--c-primary)}
+.donut{width:76px;height:76px;flex:none}
+.donut .dn{font-size:30px;font-weight:900;fill:var(--c-heading)}
+.donut .dl{font-size:11px;fill:var(--c-text-sub)}
+.dn-hi{font-size:13px;color:var(--c-text);text-decoration:none;background:var(--c-danger-light);border-radius:999px;padding:2px 12px}
+.dn-hi b{color:var(--c-danger)}
+.dn-hi:hover{box-shadow:0 0 0 1px var(--c-danger)}
+.glist{display:flex;flex-direction:column;border-top:1px solid #eeeeee}
+.grow{display:flex;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid #eeeeee;text-decoration:none;color:var(--c-text);font-size:14px}
+.grow:last-child{border-bottom:0}
+a.grow:hover{background:var(--c-primary-light)}
+.grow>i{flex:none;width:10px;height:10px;border-radius:3px;background:#c9ced6}
+.gr-n{flex:1;min-width:0}
+.gr-n b{display:inline-flex;align-items:center;gap:4px;font-weight:700;color:var(--c-heading)}
+.grow.off .gr-n b{color:#a9a9a9}
+.gr-c{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--c-text-sub)}
+.gr-c b{font-size:16px;color:var(--c-heading)}
+.gr-c em{font-style:normal;font-size:12px;font-weight:700;border-radius:4px;padding:1px 8px;background:var(--c-danger-light);color:#c22c40}
+.gcard{display:flex;flex-direction:column;gap:8px;border:1px solid var(--c-border);border-left:4px solid var(--gc);border-radius:var(--radius);padding:12px 14px;text-decoration:none;color:var(--c-text);background:#fff;transition:box-shadow .2s,border-color .2s}
+a.gcard:hover{box-shadow:0 2px 8px rgba(41,41,41,.12);border-color:var(--gc)}
+.gc-h{display:flex;align-items:center;gap:10px}
+.gc-ic{flex:none;width:32px;height:32px;border-radius:8px;background:var(--gc);color:#fff;font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center}
+.gc-t{flex:1;min-width:0;display:flex;flex-direction:column}
+.gc-t b{display:inline-flex;align-items:center;gap:4px;font-size:15px;color:var(--c-heading)}
+.gc-t small{font-size:12px;color:var(--c-text-sub)}
+.gc-n{text-align:right;line-height:1}
+.gc-n b{font-size:24px;font-weight:900;color:var(--c-heading)}
+.gc-n small{font-size:12px;color:var(--c-text-sub);margin-left:2px}
+.gc-bar{display:flex;height:8px;border-radius:4px;overflow:hidden;background:#eee;gap:2px}
+.gc-bar i{background:#ffab31}.gc-bar i.r{background:var(--c-danger)}
+.gc-leg{display:flex;gap:12px;font-size:12px;color:var(--c-text-sub)}
+.gc-leg span{display:inline-flex;align-items:center;gap:4px}
+.gc-leg i{width:8px;height:8px;border-radius:2px;background:#ffab31}.gc-leg i.r{background:var(--c-danger)}
+.gc-top{font-size:13px;background:var(--c-bg);border-radius:6px;padding:6px 10px;color:var(--c-heading)}
+.gc-top span{display:inline-block;font-size:11px;font-weight:700;color:var(--c-danger);margin-right:6px}
+.gc-ok{font-size:13px;color:var(--c-ok);background:var(--c-ok-light);border-radius:6px;padding:6px 10px}
+.gcard.off{border-style:dashed;border-left-style:solid;border-left-color:#c9ced6;background:#fafafa}
+.gcard.off .gc-ic{background:#c9ced6}
+.gcard.off .gc-t b{color:#8a929c}
+.gc-lock{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;color:var(--c-text-sub)}
+.cat{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 4px;border-bottom:1px solid #eeeeee;font-size:14px;color:var(--c-text);text-decoration:none}
+.cat:last-child{border-bottom:0}
+a.cat:hover{background:var(--c-primary-light)}
+.cat.off>span:first-child{color:#a9a9a9}
+.cat .cc{display:flex;gap:6px;flex:none}
+.cat .gn{display:flex;flex-direction:column;min-width:0}
+.cat .gn b{font-size:14px;color:var(--c-heading)}
+.cat.off .gn b{color:#a9a9a9}
+.cat .gn small{font-size:12px;color:var(--c-text-sub);line-height:1.4}
+.cat em{font-style:normal;font-size:12px;font-weight:700;border-radius:4px;padding:1px 8px;background:var(--c-warn-light);color:#b35400}
+.cat em.r{background:var(--c-danger-light);color:#c22c40}
+.cat em.ok{background:var(--c-ok-light);color:var(--c-ok)}
+.isum{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.isum a{display:flex;flex-direction:column;background:var(--c-bg);border:1px solid transparent;border-radius:6px;padding:10px 12px;text-decoration:none;color:var(--c-text);transition:border-color .2s}
+.isum a:hover{border-color:var(--c-primary)}
+.isum b{font-size:24px;font-weight:900;color:var(--c-heading);line-height:1.2}
+.isum a.r b{color:var(--c-danger)}
+.isum span{font-size:12px;color:var(--c-text-sub)}
+.isum span::after{content:" →";color:var(--c-primary)}
+.bench-sep{width:1px;height:20px;background:var(--c-border);margin:0 6px}
+@media (max-width:1100px){.home2{grid-template-columns:1fr}}
+.pick .pc{font-size:11px;font-weight:700;margin-left:6px;padding:0 6px;border-radius:999px;background:var(--c-warn-light);color:#b35400}
+.pick.on .pc{background:#fff;color:#b35400}
+.vl{display:inline-flex;align-items:center;gap:6px}
+a.num{color:var(--c-primary-dark);font-weight:700;text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px}
+a.num:hover{color:var(--c-primary)}
+.kpi.clk{cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.kpi.clk:hover,.kpi.clk:focus-visible{border-color:var(--c-primary);outline:none}
+.kpi.clk.on{border-color:var(--c-primary);box-shadow:0 0 0 1px var(--c-primary)}
+.kpi .go{font-size:12px;color:var(--c-primary);font-weight:700;margin-top:4px}
+.cmpt td b{color:var(--c-heading)}
 .mkt-only{font-size:13px;color:var(--c-text-sub);background:var(--c-bg);border-radius:6px;padding:8px 12px}
 
-/* 管理 Issue */
+/* 改善重點 */
 .iss{background:#fff;border:1px solid var(--c-border);border-left:4px solid var(--c-warn);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
 .iss.h{border-left-color:var(--c-danger)}
 .iss+.iss{margin-top:12px}
 .iss-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.iss-h h3{font-size:16px;color:var(--c-heading);margin-right:auto}
+.iss-h h3{font-size:16px;color:var(--c-heading)}
+.iss-h .sub{margin-right:auto}
+.pcnt{border:0;cursor:pointer;font-family:inherit;font-size:13px}
+.pcnt:hover{filter:brightness(.95);text-decoration:underline}
+.lnk{border:0;background:none;padding:0;font:inherit;font-size:14px;font-weight:700;color:var(--c-accent);cursor:pointer}
+.lnk:hover{text-decoration:underline}
+tr.hiperf td{background:#fff8f0}
+.wt .w{color:var(--c-danger);font-weight:700}
+.wt .gp{display:flex;flex-wrap:wrap;gap:4px}
+.wt .gp i{font-style:normal;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--c-danger-light);color:#b3263a;white-space:nowrap}
+.wt .gp i.mk{background:var(--c-bg);color:var(--c-text-sub)}
+.iss-r{font-size:16px;font-weight:700;color:#fff;background:var(--c-primary-dark);border-radius:4px;padding:1px 10px}
+.iss-d{font-size:13px;font-weight:700;color:var(--c-primary-dark);background:var(--c-primary-light);border-radius:4px;padding:2px 8px}
 .ev{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}
-.ev span{font-size:13px;line-height:1.4;padding:2px 8px;border-radius:4px;background:var(--c-bg)}
+.ev>span{font-size:13px;line-height:1.4;padding:2px 8px;border-radius:4px;background:var(--c-bg)}
+.ev{align-items:center;gap:6px}
+.ev .ev-cap{font-size:12px;color:var(--c-text-sub);background:none;padding:0;margin-right:2px}
+.ev .gv-row{display:inline-flex;align-items:baseline;gap:4px;background:#fff;border:1px solid var(--c-border);padding:1px 8px;white-space:nowrap}
+.gv-row b{font-weight:400;color:var(--c-text)}
+.gv-row .o{font-weight:700;color:var(--c-heading)}
+.gv-row .vs{display:none}
+.gv-row .m{font-size:12px;color:var(--c-text-sub)}
+.gv-row .m::before{content:"/ "}
+.gv-row em{font-style:normal;font-weight:700;color:var(--c-danger);margin-left:2px}
 .sol{background:#f8fafb;border-radius:6px;padding:10px 14px}
 .sol>b{display:block;font-size:13px;color:var(--c-primary-dark);margin-bottom:4px}
 .sol ol{list-style:none;counter-reset:s}
@@ -198,6 +380,8 @@ select{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;backg
 .sol li:first-child{border-top:0}
 .sol li::before{content:counter(s);flex:none;width:20px;height:20px;border-radius:50%;background:var(--c-primary);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
 .sol li span{flex:1}
+.sol li .btn{flex:none;width:168px;justify-content:center;padding-left:6px;padding-right:6px}
+td.act .btn+.btn{margin-left:6px}
 .iss-f{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;font-size:13px}
 .top-iss{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px dashed var(--c-border);font-size:14px}
 .top-iss:last-child{border-bottom:0}
@@ -265,12 +449,28 @@ select{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;backg
 .plan-bar .chips .off:hover{border-color:var(--c-primary);color:var(--c-primary)}
 .plan-bar .msg{font-size:13px;color:var(--c-text-sub)}
 .plan-bar.full{border-color:#cde6bd;background:#f6fbf2}
+.plan-bar{position:relative;padding-right:44px}
+.pb-x{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;border:0;border-radius:50%;background:none;font-size:18px;color:var(--c-text-sub);cursor:pointer}
+.pb-x:hover{background:var(--c-bg);color:var(--c-heading)}
+.pb-mini{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--c-border);background:#fff;border-radius:999px;padding:3px 10px;font-size:12px;color:var(--c-text);cursor:pointer;white-space:nowrap}
+.pb-mini:hover{border-color:var(--c-primary);color:var(--c-primary)}
+.pb-mini b{color:var(--c-primary)}
+.pb-mini[hidden]{display:none}
 .locked{text-align:center;padding:56px 20px;color:var(--c-text-sub)}
 .toast-wrap{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:100;pointer-events:none}
 .toast{background:#292929;color:#fff;padding:10px 18px;border-radius:4px;font-size:14px;opacity:0;transition:.3s}
 .toast.show{opacity:1}
 .fade{animation:fade .3s}@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .foot{font-size:12px;color:var(--c-text-sub);text-align:center;padding:16px}
+.pbox{margin-top:14px;padding-top:12px;border-top:1px dashed var(--c-border)}
+.pbox-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.pbox-h b{font-size:14px;color:var(--c-heading)}
+.pbox .t td{vertical-align:middle}
+.pbox .gp{display:flex;flex-wrap:wrap;gap:4px}
+.pbox .gp i{font-style:normal;font-size:12px;padding:1px 8px;border-radius:4px;background:var(--c-danger-light);color:#b3263a;white-space:nowrap}
+.pbox .gp i.mk{background:var(--c-bg);color:var(--c-text-sub)}
+.pbox .more{display:block;margin:8px auto 0}
+.iss .pbox{margin-top:0;margin-bottom:12px}
 [id^="go-"]{scroll-margin-top:130px}
 [id^="go-"].flash>.card,.iss.flash{box-shadow:0 0 0 3px var(--c-primary);transition:box-shadow .3s}
 
@@ -285,13 +485,14 @@ select{padding:7px 10px;border:1px solid var(--c-border);border-radius:4px;backg
   <a class="logo" href="#home" title="回到首頁"><span class="mark mk"><img src="logo104.png" alt="104" onload="var s=42/this.naturalHeight;this.parentNode.style.width=(this.naturalWidth*s*.235)+'px';this.style.marginLeft=-(this.naturalWidth*s*.062)+'px'"></span><span class="prod">人才360畫像</span></a>
   <span class="co">範例科技股份有限公司</span>
   <span class="sp"></span>
+  <button class="pb-mini" id="pbMini" hidden title="展開產品啟用狀態"></button>
   <a class="why" href="./">為什麼需要人才畫像？</a>
   <div class="who">
     <button class="who-btn" id="whoBtn" aria-haspopup="true" aria-expanded="false"><span class="av" id="av">王</span><span class="nmtxt" id="whoName">王經理</span><span class="caret">▾</span></button>
     <div class="who-menu" id="whoMenu" hidden>
       <div class="sec">切換帳號</div>
       <button data-role="hr" class="on"><b>王經理</b><span>人資部｜HR</span></button>
-      <button data-role="mgr"><b>陳協理</b><span>產品研發部｜部門主管</span></button>
+      <button data-role="mgr"><b>陳協理</b><span>業務部｜部門主管</span></button>
       <div class="sec">公司已啟用的 104 產品</div>
       <button data-plan="part" class="on"><b>部分啟用</b><span>測評中心、績效管理、企業大師</span></button>
       <button data-plan="full"><b>全部啟用</b><span>6 項產品，完整人才畫像</span></button>
@@ -317,7 +518,7 @@ const SRC_ORDER=['assess','perf','org','train','pay','sat'];
 const SRC_DESC={assess:'能力與動機',perf:'工作表現',org:'職務、技能與經歷',train:'學習與成長',pay:'薪酬',sat:'員工體驗'};
 const PLANS={part:['assess','perf','org'],full:SRC_ORDER.slice()};
 
-/* ===== 市場對標資料（虛構） ===== */
+/* ===== 市場比較資料（虛構） ===== */
 const IND={soft:{n:'軟體及網路相關業',k:1,cos:32},elec:{n:'電腦及消費性電子製造業',k:.96,cos:41},fin:{n:'金融及保險業',k:1.06,cos:27}};
 /* 每個面向：company 端資料需要的 104 產品 */
 const DIMK=[
@@ -341,11 +542,36 @@ const BROLES=[
     pay:[75000,69500],comp:[['溝通協作',85,88],['領導能力',78,70],['創新思考',80,70]],exp:[5.5,5.0],ex:[['滿意度',75,70],['敬業度',72,68]],learn:[30,26]},
   {id:'sa',name:'業務專員',dept:'業務部',n:40,
     skill:[['顧問式銷售',85,48],['CRM 系統操作',80,75],['商務談判',70,52],['數據化業績管理',58,20]],
-    pay:[50000,42000],comp:[['溝通協作',85,82],['貫徹執行',82,76],['應變能力',78,70]],exp:[3.6,2.3],ex:[['滿意度',72,58],['敬業度',70,55]],learn:[24,18]}
+    pay:[50000,42000],comp:[['溝通協作',85,82],['貫徹執行',82,76],['應變能力',78,70]],exp:[3.6,2.3],ex:[['滿意度',72,58],['敬業度',70,55]],learn:[24,18]},
+  {id:'qa',name:'測試工程師',dept:'產品研發部',n:8,
+    skill:[['自動化測試框架',86,42],['API 測試',80,61],['效能測試',62,25],['CI/CD 整合',70,38]],
+    pay:[60000,56000],comp:[['問題分析',80,76],['貫徹執行',78,80],['溝通協作',72,70]],exp:[4.0,3.2],ex:[['滿意度',75,70],['敬業度',72,67]],learn:[26,20]},
+  {id:'da',name:'資料分析師',dept:'產品研發部',n:5,
+    skill:[['SQL',92,94],['Python 資料分析',85,86],['資料視覺化',80,82],['統計建模',65,60]],
+    pay:[70000,69500],comp:[['問題分析',86,88],['溝通協作',74,76],['創新思考',76,78]],exp:[4.5,4.6],ex:[['滿意度',77,79],['敬業度',74,76]],learn:[30,31]},
+  {id:'cs',name:'客服專員',dept:'客戶服務部',n:30,
+    skill:[['客訴處理',88,80],['CRM 系統操作',82,70],['多通路客服',70,35],['知識庫維護',60,22]],
+    pay:[38000,36500],comp:[['溝通協作',86,88],['應變能力',80,72],['貫徹執行',76,74]],exp:[3.0,2.1],ex:[['滿意度',70,57],['敬業度',68,54]],learn:[20,16]},
+  {id:'mk',name:'行銷企劃',dept:'行銷部',n:12,
+    skill:[['數位廣告投放',84,62],['社群經營',86,80],['數據分析',72,40],['內容企劃',80,78]],
+    pay:[52000,52000],comp:[['創新思考',84,86],['溝通協作',80,78],['問題分析',72,68]],exp:[3.8,3.5],ex:[['滿意度',74,72],['敬業度',71,70]],learn:[26,14]}
 ];
+/* 公司整體：各職務依人數加權 */
+function overall(rs){
+  const N=rs.reduce((s,x)=>s+x.n,0),w=f=>Math.round(rs.reduce((s,x)=>s+f(x)*x.n,0)/N*10)/10,av=a=>a.reduce((s,v)=>s+v,0)/a.length;
+  return {id:'all',name:'公司整體',dept:'全公司',n:N,
+    skill:rs.map(x=>[x.name,Math.round(av(x.skill.map(s=>s[1]))),Math.round(av(x.skill.map(s=>s[2])))]),
+    pay:[Math.round(w(x=>x.pay[0])/100)*100,Math.round(w(x=>x.pay[1])/100)*100],
+    comp:rs.map(x=>[x.name,Math.round(av(x.comp.map(s=>s[1]))),Math.round(av(x.comp.map(s=>s[2])))]),
+    exp:[w(x=>x.exp[0]),w(x=>x.exp[1])],
+    ex:[0,1].map(i=>[i?'敬業度':'滿意度',Math.round(w(x=>x.ex[i][1])),Math.round(w(x=>x.ex[i][2]))]),
+    learn:[Math.round(w(x=>x.learn[0])),Math.round(w(x=>x.learn[1]))]};
+}
+const lagN=x=>DIMK.filter(d=>has(d.src)&&['h','m'].includes(stat(x,d.k).lv)).length;
+const hiN=x=>DIMK.filter(d=>has(d.src)&&stat(x,d.k).lv==='h').length;
 
 /* ===== 公司內部人才資料（虛構） ===== */
-const MY_DEPT='產品研發部';
+const MY_DEPT='業務部';
 const DIMS=['問題分析','領導能力','溝通協作','貫徹執行','創新思考','應變能力'];
 const DEPTS=[
   {name:'產品研發部',n:84,pay:68500},{name:'業務部',n:72,pay:52300},{name:'行銷部',n:28,pay:55800},
@@ -375,6 +601,71 @@ const MENTOR={'問題分析':'由資深架構師帶領做決策檢討','領導�
 const COURSE={'問題分析':'結構化問題解決','領導能力':'新手主管的領導力','溝通協作':'同理溝通與回饋技巧','貫徹執行':'目標管理與時間規劃','創新思考':'設計思考工作坊','應變能力':'敏捷式專案管理'};
 const JOB_SKILLS={j1:['系統架構設計','專案管理','程式碼審查','人員招募面談'],j2:['系統架構設計','雲端服務（AWS）','程式碼審查','效能調校'],j3:['銷售管道管理','客戶關係管理（CRM）','業績預測分析','商務談判'],j4:['勞動法規','績效制度設計','組織診斷','員工關係處理']};
 const PERSON_SKILLS={p1:['系統架構設計','程式碼審查','效能調校','雲端服務（AWS）'],p2:['專案管理','人員招募面談','系統架構設計','程式碼審查'],p3:['雲端服務（AWS）','效能調校'],p4:['使用者研究','介面設計'],p5:['銷售管道管理','客戶關係管理（CRM）','商務談判'],p6:['客戶關係管理（CRM）'],p7:['社群行銷','數據分析'],p8:['客訴處理','員工關係處理'],p9:['財務報表','稅務法規'],p10:['勞動法規','員工關係處理','組織診斷']};
+/* 各職務在職人員（虛構，依職務平均值隨機產生，數值固定） */
+const MEMBERS={};
+(function(){
+  const SN='陳林黃張李王吳劉蔡楊許鄭謝郭洪曾周蕭廖賴'.split(''),GN=['怡君','冠廷','雅婷','家豪','承恩','品妤','柏宇','詩涵','俊傑','佳穎','彥廷','欣怡','宗翰','筱涵','建宏','郁婷','子軒','思穎','偉誠','雅雯','明哲','靜宜','俊宏','怡萱'];
+  const rnd=s=>()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+  const cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+  BROLES.forEach((r,ri)=>{const R=rnd(ri*977+13),used=new Set();r.mem=[];
+    for(let i=0;i<r.n;i++){let nm;do{nm=SN[Math.floor(R()*SN.length)]+GN[Math.floor(R()*GN.length)]}while(used.has(nm));used.add(nm);
+      const comp=r.comp.map(([n,,o])=>[n,Math.round(cl(o+(R()-.5)*30,20,99))]);
+      const m={id:`m-${r.id}-${i}`,gen:1,rid:r.id,name:nm,dept:r.dept,title:r.name,
+        skills:r.skill.filter(([,,o])=>R()*100<o).map(x=>x[0]),comp,
+        pay:Math.round(r.pay[1]*(.82+R()*.36)/100)*100,years:Math.round(cl(r.exp[1]*(.3+R()*1.4),.3,15)*10)/10,
+        ex:Math.round(cl(r.ex.reduce((s,x)=>s+x[2],0)/r.ex.length+(R()-.5)*30,30,98)),hours:Math.round(cl(r.learn[1]*(R()*2),0,80)),perf:['A','A',['A+','B+','A','B','B+','B+','A','B','B+','A'][(i*3+ri)%10]]}; /* 高績效（A 以上）約 38% */
+      m.radar=DIMS.map(d=>{const c=comp.find(x=>x[0]===d);return c?c[1]:Math.round(55+R()*30)});
+      r.mem.push(m);MEMBERS[m.id]=m;}
+  });
+})();
+/* 切換比較產業：優質企業端的六個面向都依產業係數調整（本公司資料不變） */
+BROLES.forEach(r=>r.base={skill:r.skill.map(x=>x[1]),comp:r.comp.map(x=>x[1]),exp:r.exp[0],ex:r.ex.map(x=>x[1]),learn:r.learn[0]});
+function applyInd(){const k=IND[S.ind].k,c=v=>Math.min(99,Math.round(v));
+  BROLES.forEach(r=>{const b=r.base;r.skill.forEach((x,i)=>x[1]=c(b.skill[i]*k));r.comp.forEach((x,i)=>x[1]=c(b.comp[i]*k));r.exp[0]=Math.round(b.exp*k*10)/10;r.ex.forEach((x,i)=>x[1]=c(b.ex[i]*k));r.learn[0]=Math.round(b.learn*k)})}
+/* 某職務某面向：低於優質企業平均、需關注的人員 */
+function lagPeople(r,k){
+  const mk=mPay(r),exM=Math.round(r.ex.reduce((s,x)=>s+x[1],0)/r.ex.length),lagSk=r.skill.filter(([,m,o])=>m>o).map(x=>x[0]);
+  return r.mem.map(p=>{let g=[],w=0;
+    /* 個人「落後」門檻：與項目層級「差距較大」一致，避免人人上榜 */
+    if(k==='skill'){const miss=lagSk.filter(s=>!p.skills.includes(s));if(miss.length>=2){g=miss.map(s=>`缺 ${s}`);w=miss.length}}
+    if(k==='comp'){const lo=p.comp.map(([n,v],i)=>({n,v,m:r.comp[i][1]})).filter(x=>x.m-x.v>=10).sort((a,b)=>(b.m-b.v)-(a.m-a.v));g=lo.map(x=>`${x.n} PR ${x.v}（−${x.m-x.v}）`);w=lo.reduce((s,x)=>s+x.m-x.v,0)}
+    if(k==='learn'&&p.hours<r.learn[0]*.6){g=[`年學習 ${p.hours} 小時（差 ${r.learn[0]-p.hours}）`];w=r.learn[0]-p.hours}
+    if(k==='pay'){const d=Math.round((p.pay-mk)/mk*100);if(d<=-5){g=[`月薪 ${money(p.pay)}（低 ${-d}%）`];w=-d}}
+    if(k==='exp'&&p.years<r.exp[0]*.7){g=[`年資 ${p.years} 年（少 ${Math.round((r.exp[0]-p.years)*10)/10} 年）`];w=r.exp[0]-p.years}
+    if(k==='ex'&&p.ex<=exM-10){g=[`體驗 ${p.ex} 分（低 ${exM-p.ex}）`];w=exM-p.ex}
+    return {p,g,w}}).filter(x=>x.w>0).sort((a,b)=>b.w-a.w);
+}
+const PB_T={skill:['需補強技能的人員','缺少 2 項以上本公司落後市場的關鍵技能'],comp:['需補強職能的人員','任一關鍵職能 PR 低於優質企業平均 10 以上'],learn:['學習投入不足的人員','年學習時數不到優質企業平均的 6 成'],pay:['薪資低於市場的人員','月薪低於優質企業中位數 5% 以上'],exp:['年資低於市場平均的人員','年資不到優質企業平均的 7 成，經驗待累積'],ex:['員工體驗偏低的人員','體驗分數低於優質企業平均 10 分以上']};
+const pathJobFor=r=>'--mk-'+r.id;
+/* 優先關注名單：目前隱藏（選單與 AI 顧問都不出現），改 true 即恢復 */
+const WATCH_ON=false;
+/* 優先關注名單的判定 */
+const WCAT={ret:{o:0,d:'近一年績效 A 以上，且月薪低於市場 5% 以上、員工體驗也低於優質企業平均 10 分以上，流失風險高。'},dev:{o:1,d:'近一年績效 B+ 以下，且缺 2 項以上關鍵技能、職能合計落差 20 以上，能力與績效都需要補強。'},obs:{o:2}};
+function watchOf(r,p){
+  const lagSk=r.skill.filter(([,m,o])=>m>o).map(x=>x[0]),sk=lagSk.filter(s=>!p.skills.includes(s)).length;
+  const cg=p.comp.reduce((s,[,v],i)=>s+Math.max(0,r.comp[i][1]-v),0);
+  const mk=mPay(r),payD=Math.round((p.pay-mk)/mk*100),exM=Math.round(r.ex.reduce((s,x)=>s+x[1],0)/r.ex.length),exD=p.ex-exM;
+  const hi=p.perf[2].startsWith('A'),lowLearn=p.hours<r.learn[0]*.5;
+  const why=[];
+  if(has('pay')&&payD<=-5) why.push(`薪資低 ${-payD}%`);
+  if(has('sat')&&exD<=-10) why.push(`體驗低 ${-exD} 分`);
+  if(sk>=2) why.push(`缺 ${sk} 項技能`);
+  if(cg>=20) why.push(`職能落差 ${cg}`);
+  if(lowLearn) why.push('學習不足');
+  /* 留才：薪資與體驗兩項都落後才列入（只啟用其一時看該項）；補強：技能與職能兩項都有明顯落差 */
+  const pr=has('pay')?payD<=-5:null, er=has('sat')?exD<=-10:null, risk=pr!==null||er!==null?(pr!==false&&er!==false):false, gap=sk>=2&&cg>=20;
+  const cat=hi&&risk?'ret':!hi&&gap?'dev':'obs';
+  return {r,p,sk,cg,payD,exD,why,cat,score:(has('pay')?Math.max(0,-payD):0)+(has('sat')?Math.max(0,-exD):0)+sk*5+cg};
+}
+/* 人員的下一步：能力類→發展路徑；薪資→薪資競爭力檢視；年資、體驗→主管面談（無法用培訓補強） */
+const pAct=(r,k,p)=>['skill','comp','learn'].includes(k)?`<a class="btn btn-line btn-sm" href="#path--${p.id}${pathJobFor(r)}">看發展路徑</a>`:k==='pay'?`<a class="btn btn-line btn-sm" href="#salary--${r.id}">看薪資檢視</a>`:`<a class="btn btn-line btn-sm" href="#" data-toast="已將 ${p.name} 加入一對一面談清單（示意）">安排一對一面談</a>`;
+function peopleBox(r,k,key){
+  const L=lagPeople(r,k),all=S.pmore&&S.pmore[key],sh=all?L:L.slice(0,6),[t,d]=PB_T[k];
+  if(!L.length) return `<div class="pbox"><div class="pbox-h"><b>${t}</b><span class="sub">目前沒有</span></div></div>`;
+  return `<div class="pbox"><div class="pbox-h"><b>${t}（${L.length} / ${r.n} 位）</b>${tip(d+'。'+(['skill','comp','learn'].includes(k)?'可進一步查看個人的發展路徑與補強建議。':k==='pay'?'可到薪資競爭力檢視查看完整名單。':'年資與體驗無法靠培訓補強，建議由主管一對一面談了解原因。'))}<span class="sub">依落差大小排序</span></div>
+    <div class="tbl"><table class="t"><thead><tr><th>姓名</th><th>落差</th><th></th></tr></thead><tbody>${sh.map(x=>`<tr><td><b>${x.p.name}</b><div class="sub">${x.p.title}｜年資 ${x.p.years} 年</div></td><td><span class="gp">${x.g.map(s=>`<i>${s}</i>`).join('')}</span></td><td class="act">${pAct(r,k,x.p)}</td></tr>`).join('')}</tbody></table></div>
+    ${L.length>6?`<button class="btn btn-line btn-sm more" data-pmore="${key}">${all?'收合':`顯示全部 ${L.length} 位`}</button>`:''}</div>`;
+}
 const ABIL=p=>{const c=p.radar.reduce((s,v)=>s+v,0)/p.radar.length,k=Math.min((PERSON_SKILLS[p.id]||[]).length/4,1)*100,l=Math.min(p.hours/20,1)*100;return {c:Math.round(c),k:Math.round(k),l:Math.round(l),s:Math.round(c*.5+k*.3+l*.2)}};
 PEOPLE.forEach(p=>{p.ab=ABIL(p);p.pot=p.ab.s>=80?'高':p.ab.s>=65?'中':'低'});
 const ABIL_TIP='綜合能力＝職能 PR 平均 × 50%（測評中心）＋技能 × 30%（企業大師登錄技能，4 項為滿分）＋學習 × 20%（年度學習時數，20 小時為滿分）。80 分以上為高、65–79 為中、65 以下為低。';
@@ -383,11 +674,12 @@ const EX_TIP='員工體驗：最近一次員工體驗調查的整體分數（滿
 
 /* ===== 狀態 ===== */
 const S={role:'hr',plan:'part',ind:'soft',brole:'fe',idim:'',irole:'',job:'j1',picks:['p1','p2','p3'],pathP:'p1',pathJ:'j1',track:[]};
+try{S.pbClosed=sessionStorage.getItem('t360_pb')==='1'}catch(e){}
 const isMgr=()=>S.role==='mgr';
-const ROLES={hr:{av:'王',nm:'王經理',msg:'目前以王經理（人資部）的帳號檢視'},mgr:{av:'陳',nm:'陳協理',msg:'目前以陳協理（產品研發部主管）的帳號檢視'}};
+const ROLES={hr:{av:'王',nm:'王經理',msg:'目前以王經理（人資部）的帳號檢視'},mgr:{av:'陳',nm:'陳協理',msg:'目前以陳協理（業務部主管）的帳號檢視'}};
 const has=k=>PLANS[S.plan].includes(k);
 const REQ={review:['assess','perf'],promo:['assess','perf','org'],path:['assess'],salary:['pay','org']};
-const FEAT={review:'人才盤點',promo:'升遷評估',path:'發展路徑',salary:'薪資合理性'};
+const FEAT={review:'人才盤點',promo:'升遷評估',path:'發展路徑',salary:'薪資競爭力檢視',watch:'優先關注名單'};
 const missing=page=>(REQ[page]||[]).filter(k=>!has(k));
 
 /* ===== 工具 ===== */
@@ -395,41 +687,53 @@ const $=s=>document.querySelector(s);
 const fmt=n=>n.toLocaleString('zh-TW');
 const range=n=>`約 ${Math.floor(n/1000)-3}K–${Math.floor(n/1000)+3}K`;
 const money=n=>isMgr()?range(n):fmt(n)+' 元';
-const byId=id=>PEOPLE.find(p=>p.id===id);
-const job=id=>JOBS.find(j=>j.id===id);
+const byId=id=>PEOPLE.find(p=>p.id===id)||MEMBERS[id];
+/* 發展路徑的「優質企業水準」目標：id 為 mk-職務代碼，條件取自同產業優質企業平均 */
+const mkJob=id=>{const r=id&&id.startsWith('mk-')&&brole(id.slice(3));if(!r)return;return {id,name:r.name+'（優質企業水準）',short:r.name,dept:r.dept,lv:'市場',mk:r,target:DIMS.map(d=>{const c=r.comp.find(x=>x[0]===d);return c?c[1]:null})}};
+const job=id=>JOBS.find(j=>j.id===id)||mkJob(id);
+const jobSkills=j=>j.mk?j.mk.skill.map(x=>x[0]):(JOB_SKILLS[j.id]||[]);
+const pSkills=p=>PERSON_SKILLS[p.id]||p.skills||[];
 const visP=()=>isMgr()?PEOPLE.filter(p=>p.dept===MY_DEPT):PEOPLE;
 const visJ=()=>isMgr()?JOBS.filter(j=>j.dept===MY_DEPT):JOBS;
 const visR=()=>isMgr()?BROLES.filter(r=>r.dept===MY_DEPT):BROLES;
 const brole=id=>BROLES.find(r=>r.id===id);
-const fitC=(p,j)=>p.radar.reduce((s,v,i)=>s+Math.min(v/j.target[i],1),0)/DIMS.length;
-const fitK=(p,j)=>{const r=JOB_SKILLS[j.id]||[];return r.length?r.filter(s=>(PERSON_SKILLS[p.id]||[]).includes(s)).length/r.length:1};
+const fitC=(p,j)=>{const ix=DIMS.map((d,i)=>i).filter(i=>j.target[i]!=null);return ix.reduce((s,i)=>s+Math.min(p.radar[i]/j.target[i],1),0)/ix.length};
+const fitK=(p,j)=>{const r=jobSkills(j);return r.length?r.filter(s=>pSkills(p).includes(s)).length/r.length:1};
 const fit=(p,j)=>Math.round((fitC(p,j)*.7+fitK(p,j)*.3)*100);
-const gaps=(p,j)=>p.radar.map((v,i)=>({d:DIMS[i],v,t:j.target[i],g:j.target[i]-v})).filter(x=>x.g>0).sort((a,b)=>b.g-a.g);
-const skillMiss=(p,j)=>(JOB_SKILLS[j.id]||[]).filter(s=>!(PERSON_SKILLS[p.id]||[]).includes(s));
+const gaps=(p,j)=>p.radar.map((v,i)=>({d:DIMS[i],v,t:j.target[i],g:j.target[i]-v})).filter(x=>x.t!=null&&x.g>0).sort((a,b)=>b.g-a.g);
+const skillMiss=(p,j)=>jobSkills(j).filter(s=>!pSkills(p).includes(s));
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2400)}
 const tip=t=>`<span class="tip" tabindex="0" role="img" aria-label="說明：${t}" data-tip="${t}">!</span>`;
-const src=keys=>`<div class="card-src">來源：${keys.map(k=>k==='mkt'?'104 人力銀行市場資料':`<a href="${SRC[k].url}" target="_blank" rel="noopener">${SRC[k].prod}</a>`).join('、')}</div>`;
+const src=keys=>`<div class="card-src">來源：${keys.map(k=>k==='mkt'?'104 人力銀行市場職務資料':isMgr()?SRC[k].prod:`<a href="${SRC[k].url}" target="_blank" rel="noopener">${SRC[k].prod}</a>`).join('、')}</div>`;
 const card=(title,keys,body,extra='')=>`<div class="card"><div class="card-h"><h3>${title}</h3>${extra}</div>${body}${keys&&keys.length?src(keys):''}</div>`;
-const kpi=(l,n,t,sub='',cls='')=>`<div class="card kpi"><div class="l">${l}${t?tip(t):''}</div><div class="n ${cls}">${n}</div>${sub?`<div class="sub">${sub}</div>`:''}</div>`;
-const ai=t=>`<div class="ai"><div class="t">✨ AI 綜合分析</div>${t}</div>`;
-const head=(crumb,title,desc,t)=>`<div class="crumb">${crumb}</div><div class="ph"><div><h1>${title}</h1><p>${desc}${t?tip(t):''}</p></div></div>`;
+const kpi=(l,n,t,sub='',cls='',f='',on=false)=>`<div class="card kpi ${f?'clk':''} ${on?'on':''}" ${f?`data-ifilter="${f}" role="button" tabindex="0"`:''}><div class="l">${l}${t?tip(t):''}</div><div class="n ${cls}">${n}</div>${sub?`<div class="sub">${sub}</div>`:''}${f?'<div class="go">查看 →</div>':''}</div>`;
+const CALC={skill:'職務關鍵技能逐項計算「具備該技能的人數 ÷ 職務人數」，再取平均',pay:'職務月薪由低到高排列，取正中間的數字',comp:'職務關鍵職能 PR 的平均',exp:'職務在職人員的平均年資',ex:'滿意度與敬業度兩項分數的平均（滿分 100）',learn:'職務人員一年平均的學習時數'};
+/* 頁面內的「AI 綜合分析」區塊已移除（改由 AI HR 顧問提供），保留函式避免呼叫處出錯 */
+const ai=t=>'';
+const scopeTag=()=>`<span class="badge b-brand scope" title="資料範圍">${isMgr()?MY_DEPT:'全公司'}</span>`;
+const head=(crumb,title,desc,t)=>`<div class="ph"><div><h1>${title}${scopeTag()}</h1><p>${desc}${t?tip(t):''}</p></div></div>`;
 const fitCell=f=>`<div style="display:flex;align-items:center;gap:8px"><span class="fitnum" style="font-size:16px">${f}%</span></div>`;
 function buyBox(miss,title,mini){
   const ok=SRC_ORDER.filter(has);
   return `<div class="card buy ${mini?'mini':''}">${mini?'':'<div class="ic">🔒</div>'}<h3>${title}</h3>
-    <p>需啟用以下 104 產品才能使用。</p>
-    <div class="need">${miss.map(k=>`<a href="${SRC[k].url}" target="_blank" rel="noopener">了解${SRC[k].prod} ↗<small>提供${SRC_DESC[k]}資料</small></a>`).join('')}</div>
+    ${isMgr()?`<p>公司尚未啟用以下 104 產品，如需使用請洽 HR。</p>
+    <div class="need">${miss.map(k=>`<span>${SRC[k].prod}<small>提供${SRC_DESC[k]}資料</small></span>`).join('')}</div>`:`<p>需啟用以下 104 產品才能使用。</p>
+    <div class="need">${miss.map(k=>`<a href="${SRC[k].url}" target="_blank" rel="noopener">了解${SRC[k].prod} ↗<small>提供${SRC_DESC[k]}資料</small></a>`).join('')}</div>`}
     <div class="have">目前已啟用：${ok.map(k=>SRC[k].prod).join('、')}</div></div>`;
 }
-const lockLine=(k,t)=>`<p class="lockline">🔒 啟用${SRC[k].prod}後，${t}。<a href="${SRC[k].url}" target="_blank" rel="noopener">了解${SRC[k].prod} ↗</a></p>`;
+/* 部門主管無法決定採購產品：不顯示產品推廣連結，改為「請洽 HR 啟用」 */
+const hrAsk=k=>`<span class="sub" style="white-space:nowrap">請洽 HR 啟用${SRC[k].prod}</span>`;
+const enBtn=k=>isMgr()?hrAsk(k):`<a class="btn btn-line btn-sm" href="${SRC[k].url}" target="_blank" rel="noopener">啟用${SRC[k].prod}</a>`;
+const lockLine=(k,t)=>isMgr()?`<p class="lockline">🔒 公司啟用${SRC[k].prod}後，${t}。如需使用請洽 HR。</p>`:`<p class="lockline">🔒 啟用${SRC[k].prod}後，${t}。<a href="${SRC[k].url}" target="_blank" rel="noopener">了解${SRC[k].prod} ↗</a></p>`;
 function planBar(){
   const n=SRC_ORDER.filter(has).length, full=n===SRC_ORDER.length;
-  return `<div class="plan-bar ${full?'full':''}"><span class="pg">已啟用 <b>${n}</b> / 6 項 104 產品</span>
+  if(S.pbClosed||isMgr()) return '';
+  return `<div class="plan-bar ${full?'full':''}"><button class="pb-x" data-pbclose title="收合到右上角" aria-label="收合產品啟用列">×</button><span class="pg">已啟用 <b>${n}</b> / 6 項 104 產品</span>
     <span class="chips">${SRC_ORDER.map(k=>has(k)?`<span class="on">${SRC[k].prod}</span>`:`<a class="off" href="${SRC[k].url}" target="_blank" rel="noopener" title="了解${SRC[k].prod}">${SRC[k].prod}</a>`).join('')}</span>
-    <span class="msg">${full?'六個面向皆可與市場對標':'啟用全部產品，即可完整對標六個面向'}</span></div>`;
+    <span class="msg">${full?'六個面向皆可與市場比較':'啟用全部產品，即可完整比較六個面向'}</span></div>`;
 }
 
-/* ===== 對標判斷 ===== */
+/* ===== 比較判斷 ===== */
 const mPay=r=>Math.round(r.pay[0]*IND[S.ind].k/100)*100;
 const LV={h:['明顯落後','st-h'],m:['落後','st-m'],n:['持平','st-n'],g:['領先','st-g']};
 const stTag=(lv,txt)=>`<span class="st ${LV[lv][1]}">${LV[lv][0]}${txt?`｜${txt}`:''}</span>`;
@@ -443,83 +747,120 @@ function stat(r,k){
   if(k==='learn'){const[m,o]=r.learn,q=o/m;const lv=q<.5?'h':q<.8?'m':q>1.05?'g':'n';return {lv,txt:`${o} vs ${m} 小時`,short:`${o} vs ${m} 時`}}
 }
 const dimOf=k=>DIMK.find(d=>d.k===k);
-const prodBtn=k=>has(k)?`<a class="btn btn-line btn-sm" href="#" data-toast="前往${SRC[k].prod}執行（示意）">前往${SRC[k].prod}</a>`:`<a class="btn btn-buy btn-sm" href="${SRC[k].url}" target="_blank" rel="noopener">啟用${SRC[k].prod} ↗</a>`;
+/* 管理議題分類（主管視角） */
+const GRPS=[
+  {id:'dev',n:'能力培育',q:'人才能力跟得上市場嗎？',dims:['skill','comp','learn'],c:'#00afb8'},
+  {id:'pay',n:'薪酬競爭力',q:'薪資留得住人、吸得到人嗎？',dims:['pay'],c:'#1654b9'},
+  {id:'ret',n:'留任與穩定',q:'人才待得住、經驗傳得下去嗎？',dims:['ex','exp'],c:'#509e1f'}
+];
+const prodBtn=k=>has(k)?`<a class="btn btn-line btn-sm" href="#" data-toast="前往${SRC[k].prod}執行（示意）">前往${SRC[k].prod}</a>`:isMgr()?hrAsk(k):`<a class="btn btn-buy btn-sm" href="${SRC[k].url}" target="_blank" rel="noopener">啟用${SRC[k].prod} ↗</a>`;
 
-/* 依落後面向產生管理 Issue */
+/* 改善重點的落差列：項目｜本公司 vs 優質企業｜差異 */
+const gapEv=(n,o,m,d)=>`<span class="gv-row"><b>${n}</b><span class="o">${o}</span><span class="vs">vs</span><span class="m">${m}</span><em>${d}</em></span>`;
+/* 依落後面向產生改善重點 */
 function issueOf(r,k){
   const s=stat(r,k); if(!['h','m'].includes(s.lv)) return null;
   const mk=IND[S.ind].n+'優質企業';
   let title,ev,sol;
   if(k==='skill'){const low=r.skill.filter(([,m,o])=>m-o>=25),nm=low.map(x=>x[0]).join('、');
-    title=`${r.name}的關鍵技能落後市場`;ev=low.map(([n,m,o])=>`${n}：本公司 ${o}%，優質企業 ${m}%`);
+    title=`${r.name}的關鍵技能落後市場`;ev=low.map(([n,m,o])=>gapEv(n,`${o}%`,`${m}%`,`−${m-o}`));
     sol=[[`用企業大師盤點技能，將 ${nm} 設為職務必備技能，追蹤具備率`,'org'],[`在企業學習平台開設 ${nm} 課程，指定 6 個月內完成`,'train'],[`招募時把缺少的技能列為必要條件，補足團隊技能組合`,null]];}
   if(k==='pay'){const m=mPay(r),o=r.pay[1];const e=stat(r,'ex');
-    title=`${r.name}薪資水平低於市場`;ev=[`本公司中位數 ${money(o)}`,`優質企業中位數 ${money(m)}`,`差距 ${s.txt}`];if(has('sat')&&['h','m'].includes(e.lv))ev.push(`員工體驗${e.txt}，可能影響留任`);
+    title=`${r.name}薪資水平低於市場`;ev=[gapEv('月薪中位數',isMgr()?range(o):fmt(o),isMgr()?range(m):fmt(m)+' 元',isMgr()?s.txt:`少 ${fmt(m-o)} 元（${s.txt}）`)];if(has('sat')&&['h','m'].includes(e.lv))ev.push(`員工體驗${e.txt}，可能影響留任`);
     sol=[[`用薪酬平台取得同產業薪資報告，重新檢視${r.name}薪資帶`,'pay'],[`將調薪與績效連動，優先調整高績效者`,'perf'],[`用員工體驗調查追蹤薪酬滿意度的變化`,'sat']];}
   if(k==='comp'){const low=r.comp.filter(([,m,o])=>m-o>=5);
-    title=`${r.name}的${low.map(x=>x[0]).join('、')}職能落後`;ev=low.map(([n,m,o])=>`${n}：本公司 PR ${o}，優質企業 PR ${m}`);
+    title=`${r.name}的${low.map(x=>x[0]).join('、')}職能落後`;ev=low.map(([n,m,o])=>gapEv(n,`PR ${o}`,`PR ${m}`,`−${m-o}`));
     sol=[[`用測評中心找出每位員工的職能落差，鎖定需加強的對象`,'assess'],[`透過發展路徑安排歷練與導師，例如「${TASK[low[0][0]]}」`,'path'],[`在企業學習平台安排「${COURSE[low[0][0]]}」課程`,'train']];}
-  if(k==='exp'){title=`${r.name}平均年資偏短，經驗出現斷層`;ev=[`本公司平均 ${r.exp[1]} 年`,`優質企業平均 ${r.exp[0]} 年`,`共 ${r.n} 人`];
+  if(k==='exp'){title=`${r.name}平均年資偏短，經驗出現斷層`;ev=[gapEv('平均年資',`${r.exp[1]} 年`,`${r.exp[0]} 年`,`少 ${Math.round((r.exp[0]-r.exp[1])*10)/10} 年（−${Math.round((1-r.exp[1]/r.exp[0])*100)}%）`)];
     sol=[[`招募時用測評中心評估特質適配，降低錯配與早期離職`,'assess'],[`用績效管理建立新人 90 天目標與導師制度`,'perf'],[`用員工體驗調查找出新人離開的原因`,'sat']];}
-  if(k==='ex'){title=`${r.name}員工體驗低於市場`;ev=r.ex.map(([n,m,o])=>`${n}：本公司 ${o} 分，優質企業 ${m} 分`);
+  if(k==='ex'){title=`${r.name}員工體驗低於市場`;ev=r.ex.map(([n,m,o])=>gapEv(n,`${o} 分`,`${m} 分`,`−${m-o} 分`));
     sol=[[`用員工體驗調查找出低分構面，例如主管支持、職涯發展`,'sat'],[`針對低分構面訂定行動計畫，每季重新調查追蹤`,'sat'],[`用績效管理建立主管每月一對一面談`,'perf']];}
-  if(k==='learn'){title=`${r.name}學習投入不足`;ev=[`本公司年均 ${r.learn[1]} 小時`,`優質企業年均 ${r.learn[0]} 小時`];
+  if(k==='learn'){title=`${r.name}學習投入不足`;ev=[gapEv('年均學習',`${r.learn[1]} 小時`,`${r.learn[0]} 小時`,`少 ${r.learn[0]-r.learn[1]} 小時（−${Math.round((1-r.learn[1]/r.learn[0])*100)}%）`)];
     sol=[[`用企業學習平台建立職務學習地圖與年度時數目標`,'train'],[`將學習完成率納入績效管理的發展目標`,'perf'],[`用企業大師盤點技能，讓學習對準技能缺口`,'org']];}
-  return {id:r.id+'-'+k,r,k,lv:s.lv,title,ev,sol,mk};
+  const short={skill:'關鍵技能落後市場',pay:'薪資低於市場',comp:'職能落後市場',exp:'年資偏短',ex:'員工體驗低於市場',learn:'學習投入不足'}[k];
+  return {id:r.id+'-'+k,r,k,lv:s.lv,title,short,ev,sol,mk};
 }
 function allIssues(){
   const out=[];visR().forEach(r=>DIMK.forEach(d=>{if(has(d.src)){const i=issueOf(r,d.k);if(i)out.push(i)}}));
-  return out.sort((a,b)=>(a.lv==='h'?0:1)-(b.lv==='h'?0:1));
+  /* 依落後人數（個人低於優質企業平均）多到少；人數相同時明顯落後排前 */
+  out.forEach(i=>i.lagN=lagPeople(i.r,i.k).length);
+  return out.sort((a,b)=>b.lagN-a.lagN||(a.lv==='h'?0:1)-(b.lv==='h'?0:1));
 }
 const lockedDims=()=>DIMK.filter(d=>!has(d.src));
+/* 單一職務某面向的詳細分析（展開於總覽表中） */
+function roleDetail(r,k,is){
+  const leg=(unit,warnAt)=>`<div class="gleg"><span><i></i>本公司</span><span><i class="warn"></i>本公司（差距較大）${tip(`單一項目低於優質企業平均 ${warnAt}${unit==='%'?' 個百分點':k==='comp'?' PR':' 分'}以上，建議優先補強。面向整體是否「明顯落後」，依該面向所有項目的平均差距判定。`)}</span><span><i class="req"></i>優質企業平均</span></div>`;
+  const dual=(rows,unit,warnAt)=>`${leg(unit,warnAt)}<div class="bars gb">${rows.map(([n,m,o])=>{const w=m-o>=warnAt;return `<div class="gbar"><span>${n}</span><div class="gt"><div class="track"><span class="fill ${w?'warn':''}" data-w="${o}"></span></div><div class="track"><span class="fill req" data-w="${m}"></span></div></div><span class="gv"><b class="${w?'w':''}">${o}${unit}</b><small>${m}${unit}</small></span><span class="gd ${o<m?'w':''}">${o>=m?'✓':'−'+(m-o)}</span></div>`}).join('')}</div>`;
+  const vs=(o,m,u,on,mn,du,hide)=>{const d=Math.round((on-mn)*10)/10,p=Math.round((on-mn)/mn*100),cls=d<0?'w':'ok',abs=Math.abs(d);
+    return `<div class="vs"><div><small>本公司</small><b>${o}</b> <span class="sub">${u}</span></div><div class="mk"><small>優質企業平均</small><b>${m}</b> <span class="sub">${u}</span></div><div class="df ${cls}"><small>差異</small><b>${d===0?'持平':hide?(d<0?'低於':'高於'):`${d<0?'少':'多'} ${du==='元'?fmt(abs):abs} ${du}`}</b>${d===0?'':` <span class="pct">${p>0?'+':''}${p}%</span>`}</div></div>`};
+  const body={skill:()=>dual(r.skill,'%',25),pay:()=>vs(isMgr()?range(r.pay[1]):fmt(r.pay[1]),isMgr()?range(mPay(r)):fmt(mPay(r)),isMgr()?'':'元／月',r.pay[1],mPay(r),'元',isMgr()),comp:()=>dual(r.comp,'',8),exp:()=>vs(r.exp[1],r.exp[0],'年',r.exp[1],r.exp[0],'年'),ex:()=>dual(r.ex,'',10),learn:()=>vs(r.learn[1],r.learn[0],'小時／年',r.learn[1],r.learn[0],'小時')}[k]();
+  return body+peopleBox(r,k,'x-'+r.id+'-'+k);
+}
+/* 公司整體：某面向各職務的比較 */
+function allDetail(rs,k){
+  return `<table class="t xt"><thead><tr><th>職務</th><th>優質企業平均</th><th>本公司</th><th>比較結果</th><th></th></tr></thead><tbody>${rs.map(x=>{const s=stat(x,k);const v={skill:a=>`${Math.round(a.skill.reduce((t,y)=>t+y[2],0)/a.skill.length)}%`,pay:a=>money(a.pay[1]),comp:a=>`PR ${Math.round(a.comp.reduce((t,y)=>t+y[2],0)/a.comp.length)}`,exp:a=>`${a.exp[1]} 年`,ex:a=>`${Math.round(a.ex.reduce((t,y)=>t+y[2],0)/a.ex.length)} 分`,learn:a=>`${a.learn[1]} 小時`}[k],mv={skill:a=>`${Math.round(a.skill.reduce((t,y)=>t+y[1],0)/a.skill.length)}%`,pay:a=>money(mPay(a)),comp:a=>`PR ${Math.round(a.comp.reduce((t,y)=>t+y[1],0)/a.comp.length)}`,exp:a=>`${a.exp[0]} 年`,ex:a=>`${Math.round(a.ex.reduce((t,y)=>t+y[1],0)/a.ex.length)} 分`,learn:a=>`${a.learn[0]} 小時`}[k];
+    return `<tr><td><b>${x.name}</b></td><td class="mkv">${mv(x)}</td><td><b>${v(x)}</b></td><td>${stTag(s.lv,s.txt)}</td><td class="act"><button class="btn btn-line btn-sm" data-hrole="${x.id}" data-xopen="${k}">看此職務</button></td></tr>`}).join('')}</tbody></table>`;
+}
 function issueCard(i){
-  const d=dimOf(i.k),on=S.track.includes(i.id);
-  return `<div class="iss ${i.lv}" id="go-${i.r.id}-${i.k}"><div class="iss-h"><h3>${i.title}</h3><span class="badge ${i.lv==='h'?'b-danger':'b-warn'}">${i.lv==='h'?'高':'中'}優先</span><span class="badge b-line">${d.n}</span><span class="badge b-line">${i.r.name}｜${i.r.n} 人</span></div>
-    <div class="ev">${i.ev.map(e=>`<span>${e}</span>`).join('')}</div>
-    <div class="sol"><b>建議解法</b><ol>${i.sol.map(([t,p])=>`<li><span>${t}</span>${p==='path'?`<a class="btn btn-line btn-sm" href="#path">看發展路徑</a>`:p?prodBtn(p):''}</li>`).join('')}</ol></div>
-    <div class="iss-f"><span class="sub">對標：${i.mk}｜<a href="#bench--${i.r.id}--${i.k}" style="text-decoration:none">看${i.r.name}${d.n}對標 →</a></span>${on?'<span class="badge b-ok">✓ 已列入改善計畫</span>':`<button class="btn btn-blue btn-sm" data-track="${i.id}">列入改善計畫</button>`}</div></div>`;
+  const d=dimOf(i.k),pn=lagPeople(i.r,i.k).length,op=S.iopen&&S.iopen[i.id];
+  return `<div class="iss" id="go-${i.r.id}-${i.k}"><div class="iss-h"><span class="iss-r">${i.r.name}</span><span class="iss-d">${d.n}</span><h3>${i.short}</h3><span class="sub">${i.r.dept}</span>${pn?`<button class="badge b-warn pcnt" data-ipeople="${i.id}" aria-expanded="${!!op}" title="${i.r.name}共 ${i.r.n} 人，其中 ${pn} 人在這個面向低於優質企業平均。點選${op?'收合':'查看'}人員清單">${pn} / ${i.r.n} 人落後 ${op?'▴':'▾'}</button>`:`<span class="badge b-line">0 / ${i.r.n} 人落後</span>`}</div>
+    <div class="ev"><span class="ev-cap">本公司 / 優質企業平均</span>${i.ev.map(e=>e.startsWith('<span')?e:`<span>${e}</span>`).join('')}</div>
+    ${pn&&op?peopleBox(i.r,i.k,'i-'+i.id):''}
+    <div class="sol"><b>建議解法</b><ol>${i.sol.map(([t,p])=>`<li><span>${t}</span>${p==='path'?`<a class="btn btn-line btn-sm" href="#path--${(lagPeople(i.r,i.k)[0]||{p:i.r.mem[0]}).p.id}--mk-${i.r.id}">看發展路徑</a>`:p?prodBtn(p):''}</li>`).join('')}</ol></div>
+    <div class="iss-f"><span class="sub">比較基準：${i.mk}｜<a href="#bench--${i.r.id}--${i.k}" style="text-decoration:none">看${i.r.name}${d.n}詳細分析 →</a></span></div></div>`;
 }
 
 /* ===== 導覽 ===== */
 const NAV=[
-  {g:'市場對標總覽',d:'看全貌',items:[['home','市場對標總覽']]},
-  {g:'職務對標',d:'找差距',items:[['bench','職務對標']]},
-  {g:'管理 Issue',d:'給解法',items:[['issues','管理 Issue']],cnt:true},
-  {g:'人才管理',d:'管人才',items:[['review','人才盤點'],['promo','升遷評估'],['path','發展路徑'],['salary','薪資合理性']]}
+  {g:'人才市場分析',d:'同業標竿對照',items:[['home','人才市場分析']]},
+  {g:'人才改善重點',d:'議題與對策',items:[['issues','改善重點']],cnt:true},
+  {g:'人才發展',d:'個人補強',items:[/* ['watch','優先關注名單'] 暫時隱藏，需要時取消註解 */['path','發展路徑'],['salary','薪資競爭力檢視']]}
 ];
 function renderNav(cur){
   const mod=NAV.find(s=>s.items.some(([id])=>id===cur));
-  const n=allIssues().filter(i=>i.lv==='h').length;
-  $('#side').innerHTML=`<div class="tabs">${NAV.map(s=>`<div class="tab-item"><a href="#${s.items[0][0]}" class="${s===mod?'on':''}">${s.g}<small>${s.d}</small>${s.cnt&&n?`<span class="cnt" title="高優先 Issue">${n}</span>`:''}</a>${s.items.length>1?`<div class="drop">${s.items.map(([id,t])=>`<a href="#${id}" class="${id===cur?'on':''} ${missing(id).length?'lk':''}">${t}</a>`).join('')}</div>`:''}</div>`).join('')}</div>`;
+  const n=allIssues().length;
+  $('#side').innerHTML=`<div class="tabs">${NAV.map(s=>`<div class="tab-item"><a href="#${s.items[0][0]}" class="${s===mod?'on':''}">${s.g}<small>${s.d}</small>${s.cnt&&n?`<span class="cnt" title="改善重點共 ${n} 項">${n}</span>`:''}</a>${s.items.length>1?`<div class="drop">${s.items.map(([id,t])=>`<a href="#${id}" class="${id===cur?'on':''} ${missing(id).length?'lk':''}">${t}</a>`).join('')}</div>`:''}</div>`).join('')}</div>`;
 }
-const benchBar=()=>`<div class="bench-bar"><span>對標產業</span><select id="indSel">${Object.entries(IND).map(([k,v])=>`<option value="${k}" ${k===S.ind?'selected':''}>${v.n}</option>`).join('')}</select><span class="sep"></span><span>對標對象 <b>${IND[S.ind].n}優質企業 ${IND[S.ind].cos} 家</b>${tip('優質企業：104 人力銀行依營收成長、員工留任率與雇主評價，篩選出的同產業企業平均值（示意）。')}</span><span class="sep"></span><span class="sub">資料期間 2026 Q3｜104 人力銀行市場資料</span></div>`;
+const CO_IND='soft';
+const indSel=(noLabel)=>`${noLabel?'':`<span style="display:inline-flex;align-items:center;gap:6px">比較產業${tip('預設為本公司在 104 登記的產業，可改看其他產業。優質企業：104 依營收成長、員工留任率與雇主評價篩選出的同產業企業（示意）。')}</span>`}<select id="indSel" aria-label="比較產業" title="比較產業">${Object.entries(IND).map(([k,v])=>`<option value="${k}" ${k===S.ind?'selected':''}>${v.n}${k===CO_IND?'（本公司產業）':''}</option>`).join('')}</select>`;
+const benchBar=()=>`<div class="bench-bar">${indSel()}</div>`;
 
 /* ===== 頁面 ===== */
 const PAGES={
   home(){
-    const who=isMgr()?'陳協理（產品研發部主管）':'王經理（人資部）';
+    const who=isMgr()?'陳協理（業務部主管）':'王經理（人資部）';
     const rs=visR(), is=allIssues(), hi=is.filter(i=>i.lv==='h'), lk=lockedDims();
     let cells=0;
-    const rows=rs.map(r=>`<tr><td><b>${r.name}</b><div class="sub">${r.dept}｜${r.n} 人</div></td>${DIMK.map(d=>{if(!has(d.src))return `<td class="c" data-go="bench--${r.id}--${d.k}"><span class="st st-l">🔒 未對標</span></td>`;const s=stat(r,d.k);if(['h','m'].includes(s.lv))cells++;return `<td class="c" data-go="bench--${r.id}--${d.k}">${stTag(s.lv)}<small>${s.short}</small></td>`}).join('')}</tr>`).join('');
+    const rows=rs.map(r=>`<tr><td><b>${r.name}</b><div class="sub">${r.dept}｜${r.n} 人</div></td>${DIMK.map(d=>{if(!has(d.src))return `<td class="c" data-go="bench--${r.id}--${d.k}"><span class="st st-l">🔒 未比較</span></td>`;const s=stat(r,d.k);if(['h','m'].includes(s.lv))cells++;return `<td class="c" data-go="bench--${r.id}--${d.k}">${stTag(s.lv)}<small>${s.short}</small></td>`}).join('')}</tr>`).join('');
     const worst=rs.map(r=>({r,n:DIMK.filter(d=>has(d.src)&&stat(r,d.k).lv==='h').length})).sort((a,b)=>b.n-a.n)[0];
-    return `<div class="hello">${who}您好，這是貴公司與市場的人才對標</div>
-    <p class="sub" style="font-size:14px;margin:4px 0 16px">把同產業優質企業的職務輪廓，對照本公司的人才輪廓，找出管理 Issue 與解法。</p>
-    ${planBar()}${benchBar()}
-    <div class="grid g4">${kpi('對標職務',rs.length+' 個')}${kpi('管理 Issue',is.length+' 個','依落後程度自動產生，明顯落後為高優先',`高優先 ${hi.length} 個`,'r')}${kpi('落後面向',cells+' 個','職務 × 面向中，落後或明顯落後的格數')}${kpi('尚未對標面向',lk.length+' 個','',lk.length?'啟用對應產品即可對標':'已全部對標')}</div>
-    <div class="grid mt" style="grid-template-columns:2fr 1fr">
-      ${card('職務 × 面向對標結果',['mkt',...SRC_ORDER.filter(has)],`<div class="tbl"><table class="t hm nw"><thead><tr><th>職務</th>${DIMK.map(d=>`<th class="c"><span style="display:inline-flex;align-items:center;gap:4px">${d.n}${tip(d.d+'；本公司資料來源：'+SRC[d.src].prod)}</span></th>`).join('')}</tr></thead><tbody>${rows}</tbody></table></div>
-        <div class="legend"><span>${stTag('h')}</span><span>${stTag('m')}</span><span>${stTag('n')}</span><span>${stTag('g')}</span><span>點選格子看職務對標</span></div>`)}
-      ${card('高優先 Issue',[],hi.length?hi.slice(0,5).map(i=>`<div class="top-iss"><a href="#issues--${i.r.id}--${i.k}"><b>${i.title}</b><div class="sub">${dimOf(i.k).n}｜${i.r.n} 人</div></a><span class="badge b-danger">高</span></div>`).join('')+`<a href="#issues" style="display:inline-block;margin-top:10px;font-weight:700;font-size:14px;text-decoration:none">看全部 ${is.length} 個 Issue 與解法 →</a>`:'<p class="sub">目前沒有高優先 Issue</p>')}
+    return `<div class="hello" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">${who}您好，以下為公司人才市場定位分析${scopeTag()}</div>
+    <p class="sub" style="font-size:14px;margin:4px 0 16px">以同產業優質企業為標竿，比較公司各個職務人才的技能、薪資、職能等差距，掌握人才管理的關鍵議題與改善方向。<br><span class="sub">本次比較涵蓋 <b>${rs.length} 個職務、共 ${rs.reduce((s,r)=>s+r.n,0)} 人</b>${isMgr()?'':`（全公司 ${DEPTS.reduce((s,d)=>s+d.n,0)} 人，其餘職務尚無足夠的同業比較資料）`}${tip('僅納入 104 有足夠同產業優質企業樣本的職務；樣本不足的職務暫不比較。')}</span></p>
+    ${planBar()}
+    <div class="grid home2">
+    ${(()=>{if(!rs.find(x=>x.id===S.hrole))S.hrole=rs[0].id;const ALL=null,r=brole(S.hrole),isAll=r===ALL,lnk=k=>isAll?'#issues':`#bench--${r.id}--${k}`;
+      const avg=a=>Math.round(a.reduce((s,v)=>s+v,0)/a.length);
+      const V={skill:[`平均具備率 ${avg(r.skill.map(x=>x[1]))}%`,`平均具備率 ${avg(r.skill.map(x=>x[2]))}%`],pay:[`月薪中位數 ${money(mPay(r))}`,`月薪中位數 ${money(r.pay[1])}`],comp:[`平均 PR ${avg(r.comp.map(x=>x[1]))}`,`平均 PR ${avg(r.comp.map(x=>x[2]))}`],exp:[`平均 ${r.exp[0]} 年`,`平均 ${r.exp[1]} 年`],ex:[`平均 ${avg(r.ex.map(x=>x[1]))} 分`,`平均 ${avg(r.ex.map(x=>x[2]))} 分`],learn:[`年均 ${r.learn[0]} 小時`,`年均 ${r.learn[1]} 小時`]};
+      return card(`公司人才市場分析${tip('以同產業優質企業的職務輪廓為標竿，盤點本公司同職務人才在技能、薪資、職能、經歷、員工體驗與學習上的差距。')}`,['mkt',...SRC_ORDER.filter(has)],`<div class="chips-r" role="tablist" aria-label="選擇職務">${rs.map(x=>{const n=lagN(x),hn=hiN(x),on=x===r;return `<button class="rchip ${on?'on':''}" role="tab" aria-selected="${on}" data-hrole="${x===ALL?'all':x.id}" title="${x===ALL?`全公司 ${x.n} 人`:`${x.dept}｜在職 ${x.n} 人`}｜${n?`${n} 個面向落後`:'皆達市場水準'}"><i class="dot ${hn?'h':n?'m':'g'}"></i>${x.name}</button>`}).join('')}</div>
+        <div class="dot-leg"><span><i class="dot h"></i>有明顯落後</span><span><i class="dot m"></i>有落後</span><span><i class="dot g"></i>皆達市場水準</span><span class="sub" style="margin-left:auto">${isAll?`全公司 ${r.n} 人，${rs.length} 個職務加權平均`:`${r.dept}｜在職 ${r.n} 人`}</span></div>
+        <div class="tbl"><table class="t cmpt"><thead><tr><th>面向</th><th><span class="vl">優質企業平均${tip(`${IND[S.ind].n} ${IND[S.ind].cos} 家優質企業的${r.name}平均值`)}</span></th><th><span class="vl">本公司${tip(`本公司${r.name}，共 ${r.n} 人`)}</span></th><th>比較結果</th><th></th></tr></thead><tbody>
+        ${DIMK.map(d=>{const op=has(d.src)&&S.open&&S.open[d.k];return `<tr class="${op?'opened':''}"><td><b>${d.n}</b><div class="sub">${d.d}</div></td><td class="mkv"><span class="vl">${V[d.k][0]}${tip(CALC[d.k]+'。資料來源：104 人力銀行市場職務資料（同產業優質企業）')}</span></td><td>${has(d.src)?`<span class="vl"><a class="num" href="#" data-xp="${d.k}" title="看詳細分析">${V[d.k][1]}</a>${tip(CALC[d.k]+'。資料來源：'+SRC[d.src].prod)}</span>`:`<span class="vl na">尚無資料${tip('公司尚未啟用'+SRC[d.src].prod+'，沒有本公司資料可比較。')}</span>`}</td><td>${has(d.src)?stTag(stat(r,d.k).lv,stat(r,d.k).txt):'<span class="st st-l">需啟用產品進行比較</span>'}</td><td class="act">${has(d.src)&&is.find(x=>x.r.id===r.id&&x.k===d.k)?`<a class="btn btn-line btn-sm" href="#issues--${r.id}--${d.k}">看改善建議</a> `:''}${has(d.src)?`<button class="btn btn-line btn-sm ${op?'on':''}" data-xp="${d.k}" aria-expanded="${!!op}">${op?'收合':'看詳細分析'}</button>`:enBtn(d.src)}</td></tr>`+(op?`<tr class="xrow" id="go-${r.id}-${d.k}"><td colspan="5"><div class="xp bx"><div class="xp-h"><b>${r.name}｜${d.n}詳細分析</b>${isAll?'<span class="sub">各職務比較，點「看此職務」切換到該職務</span>':''}</div>${isAll?allDetail(rs,d.k):roleDetail(r,d.k,is)}</div></td></tr>`:'')}).join('')}
+        </tbody></table></div>`,`<span class="hint ind">${indSel(true)}</span>`)})()}
+      ${/* 首頁右側改善重點摘要已移除（與頁籤重複） */''&&card('改善重點'+tip('改善重點：各職務每個面向與優質企業比較，落後或明顯落後就產生一項；明顯落後列為優先。'),[],(()=>{const G=GRPS.map(g=>{const ds=g.dims.map(dimOf),on=ds.filter(d=>has(d.src)),off=ds.filter(d=>!has(d.src)),gi=is.filter(i=>g.dims.includes(i.k));return {g,ds,on,off,t:gi.length,h:gi.filter(i=>i.lv==='h').length}});
+        const R=52,C=2*Math.PI*R,tot=is.length||1;let acc=0;
+        const segs=G.filter(x=>x.t).map(x=>{const len=x.t/tot*C,s=`<circle r="${R}" cx="70" cy="70" fill="none" stroke="${x.g.c}" stroke-width="16" stroke-dasharray="${Math.max(len-2,0)} ${C}" stroke-dashoffset="${-acc}" transform="rotate(-90 70 70)"></circle>`;acc+=len;return s}).join('');
+        return `<div class="sb-top"><a class="dz-sum" href="#issues"><b>${is.length}</b> 項改善重點</a><a class="dn-hi" href="#issues">優先 <b>${hi.length}</b></a></div>
+          <div class="sbar" role="img" aria-label="${G.filter(x=>x.t).map(x=>x.g.n+' '+x.t+' 項').join('、')}">${G.filter(x=>x.t).map(x=>`<i style="flex:${x.t};background:${x.g.c}" title="${x.g.n} ${x.t} 項"></i>`).join('')}</div>
+          <div class="glist">${G.map(x=>x.on.length?`<a class="grow" href="#issues--grp-${x.g.id}"><i style="background:${x.g.c}"></i><span class="gr-n"><b>${x.g.n}${tip(x.g.q+' 包含：'+x.ds.map(d=>d.n).join('、')+(x.off.length?`（${x.off.map(d=>d.n).join('、')}需啟用產品）`:''))}</b></span><span class="gr-c">${x.h?`<em class="r">優先 ${x.h}</em>`:''}<b>${x.t}</b> 項</span></a>`:`<div class="grow off"><i></i><span class="gr-n"><b>${x.g.n}</b></span><a class="btn btn-line btn-sm" href="${SRC[x.off[0].src].url}" target="_blank" rel="noopener">啟用${SRC[x.off[0].src].prod}</a></div>`).join('')}</div>`})())}
     </div>
-    ${lk.length?`<div class="mt">${buyBox([...new Set(lk.map(d=>d.src))],`再對標 ${lk.length} 個面向（${lk.map(d=>d.n).join('、')}），找出更多管理 Issue`,true)}</div>`:''}
-    ${worst&&worst.n?`<div class="mt">${ai(`${worst.r.name}有 ${worst.n} 個面向明顯落後市場（${DIMK.filter(d=>has(d.src)&&stat(worst.r,d.k).lv==='h').map(d=>d.n).join('、')}），這些問題通常互相影響，例如薪資偏低與體驗不佳會造成年資偏短。建議優先處理，並在半年後重新對標確認成效。`)}</div>`:''}`;
+    ${lk.length?`<div class="mt">${buyBox([...new Set(lk.map(d=>d.src))],`再比較 ${lk.length} 個面向（${lk.map(d=>d.n).join('、')}），找出更多改善重點`,true)}</div>`:''}
+    ${worst&&worst.n?`<div class="mt">${ai(`${worst.r.name}有 ${worst.n} 個面向明顯落後市場（${DIMK.filter(d=>has(d.src)&&stat(worst.r,d.k).lv==='h').map(d=>d.n).join('、')}），這些問題通常互相影響，例如薪資偏低與體驗不佳會造成年資偏短。建議優先處理，並在半年後重新比較確認成效。`)}</div>`:''}`;
   },
 
   bench(a){
     const rs=visR(); if(a&&rs.find(r=>r.id===a)) S.brole=a; if(!rs.find(r=>r.id===S.brole)) S.brole=rs[0].id;
     const r=brole(S.brole), is=allIssues();
-    const relLink=k=>{const i=is.find(x=>x.r.id===r.id&&x.k===k);return i?`<div class="rel"><span class="sub">已產生管理 Issue</span><a href="#issues--${r.id}--${k}">看「${i.title}」解法 →</a></div>`:''};
-    const leg=`<div class="gleg"><span><i></i>本公司</span><span><i class="warn"></i>明顯低於市場</span><span><i class="req"></i>優質企業</span></div>`;
+    const relLink=k=>{const i=is.find(x=>x.r.id===r.id&&x.k===k);return i?`<div class="rel"><span class="sub">已產生改善重點</span><a href="#issues--${r.id}--${k}">看「${i.title}」解法 →</a></div>`:''};
+    const leg=`<div class="gleg"><span><i></i>本公司</span><span><i class="warn"></i>本公司（差距較大）</span><span><i class="req"></i>優質企業平均</span></div>`;
     const dual=(rows,unit,warnAt)=>`${leg}<div class="bars gb">${rows.map(([n,m,o])=>{const w=m-o>=warnAt;return `<div class="gbar"><span>${n}</span><div class="gt"><div class="track"><span class="fill ${w?'warn':''}" data-w="${o}"></span></div><div class="track"><span class="fill req" data-w="${m}"></span></div></div><span class="gv"><b class="${w?'w':''}">${o}${unit}</b><small>${m}${unit}</small></span><span class="gd ${o<m?'w':''}">${o>=m?'✓':'−'+(m-o)}</span></div>`}).join('')}</div>`;
     const vs=(o,m,u,s)=>`<div class="vs"><div><small>本公司</small><b>${o}</b> <span class="sub">${u}</span></div><div class="mk"><small>優質企業</small><b>${m}</b> <span class="sub">${u}</span></div>${s}</div>`;
     const body={
@@ -531,25 +872,32 @@ const PAGES={
       learn:()=>vs(r.learn[1],r.learn[0],'小時／年',stTag(stat(r,'learn').lv,stat(r,'learn').txt))
     };
     const mkt={skill:()=>`優質企業具備率：${r.skill.map(([n,m])=>`${n} ${m}%`).join('、')}`,pay:()=>`優質企業月薪中位數 ${money(mPay(r))}`,comp:()=>`優質企業 PR：${r.comp.map(([n,m])=>`${n} ${m}`).join('、')}`,exp:()=>`優質企業平均年資 ${r.exp[0]} 年`,ex:()=>`優質企業：${r.ex.map(([n,m])=>`${n} ${m} 分`).join('、')}`,learn:()=>`優質企業年均學習 ${r.learn[0]} 小時`};
-    return head('職務對標','職務對標','同一職務，比較優質企業的職務輪廓與本公司的人才輪廓。')+benchBar()+
+    return head('職務落差分析','職務落差分析','同一職務，比較優質企業的職務輪廓與本公司的人才輪廓。')+benchBar()+
     `<div class="filters"><span>職務：</span><div class="picks">${rs.map(x=>`<a class="pick ${x.id===r.id?'on':''}" href="#bench--${x.id}">${x.name}</a>`).join('')}</div></div>
     <div class="card" style="margin-bottom:16px"><div class="route"><div class="node"><span class="sub">優質企業</span><b>${r.name}</b><span class="sub">${IND[S.ind].n}｜${IND[S.ind].cos} 家平均</span></div><span class="arrow">⇄</span><div class="node"><span class="sub">本公司</span><b>${r.name}</b><span class="sub">${r.dept}｜${r.n} 人</span></div>
       <div style="margin-left:auto;display:flex;gap:6px;flex-wrap:wrap">${DIMK.map(d=>has(d.src)?`<span title="${d.n}">${d.n} ${stTag(stat(r,d.k).lv)}</span>`:'').join(' ')}</div></div></div>
-    <div class="grid g2 bx">${DIMK.map(d=>`<div id="go-${r.id}-${d.k}">`+card(d.n+tip(d.d),has(d.src)?['mkt',d.src]:['mkt'],has(d.src)?body[d.k]()+relLink(d.k):`<div class="mkt-only">${mkt[d.k]()}</div>${lockLine(d.src,'即可對照本公司'+d.n+'資料')}`,has(d.src)?stTag(stat(r,d.k).lv):'<span class="st st-l">🔒 未對標</span>')+'</div>').join('')}</div>`;
+    <div class="grid g2 bx">${DIMK.map(d=>`<div id="go-${r.id}-${d.k}">`+card(d.n+tip(d.d),has(d.src)?['mkt',d.src]:['mkt'],has(d.src)?body[d.k]()+relLink(d.k):`<div class="mkt-only">${mkt[d.k]()}</div>${lockLine(d.src,'即可對照本公司'+d.n+'資料')}`,has(d.src)?stTag(stat(r,d.k).lv):'<span class="st st-l">🔒 未比較</span>')+'</div>').join('')}</div>`;
   },
 
   issues(a,b){
+    if(a==='lvh'){S.ilv='h';S.irole='';S.idim='';a=undefined;}
+    if(a&&a.startsWith('dim-')){S.idim=a.slice(4);S.irole='';S.ilv='';S.igrp='';a=undefined;}
+    if(a&&a.startsWith('grp-')){S.igrp=a.slice(4);S.idim='';S.irole='';S.ilv='';a=undefined;}
     if(a!==undefined&&a!=='') S.irole=a;
-    if(b) S.idim='';
-    let is=allIssues(); const all=is.length, lk=lockedDims();
+    S.idim=''; /* 面向篩選已移除，改用管理議題 */
+    let is=allIssues(), lkShown=false; const all=is.length, lk=lockedDims();
     if(S.irole) is=is.filter(i=>i.r.id===S.irole);
     if(S.idim) is=is.filter(i=>i.k===S.idim);
+    if(S.igrp){const g=GRPS.find(x=>x.id===S.igrp);if(g)is=is.filter(i=>g.dims.includes(i.k));}
+    if(S.ilv==='h') is=is.filter(i=>i.lv==='h');
+    if(S.ilv==='track') is=is.filter(i=>S.track.includes(i.id));
     const dimChip=(k,t)=>`<button class="pick ${S.idim===k?'on':''}" data-idim="${k}">${t}</button>`;
-    return head('管理 Issue','管理 Issue','依職務對標結果找出的管理問題，每個 Issue 都附上建議解法與可使用的 104 產品。')+
-    `<div class="grid g4">${kpi('全部 Issue',all+' 個')}${kpi('高優先',allIssues().filter(i=>i.lv==='h').length+' 個','對應「明顯落後」的面向','','r')}${kpi('已列入改善計畫',S.track.length+' 個')}${kpi('尚未對標面向',lk.length+' 個','',lk.length?lk.map(d=>d.n).join('、'):'已全部對標')}</div>
-    <div class="filters mt"><span>面向：</span><div class="picks">${dimChip('','全部')}${DIMK.filter(d=>has(d.src)).map(d=>dimChip(d.k,d.n)).join('')}</div><span style="margin-left:8px">職務：</span><select id="iroleSel"><option value="">全部職務</option>${visR().map(r=>`<option value="${r.id}" ${S.irole===r.id?'selected':''}>${r.name}</option>`).join('')}</select></div>
-    ${is.length?is.map(issueCard).join(''):'<div class="card locked"><b>沒有符合條件的 Issue</b><p class="sub">試試其他面向或職務</p></div>'}
-    ${lk.length?`<div class="mt">${buyBox([...new Set(lk.map(d=>d.src))],`還有 ${lk.length} 個面向尚未對標（${lk.map(d=>d.n).join('、')}），啟用後可找出更多 Issue`,true)}</div>`:''}`;
+    return head('改善重點','人才管理改善重點','彙整各職務與同產業優質企業比較後的落後項目，依能力培育、薪酬競爭力、留任與穩定分類，並提供改善做法與對應的 104 解決方案。','排序：依落後人數由多到少排列，人數相同時明顯落後的排前面。「18 / 40 人落後」表示職務共 40 人，其中 18 人在該面向低於優質企業平均，點選可查看名單。')+
+    `<div class="filters mt"><span>管理議題：</span><div class="picks"><button class="pick ${!S.igrp?'on':''}" data-igrp="">全部</button>${GRPS.map(g=>`<button class="pick ${S.igrp===g.id?'on':''}" data-igrp="${g.id}">${g.n}</button>`).join('')}</div><span style="margin-left:8px">職務：</span><select id="iroleSel"><option value="">全部職務</option>${visR().map(r=>`<option value="${r.id}" ${S.irole===r.id?'selected':''}>${r.name}</option>`).join('')}</select></div>
+    ${(()=>{if(is.length)return `<p class="sub" style="margin:0 0 8px">共 ${is.length} 項｜依落後人數多到少排序</p>`+is.map(issueCard).join('');const g=S.igrp&&GRPS.find(x=>x.id===S.igrp),fl=g?lk.filter(d=>g.dims.includes(d.k)):[];
+      if(fl.length){lkShown=true;return buyBox([...new Set(fl.map(d=>d.src))],`啟用後即可比較${fl.map(d=>d.n).join('、')}，找出改善重點`,true)}
+      return `<div class="card locked"><b>${S.irole?brole(S.irole).name:'各職務'}${g?`在「${g.n}」`:''}沒有落後市場的項目 👍</b><p class="sub">已達同產業優質企業水準，可改選其他職務或管理議題</p></div>`})()}
+    ${lk.length&&!lkShown?`<div class="mt" id="lockbox">${buyBox([...new Set(lk.map(d=>d.src))],`還有 ${lk.length} 個面向尚未比較（${lk.map(d=>d.n).join('、')}），啟用後可找出更多改善重點`,true)}</div>`:''}`;
   },
 
   review(){
@@ -591,28 +939,67 @@ const PAGES={
 
   path(a,b){
     if(a) S.pathP=a; if(b) S.pathJ=b;
-    const ppl=visP(); if(!ppl.find(p=>p.id===S.pathP)) S.pathP=ppl[0].id;
-    const js=visJ(); if(!js.find(j=>j.id===S.pathJ)) S.pathJ=js[0].id;
-    const p=byId(S.pathP), j=job(S.pathJ), f=fit(p,j), g=gaps(p,j).slice(0,2), sm=skillMiss(p,j), req=JOB_SKILLS[j.id]||[];
-    const leg=`<div class="gleg"><span><i></i>員工目前</span><span><i class="warn"></i>未達要求</span><span><i class="req"></i>職缺要求</span></div>`;
-    const bars=`${leg}<div class="bars gb">${DIMS.map((d,i)=>{const v=p.radar[i],t=j.target[i],w=v<t;return `<div class="gbar"><span>${d}</span><div class="gt"><div class="track"><span class="fill ${w?'warn':''}" data-w="${v}"></span></div><div class="track"><span class="fill req" data-w="${t}"></span></div></div><span class="gv"><b class="${w?'w':''}">${v}</b><small>${t}</small></span><span class="gd ${w?'w':''}">${w?'−'+(t-v):'✓'}</span></div>`}).join('')}</div>`;
-    return head('人才管理 › 發展路徑','發展路徑','看員工離目標職缺還差什麼、該怎麼準備。')+
-    `<div class="filters">員工：<select id="pathP">${ppl.map(x=>`<option value="${x.id}" ${x.id===p.id?'selected':''}>${x.name}（${x.title}）</option>`).join('')}</select>目標職缺：<select id="pathJ">${js.map(x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.name}（${x.dept}）</option>`).join('')}</select></div>
-    <div class="card"><div class="route"><div class="node"><span class="sub">目前</span><b>${p.title}</b><span class="sub">${p.dept}｜年資 ${p.years} 年</span></div><span class="arrow">→</span><div class="node"><span class="sub">目標</span><b>${j.name}</b><span class="sub">${j.dept}</span></div><div style="margin-left:auto;text-align:right"><span class="sub" style="display:inline-flex;align-items:center;gap:4px">目前適配度${tip(FIT_TIP)}</span><div class="fitnum">${f}%</div></div></div></div>
+    /* 員工清單＝各職務在職人員（與人才市場分析的人員一致），依職務分組 */
+    const prs=visR(), ppl=prs.flatMap(r=>r.mem); if(!ppl.find(p=>p.id===S.pathP)){S.pathP=ppl[0].id;if(!b&&!mkJob(S.pathJ))S.pathJ='mk-'+ppl[0].rid}
+    const mks=visR().map(r=>mkJob('mk-'+r.id)), ijs=visJ(), js=[...mks,...ijs];
+    if(!js.find(j=>j.id===S.pathJ)){const own=MEMBERS[S.pathP];S.pathJ=own?'mk-'+own.rid:ijs[0].id}
+    const p=byId(S.pathP), j=job(S.pathJ), isMk=!!j.mk, f=fit(p,j), g=gaps(p,j).slice(0,2), sm=skillMiss(p,j), req=jobSkills(j);
+    const reqL=isMk?'優質企業平均':'職缺要求';
+    const leg=`<div class="gleg"><span><i></i>員工目前</span><span><i class="warn"></i>未達${isMk?'優質企業平均':'要求'}</span><span><i class="req"></i>${reqL}</span></div>`;
+    const xr=isMk?(()=>{const r=j.mk,row=(n,o,m,u)=>{const d=Math.round((m-o)*10)/10;const pc=Math.min(o/m*100,100);return `<div class="gbar"><span>${n}</span><div class="gt"><div class="track"><span class="fill ${d>0?'warn':''}" data-w="${pc}"></span></div><div class="track"><span class="fill req" data-w="100"></span></div></div><span class="gv"><b class="${d>0?'w':''}">${o} ${u}</b><small>${m} ${u}</small></span><span class="gd ${d>0?'w':''}">${d>0?'−'+d:'✓'}</span></div>`};
+      return p.hours!=null?`<h4 class="gh mt">學習投入</h4><div class="bars gb xr">${row('年學習時數',p.hours,r.learn[0],'小時')}</div>`:''})():'';
+    const bars=`${leg}<div class="bars gb">${DIMS.map((d,i)=>{const v=p.radar[i],t=j.target[i];if(t==null)return '';const w=v<t;return `<div class="gbar"><span>${d}</span><div class="gt"><div class="track"><span class="fill ${w?'warn':''}" data-w="${v}"></span></div><div class="track"><span class="fill req" data-w="${t}"></span></div></div><span class="gv"><b class="${w?'w':''}">${v}</b><small>${t}</small></span><span class="gd ${w?'w':''}">${w?'−'+(t-v):'✓'}</span></div>`}).join('')}</div>`;
+    const opt=x=>`<option value="${x.id}" ${x.id===j.id?'selected':''}>${x.mk?x.name:`${x.name}（${x.dept}）`}</option>`;
+    return head('人才管理 › 發展路徑','發展路徑','看員工離目標還差什麼、該怎麼準備。目標可選同產業優質企業的職務水準，或公司內部職缺。')+
+    `<div class="filters">員工：<select id="pathP">${prs.map(r=>`<optgroup label="${r.name}（${r.n} 人）">${r.mem.map(x=>`<option value="${x.id}" ${x.id===p.id?'selected':''}>${x.name}</option>`).join('')}</optgroup>`).join('')}</select>比較目標${tip('優質企業水準：與同產業優質企業同職務的平均比較（104 人力銀行市場職務資料）。公司內部職缺：與內部職缺畫像的要求比較。')}<select id="pathJ"><optgroup label="與優質企業比較">${mks.map(opt).join('')}</optgroup><optgroup label="公司內部職缺">${ijs.map(opt).join('')}</optgroup></select></div>
+    <div class="card"><div class="route"><div class="node"><span class="sub">目前</span><b>${p.title}</b><span class="sub">${p.dept}｜年資 ${p.years} 年</span></div><span class="arrow">→</span><div class="node"><span class="sub">${isMk?'比較對象':'目標'}</span><b>${isMk?j.short:j.name}</b><span class="sub">${isMk?`${IND[S.ind].n}優質企業平均`:j.dept}</span></div><div style="margin-left:auto;text-align:right"><span class="sub" style="display:inline-flex;align-items:center;gap:4px">目前適配度${tip(FIT_TIP)}</span><div class="fitnum">${f}%</div></div></div></div>
     <div class="grid g2 mt">
-      ${card('能力落差',['assess','org'],`<h4 class="gh">職能（軟實力）</h4>${bars}<h4 class="gh mt">技能（專業技術）</h4><div class="sk-sum">已具備 <b>${req.length-sm.length}</b> / ${req.length} 項職缺所需技能</div><div class="sk">${req.map(s=>sm.includes(s)?`<span class="no">✕ ${s}</span>`:`<span class="ok">✓ ${s}</span>`).join('')}</div>`)}
-      ${card('學習與歷練建議',['train','assess'],g.length?`<div class="tipbox">💡 做中學為主、跟人學為輔、上課學補充，三種一起進行效果最好。</div><div class="plan mt"><h4>做中學 <span>主要：在工作中累積經驗</span></h4><ul>${g.map(x=>`<li>${TASK[x.d]}</li>`).join('')}</ul></div>
+      ${card('能力落差',isMk?['mkt','assess','org']:['assess','org'],`<h4 class="gh">職能（軟實力）</h4>${bars}<h4 class="gh mt">技能（專業技術）</h4><div class="sk-sum">已具備 <b>${req.length-sm.length}</b> / ${req.length} 項${isMk?'優質企業同職務的關鍵技能':'職缺所需技能'}</div><div class="sk">${req.map(s=>sm.includes(s)?`<span class="no">✕ ${s}</span>`:`<span class="ok">✓ ${s}</span>`).join('')}</div>${xr}`)}
+      ${card('學習與歷練建議',['train','assess'],g.length||(isMk&&sm.length)?`<div class="tipbox">💡 做中學為主、跟人學為輔、上課學補充，三種一起進行效果最好。</div><div class="plan mt"><h4>做中學 <span>主要：在工作中累積經驗</span></h4><ul>${g.map(x=>`<li>${TASK[x.d]}</li>`).join('')}</ul></div>
         <div class="plan mt"><h4>跟人學 <span>其次：請主管或前輩帶</span></h4><ul>${g.map(x=>`<li>${MENTOR[x.d]}</li>`).join('')}</ul></div>
-        ${has('train')?`<div class="plan mt"><h4>上課學 <span>輔助：補足觀念與方法</span></h4><ul>${g.map(x=>`<li>${COURSE[x.d]} <button class="btn btn-line btn-sm" data-toast="已將「${COURSE[x.d]}」指派給 ${p.name}（示意）">指派</button></li>`).join('')}</ul></div>`:`<div class="plan mt"><h4>上課學 <span>輔助：補足觀念與方法</span></h4>${lockLine('train','可看到建議課程並直接指派')}</div>`}`:'<p>已達到目標職缺的能力要求，可直接列入人選。</p>')}
+        ${has('train')?`<div class="plan mt"><h4>上課學 <span>輔助：補足觀念與方法</span></h4><ul>${[...g.map(x=>COURSE[x.d]),...(isMk?sm.slice(0,3).map(s=>s+' 實務課程'):[])].map(c=>`<li>${c} <button class="btn btn-line btn-sm" data-toast="已將「${c}」指派給 ${p.name}（示意）">指派</button></li>`).join('')}</ul></div>`:`<div class="plan mt"><h4>上課學 <span>輔助：補足觀念與方法</span></h4>${lockLine('train','可看到建議課程並直接指派')}</div>`}`:`<p>${isMk?'職能與技能已達優質企業同職務水準。':'已達到目標職缺的能力要求，可直接列入人選。'}</p>`)}
     </div>`;
   },
 
-  salary(){
+  /* 優先關注名單：整合績效、薪資、體驗、技能、職能、學習，判定每位員工的關注類型 */
+  watch(a){
+    if(a!==undefined) S.wrole=a;
+    const rs=visR(); if(S.wrole&&!rs.find(r=>r.id===S.wrole)) S.wrole='';
+    const L=(S.wrole?rs.filter(r=>r.id===S.wrole):rs).flatMap(r=>r.mem.map(p=>watchOf(r,p)));
+    const ret=L.filter(x=>x.cat==='ret'), dev=L.filter(x=>x.cat==='dev'), obs=L.filter(x=>x.cat==='obs');
+    if(!['ret','dev','all'].includes(S.wtab)) S.wtab=ret.length?'ret':'dev';
+    const shown=(S.wtab==='ret'?ret:S.wtab==='dev'?dev:L).slice().sort((x,y)=>WCAT[x.cat].o-WCAT[y.cat].o||y.score-x.score);
+    const all=S.pmore&&S.pmore.w, sh=all?shown:shown.slice(0,15);
+    const miss=['pay','sat'].filter(k=>!has(k));
+    const tab=(k,t,n,tp)=>`<button class="${S.wtab===k?'on':''}" data-wtab="${k}">${t}${tp?tip(tp):''}<span class="${k==='ret'?'r':''}">${n}</span></button>`;
+    return head('','優先關注名單','整合每位員工的績效、薪資、員工體驗與能力落差，找出流失風險高的高績效者，以及最需要補強能力的人。')+
+    `<div class="filters">職務：<select id="wRole"><option value="">全部職務</option>${rs.map(r=>`<option value="${r.id}" ${S.wrole===r.id?'selected':''}>${r.name}</option>`).join('')}</select><span class="sub">比較基準：${IND[S.ind].n}優質企業平均</span></div>
+    <div class="ptabs itabs">${tab('ret','優先留才',ret.length,WCAT.ret.d)}${tab('dev','優先補強',dev.length,WCAT.dev.d)}${tab('all','全部人員',L.length)}</div>
+    ${miss.length?`<p class="lockline mt">🔒 尚未納入${miss.map(k=>SRC[k].prod).join('、')}的資料，${miss.includes('pay')?'薪資':''}${miss.length>1?'與':''}${miss.includes('sat')?'員工體驗':''}不列入判斷。${isMgr()?`如需使用請洽 HR 啟用${miss.map(k=>SRC[k].prod).join('、')}。`:''}</p>`:''}
+    <div class="mt">${card(`${{ret:'優先留才',dev:'優先補強',all:'全部人員'}[S.wtab]}（${shown.length} 位）`,['perf','assess','org',...miss.length?[]:['pay','sat']],shown.length?`<div class="tbl"><table class="t nw wt"><thead><tr><th>姓名</th><th>近一年績效</th><th>薪資 vs 市場</th><th>員工體驗</th><th>技能缺口</th><th>職能落差</th><th>關注原因</th><th></th></tr></thead><tbody>${sh.map(x=>`<tr class="${x.cat==='ret'?'hiperf':''}"><td><b>${x.p.name}</b><div class="sub">${x.r.name}｜年資 ${x.p.years} 年</div></td><td><b>${x.p.perf[2]}</b></td><td>${has('pay')?`<span class="${x.payD<=-5?'w':''}">${x.payD<0?'低':'高'} ${Math.abs(x.payD)}%</span>`:'<span class="sub">—</span>'}</td><td>${has('sat')?`<span class="${x.exD<=-10?'w':''}">${x.p.ex} 分</span>`:'<span class="sub">—</span>'}</td><td>${x.sk?`<span class="w">缺 ${x.sk} 項</span>`:'—'}</td><td>${x.cg?`<span class="w">−${x.cg}</span>`:'—'}</td><td><span class="gp">${x.why.map(s=>`<i>${s}</i>`).join('')||'<i class="mk">無明顯落差</i>'}</span></td><td class="act">${x.cat==='ret'?`<a class="btn btn-line btn-sm" href="#" data-toast="已將 ${x.p.name} 加入一對一面談清單（示意）">安排留才面談</a>`:`<a class="btn btn-line btn-sm" href="#path--${x.p.id}--mk-${x.r.id}">看發展路徑</a>`}</td></tr>`).join('')}</tbody></table></div>${shown.length>15?`<button class="btn btn-line btn-sm more" style="display:block;margin:10px auto 0" data-pmore="w">${all?'收合':`顯示全部 ${shown.length} 位`}</button>`:''}`:'<p class="sub">目前沒有符合的人員</p>')}</div>
+    ${ret.length||dev.length?`<div class="mt">${ai(`${S.wrole?brole(S.wrole).name:isMgr()?MY_DEPT:'全公司'}共 ${L.length} 位，其中 <b>${ret.length} 位</b>是績效好但${has('pay')||has('sat')?'薪資或體驗落後市場':'需要關注'}的高流失風險人才，建議先由主管安排留才面談${has('pay')?'並檢視調薪':''}；<b>${dev.length} 位</b>績效偏低且能力落差大，建議依發展路徑安排補強。其餘 ${obs.length} 位持續觀察即可。`)}</div>`:''}`;
+  },
+  salary(a){
+    if(a!==undefined) S.srole=a;
+    const rs=visR(); if(S.srole&&!rs.find(r=>r.id===S.srole)) S.srole='';
+    const tot=(S.srole?rs.filter(r=>r.id===S.srole):rs).reduce((s,r)=>s+r.n,0);
+    const L=(S.srole?rs.filter(r=>r.id===S.srole):rs).flatMap(r=>lagPeople(r,'pay').map(x=>({...x,r,m:mPay(r),d:Math.round((x.p.pay-mPay(r))/mPay(r)*100)})));
+    const PR={'A+':0,'A':1,'B+':2,'B':3}, isHi=x=>x.p.perf[2].startsWith('A');
+    const SORTS={hi:['高績效優先',(x,y)=>(isHi(y)-isHi(x))||(PR[x.p.perf[2]]-PR[y.p.perf[2]])||(x.d-y.d)],gap:['差距大到小',(x,y)=>x.d-y.d],perf:['績效高到低',(x,y)=>(PR[x.p.perf[2]]-PR[y.p.perf[2]])||(x.d-y.d)]};
+    if(!SORTS[S.ssort]) S.ssort='hi'; L.sort(SORTS[S.ssort][1]);
+    const hiP=L.filter(isHi), avgD=L.length?Math.round(L.reduce((s,x)=>s+x.d,0)/L.length):0;
+    const all=S.pmore&&S.pmore.sal, sh=all?L:L.slice(0,15);
+    return head('','薪資競爭力檢視','找出月薪低於同產業優質企業同職務中位數 5% 以上的員工，優先檢視高績效但薪資落後市場的人才，降低流失風險。')+
+    `<div class="filters">職務：<select id="salRole"><option value="">全部職務</option>${rs.map(r=>`<option value="${r.id}" ${S.srole===r.id?'selected':''}>${r.name}</option>`).join('')}</select>排序：<select id="salSort">${Object.entries(SORTS).map(([k,[n]])=>`<option value="${k}" ${S.ssort===k?'selected':''}>${n}</option>`).join('')}</select><span class="sub">比較產業：${IND[S.ind].n}</span></div>
+    <div class="grid g4">${(()=>{const c=xs=>Math.round(xs.reduce((s,x)=>s+(x.m-x.p.pay),0)*12/10000);return kpi('調到市場中位數',`每年約 ${fmt(c(L))} 萬`,'把名單內所有人的月薪調到優質企業同職務中位數，每年需增加的人事成本（以 12 個月試算，未含勞健保等）。',`其中高績效 ${hiP.length} 位約 ${fmt(c(hiP))} 萬`)})()}${kpi('低於市場人數',`${L.length} <small style="font-size:14px;font-weight:400">/ ${tot} 位</small>`,'月薪低於優質企業同職務中位數 5% 以上')}${kpi('其中高績效',`${hiP.length} 位`,'最近一次績效 A 以上，流失風險較高，建議優先檢視','','warn')}${kpi('平均差距',`低 ${-avgD}%`,'這些員工月薪與優質企業中位數的平均差距')}</div>
+    <div class="mt">${card(`人員清單（${L.length} 位）`,['mkt','pay','perf'],L.length?`<div class="tbl"><table class="t nw"><thead><tr><th>姓名</th><th>近一年績效</th><th>月薪</th><th><span style="display:inline-flex;align-items:center;gap:4px">優質企業中位數${tip(`${IND[S.ind].n}優質企業中，同職務員工月薪由低到高排列，取正中間的數字。資料來源：104 人力銀行市場職務資料。`)}</span></th><th><span style="display:inline-flex;align-items:center;gap:4px">差異${tip('（員工月薪 − 優質企業中位數）÷ 優質企業中位數。低於 10% 以上以紅色標示。')}</span></th></tr></thead><tbody>${sh.map(x=>`<tr class="${isHi(x)?'hiperf':''}"><td><b>${x.p.name}</b><div class="sub">${x.r.name}｜${x.r.dept}</div></td><td><b>${x.p.perf[2]}</b>${isHi(x)?' <span class="badge b-warn">高績效</span>':''}</td><td>${money(x.p.pay)}</td><td class="mkv">${money(x.m)}</td><td><span class="st st-${x.d<=-10?'h':'m'}">低 ${-x.d}%${isMgr()?'':`｜−${fmt(x.m-x.p.pay)} 元`}</span></td></tr>`).join('')}</tbody></table></div>${L.length>15?`<button class="btn btn-line btn-sm more" style="display:block;margin:10px auto 0" data-pmore="sal">${all?'收合':`顯示全部 ${L.length} 位`}</button>`:''}`:'<p class="sub">目前沒有月薪低於市場的人員</p>',L.length?`<span style="margin-left:auto;display:inline-flex;align-items:center;gap:10px"><a class="btn btn-line btn-sm" href="#" data-toast="前往薪酬平台試算調薪預算（示意）">至薪酬平台試算調薪預算</a></span>`:'')}</div>`;
+  },
+  salaryOld(){
     const rows=DEPTS.map(d=>{const diff=Math.round((d.pay-CO_MEDIAN)/CO_MEDIAN*100);
       if(isMgr()&&d.name!==MY_DEPT) return `<tr><td>${d.name}</td><td colspan="4"><span class="lock">無權限檢視其他部門薪資</span></td></tr>`;
       return `<tr><td><b>${d.name}</b></td><td>${d.n}</td><td>${money(d.pay)}</td><td>${diff>=0?'高 '+diff:'低 '+Math.abs(diff)}%</td><td>${diff<=-15?'<span class="badge b-danger">明顯偏低</span>':diff<=-8?'<span class="badge b-warn">偏低</span>':'<span class="badge b-ok">合理</span>'}</td></tr>`}).join('');
     const under=visP().filter(p=>p.pay<DEPTS.find(d=>d.name===p.dept).pay*0.95&&p.perf[2].startsWith('A'));
-    return head('人才管理 › 薪資合理性','薪資合理性','各部門與高績效員工的薪資，是否與表現相稱。','與市場的薪資比較，請看「職務對標」的薪資面向。')+
+    return head('人才管理 › 薪資合理性','薪資合理性','各部門與高績效員工的薪資，是否與表現相稱。','與市場的薪資比較，請看「職務比較」的薪資面向。')+
     `<div class="grid g2">${card('各部門平均月薪 vs 公司中位數',['pay','org'],`<div class="tbl"><table class="t nw"><thead><tr><th>部門</th><th>人數</th><th>平均月薪</th><th><span style="display:inline-flex;align-items:center;gap:4px">公司中位數${tip('公司中位數：'+money(CO_MEDIAN)+'。把全公司員工月薪由低到高排列，排在正中間的那個數字。')}</span></th><th><span style="display:inline-flex;align-items:center;gap:4px">狀態${tip('低於公司中位數 8% 為偏低、低於 15% 為明顯偏低。')}</span></th></tr></thead><tbody>${rows}</tbody></table></div>`)}
     ${card('高績效但薪資偏低的員工'+tip('最近一次績效 A 以上，且月薪低於部門平均 5% 以上。'),['pay','perf'],under.length?`<div class="uplist">${under.map(p=>{const avg=DEPTS.find(d=>d.name===p.dept).pay,diff=p.pay-avg,pct=Math.round(diff/avg*100),w=Math.round(p.pay/avg*100);
         return `<div class="up"><div class="up-h"><span><b>${p.name}</b><span class="sub">${p.dept}｜近一年績效 ${p.perf[2]}</span></span><span class="up-gap">低 ${Math.abs(pct)}%${isMgr()?'':`<small>（−${fmt(Math.abs(diff))} 元）</small>`}</span></div>
@@ -626,36 +1013,70 @@ function setRole(r,silent){
   S.role=r; const R=ROLES[r];
   document.querySelectorAll('#whoMenu [data-role]').forEach(x=>x.classList.toggle('on',x.dataset.role===r));
   $('#av').textContent=R.av; $('#whoName').textContent=R.nm;
+  if(window.aiReset) setTimeout(aiReset,0);
   if(!silent) toast(R.msg);
 }
 function setPlan(p,silent){
   S.plan=p;
   whoMenu.querySelectorAll('[data-plan]').forEach(x=>x.classList.toggle('on',x.dataset.plan===p));
-  if(!silent) toast(p==='full'?'已切換為全部啟用：六個面向皆可對標':'已切換為部分啟用：未啟用產品的面向會鎖定');
+  if(window.aiReset) setTimeout(aiReset,0);
+  if(!silent) toast(p==='full'?'已切換為全部啟用：六個面向皆可比較':'已切換為部分啟用：未啟用產品的面向會鎖定');
 }
 function render(){
+  applyInd();
   const h=decodeURIComponent(location.hash.replace('#',''))||'home';
   const [page,a,b]=h.split('--');
   if(page==='home'&&ROLES[a]&&a!==S.role) setRole(a,true);
   if(PLANS[b]&&b!==S.plan) setPlan(b,true);
-  const fn=PAGES[page]?page:'home';
-  if(fn==='issues'&&a===undefined) S.irole='';
+  /* 職務落差分析已併入人才市場分析：#bench--職務--面向 → 總覽並展開該列 */
+  if(page==='bench'){if(a){S.hrole=a;S.brole=a}S.open={};if(b)S.open[b]=true;S.goId=a&&b?`go-${a}-${b}`:'';try{history.replaceState(null,'','#home')}catch(e){}}
+  /* C 版已移除人才盤點、升遷評估（B 版有），舊連結導回首頁 */
+  const fn=page==='bench'||page==='review'||page==='promo'||(page==='watch'&&!WATCH_ON)?'home':(PAGES[page]?page:'home');
+  if(fn==='issues'&&a===undefined){S.irole='';S.ilv='';}
+  if(fn==='issues'&&a&&a!=='lvh'&&!a.startsWith('dim-')&&!a.startsWith('grp-')) S.ilv='';
+  if(fn==='issues'&&!(a&&a.startsWith('grp-'))&&!S.keepF) S.igrp='';
+  S.keepF=false;
   renderNav(fn);
   const miss=missing(fn);
-  const body=miss.length?head('人才管理 › '+FEAT[fn],FEAT[fn],'')+buyBox(miss,`啟用${miss.map(k=>SRC[k].prod).join('、')}，即可使用「${FEAT[fn]}」`):PAGES[fn](a,b);
+  const body=miss.length?head('',FEAT[fn],'')+buyBox(miss,`啟用${miss.map(k=>SRC[k].prod).join('、')}，即可使用「${FEAT[fn]}」`):PAGES[fn](a,b);
   $('#main').innerHTML=`<div class="fade">${body}</div>`;
   setTimeout(()=>document.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'),50);
   bind();
   if(document.activeElement&&document.activeElement.closest&&document.activeElement.closest('.side')) document.activeElement.blur();
-  const go=b&&document.getElementById('go-'+a+'-'+b);
-  if(go&&location.hash!==render.last){render.last=location.hash;setTimeout(()=>{go.scrollIntoView({behavior:'smooth',block:'start'});go.classList.add('flash');setTimeout(()=>go.classList.remove('flash'),1800)},80);}
+  const gid=S.goId; S.goId='';
+  const go=(gid&&document.getElementById(gid))||(b&&document.getElementById('go-'+a+'-'+b));
+  if(go&&(gid||location.hash!==render.last)){render.last=location.hash;setTimeout(()=>{go.scrollIntoView({behavior:'smooth',block:'start'});go.classList.add('flash');setTimeout(()=>go.classList.remove('flash'),1800)},80);}
   else if(location.hash!==render.last){window.scrollTo(0,0);render.last=location.hash;}
 }
 function bind(){
-  const is=$('#indSel'); if(is) is.onchange=()=>{S.ind=is.value;toast('已切換對標產業：'+IND[S.ind].n);render()};
-  const ir=$('#iroleSel'); if(ir) ir.onchange=()=>{location.hash='issues--'+ir.value};
-  document.querySelectorAll('[data-idim]').forEach(b=>b.onclick=()=>{S.idim=b.dataset.idim;render()});
+  const is=$('#indSel'); if(is) is.onchange=()=>{S.ind=is.value;toast('已切換比較產業：'+IND[S.ind].n);const y=window.scrollY;render();window.scrollTo(0,y)};
+  const ir0=document.querySelector('[data-indreset]'); if(ir0) ir0.onclick=e=>{e.preventDefault();S.ind=CO_IND;toast('已回到本公司產業：'+IND[CO_IND].n);const y=window.scrollY;render();window.scrollTo(0,y)};
+  /* 管理議題與職務可同時篩選：切換其中一個時保留另一個 */
+  const reIss=()=>{S.keepF=true;const y=window.scrollY;try{history.replaceState(null,'','#issues--'+(S.irole||''))}catch(e){}render.last=location.hash;render();window.scrollTo(0,y)};
+  const ir=$('#iroleSel'); if(ir) ir.onchange=()=>{S.irole=ir.value;reIss()};
+  document.querySelectorAll('[data-igrp]').forEach(b=>b.onclick=()=>{S.igrp=b.dataset.igrp;reIss()});
+  document.querySelectorAll('[data-ifilter]').forEach(c=>{const go=e=>{if(e.target.closest('.tip'))return;const f=c.dataset.ifilter;
+    if(f==='lock'){const lb=$('#lockbox');if(lb)lb.scrollIntoView({behavior:'smooth',block:'center'});return}
+    S.ilv=f==='all'?'':f;if(f==='all'){S.idim='';S.irole=''}const y=window.scrollY;render();window.scrollTo(0,y)};
+    c.onclick=go;c.onkeydown=e=>{if(e.key==='Enter')go(e)}});
+  const pm=$('#pbMini'), pn=SRC_ORDER.filter(has).length;
+  pm.hidden=!S.pbClosed||isMgr(); pm.innerHTML=`已啟用 <b>${pn}</b> / 6 項 104 產品 ▾`;
+  pm.onclick=()=>{S.pbClosed=false;try{sessionStorage.removeItem('t360_pb')}catch(e){};render();window.scrollTo({top:0,behavior:'smooth'})};
+  const px=document.querySelector('[data-pbclose]'); if(px) px.onclick=()=>{S.pbClosed=true;try{sessionStorage.setItem('t360_pb','1')}catch(e){};const y=window.scrollY;render();window.scrollTo(0,y);toast('已收合到右上角，點「已啟用 N / 6」可再展開')};
+  document.querySelectorAll('[data-xp]').forEach(b=>b.onclick=e=>{e.preventDefault();S.open=S.open||{};const k=b.dataset.xp;S.open[k]=!S.open[k];const y=window.scrollY;render();window.scrollTo(0,y)});
+  document.querySelectorAll('[data-hrole]').forEach(b=>b.onclick=()=>{S.hrole=b.dataset.hrole;if(b.dataset.hrole!=='all')S.brole=b.dataset.hrole;S.moreOpen=false;if(b.dataset.xopen){S.open={};S.open[b.dataset.xopen]=true}const y=window.scrollY;render();window.scrollTo(0,y)});
+  const mo=document.querySelector('[data-more]'); if(mo) mo.onclick=()=>{S.moreOpen=!S.moreOpen;const y=window.scrollY;render();window.scrollTo(0,y);const q=$('#roleQ');if(q)q.focus()};
+  const rq=$('#roleQ'), rd=$('#roleD');
+  const rf=()=>{const q=(rq.value||'').trim(),d=rd.value;let c=0;document.querySelectorAll('.morep tr[data-hrole]').forEach(tr=>{const ok=(!q||tr.dataset.name.includes(q))&&(!d||tr.dataset.dept===d);tr.hidden=!ok;if(ok)c++});document.querySelector('.morep .nores').hidden=c>0};
+  if(rq){rq.oninput=rf;rd.onchange=rf}
+  document.querySelectorAll('[data-pmore]').forEach(b=>b.onclick=()=>{S.pmore=S.pmore||{};S.pmore[b.dataset.pmore]=!S.pmore[b.dataset.pmore];const y=window.scrollY;render();window.scrollTo(0,y)});
+  document.querySelectorAll('[data-ipeople]').forEach(b=>b.onclick=()=>{S.iopen=S.iopen||{};S.iopen[b.dataset.ipeople]=!S.iopen[b.dataset.ipeople];const y=window.scrollY;render();window.scrollTo(0,y)});
+  document.querySelectorAll('[data-idim]').forEach(b=>b.onclick=()=>{S.idim=b.dataset.idim;const y=window.scrollY;try{history.replaceState(null,'','#issues--'+(S.irole||''))}catch(e){}render.last=location.hash;render();window.scrollTo(0,y)});
   document.querySelectorAll('[data-track]').forEach(b=>b.onclick=()=>{S.track.push(b.dataset.track);toast('已列入改善計畫（示意）');const y=window.scrollY;render();window.scrollTo(0,y)});
+  const wr=$('#wRole'); if(wr) wr.onchange=()=>{location.hash='watch--'+wr.value};
+  document.querySelectorAll('[data-wtab]').forEach(b=>b.onclick=e=>{if(e.target.closest('.tip'))return;S.wtab=b.dataset.wtab;if(S.pmore)S.pmore.w=false;const y=window.scrollY;render();window.scrollTo(0,y)});
+  const sr=$('#salRole'); if(sr) sr.onchange=()=>{location.hash='salary--'+sr.value};
+  const ss=$('#salSort'); if(ss) ss.onchange=()=>{S.ssort=ss.value;const y=window.scrollY;render();window.scrollTo(0,y)};
   const ps=$('#promoSel'); if(ps) ps.onchange=()=>{S.job=ps.value;S.picks=[];render()};
   const pp=$('#pathP'), pj=$('#pathJ');
   if(pp) pp.onchange=()=>{S.pathP=pp.value; location.hash='path--'+S.pathP+'--'+S.pathJ};
@@ -664,6 +1085,9 @@ function bind(){
     if(S.picks.includes(id)){if(S.picks.length<=2){toast('至少需要 2 位候選人');return}S.picks=S.picks.filter(x=>x!==id)}
     else{if(S.picks.length>=4){toast('最多比較 4 位候選人');return}S.picks.push(id)} render();});
 }
+const closeRole=()=>{S.moreOpen=false;const y=window.scrollY;render();window.scrollTo(0,y)};
+document.addEventListener('click',e=>{if(S.moreOpen&&!e.target.closest('.rsel'))closeRole()},true);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.moreOpen)closeRole()});
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-toast]'); if(t){e.preventDefault();toast(t.dataset.toast);return}
   if(e.target.closest('a,button,select,input,.tip')) return;
@@ -695,5 +1119,114 @@ render();
   b.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'})});
 })();
 </script>
+<!-- AI HR 顧問（示意：依頁面資料產生固定回覆，不連線） -->
+<style>
+/* 樣式比照「104 人才競爭力」的 AI HR顧問 */
+.ai-fab{position:fixed;right:28px;bottom:28px;z-index:85;width:82px;height:88px;border:0;background:none;cursor:pointer;padding:0;display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 1px 2.5px rgba(41,41,41,.2))}
+.ai-fab .ic{width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+.ai-fab .ic svg{width:42px;height:42px}
+.ai-fab .lb{width:72px;height:20px;line-height:20px;border-radius:10px;background:#028b95;color:#fff;font-size:11px;font-weight:700;margin-top:-6px;text-align:center}
+.ai-fab:hover .ic{transform:scale(1.05);transition:transform .15s}
+.ai-fab[hidden]{display:none}
+.totop{bottom:126px!important;right:45px!important}
+.ai-pn{position:fixed;top:0;right:0;bottom:0;z-index:90;width:384px;max-width:100%;background:linear-gradient(160deg,#e6f9fa 0%,#fffeea 100%);box-shadow:-3px 0 20px rgba(0,0,0,.1);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .25s;visibility:hidden}
+.ai-pn.open{transform:none;visibility:visible}
+.ai-hd{display:flex;align-items:center;gap:8px;height:48px;padding:0 14px}
+.ai-hd .lg svg{width:22px;height:22px;display:block}
+.ai-hd b{font-size:14px;font-weight:700;color:#028b95}
+.ai-hd .beta{font-size:10px;font-weight:700;color:#fff;background:#ffab31;border-radius:9px;padding:2px 8px}
+.ai-hd button{margin-left:auto;border:0;background:none;font-size:18px;color:#7e7e7e;cursor:pointer}
+.ai-log{flex:1;overflow-y:auto;padding:8px 18px 16px;display:flex;flex-direction:column;gap:14px}
+.ai-m{font-size:14px;line-height:1.7;color:#292929;padding:4px 2px}
+.ai-m.me{align-self:flex-end;background:#fff;border:1px solid #dddddd;color:#292929;border-radius:16px 16px 4px 16px;padding:6px 14px;max-width:85%}
+.ai-m ul{margin:4px 0 0 18px}
+.ai-m .act{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ai-q{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:0 18px 12px}
+.ai-q button,.ai-m .act a{border:1.33px solid #2563a8;background:#eff6ff;color:#2563a8;border-radius:20px;padding:8px 15px;font:inherit;font-size:13px;font-weight:500;cursor:pointer;text-align:left;text-decoration:none;line-height:1.4}
+.ai-m .act a{padding:5px 13px}
+.ai-q button:nth-child(3n+2),.ai-m .act a:nth-child(3n+2){border-color:#16a34a;background:#f0fdf4;color:#16a34a}
+.ai-q button:nth-child(3n),.ai-m .act a:nth-child(3n){border-color:#ea580c;background:#fff7ed;color:#ea580c}
+.ai-q button:hover,.ai-m .act a:hover{filter:brightness(.96)}
+.ai-in{display:flex;align-items:flex-end;gap:8px;margin:0 16px;border:1px solid #dddddd;border-radius:20px;background:rgba(255,255,255,.9);padding:8px 8px 8px 14px;box-shadow:0 4px 16px rgba(0,175,184,.15);min-height:72px}
+.ai-in input{flex:1;align-self:flex-start;border:0;outline:none;background:transparent;font:inherit;font-size:16px;color:#292929;padding-top:2px}
+.ai-in input::placeholder{color:#7e7e7e}
+.ai-in button{width:32px;height:32px;border-radius:50%;border:0;background:#00afb8;color:#fff;cursor:pointer;font-size:14px;flex:none}
+.ai-ft{font-size:12px;color:#7e7e7e;text-align:center;padding:8px 16px 12px}
+.ai-typing{color:#7e7e7e;font-size:13px}
+@media (max-width:560px){.ai-fab{right:12px;bottom:16px}.totop{right:29px!important;bottom:112px!important}.ai-pn{width:100%}}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="aiG0" x1="60.0211" y1="31.1204" x2="32.6261" y2="-2.19834" gradientUnits="userSpaceOnUse"><stop stop-color="#FF9A10"/><stop offset="1" stop-color="#FFE396"/></linearGradient>
+<linearGradient id="aiG1" x1="52.0573" y1="72.0003" x2="22.5345" y2="4.21834" gradientUnits="userSpaceOnUse"><stop stop-color="#E55010"/><stop offset=".622953" stop-color="#FF7800"/><stop offset="1" stop-color="#FF9A10"/></linearGradient>
+<symbol id="aiLogo" viewBox="0 0 72 72"><path d="M35.3021 12.6117C34.9234 24.9537 24.9968 34.8893 12.6661 35.2684C13.0449 22.9265 22.9715 12.9908 35.3021 12.6117Z" fill="#4CA1DE"/><path d="M37.1241 12.6254C49.2829 13.1844 58.9283 23.0649 59.3103 35.2802C47.1515 34.721 37.506 24.8407 37.1241 12.6254Z" fill="#FECF65"/><path d="M59.3103 37.0802C58.7504 49.1236 50.0402 58.9503 37.1382 59.3741C37.6981 47.3308 47.278 37.6406 59.3103 37.0802Z" fill="#F3A2A2"/><path d="M12.6721 36.9119C24.94 37.292 34.8272 47.1319 35.2964 59.3883C23.0286 59.0081 13.1413 49.1684 12.6721 36.9119Z" fill="#33C488"/><path d="M59.1854 35.2802C63.5955 35.2802 66.1502 35.2802 72.0002 35.2802C71.6402 15.4801 55.8954 0 36.0208 0C23.029 0 11.6569 6.62126 5.32526 16.9458C-.985269 28.4082.0656362 33.8401.0655551 36.1802C.722537 28.7971 2.82601 21.7372 7.40696 16.509C7.51834 16.3859 7.63544 16.2513 7.75253 16.1282C8.38941 15.4182 9.0577 14.751 9.76026 14.1097C9.90592 13.9809 10.0459 13.852 10.1887 13.7174C11.8907 12.2386 13.7085 11.0514 15.697 9.99004C16.6306 9.45521 17.6445 9.02925 18.6415 8.63004C20.007 8.07975 21.4509 7.51719 22.8834 7.17796C23.6545 7.00045 24.4342 6.85443 25.2196 6.73704C25.5537 6.6855 25.8878 6.62537 26.2363 6.57956C27.3615 6.45072 28.5011 6.36769 29.6606 6.36769C31.3856 6.36769 33.0677 6.53661 34.7099 6.82007C34.9212 6.86015 35.144 6.86874 35.3525 6.91455C35.6381 6.97182 35.9094 7.05485 36.1893 7.11497C38.6426 7.66757 40.993 8.50075 43.1664 9.62025C43.1778 9.62597 43.1835 9.6317 43.195 9.63743C43.9918 10.0469 44.7743 10.4935 45.5311 10.9803C45.5997 11.0261 45.6539 11.069 45.7196 11.1205C46.4108 11.5672 47.0933 12.0368 47.7445 12.5464C47.8073 12.5922 47.8559 12.6409 47.913 12.681C48.5641 13.1963 49.201 13.7318 49.8093 14.2958C49.8665 14.3416 49.9093 14.4017 49.9607 14.4475C50.569 15.0173 51.1545 15.6043 51.7057 16.2256C51.7657 16.2972 51.8228 16.3773 51.8828 16.4432C52.4197 17.053 52.9309 17.6743 53.4164 18.3271C53.622 18.602 53.802 18.9026 54.0019 19.189C54.3132 19.6471 54.6445 20.0937 54.9386 20.569C55.2357 21.0615 55.4898 21.5797 55.7697 22.0836C55.9211 22.3728 56.0982 22.6591 56.2438 22.9626C56.5237 23.5267 56.7636 24.1136 57.0035 24.7063C57.1149 24.964 57.2434 25.2102 57.3434 25.4793C57.6547 26.3125 57.9345 27.1629 58.1744 28.0304C58.1859 28.0591 58.1973 28.0791 58.203 28.1135C58.6999 29.9087 59.0341 31.764 59.1854 33.6823C59.2711 34.4725 59.1854 35.2802 59.1854 35.2802Z" fill="url(#aiG0)"/><path d="M70.7251 45.6824C71.9103 41.2202 72.0002 38.4641 72.0002 37.0801H59.1301C57.7801 51.2102 49.2511 58.9502 36.0873 59.276C23.2017 59.276 12.7858 48.8335 12.7858 35.9662C12.7858 23.0932 23.2017 12.6507 36.0873 12.6507C48.1525 12.6507 58.0168 22.0066 59.2201 33.7501C57.9968 18.4981 45.3084 6.30002 29.7217 6.30002C19.4031 6.30002 9.23765 12.6507 5.01152 19.5542C.785382 26.4577.06604 29.898.06604 35.9662C.06604 55.859 16.1844 72.0003 36.0844 72.0003C48.0496 72.0003 58.617 66.1414 65.1656 57.1572C68.3897 52.7338 69.7068 48.5885 70.7251 45.6824Z" fill="url(#aiG1)"/></symbol>
+</defs></svg>
+<button class="ai-fab" id="aiFab" type="button" aria-label="開啟 AI HR 顧問"><span class="ic"><svg><use href="#aiLogo"/></svg></span><span class="lb">AI HR顧問</span></button>
+<aside class="ai-pn" id="aiPn" aria-label="AI HR 顧問" aria-hidden="true">
+  <div class="ai-hd"><span class="lg"><svg><use href="#aiLogo"/></svg></span><b>AI HR顧問</b><span class="beta">BETA</span><button type="button" id="aiX" aria-label="關閉">✕</button></div>
+  <div class="ai-log" id="aiLog" aria-live="polite"></div>
+  <div class="ai-q" id="aiQ"></div>
+  <form class="ai-in" id="aiForm"><input id="aiIn" placeholder="描述您想了解的人才問題" aria-label="輸入問題"><button type="submit" aria-label="送出">➤</button></form>
+  <div class="ai-ft">提醒您勿輸入敏感資料。AI 生成內容可能有誤，請再次檢查。（示意）</div>
+</aside>
+<script>
+(function(){
+  const fab=$('#aiFab'),pn=$('#aiPn'),log=$('#aiLog'),qb=$('#aiQ');
+  const page=()=>(decodeURIComponent(location.hash.replace('#',''))||'home').split('--')[0];
+  const lit=r=>hiN(r)?'🔴':lagN(r)?'🟡':'🟢';
+  const worstR=()=>visR().slice().sort((a,b)=>hiN(b)-hiN(a)||lagN(b)-lagN(a))[0];
+  const lagDims=r=>DIMK.filter(d=>has(d.src)&&['h','m'].includes(stat(r,d.k).lv)).sort((a,b)=>(stat(r,a.k).lv==='h'?0:1)-(stat(r,b.k).lv==='h'?0:1));
+  const act=a=>a.length?`<div class="act">${a.map(([t,h])=>`<a href="${h}" data-aigo>${t}</a>`).join('')}</div>`:'';
+  /* 回覆內容（依目前資料產生） */
+  const A={
+    overview(){const rs=visR().filter(r=>lagN(r)).sort((a,b)=>hiN(b)-hiN(a)||lagN(b)-lagN(a)).slice(0,3);
+      if(!rs.length) return `目前各職務都達到${IND[S.ind].n}優質企業的水準 👍`;
+      return `和${IND[S.ind].n}優質企業比較，落後最多的職務：<ul>${rs.map(r=>`<li>${lit(r)} <b>${r.name}</b>：${lagDims(r).map(d=>d.n+(stat(r,d.k).lv==='h'?'（明顯落後）':'')).join('、')}</li>`).join('')}</ul>${act(rs.map(r=>[`看${r.name}`,`#bench--${r.id}--${lagDims(r)[0].k}`]))}`},
+    role(id){const r=brole(id),ds=lagDims(r);if(!ds.length) return `${r.name}各面向都達到優質企業水準。`;
+      const d=ds[0],L=lagPeople(r,d.k);
+      return `<b>${r.name}</b>（${r.dept}｜${r.n} 人）有 ${ds.length} 個面向落後：<ul>${ds.map(x=>`<li>${x.n}：${stat(r,x.k).txt}</li>`).join('')}</ul>最需要處理的是<b>${d.n}</b>，共有 ${L.length} 位員工低於優質企業平均。${act([[`看${d.n}詳細分析`,`#bench--${r.id}--${d.k}`],['看改善建議',`#issues--${r.id}--${d.k}`]])}`},
+    people(){const ab=r=>lagDims(r).filter(d=>['skill','comp','learn'].includes(d.k)),r=visR().filter(x=>ab(x).length).sort((a,b)=>ab(b).length-ab(a).length)[0],d=r&&ab(r)[0];if(!d) return '目前沒有需要補強能力的人員。';const L=lagPeople(r,d.k).slice(0,3);
+      return `以落後最多的<b>${r.name}</b>為例，${d.n}落差最大的前 3 位：<ul>${L.map(x=>`<li><b>${x.p.name}</b>：${x.g.slice(0,2).join('、')}</li>`).join('')}</ul>建議先從這幾位安排補強，點姓名可看與優質企業的落差和學習建議。${act(L.map(x=>[x.p.name,`#path--${x.p.id}--mk-${r.id}`]))}`},
+    pay(){if(!has('pay')) return isMgr()?'目前公司還沒有薪資資料，無法和市場比較。如需這項分析，請洽 HR 啟用薪酬平台。':`目前還沒有薪資資料，無法和市場比較。啟用薪酬平台後，我可以幫你找出薪資落後市場的人，並試算調薪預算。${act([['了解薪酬平台 ↗',SRC.pay.url]])}`;
+      const L=visR().flatMap(r=>lagPeople(r,'pay').map(x=>({...x,m:mPay(r)}))).filter(x=>x.p.perf[2].startsWith('A'));
+      const cost=L.reduce((s,x)=>s+(x.m-x.p.pay),0)*12;
+      return `有 <b>${L.length} 位高績效員工</b>月薪低於優質企業中位數 5% 以上，流失風險較高。${isMgr()?'':`<br>若調到市場中位數，每年約需增加 <b>${fmt(Math.round(cost/10000))} 萬元</b>人事成本（以 12 個月試算）。`}${act([['看薪資競爭力檢視','#salary']])}`},
+    priority(){const is=allIssues().slice(0,3);if(!is.length) return '目前沒有需要改善的項目。';
+      return `建議依這個順序處理：<ul>${is.map(i=>`<li><b>${i.r.name}｜${i.short}</b>：${i.sol[0][0]}</li>`).join('')}</ul>${act(is.map(i=>[`${i.r.name}${dimOf(i.k).n}`,`#issues--${i.r.id}--${i.k}`]))}`},
+    watch(){const L=visR().flatMap(r=>r.mem.map(p=>watchOf(r,p))),ret=L.filter(x=>x.cat==='ret').sort((a,b)=>b.score-a.score),dev=L.filter(x=>x.cat==='dev');
+      return `我整合了績效、薪資、員工體驗和能力落差：<ul><li><b>優先留才 ${ret.length} 位</b>：績效好但${has('pay')||has('sat')?'薪資或體驗落後市場':'（需納入薪資或體驗資料才能判斷）'}${ret.length?`，例如${ret.slice(0,3).map(x=>x.p.name).join('、')}`:''}</li><li><b>優先補強 ${dev.length} 位</b>：績效偏低且能力落差大</li></ul>${act([['看優先關注名單','#watch']])}`},
+    help(){return '我可以協助你：找出落後市場的職務、列出需要補強的人員、檢視薪資競爭力並試算調薪預算。請點下方的問題，或直接輸入。'}
+  };
+  const QS=()=>{const p=page(),r=worstR(),q=[];
+    if(p==='issues') q.push(['要先處理哪幾項？','priority']);
+    if(WATCH_ON) q.push(['哪些人要優先關注？','watch']);
+    if(p==='path'||p==='issues'||p==='home') q.push(['需要補強的人有誰？','people']);
+    if(p==='home'||p==='issues') q.push(['哪些職務落後最多？','overview']);
+    if(r&&lagN(r)) q.push([`看${lit(r)}「${r.name}」的狀況`,'role:'+r.id]);
+    q.push([p==='salary'?'調薪預算要多少？':'薪資有競爭力嗎？','pay']);
+    return q.slice(0,4)};
+  const add=(h,me)=>{const d=document.createElement('div');d.className='ai-m'+(me?' me':'');d.innerHTML=h;log.appendChild(d);log.scrollTop=log.scrollHeight};
+  const chips=()=>{qb.innerHTML=QS().map(([t,k])=>`<button type="button" data-aiq="${k}">${t}</button>`).join('')};
+  const say=(k,label)=>{add(label,true);const t=document.createElement('div');t.className='ai-m ai-typing';t.textContent='思考中…';log.appendChild(t);log.scrollTop=log.scrollHeight;
+    setTimeout(()=>{t.remove();const[f,a]=k.split(':');add((A[f]||A.help)(a));chips()},500)};
+  const greet=()=>{const nm=isMgr()?'陳協理':'王經理',r=worstR(),hi=visR().filter(x=>hiN(x));
+    add(`Hi ${nm}，我是你的 AI HR 顧問 👋<br>職務旁的燈號代表和${IND[S.ind].n}優質企業比較的結果：<br>🟢 達市場水準　🟡 有落後　🔴 有明顯落後<br><br>${hi.length?`目前有 <b>${hi.length} 個職務亮紅燈</b>，其中<b>${r.name}</b>有 ${hiN(r)} 個面向明顯落後，建議優先關注。`:'目前沒有職務亮紅燈。'}<br>你想先從哪裡看起？`)};
+  function open(){pn.classList.add('open');pn.setAttribute('aria-hidden','false');fab.hidden=true;if(!log.children.length)greet();chips();setTimeout(()=>$('#aiIn').focus(),250)}
+  function close(){pn.classList.remove('open');pn.setAttribute('aria-hidden','true');fab.hidden=false}
+  fab.onclick=open;$('#aiX').onclick=close;
+  /* 切換身分或產品方案時，清空對話並以新身分重新開場 */
+  window.aiReset=()=>{log.innerHTML='';if(pn.classList.contains('open')){greet();chips()}};
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&pn.classList.contains('open'))close()});
+  qb.onclick=e=>{const b=e.target.closest('[data-aiq]');if(b)say(b.dataset.aiq,b.textContent)};
+  log.onclick=e=>{const a=e.target.closest('[data-aigo]');if(a&&a.getAttribute('href').startsWith('#')&&innerWidth<=560)close()};
+  $('#aiForm').onsubmit=e=>{e.preventDefault();const v=$('#aiIn').value.trim();if(!v)return;$('#aiIn').value='';
+    const r=visR().find(x=>v.includes(x.name));
+    const k=r?'role:'+r.id:WATCH_ON&&/關注|流失|離職|留才|風險/.test(v)?'watch':/薪|調薪|預算|成本/.test(v)?'pay':/誰|人員|補強|名單/.test(v)?'people':/先|優先|順序|處理/.test(v)?'priority':/職務|落後|哪個|哪些|市場/.test(v)?'overview':'help';
+    say(k,v.replace(/[<>&]/g,''))};
+  addEventListener('hashchange',()=>{if(pn.classList.contains('open'))chips()});
+})();
+</script>
+<script>/* 記住目前頁面：artifact 更新重新載入後會回到這裡 */
+(function(){try{var k='t360_last';function s(){sessionStorage.setItem(k,location.pathname.split('/').pop()+location.hash)}s();addEventListener('hashchange',s);
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';if(h&&h.charAt(0)!=='#'&&/(^|\/)(index\.html)?$/.test(h))sessionStorage.removeItem(k)},true)}catch(e){}})();</script>
 </body>
 </html>
