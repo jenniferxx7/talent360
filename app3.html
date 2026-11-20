@@ -61,7 +61,7 @@ button{cursor:pointer}
 .drop a.on{background:var(--c-primary-light);color:var(--c-primary);font-weight:700}
 .drop a.lk::after{content:" 🔒";font-size:11px}
 
-main{padding:24px 28px 48px;max-width:1440px;margin:0 auto}
+main{padding:24px 28px 150px;max-width:1440px;margin:0 auto}
 .crumb{font-size:13px;color:var(--c-text-sub);margin-bottom:4px}
 .ph{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
 .ph h1{font-size:26px;color:var(--c-heading);font-weight:900;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -352,6 +352,103 @@ a.num:hover{color:var(--c-primary)}
 .iss-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .iss-h h3{font-size:16px;color:var(--c-heading)}
 .iss-h .sub{margin-right:auto}
+/* C／D 版切換 */
+.vsw{display:inline-flex;border:1px solid var(--c-border);border-radius:999px;padding:2px;background:#fff}
+.vsw button{border:0;background:none;border-radius:999px;padding:3px 12px;font-size:13px;color:var(--c-text-sub);display:inline-flex;align-items:center;gap:4px}
+.vsw button small{font-size:11px}
+.vsw button.on{background:var(--c-primary);color:#fff;font-weight:700}
+.vsw button:not(.on):hover{color:var(--c-primary)}
+/* D 版：圖像化 */
+.dg{flex:none;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:var(--gc);color:#fff;font-weight:900;box-shadow:0 2px 6px rgba(41,41,41,.18)}
+.dg.off{background:#e4e4e4;color:#a9a9a9;box-shadow:none}
+.dcard h3{font-size:16px;color:var(--c-heading)}
+.dgrid6{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.dgc{display:flex;align-items:center;gap:12px;text-align:left;border:1px solid var(--c-border);background:#fff;border-radius:8px;padding:12px;font:inherit;color:var(--c-text);cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.dgc:hover{border-color:var(--c-primary)}
+.dgc.on{border-color:var(--c-primary);box-shadow:0 0 0 2px var(--c-primary-light)}
+.dgc.off{cursor:default;background:#fafafa;border-style:dashed}
+.dgc-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.dgc b{font-size:15px;color:var(--c-heading)}
+.dgc-c{font-size:12px;font-weight:700}
+.dgc small{font-size:12px;color:var(--c-text-sub)}
+.dgc-h{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dgc-g{font-size:12px;color:var(--c-text-sub)}
+.dgc-g.w{color:#b35400;font-weight:700}
+.dmini2{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:4px 8px;margin-top:4px;font-size:12px;color:var(--c-text-sub)}
+.dmini2 .track{height:8px}
+.dmini2 .track i{display:block;height:100%;border-radius:4px}
+.dmini2 b{font-size:12px;color:var(--c-heading);text-align:right;white-space:nowrap}
+.dmini2 b.mk{color:var(--c-text-sub);font-weight:400}
+.dval.mk{fill:#7e7e7e;font-weight:400}
+.dbr .st{justify-self:start}
+.dmini{height:6px;border-radius:3px;background:#eeeeee;overflow:hidden}
+.dmini i{display:block;height:100%;border-radius:3px}
+.dhd{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.dhd h3{margin-bottom:2px}
+.dch{width:100%;height:auto;display:block}
+.dgrid{stroke:#eeeeee;stroke-width:1}
+.dax{font-size:11px;fill:#7e7e7e}
+.dval{font-size:11px;font-weight:700;fill:#292929}
+.dring{fill:none;stroke:#e4e4e4;stroke-width:1}
+.dleg{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--c-text-sub)}
+.dleg span{display:inline-flex;align-items:center;gap:6px}
+.dleg i{display:inline-block;width:14px;height:8px;border-radius:3px}
+.card-h .dleg{margin-left:auto}
+.dnote{font-size:12px;color:var(--c-text-sub);margin-top:4px}
+.dtabs{display:inline-flex;border:1px solid var(--c-border);border-radius:6px;overflow:hidden;margin-bottom:10px}
+.dtabs button{border:0;background:#fff;padding:5px 14px;font-size:13px;color:var(--c-text)}
+.dtabs button+button{border-left:1px solid var(--c-border)}
+.dtabs button.on{background:var(--c-primary);color:#fff;font-weight:700}
+.drad{display:flex;flex-direction:column;align-items:center;gap:6px;margin:0 auto 14px;max-width:320px}
+.drad svg{width:100%}
+.dwg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.dw{background:#fff;border:1px solid var(--c-border);border-radius:8px;overflow:hidden;box-shadow:var(--shadow);text-align:left;padding:0;font:inherit;color:var(--c-text)}
+.dw-t{position:relative;height:110px;background:color-mix(in srgb,var(--wc) 14%,#fff);display:flex;flex-direction:column;justify-content:flex-end;padding:10px 14px}
+.dw-t svg{position:absolute;inset:0;width:100%;height:100%}
+.dw-t path{fill:var(--wc);opacity:.85}
+.dw-t b{position:relative;font-size:30px;font-weight:900;color:#fff;line-height:1.1;text-shadow:0 1px 3px rgba(0,0,0,.25)}
+.dw-t span{position:relative;font-size:13px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.dw-t.lo b,.dw-t.lo span{color:var(--c-heading);text-shadow:0 0 6px #fff,0 0 2px #fff}
+.dw p{font-size:13px;color:var(--c-text-sub);padding:10px 14px;line-height:1.5}
+.dwb{cursor:pointer;transition:box-shadow .2s}
+.dwb:hover,.dwb.on{box-shadow:0 0 0 2px var(--wc)}
+.dbars{display:flex;flex-direction:column;gap:6px}
+.dbars{gap:2px!important}
+.dbr{display:grid;grid-template-columns:76px minmax(150px,220px) 1fr 150px;align-items:center;gap:10px;border:0;background:none;padding:3px 4px;border-radius:6px;font:inherit;color:var(--c-text);text-align:left;cursor:pointer}
+.dbr:hover{background:var(--c-primary-light)}
+.dbr-l{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dbr-t{height:12px;border-radius:6px;background:#eeeeee;overflow:hidden}
+.dbr-t i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#ffb15c,#ff7800)}
+.dbr-v{font-size:13px;color:var(--c-text-sub);text-align:right}
+.dbr-v b{color:var(--c-heading);font-size:15px}
+.dsec{font-size:16px;color:var(--c-heading);margin-bottom:8px}
+.dhist{display:flex;align-items:flex-end;justify-content:space-around;gap:12px;height:210px;padding-top:10px}
+.dh{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.dh-c{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;width:56px;height:180px}
+.dh-c i{display:block;width:100%}
+.dh-c i.o{background:#ffc78f;border-radius:4px 4px 0 0}
+.dh-c i.h{background:#ea475b}
+.dh-v{font-size:13px;font-weight:700;color:var(--c-heading);margin-bottom:4px}
+.dh small{font-size:12px;color:var(--c-text-sub)}
+.dmode .skpi{display:none}
+.dhb{display:flex;flex-direction:column;gap:8px}
+.dhb-r{display:grid;grid-template-columns:90px 1fr 210px;align-items:center;gap:12px;font-size:14px}
+.dhb-l{color:var(--c-heading);font-weight:700}
+.dhb-t{display:flex;height:16px;border-radius:8px;background:#f3f3f3;overflow:hidden}
+.dhb-t i{display:block;height:100%}
+.dhb-t i.h{background:#ea475b}.dhb-t i.o{background:#ffc78f}
+.dhb-v{color:var(--c-text-sub)}.dhb-v b{font-size:16px;color:var(--c-heading)}
+.dhb-v small{font-size:12px;margin-left:4px}
+@media (max-width:640px){.dhb-r{grid-template-columns:70px 1fr}.dhb-v{grid-column:1/-1}}
+.dglg{display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 2px;font-size:12px;color:var(--c-text-sub)}
+.dglg span{display:inline-flex;align-items:center;gap:6px}
+.dglg .dg{box-shadow:none}
+.dbar2{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:6px 0 8px}
+.dbar2 .dtabs{margin-bottom:0}
+.dcard .pbox{margin:6px 0 12px}
+.dmode .fitnum{color:var(--c-primary)}
+@media (max-width:860px){.dgrid6{grid-template-columns:1fr 1fr}.dbr{grid-template-columns:28px 1fr 90px}.dbr-t{display:none}}
+@media (max-width:560px){.dgrid6{grid-template-columns:1fr}.vsw button small{display:none}}
 .today{background:#fff;border:1px solid var(--c-border);border-radius:var(--radius);padding:12px 16px;box-shadow:var(--shadow);margin-bottom:16px}
 .today-h{display:flex;align-items:center;gap:6px;margin-bottom:6px}
 .today-h b{font-size:15px;color:var(--c-heading)}
@@ -502,6 +599,7 @@ td.act .btn+.btn{margin-left:6px}
   <span class="co">範例科技股份有限公司</span>
   <span class="sp"></span>
   <button class="pb-mini" id="pbMini" hidden title="展開產品啟用狀態"></button>
+  <div class="vsw" role="group" aria-label="切換版本"><button type="button" data-view="c" title="C 版：表格與文字為主">C 版</button><button type="button" data-view="d" title="D 版：等級與圖表為主">D 版<small>圖像化</small></button></div>
   <a class="why" href="./">為什麼需要人才畫像？</a>
   <div class="who">
     <button class="who-btn" id="whoBtn" aria-haspopup="true" aria-expanded="false"><span class="av" id="av">王</span><span class="nmtxt" id="whoName">王經理</span><span class="caret">▾</span></button>
@@ -981,7 +1079,7 @@ const PAGES={
     `<div class="filters">員工：<select id="pathP">${prs.map(r=>`<optgroup label="${r.name}（${r.n} 人）">${r.mem.map(x=>`<option value="${x.id}" ${x.id===p.id?'selected':''}>${x.name}</option>`).join('')}</optgroup>`).join('')}</select>比較目標${tip('優質企業水準：與同產業優質企業同職務的平均比較（104 人力銀行市場職務資料）。公司內部職缺：與內部職缺畫像的要求比較。')}<select id="pathJ"><optgroup label="與優質企業比較">${mks.map(opt).join('')}</optgroup><optgroup label="公司內部職缺">${ijs.map(opt).join('')}</optgroup></select></div>
     <div class="card"><div class="route"><div class="node"><span class="sub">目前</span><b>${p.title}</b><span class="sub">${p.dept}｜年資 ${p.years} 年</span></div><span class="arrow">→</span><div class="node"><span class="sub">${isMk?'比較對象':'目標'}</span><b>${isMk?j.short:j.name}</b><span class="sub">${isMk?`${IND[S.ind].n}優質企業平均`:j.dept}</span></div><div style="margin-left:auto;text-align:right"><span class="sub" style="display:inline-flex;align-items:center;gap:4px">目前適配度${tip(FIT_TIP)}</span><div class="fitnum">${f}%</div></div></div></div>
     <div class="grid g2 mt">
-      ${card('能力落差',isMk?['mkt','assess','org']:['assess','org'],`<h4 class="gh">職能（軟實力）</h4>${bars}<h4 class="gh mt">技能（專業技術）</h4><div class="sk-sum">已具備 <b>${req.length-sm.length}</b> / ${req.length} 項${isMk?'優質企業同職務的關鍵技能':'職缺所需技能'}</div><div class="sk">${req.map(s=>sm.includes(s)?`<span class="no">✕ ${s}</span>`:`<span class="ok">✓ ${s}</span>`).join('')}</div>${xr}`)}
+      ${card('能力落差',isMk?['mkt','assess','org']:['assess','org'],`<h4 class="gh">職能（軟實力）</h4>${isD()?dRadar(DIMS.map((d,i)=>j.target[i]==null?null:[d,p.radar[i],j.target[i]]).filter(Boolean),'員工目前',isMk?'優質企業平均':'職缺要求'):''}${bars}<h4 class="gh mt">技能（專業技術）</h4><div class="sk-sum">已具備 <b>${req.length-sm.length}</b> / ${req.length} 項${isMk?'優質企業同職務的關鍵技能':'職缺所需技能'}</div><div class="sk">${req.map(s=>sm.includes(s)?`<span class="no">✕ ${s}</span>`:`<span class="ok">✓ ${s}</span>`).join('')}</div>${xr}`)}
       ${card('學習與歷練建議',['train','assess'],g.length||(isMk&&sm.length)?`<div class="tipbox">💡 做中學為主、跟人學為輔、上課學補充，三種一起進行效果最好。</div><div class="plan mt"><h4>做中學 <span>主要：在工作中累積經驗</span></h4><ul>${g.map(x=>`<li>${TASK[x.d]}</li>`).join('')}</ul></div>
         <div class="plan mt"><h4>跟人學 <span>其次：請主管或前輩帶</span></h4><ul>${g.map(x=>`<li>${MENTOR[x.d]}</li>`).join('')}</ul></div>
         ${has('train')?`<div class="plan mt"><h4>上課學 <span>輔助：補足觀念與方法</span></h4><ul>${[...g.map(x=>COURSE[x.d]),...(isMk?sm.slice(0,3).map(s=>s+' 實務課程'):[])].map(c=>`<li>${c} <button class="btn btn-line btn-sm" data-toast="已將「${c}」指派給 ${p.name}（示意）">指派</button></li>`).join('')}</ul></div>`:`<div class="plan mt"><h4>上課學 <span>輔助：補足觀念與方法</span></h4>${lockLine('train','可看到建議課程並直接指派')}</div>`}`:`<p>${isMk?'職能與技能已達優質企業同職務水準。':'已達到目標職缺的能力要求，可直接列入人選。'}</p>`)}
@@ -1018,8 +1116,8 @@ const PAGES={
     const all=S.pmore&&S.pmore.sal, sh=all?L:L.slice(0,15);
     return head('','薪資競爭力檢視','找出月薪低於同產業優質企業同職務中位數 5% 以上的員工，優先檢視高績效但薪資落後市場的人才，降低流失風險。')+
     `<div class="filters">職務：<select id="salRole"><option value="">全部職務</option>${rs.map(r=>`<option value="${r.id}" ${S.srole===r.id?'selected':''}>${r.name}</option>`).join('')}</select>排序：<select id="salSort">${Object.entries(SORTS).map(([k,[n]])=>`<option value="${k}" ${S.ssort===k?'selected':''}>${n}</option>`).join('')}</select><span class="sub">比較產業：${IND[S.ind].n}</span></div>
-    <div class="grid g4">${(()=>{const c=xs=>Math.round(xs.reduce((s,x)=>s+(x.m-x.p.pay),0)*12/10000);return kpi('調到市場中位數',`每年約 ${fmt(c(L))} 萬`,'把名單內所有人的月薪調到優質企業同職務中位數，每年需增加的人事成本（以 12 個月試算，未含勞健保等）。',`其中高績效 ${hiP.length} 位約 ${fmt(c(hiP))} 萬`)})()}${kpi('低於市場人數',`${L.length} <small style="font-size:14px;font-weight:400">/ ${tot} 位</small>`,'月薪低於優質企業同職務中位數 5% 以上')}${kpi('其中高績效',`${hiP.length} 位`,'最近一次績效 A 以上，流失風險較高，建議優先檢視','','warn')}${kpi('平均差距',`低 ${-avgD}%`,'這些員工月薪與優質企業中位數的平均差距')}</div>
-    <div class="mt">${card(`人員清單（${L.length} 位）`,['mkt','pay','perf'],L.length?`<div class="tbl"><table class="t nw"><thead><tr><th>姓名</th><th>近一年績效</th><th>月薪</th><th><span style="display:inline-flex;align-items:center;gap:4px">優質企業中位數${tip(`${IND[S.ind].n}優質企業中，同職務員工月薪由低到高排列，取正中間的數字。資料來源：104 人力銀行市場職務資料。`)}</span></th><th><span style="display:inline-flex;align-items:center;gap:4px">差異${tip('（員工月薪 − 優質企業中位數）÷ 優質企業中位數。低於 10% 以上以紅色標示。')}</span></th></tr></thead><tbody>${sh.map(x=>`<tr class="${isHi(x)?'hiperf':''}"><td><b>${x.p.name}</b><div class="sub">${x.r.name}｜${x.r.dept}</div></td><td><b>${x.p.perf[2]}</b>${isHi(x)?' <span class="badge b-warn">高績效</span>':''}</td><td>${money(x.p.pay)}</td><td class="mkv">${money(x.m)}</td><td><span class="st st-${x.d<=-10?'h':'m'}">低 ${-x.d}%${isMgr()?'':`｜−${fmt(x.m-x.p.pay)} 元`}</span></td></tr>`).join('')}</tbody></table></div>${L.length>15?`<button class="btn btn-line btn-sm more" style="display:block;margin:10px auto 0" data-pmore="sal">${all?'收合':`顯示全部 ${L.length} 位`}</button>`:''}`:'<p class="sub">目前沒有月薪低於市場的人員</p>',L.length?`<span style="margin-left:auto;display:inline-flex;align-items:center;gap:10px"><a class="btn btn-line btn-sm" href="#" data-toast="前往薪酬平台試算調薪預算（示意）">至薪酬平台試算調薪預算</a></span>`:'')}</div>`;
+    <div class="grid g4 skpi">${(()=>{const c=xs=>Math.round(xs.reduce((s,x)=>s+(x.m-x.p.pay),0)*12/10000);return kpi('調到市場中位數',`每年約 ${fmt(c(L))} 萬`,'把名單內所有人的月薪調到優質企業同職務中位數，每年需增加的人事成本（以 12 個月試算，未含勞健保等）。',`其中高績效 ${hiP.length} 位約 ${fmt(c(hiP))} 萬`)})()}${kpi('低於市場人數',`${L.length} <small style="font-size:14px;font-weight:400">/ ${tot} 位</small>`,'月薪低於優質企業同職務中位數 5% 以上')}${kpi('其中高績效',`${hiP.length} 位`,'最近一次績效 A 以上，流失風險較高，建議優先檢視','','warn')}${kpi('平均差距',`低 ${-avgD}%`,'這些員工月薪與優質企業中位數的平均差距')}</div>
+    <div class="mt">${card(`人員清單（${L.length} 位）`,['mkt','pay','perf'],(L.length?`<div class="tbl"><table class="t nw"><thead><tr><th>姓名</th><th>近一年績效</th><th>月薪</th><th><span style="display:inline-flex;align-items:center;gap:4px">優質企業中位數${tip(`${IND[S.ind].n}優質企業中，同職務員工月薪由低到高排列，取正中間的數字。資料來源：104 人力銀行市場職務資料。`)}</span></th><th><span style="display:inline-flex;align-items:center;gap:4px">差異${tip('（員工月薪 − 優質企業中位數）÷ 優質企業中位數。低於 10% 以上以紅色標示。')}</span></th></tr></thead><tbody>${sh.map(x=>`<tr class="${isHi(x)?'hiperf':''}"><td><b>${x.p.name}</b><div class="sub">${x.r.name}｜${x.r.dept}</div></td><td><b>${x.p.perf[2]}</b>${isHi(x)?' <span class="badge b-warn">高績效</span>':''}</td><td>${money(x.p.pay)}</td><td class="mkv">${money(x.m)}</td><td><span class="st st-${x.d<=-10?'h':'m'}">低 ${-x.d}%${isMgr()?'':`｜−${fmt(x.m-x.p.pay)} 元`}</span></td></tr>`).join('')}</tbody></table></div>${L.length>15?`<button class="btn btn-line btn-sm more" style="display:block;margin:10px auto 0" data-pmore="sal">${all?'收合':`顯示全部 ${L.length} 位`}</button>`:''}`:'<p class="sub">目前沒有月薪低於市場的人員</p>'),L.length?`<span style="margin-left:auto;display:inline-flex;align-items:center;gap:10px"><a class="btn btn-line btn-sm" href="#" data-toast="前往薪酬平台試算調薪預算（示意）">至薪酬平台試算調薪預算</a></span>`:'')}</div>`;
   },
   salaryOld(){
     const rows=DEPTS.map(d=>{const diff=Math.round((d.pay-CO_MEDIAN)/CO_MEDIAN*100);
@@ -1035,6 +1133,99 @@ const PAGES={
   }
 };
 
+/* ===== D 版：圖像化呈現（同一份資料與功能，視覺參考「104 人才競爭力」） ===== */
+try{const qv=new URLSearchParams(location.search).get('v');if(qv==='d'||qv==='c')sessionStorage.setItem('t360_view',qv);S.view=sessionStorage.getItem('t360_view')==='d'?'d':'c'}catch(e){S.view='c'}
+const isD=()=>S.view==='d';
+const GR={g:['A','#509e1f','領先市場'],n:['B','#f5c000','與市場持平'],m:['C','#ff7800','略落後市場'],h:['D','#ea475b','明顯落後市場']};
+const grade=(r,k)=>has(dimOf(k).src)?GR[stat(r,k).lv]:null;
+const gCircle=(g,sz)=>g?`<span class="dg" style="--gc:${g[1]};width:${sz}px;height:${sz}px;font-size:${Math.round(sz*.48)}px">${g[0]}</span>`:`<span class="dg off" style="width:${sz}px;height:${sz}px;font-size:${Math.round(sz*.34)}px">🔒</span>`;
+const avgN=a=>a.reduce((s,v)=>s+v,0)/a.length;
+/* 各面向的代表值：[本公司, 優質企業, 單位] */
+const dVal=(r,k)=>({skill:[avgN(r.skill.map(x=>x[2])),avgN(r.skill.map(x=>x[1])),'%'],pay:[r.pay[1],mPay(r),'元'],comp:[avgN(r.comp.map(x=>x[2])),avgN(r.comp.map(x=>x[1])),'PR'],exp:[r.exp[1],r.exp[0],'年'],ex:[avgN(r.ex.map(x=>x[2])),avgN(r.ex.map(x=>x[1])),'分'],learn:[r.learn[1],r.learn[0],'小時']})[k];
+const fmtV=(v,u)=>u==='元'?(isMgr()?`約 ${Math.round(v/1000)}K`:fmt(Math.round(v/100)*100)):u==='年'?Math.round(v*10)/10:Math.round(v);
+/* 帶單位的數值，例如 31%、PR 72、3.6 年、62,000 元 */
+const fmtU=(v,u)=>u==='%'?`${Math.round(v)}%`:u==='PR'?`PR ${Math.round(v)}`:u==='元'?(isMgr()?fmtV(v,u):`${fmtV(v,u)} 元`):`${fmtV(v,u)} ${u}`;
+/* D 版配色比照 C 版：本公司主色、差距較大橘色、優質企業灰色 */
+const DC={o:'#00afb8',w:'#ff7800',m:'#a3aab3'};
+/* 虛構月度趨勢（示意）：本公司由約 92% 逐步走到現值，優質企業微幅成長 */
+function dTrend(o,m,seed){const w=i=>Math.sin(seed*1.3+i*1.7)*.035;return {o:[...Array(12)].map((_,i)=>o*(.82+.18*i/11+(i<11?w(i):0))),m:[...Array(12)].map((_,i)=>m*(.94+.06*i/11+(i<11?w(i+4)*.6:0)))}}
+const MON=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+/* 面積圖 */
+function dArea(ser,u){const W=760,H=230,L=48,B=26,all=ser.flatMap(s=>s.v),mx=Math.max(...all)*1.06,mn=Math.min(...all)*.86;
+  const x=i=>L+i*(W-L-12)/11,y=v=>H-B-(v-mn)/(mx-mn)*(H-B-14),ln=v=>v.map((p,i)=>`${i?'L':'M'}${x(i).toFixed(1)},${y(p).toFixed(1)}`).join('');
+  const gl=[0,1,2,3].map(t=>{const v=mn+(mx-mn)*t/3;return `<line x1="${L}" x2="${W-12}" y1="${y(v)}" y2="${y(v)}" class="dgrid"/><text x="${L-8}" y="${y(v)+4}" text-anchor="end" class="dax">${fmtV(v,u)}</text>`}).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" class="dch" role="img" aria-label="近 12 個月趨勢">${gl}${ser.map(s=>`<path d="${ln(s.v)}L${x(11)},${H-B}L${x(0)},${H-B}Z" fill="${s.c}" opacity=".16"/><path d="${ln(s.v)}" fill="none" stroke="${s.c}" stroke-width="2.5"/><circle cx="${x(11)}" cy="${y(s.v[11])}" r="4" fill="${s.c}"/>`).join('')}${MON.map((m,i)=>`<text x="${x(i)}" y="${H-6}" text-anchor="middle" class="dax">${m}</text>`).join('')}</svg>`;}
+/* 直條（本公司）＋折線（優質企業） */
+/* 逐項比較：本公司與優質企業都用直條並排（同 C 版雙條比較） */
+function dBarLine(items,u){const W=760,H=250,L=44,B=34,n=items.length,mx=Math.max(...items.flatMap(x=>[x[1],x[2]]))*1.15,bw=Math.min(30,(W-L)/n*.24);
+  const cx=i=>L+(i+.5)*(W-L-8)/n,y=v=>H-B-v/mx*(H-B-16),un=u==='%'?'%':'';
+  const gl=[0,.25,.5,.75,1].map(t=>`<line x1="${L}" x2="${W-8}" y1="${y(mx*t)}" y2="${y(mx*t)}" class="dgrid"/><text x="${L-6}" y="${y(mx*t)+4}" text-anchor="end" class="dax">${Math.round(mx*t)}${un}</text>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" class="dch" role="img" aria-label="各項目比較">${gl}${items.map(([nm,o,m],i)=>{const w=m-o>=(u==='%'?25:u==='PR'?8:10);return `<rect x="${cx(i)-bw-2}" y="${y(o)}" width="${bw}" height="${H-B-y(o)}" rx="3" fill="${w?DC.w:DC.o}"/><rect x="${cx(i)+2}" y="${y(m)}" width="${bw}" height="${H-B-y(m)}" rx="3" fill="${DC.m}"/><text x="${cx(i)-bw/2-2}" y="${y(o)-5}" text-anchor="middle" class="dval">${Math.round(o)}${un}</text><text x="${cx(i)+bw/2+2}" y="${y(m)-5}" text-anchor="middle" class="dval mk">${Math.round(m)}${un}</text><text x="${cx(i)}" y="${H-12}" text-anchor="middle" class="dax">${nm.length>8?nm.slice(0,8)+'…':nm}</text>`}).join('')}</svg>`;}
+/* 雷達圖 */
+/* 只有 5 個以上職能時才畫雷達圖；與優質企業比較只有 3 個關鍵職能，雷達圖形狀都差不多，改用下方長條即可 */
+function dRadar(items,la,lb){const n=items.length;if(n<5)return '';const c=150,R=100,pt=(i,v)=>{const a=-Math.PI/2+i*2*Math.PI/n;return [c+Math.cos(a)*R*v/100,c+Math.sin(a)*R*v/100]},poly=f=>items.map((x,i)=>pt(i,f(x)).map(v=>v.toFixed(1)).join(',')).join(' ');
+  return `<div class="drad"><svg viewBox="0 0 300 300" role="img" aria-label="職能雷達圖">${[25,50,75,100].map(v=>`<polygon points="${items.map((x,i)=>pt(i,v).join(',')).join(' ')}" class="dring"/>`).join('')}${items.map((x,i)=>{const[p,q]=pt(i,100),[tx,ty]=pt(i,122);return `<line x1="${c}" y1="${c}" x2="${p}" y2="${q}" class="dring"/><text x="${tx}" y="${ty+4}" text-anchor="middle" class="dax">${x[0]}</text>`}).join('')}<polygon points="${poly(x=>x[2])}" fill="${DC.m}" fill-opacity=".12" stroke="${DC.m}" stroke-width="2" stroke-dasharray="5 4"/><polygon points="${poly(x=>x[1])}" fill="${DC.o}" fill-opacity=".25" stroke="${DC.o}" stroke-width="2.5"/></svg><div class="dleg"><span><i style="background:${DC.o}"></i>${la}</span><span><i style="background:${DC.m}"></i>${lb}</span></div></div>`;}
+/* 波浪數字卡 */
+const dWave=(label,big,sub,pct,col)=>{const h=100-Math.max(8,Math.min(92,pct));return `<div class="dw" style="--wc:${col}"><div class="dw-t ${pct<30?'lo':''}"><svg viewBox="0 0 200 100" preserveAspectRatio="none" aria-hidden="true"><path d="M0,${h} C40,${h-9} 80,${h+9} 120,${h} S180,${h-7} 200,${h} L200,100 L0,100Z"/></svg><b>${big}</b><span>${label}</span></div><p>${sub}</p></div>`};
+const dLeg=a=>`<div class="dleg">${a.map(([c,t,d])=>`<span><i style="background:${c}${d?';height:3px':''}"></i>${t}</span>`).join('')}</div>`;
+const DPAGES={
+  home(){
+    const who=isMgr()?'陳協理（業務部主管）':'王經理（人資部）',rs=visR(),is=allIssues(),lk=lockedDims();
+    if(!rs.find(x=>x.id===S.hrole))S.hrole=rs[0].id; const r=brole(S.hrole),on=DIMK.filter(d=>has(d.src));
+    const dk=(S.ddim&&has(dimOf(S.ddim).src))?S.ddim:((on.find(d=>['h','m'].includes(stat(r,d.k).lv))||on[0]).k), dd=dimOf(dk);
+    const [o,m,u]=dVal(r,dk),t=dTrend(o,m,r.id.charCodeAt(0)+dk.length),g=grade(r,dk);
+    const bk=['skill','comp','ex'].filter(k=>has(dimOf(k).src)),bt=bk.includes(S.dbar)?S.dbar:bk[0];
+    const rlag=is.filter(i=>i.r.id===r.id).sort((a,b)=>b.lagN-a.lagN)[0], okN=on.filter(d=>['g','n'].includes(stat(r,d.k).lv)).length, sk=dVal(r,'skill');
+    return `<div class="hello" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">${who}您好，以下為公司人才市場定位分析${scopeTag()}</div>
+    <p class="sub" style="font-size:14px;margin:4px 0 16px">以同產業優質企業為標竿，用等級與圖表呈現公司各職務人才的差距。<br><span class="sub">本次比較涵蓋 <b>${rs.length} 個職務、共 ${rs.reduce((s,x)=>s+x.n,0)} 人</b></span></p>
+    ${planBar()}${todayBox(is)}
+    <div class="card dcard"><div class="card-h"><h3>職務人才市場等級${tip('依各面向與同產業優質企業平均的差距判定，門檻與 C 版「明顯落後／落後／持平／領先」相同。')}</h3><span class="hint ind">${indSel(true)}</span></div>
+      <div class="chips-r" role="tablist" aria-label="選擇職務">${rs.map(x=>{const n=lagN(x),hn=hiN(x),sel=x===r;return `<button class="rchip ${sel?'on':''}" role="tab" aria-selected="${sel}" data-hrole="${x.id}">${x.name}</button>`}).join('')}</div>
+      <div class="dgrid6">${DIMK.map(d=>{if(!has(d.src))return `<div class="dgc off"><div class="dgc-b"><div class="dgc-h"><b>${d.n}</b><span class="st st-l">需啟用產品進行比較</span></div><span class="sub">${isMgr()?hrAsk(d.src):'啟用'+SRC[d.src].prod+'後即可比較'}</span></div></div>`;
+        const s=stat(r,d.k),[a,b,uu]=dVal(r,d.k),mx=Math.max(a,b),w=['h','m'].includes(s.lv);
+        return `<button class="dgc ${d.k===dk?'on':''}" data-ddim="${d.k}"><div class="dgc-b"><div class="dgc-h"><b>${d.n}</b>${stTag(s.lv)}</div><span class="dgc-g ${w?'w':''}">${['exp','learn'].includes(d.k)?(()=>{const df=Math.round((a-b)*10)/10,p=Math.round((a-b)/b*100);return df===0?'持平':`${df<0?'少':'多'} ${Math.abs(df)} ${uu}（${p>0?'+':''}${p}%）`})():s.txt}</span>
+          <div class="dmini2"><span>本公司</span><div class="track"><i style="width:${a/mx*100}%;background:${w?DC.w:DC.o}"></i></div><b>${fmtU(a,uu)}</b><span>優質企業</span><div class="track"><i style="width:${b/mx*100}%;background:${DC.m}"></i></div><b class="mk">${fmtU(b,uu)}</b></div></div></button>`}).join('')}</div></div>
+    ${(()=>{/* 選定面向：趨勢與逐項比較合併成一張卡，並可展開落後人員清單 */
+      const itm=['skill','comp','ex'].includes(dk), cv=itm&&S.dchart==='item'?'item':'trend', pk='d-'+r.id+'-'+dk, L=lagPeople(r,dk), op=S.dppl===pk;
+      return `<div class="card dcard mt" id="go-${r.id}-${dk}"><div class="dhd"><div style="flex:1"><h3 style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">${r.name}｜${dd.n}${stTag(stat(r,dk).lv,stat(r,dk).txt)}</h3><p class="sub">本公司 ${fmtU(o,u)}，優質企業 ${fmtU(m,u)}。近 12 個月本公司持續改善，${o<m?'但與優質企業仍有差距':'已達市場水準'}。</p></div>
+        ${L.length?`<button class="badge b-warn pcnt" data-dppl="${op?'':pk}" aria-expanded="${op}">${L.length} / ${r.n} 人落後 ${op?'▴':'▾'}</button>`:`<span class="badge b-line">0 / ${r.n} 人落後</span>`}</div>
+        ${op?peopleBox(r,dk,'x-'+r.id+'-'+dk):''}
+        <div class="dbar2">${itm?`<div class="dtabs"><button class="${cv==='trend'?'on':''}" data-dchart="trend">近 12 個月趨勢</button><button class="${cv==='item'?'on':''}" data-dchart="item">逐項比較</button></div>`:'<b class="sub">近 12 個月趨勢</b>'}
+          ${cv==='item'?dLeg([[DC.o,'本公司'],[DC.w,'本公司（差距較大）'],[DC.m,'優質企業平均']]):dLeg([[DC.o,'本公司'],[DC.m,'優質企業平均']])}</div>
+        ${cv==='item'?dBarLine(r[dk].map(([n,mm,oo])=>[n,oo,mm]),{skill:'%',comp:'PR',ex:'分'}[dk]):dArea([{v:t.m,c:DC.m},{v:t.o,c:DC.o}],u)}
+        <p class="dnote">${cv==='item'?'橘色為差距較大的項目':'月度趨勢為示意資料'}｜點上方卡片切換面向</p></div>`})()}
+    <h3 class="dsec mt">${r.name}｜重點指標</h3>
+    <div class="dwg">${dWave(`${r.name}｜達市場水準的面向`,`${okN} / ${on.length} 個`,`已比較的 ${on.length} 個面向中，有 ${okN} 個達到優質企業水準。`,okN/on.length*100,'#509e1f')}
+      ${dWave(`${r.name}｜關鍵技能具備率`,`${Math.round(sk[0])}%`,`優質企業平均 ${Math.round(sk[1])}%，差 ${Math.round(sk[1]-sk[0])} 個百分點。`,sk[0],'#1654b9')}
+      ${rlag?dWave(`${r.name}｜${dimOf(rlag.k).n}落後人數`,`${rlag.lagN} / ${r.n} 人`,`${Math.round(rlag.lagN/r.n*100)}% 的人低於優質企業，是落後人數最多的面向。`,rlag.lagN/r.n*100,'#ff7800'):dWave(`${r.name}｜落後人數`,'0 人','各面向都沒有明顯落後的人員。',0,'#ff7800')}
+      ${has('pay')?(()=>{const[a,b]=dVal(r,'pay'),q=Math.round(a/b*100);return dWave(`${r.name}｜薪資達市場水準`,`${q}%`,`本公司月薪中位數 ${fmtU(a,'元')}，為優質企業 ${fmtU(b,'元')} 的 ${q}%。`,q,'#00afb8')})():dWave(`${r.name}｜薪資達市場水準`,'—',isMgr()?`公司尚未啟用薪酬平台，請洽 HR 啟用。`:`啟用薪酬平台後即可比較薪資競爭力。`,0,'#a9a9a9')}</div>
+    ${lk.length?`<div class="mt">${buyBox([...new Set(lk.map(d=>d.src))],`再比較 ${lk.length} 個面向（${lk.map(d=>d.n).join('、')}），找出更多改善重點`,true)}</div>`:''}`;
+  },
+  issues(a,b){
+    const base=PAGES.issues(a,b); let is=allIssues(); if(S.irole) is=is.filter(i=>i.r.id===S.irole); if(S.igrp){const gp=GRPS.find(x=>x.id===S.igrp);if(gp)is=is.filter(i=>gp.dims.includes(i.k))}
+    if(!is.length) return base;
+    /* 精簡：預設只列落後人數最多的 6 項，可展開全部 */
+    const more=S.dmore, sh=more?is:is.slice(0,6);
+    const vis=`<div class="card dcard"><div class="card-h"><h3>落後人數最多的項目</h3><span class="sub">點選列可跳到該項的改善建議</span></div>
+      <div class="dbars">${sh.map(i=>{const p=Math.round(i.lagN/i.r.n*100);return `<button class="dbr" data-dgo="go-${i.r.id}-${i.k}">${stTag(i.lv)}<span class="dbr-l"><b>${i.r.name}</b>｜${dimOf(i.k).n}</span><span class="dbr-t"><i style="width:${p}%"></i></span><span class="dbr-v"><b>${i.lagN}</b> / ${i.r.n} 人（${p}%）</span></button>`}).join('')}</div>
+      ${is.length>6?`<button class="lnk" style="display:block;margin:8px auto 0" data-dmore="1">${more?'收合 ▴':`顯示全部 ${is.length} 項 ▾`}</button>`:''}</div>
+      <h3 class="dsec mt">詳細改善建議</h3>`;
+    return base.replace('<p class="sub" style="margin:0 0 8px">共 ',vis+'<p class="sub" style="margin:0 0 8px">共 ');
+  },
+  salary(a){
+    const base=PAGES.salary(a); if(!base.includes('skpi')) return base;
+    const rs=visR(),sel=S.srole?rs.filter(r=>r.id===S.srole):rs,tot=sel.reduce((s,r)=>s+r.n,0);
+    const L=sel.flatMap(r=>lagPeople(r,'pay').map(x=>({...x,m:mPay(r),d:Math.round((x.p.pay-mPay(r))/mPay(r)*100)}))),hi=L.filter(x=>x.p.perf[2].startsWith('A'));
+    const cost=xs=>Math.round(xs.reduce((s,x)=>s+(x.m-x.p.pay),0)*12/10000);
+    const BK=[['5–10%',-10,-5],['10–15%',-15,-10],['15–20%',-20,-15],['20–25%',-25,-20],['25% 以上',-999,-25]].map(([n,lo,hi2])=>{const xs=L.filter(x=>x.d<=hi2&&x.d>lo);return [n,xs.filter(x=>x.p.perf[2].startsWith('A')).length,xs.length]});
+    const mx=Math.max(1,...BK.map(x=>x[2]));
+    const vis=`<div class="dwg">${dWave('月薪低於市場 5% 以上的員工',`${L.length} / ${tot} 位`,`比較範圍內共 ${tot} 位員工，其中 ${L.length} 位（${Math.round(L.length/tot*100)}%）月薪低於優質企業同職務中位數 5% 以上。`,L.length/tot*100,'#ff7800')}${dWave('其中績效 A 以上',`${hi.length} 位`,'表現好但薪資低於市場，流失風險較高，建議優先檢視。',L.length?hi.length/L.length*100:0,'#ea475b')}${dWave('全部調到市場中位數',`每年 ${fmt(cost(L))} 萬`,`需增加的人事成本（12 個月試算）；只調高績效者約 ${fmt(cost(hi))} 萬。`,60,'#1654b9')}${dWave('平均低於市場',L.length?`${-Math.round(L.reduce((s,x)=>s+x.d,0)/L.length)}%`:'—',`這 ${L.length} 位員工的月薪，平均比優質企業中位數低多少。`,L.length?-L.reduce((s,x)=>s+x.d,0)/L.length*3:0,'#00afb8')}</div>
+      <div class="card dcard mt"><div class="card-h"><h3>月薪低於市場的幅度｜各有幾位</h3>${dLeg([['#ea475b','其中績效 A 以上'],['#ffc78f','其他']])}</div>
+      <p class="sub" style="margin:-4px 0 10px">把低於市場的 ${L.length} 位員工，依「月薪比優質企業中位數低多少」分組；越下方差距越大。</p>
+      <div class="dhb">${BK.map(([n,h,t])=>`<div class="dhb-r"><span class="dhb-l">低 ${n}</span><span class="dhb-t"><i class="h" style="width:${h/mx*100}%"></i><i class="o" style="width:${(t-h)/mx*100}%"></i></span><span class="dhb-v"><b>${t}</b> 位${h?`<small>（績效 A 以上 ${h} 位）</small>`:''}</span></div>`).join('')}</div></div>`;
+    return base.replace('<div class="grid g4 skpi">',vis+'<div class="grid g4 skpi">');
+  }
+};
 /* ===== 路由 ===== */
 function setRole(r,silent){
   S.role=r; const R=ROLES[r];
@@ -1065,7 +1256,10 @@ function render(){
   S.keepF=false;
   renderNav(fn);
   const miss=missing(fn);
-  const body=miss.length?head('',FEAT[fn],'')+buyBox(miss,`啟用${miss.map(k=>SRC[k].prod).join('、')}，即可使用「${FEAT[fn]}」`):PAGES[fn](a,b);
+  const body=miss.length?head('',FEAT[fn],'')+buyBox(miss,`啟用${miss.map(k=>SRC[k].prod).join('、')}，即可使用「${FEAT[fn]}」`):(isD()&&DPAGES[fn]?DPAGES[fn](a,b):PAGES[fn](a,b));
+  document.body.classList.toggle('dmode',isD());
+  document.querySelectorAll('[data-view]').forEach(x=>{x.classList.toggle('on',x.dataset.view===S.view);x.setAttribute('aria-pressed',x.dataset.view===S.view)});
+  document.title=isD()?'人才360畫像（D 版：圖像化）｜Talent One':'人才360畫像（C 版：市場比較）｜Talent One';
   $('#main').innerHTML=`<div class="fade">${body}</div>`;
   setTimeout(()=>document.querySelectorAll('.fill').forEach(f=>f.style.width=f.dataset.w+'%'),50);
   bind();
@@ -1076,6 +1270,14 @@ function render(){
   else if(location.hash!==render.last){window.scrollTo(0,0);render.last=location.hash;}
 }
 function bind(){
+  /* D 版互動：等級卡切換面向、逐項比較頁籤、長條列跳到詳細建議 */
+  const keepY=f=>()=>{f();const y=window.scrollY;render();window.scrollTo(0,y)};
+  document.querySelectorAll('[data-ddim]').forEach(b=>b.onclick=keepY(()=>{S.ddim=b.dataset.ddim}));
+  document.querySelectorAll('[data-dbar]').forEach(b=>b.onclick=keepY(()=>{S.dbar=b.dataset.dbar}));
+  document.querySelectorAll('[data-dmore]').forEach(b=>b.onclick=keepY(()=>{S.dmore=!S.dmore}));
+  document.querySelectorAll('[data-dchart]').forEach(b=>b.onclick=keepY(()=>{S.dchart=b.dataset.dchart}));
+  document.querySelectorAll('[data-dppl]').forEach(b=>b.onclick=keepY(()=>{S.dppl=b.dataset.dppl}));
+  document.querySelectorAll('[data-dgo]').forEach(b=>b.onclick=()=>{const g=document.getElementById(b.dataset.dgo);if(g){g.scrollIntoView({behavior:'smooth',block:'start'});g.classList.add('flash');setTimeout(()=>g.classList.remove('flash'),1800)}});
   const is=$('#indSel'); if(is) is.onchange=()=>{S.ind=is.value;toast('已切換比較產業：'+IND[S.ind].n);const y=window.scrollY;render();window.scrollTo(0,y)};
   const ir0=document.querySelector('[data-indreset]'); if(ir0) ir0.onclick=e=>{e.preventDefault();S.ind=CO_IND;toast('已回到本公司產業：'+IND[CO_IND].n);const y=window.scrollY;render();window.scrollTo(0,y)};
   /* 管理議題與職務可同時篩選：切換其中一個時保留另一個 */
@@ -1130,6 +1332,7 @@ whoMenu.querySelectorAll('[data-plan]').forEach(b=>b.onclick=()=>{whoMenu.hidden
 const C_ALONE=!/app3\.html$/i.test(location.pathname)&&location.protocol!=='data:';
 if(C_ALONE) document.querySelector('a.why').hidden=true;
 document.querySelector('a.why').addEventListener('click',e=>{e.preventDefault();location.href=new URL('./',location.href).href;});
+document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{if(S.view===b.dataset.view)return;S.view=b.dataset.view;try{sessionStorage.setItem('t360_view',S.view)}catch(e){}toast(isD()?'已切換到 D 版：等級與圖表為主':'已切換到 C 版：表格與文字為主');const y=window.scrollY;render();window.scrollTo(0,y)});
 window.addEventListener('hashchange',render);
 render();
 </script>

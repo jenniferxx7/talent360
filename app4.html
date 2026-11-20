@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>人才360畫像（D 版：圖像化）｜Talent One</title>
+<style>body{font-family:Arial,"PingFang TC","Microsoft JhengHei",sans-serif;color:#7e7e7e;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}</style>
+</head>
+<body>
+<p>正在開啟 D 版（圖像化）… 若沒有自動跳轉，請<a href="app3.html?v=d">點這裡</a>。</p>
+<script>
+/* D 版入口：D 版與 C 版共用 app3.html 的資料與功能，以 v=d 切換為圖像化呈現 */
+try{sessionStorage.setItem('t360_view','d')}catch(e){}
+location.replace(new URL('app3.html?v=d'+location.hash,location.href).href);
+</script>
+</body>
+</html>
